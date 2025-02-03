@@ -4,3 +4,4 @@ to la escrevendo e tal dai
 
 quero uma imagem 
 
+![|300x300](IMG-20250203-WA0035.jpg)
