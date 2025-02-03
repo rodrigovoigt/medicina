@@ -5,6 +5,13 @@ Nota de teste sobre como funciona
 e uma imagem seria entao
 
 ![](Screenshot_20250201_073519_Reddit%201.jpg)
+
+
+
+
 a
-[Drawing 2025-02-03 17.41.19.excalidraw](Drawing%202025-02-03%2017.41.19.excalidraw.md)
+
+aqui
+[a](Drawing%202025-02-03%2017.41.19.excalidraw.png)
+
 
