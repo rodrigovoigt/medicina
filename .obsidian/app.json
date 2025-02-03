@@ -1,5 +1,8 @@
 {
   "newLinkFormat": "shortest",
   "useMarkdownLinks": true,
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "trashOption": "none",
+  "newFileLocation": "current",
+  "attachmentFolderPath": "Assets/Attachments"
 }
