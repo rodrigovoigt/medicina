@@ -53,12 +53,14 @@
             "id": "1288e7309e2fe83a",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Teste excali.md"
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Teste excali"
+              "icon": "lucide-file",
+              "title": "Untitled"
             }
           }
         ],
@@ -139,7 +141,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Teste excali.md",
+            "file": "Untitled.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -197,14 +199,14 @@
   },
   "active": "1288e7309e2fe83a",
   "lastOpenFiles": [
-    "Untitled 1.md",
+    "Screenshot_20250201_073519_Reddit 1.jpg",
     "Teste excali.md",
+    "Untitled 1.md",
     "Untitled.md",
     "Teste.md",
     "Drawing 2025-02-03 17.41.19.excalidraw.png",
     "Untitled",
     "Drawing 2025-02-03 17.41.19.excalidraw.md",
-    "Screenshot_20250201_073519_Reddit 1.jpg",
     "Screenshot_20250201_073519_Reddit.jpg",
     "README.md",
     "Screenshot_20250131_182302_Firefox.jpg"
