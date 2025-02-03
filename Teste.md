@@ -1,3 +1,3 @@
 Nota de teste sobre como funciona
 
-![[Screenshot_20250131_182302_Firefox.jpg]]
+![Nota de teste](Screenshot_20250131_182302_Firefox.jpg)
