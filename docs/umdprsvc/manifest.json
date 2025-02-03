@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "umdprsvc",
+  "version": "1.1",
+  "description": "Esta ferramenta foi desenvolvida com o objetivo de otimizar e facilitar a elaboração, escrita e cálculos relacionados ao atendimento médico, proporcionando um suporte adicional para estudos e pesquisas na área da saúde. No entanto, é importante destacar que esta ferramenta ainda não foi validada por autoridades competentes ou instituições reguladoras. Uso Exclusivo para Estudos e Pesquisas. Reforçamos que esta ferramenta é destinada exclusivamente para fins de estudo e pesquisa. Ela não deve ser utilizada para diagnósticos, tratamentos ou qualquer outro tipo de atendimento médico oficial. As informações geradas pela ferramenta são meramente ilustrativas e devem ser interpretadas com cautela. A precisão e a exatidão das informações fornecidas pela ferramenta não são garantidas. A utilização dos dados gerados deve ser feita com discernimento e sempre em conjunto com a análise crítica de profissionais qualificados. O uso inadequado ou a interpretação errônea das informações pode resultar em consequências adversas, pelas quais os desenvolvedores da ferramenta não se responsabilizam.",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
