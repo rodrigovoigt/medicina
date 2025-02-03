@@ -25,12 +25,14 @@
             "id": "f0aac70d46cf8054",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Drawing 2025-02-03 17.41.19.excalidraw.md"
+                "file": "Teste.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-02-03 17.41.19.excalidraw"
+              "icon": "lucide-file",
+              "title": "Teste"
             }
           }
         ],
@@ -111,7 +113,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Drawing 2025-02-03 17.41.19.excalidraw.md",
+            "file": "Teste.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -169,8 +171,8 @@
   },
   "active": "f0aac70d46cf8054",
   "lastOpenFiles": [
-    "Teste.md",
     "Drawing 2025-02-03 17.41.19.excalidraw.md",
+    "Teste.md",
     "Screenshot_20250201_073519_Reddit 1.jpg",
     "Screenshot_20250201_073519_Reddit.jpg",
     "README.md",
