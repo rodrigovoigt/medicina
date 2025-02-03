@@ -14,3 +14,6 @@ quero uma imagem
 teste de escrita
 
 ![teste](Assets/Attachments/IMG-20250203-WA0062.jpg)
+
+
+![](Assets/Attachments/IMG-20250203-WA0065.jpg)

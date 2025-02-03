@@ -1,5 +1,5 @@
 {
-  "newLinkFormat": "shortest",
+  "newLinkFormat": "relative",
   "useMarkdownLinks": true,
   "showUnsupportedFiles": true,
   "trashOption": "none",
