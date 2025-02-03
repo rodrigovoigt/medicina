@@ -4,5 +4,6 @@
   "showUnsupportedFiles": true,
   "trashOption": "none",
   "newFileLocation": "current",
-  "attachmentFolderPath": "Assets/Attachments"
+  "attachmentFolderPath": "Assets/Attachments",
+  "alwaysUpdateLinks": true
 }
