@@ -9,3 +9,6 @@ quero uma imagem
 
 
 ![|300x502](IMG-20250203-WA0066.jpg)
+
+
+![](IMG-20250203-WA0062.jpg)

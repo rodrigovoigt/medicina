@@ -71,7 +71,7 @@
               "state": {
                 "file": "Untitled.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "Untitled"
@@ -214,6 +214,7 @@
   },
   "active": "a7f65c5cb4d8c657",
   "lastOpenFiles": [
+    "Assets/Attachments/IMG-20250203-WA0062.jpg",
     "Drawing 2025-02-03 18.53.08.excalidraw.md",
     "Untitled.md",
     "Teste excali.md",
