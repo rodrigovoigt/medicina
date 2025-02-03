@@ -8,7 +8,7 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque elementum ligula, nec tincidunt justo porta id.
 
 ### Section 1
-![Small Image](https://via.placeholder.com/400x200)
+
 
 Phasellus aliquet, justo nec dapibus faucibus, ligula tortor viverra justo, nec suscipit nisi arcu sit amet urna. Fusce id purus sed metus ultricies volutpat.
 
