@@ -1,1 +1,1 @@
-Nota de teste sobre como funciona
+Nota de teste sobre como fu![[Screenshot_20250131_182302_Firefox.jpg]]nciona
