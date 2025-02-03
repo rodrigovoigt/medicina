@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Teste.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
@@ -98,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "README.md",
+            "file": "Teste.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,8 +155,8 @@
   },
   "active": "84e095b7502c3e17",
   "lastOpenFiles": [
-    "Screenshot_20250131_182302_Firefox.jpg",
     "README.md",
-    "Teste.md"
+    "Teste.md",
+    "Screenshot_20250131_182302_Firefox.jpg"
   ]
 }
