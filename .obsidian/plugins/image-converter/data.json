@@ -267,7 +267,7 @@
   },
   "isImageAlignmentEnabled": true,
   "imageAlignment_cacheCleanupInterval": 3600000,
-  "imageAlignment_cacheLocation": "plugin",
+  "imageAlignment_cacheLocation": ".obsidian",
   "isDragResizeEnabled": true,
   "isScrollResizeEnabled": true,
   "isResizeInReadingModeEnabled": false,
