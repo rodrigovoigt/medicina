@@ -8,7 +8,7 @@ computador esta funcionando?
 
 officialmente funcionou só aprender a usar agr
 
-![images](Assets/Attachments/images.jpg)
+![images|700x419](Assets/Attachments/images.jpg)
 
 
 
