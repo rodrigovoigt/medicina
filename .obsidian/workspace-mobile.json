@@ -11,12 +11,14 @@
             "id": "07e8f6cad7b80890",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw.md"
+                "file": "Anotação.md",
+                "mode": "source",
+                "source": true
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-02-04 09.34.47.excalidraw"
+              "icon": "lucide-file",
+              "title": "Anotação"
             }
           }
         ]
@@ -96,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw.md",
+            "file": "Anotação.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -156,8 +158,8 @@
   },
   "active": "07e8f6cad7b80890",
   "lastOpenFiles": [
-    "Anotação.md",
     "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw.md",
+    "Anotação.md",
     "Titutlo.md",
     "Teste.md",
     "Assets/Attachments/IMG-20250203-WA0066.jpg",

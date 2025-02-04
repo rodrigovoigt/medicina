@@ -9,3 +9,8 @@ Anotações lorem ipsum sit amet dracos ibis sit ome ano lorem soma ipsum que os
 
 
 ![Drawing 2025-02-04 09.34.47.excalidraw](Assets/Excalidraw/Drawing%202025-02-04%2009.34.47.excalidraw.md)
+
+
+Adicionado
+
+Agora por fim então m mais *texto*
