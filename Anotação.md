@@ -20,7 +20,7 @@
 [^1]: testezinho
 
 
-![Nome que aprecerá a imagem|430x250](Assets/Attachments/Anotação-1738677140904.png)
+![Nome que aprecerá a imagem|580x337](Assets/Attachments/Anotação-1738677140904.png)
 
 
 
