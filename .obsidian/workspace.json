@@ -14,14 +14,27 @@
               "type": "markdown",
               "state": {
                 "file": "Teste oficial completo.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
               "title": "Teste oficial completo"
             }
+          },
+          {
+            "id": "ce1b39529100250a",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Drawing 2025-02-04 16.08.17.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2025-02-04 16.08.17.excalidraw"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -180,10 +193,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7b5f8f673f34e60f",
+  "active": "ce1b39529100250a",
   "lastOpenFiles": [
-    "Drawing 2025-02-04 15.48.17.excalidraw.md",
     "Teste oficial completo.md",
+    "Drawing 2025-02-04 16.08.17.excalidraw.md",
+    "Drawing 2025-02-04 15.48.17.excalidraw.md",
     "Assets/Attachments/Anotação-1738677113392.png",
     "Assets/Attachments/Anotação-1738677140904.png",
     "Assets/Excalidraw/Drawing 2025-02-04 10.59.44.excalidraw.md",
