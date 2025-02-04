@@ -25,7 +25,7 @@
 
 
 
-[Drawing 2025-02-04 10.59.44.excalidraw](Assets/Excalidraw/Drawing%202025-02-04%2010.59.44.excalidraw.md)
+![Drawing 2025-02-04 10.59.44.excalidraw](Assets/Excalidraw/Drawing%202025-02-04%2010.59.44.excalidraw.md)
 
 
 
