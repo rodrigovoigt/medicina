@@ -25,7 +25,7 @@
 
 
 
-![|553x439](../Assets/Attachments/Anota%C3%A7%C3%A3o-1738678181804.png)
+![|553x439]()
 
 
 
