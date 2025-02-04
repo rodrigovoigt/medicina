@@ -15,7 +15,7 @@ computador esta funcionando?
 
 officialmente funcionou só aprender a usar agr
 
-![images|397x238](Assets/Attachments/images.jpg)
+![images|419x251](Assets/Attachments/images.jpg)
 
 
 
