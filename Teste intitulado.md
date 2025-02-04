@@ -12,4 +12,4 @@ officialmente funcionou só aprender a usar agr
 
 
 
-![Screenshot_20250201_073519_Reddit 1](Assets/Attachments/Screenshot_20250201_073519_Reddit%201.jpg)
+![Screenshot_20250201_073519_Reddit 1|184x409](Assets/Attachments/Screenshot_20250201_073519_Reddit%201.jpg)
