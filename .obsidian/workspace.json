@@ -11,12 +11,14 @@
             "id": "7b5f8f673f34e60f",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Drawing 2025-02-04 15.48.17.excalidraw.md"
+                "file": "Teste oficial completo.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-02-04 15.48.17.excalidraw"
+              "icon": "lucide-file",
+              "title": "Teste oficial completo"
             }
           }
         ]
@@ -180,8 +182,8 @@
   },
   "active": "7b5f8f673f34e60f",
   "lastOpenFiles": [
-    "Teste oficial completo.md",
     "Drawing 2025-02-04 15.48.17.excalidraw.md",
+    "Teste oficial completo.md",
     "Assets/Attachments/Anotação-1738677113392.png",
     "Assets/Attachments/Anotação-1738677140904.png",
     "Assets/Excalidraw/Drawing 2025-02-04 10.59.44.excalidraw.md",
