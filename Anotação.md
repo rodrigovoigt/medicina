@@ -25,7 +25,7 @@
 
 
 
-![Anotação-1738677113392](Assets/Attachments/Anotação-1738677113392.png)
+![Anotação-1738677113392|448x260](Assets/Attachments/Anotação-1738677113392.png)
 
 
 
