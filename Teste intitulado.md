@@ -8,4 +8,8 @@ computador esta funcionando?
 
 officialmente funcionou só aprender a usar agr
 
-![[]]
+![images](Assets/Attachments/images.jpg)
+
+
+
+![Screenshot_20250201_073519_Reddit 1](Assets/Attachments/Screenshot_20250201_073519_Reddit%201.jpg)
