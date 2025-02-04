@@ -6,8 +6,7 @@
 *  teste 1
 * teste 2
 --- 
-### TESTE
-[^1]
+### TESTE [^1]
 
 ----
 >asdasd
