@@ -441,7 +441,7 @@
   "pdfLockAfterImport": true,
   "pdfNumColumns": 1,
   "pdfNumRows": 1,
-  "pdfDirection": "right",
+  "pdfDirection": "down",
   "pdfImportScale": 0.3,
   "gridSettings": {
     "DYNAMIC_COLOR": true,
