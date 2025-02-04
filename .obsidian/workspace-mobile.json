@@ -11,14 +11,10 @@
             "id": "07e8f6cad7b80890",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "santa.md",
-                "mode": "preview",
-                "source": true
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "santa"
+              "title": "New tab"
             }
           }
         ]
@@ -158,8 +154,9 @@
   },
   "active": "07e8f6cad7b80890",
   "lastOpenFiles": [
-    "Assets/Attachments/images.jpg",
     "santa.md",
+    "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw",
+    "Assets/Attachments/images.jpg",
     "Anotação.md",
     "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw.md",
     "Titutlo.md",

@@ -6,5 +6,6 @@
   "newFileLocation": "current",
   "attachmentFolderPath": "Assets/Attachments",
   "alwaysUpdateLinks": true,
-  "livePreview": false
+  "livePreview": false,
+  "promptDelete": false
 }
