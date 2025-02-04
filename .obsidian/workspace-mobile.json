@@ -28,7 +28,7 @@
               "type": "markdown",
               "state": {
                 "file": "Anotação.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
@@ -173,6 +173,7 @@
   },
   "active": "07e8f6cad7b80890",
   "lastOpenFiles": [
+    "Assets/Attachments/IMG-20250204-WA0002.jpg",
     "Drawing 2025-02-04 09.20.21.excalidraw.md",
     "Drawing 2025-02-03 18.53.08.excalidraw.md",
     "Anotação.md",
