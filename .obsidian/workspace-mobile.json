@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Anotação.md",
-                "mode": "source",
+                "file": "Assets/Attachments/santa.md",
+                "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Anotação"
+              "title": "santa"
             }
           }
         ]
@@ -98,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Anotação.md",
+            "file": "Assets/Attachments/santa.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -158,14 +158,15 @@
   },
   "active": "07e8f6cad7b80890",
   "lastOpenFiles": [
-    "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw.md",
+    "Assets/Attachments/images.jpg",
+    "Assets/Attachments/santa.md",
     "Anotação.md",
+    "Assets/Excalidraw/Drawing 2025-02-04 09.34.47.excalidraw.md",
     "Titutlo.md",
     "Teste.md",
     "Assets/Attachments/IMG-20250203-WA0066.jpg",
     "Assets/Attachments/IMG-20250204-WA0002.jpg",
     "Assets/Attachments/Screenshot_20250201_073519_Reddit 1.jpg",
-    "Assets/Attachments/images.jpg",
     "Assets/Attachments/Screenshot_20250201_073519_Reddit.jpg",
     "Assets/Attachments/Screenshot_20250131_182302_Firefox.jpg",
     "Assets/Attachments/IMG-20250203-WA0065.jpg",
