@@ -4,67 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "88c4c52304a88c45",
+        "id": "8b723f34aa64298b",
         "type": "tabs",
         "children": [
           {
-            "id": "84e095b7502c3e17",
+            "id": "0933946ff2b78b6d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Teste.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Teste"
-            }
-          },
-          {
-            "id": "f0aac70d46cf8054",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Teste.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Teste"
-            }
-          },
-          {
-            "id": "b8885d133334af77",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
+                "file": "Teste excali.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "Teste excali"
             }
           },
           {
-            "id": "1288e7309e2fe83a",
+            "id": "07e8f6cad7b80890",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Teste intitulado.md",
+                "file": "Anotação.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Teste intitulado"
+              "title": "Anotação"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -188,6 +160,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -198,21 +171,22 @@
       "audio-recorder:Start/stop recording": false
     }
   },
-  "active": "1288e7309e2fe83a",
+  "active": "07e8f6cad7b80890",
   "lastOpenFiles": [
-    "Teste excali.md",
-    "Teste intitulado.md",
-    "Excalidraw/Drawing 2025-02-03 23.36.28.excalidraw.md",
-    "Excalidraw/Drawing 2025-02-03 23.36.27.excalidraw.md",
-    "Assets/Attachments/images.jpg",
+    "Drawing 2025-02-04 09.20.21.excalidraw.md",
+    "Drawing 2025-02-03 18.53.08.excalidraw.md",
+    "Anotação.md",
     "Titutlo.md",
-    "Excalidraw/Drawing 2025-02-03 23.36.29.excalidraw.md",
-    "Excalidraw",
     "Teste com desenho.md",
+    "Teste intitulado.md",
+    "Assets/Excalidraw/Drawing 2025-02-03 23.36.28.excalidraw.md",
+    "Assets/Excalidraw/Drawing 2025-02-03 23.36.27.excalidraw.md",
+    "Assets/Attachments/images.jpg",
+    "Assets/Excalidraw/Drawing 2025-02-03 23.36.29.excalidraw.md",
+    "Assets/Excalidraw",
     "Untitled.md",
     "Assets/Attachments/IMG-20250203-WA0065.jpg",
     "Assets/Attachments/IMG-20250203-WA0062.jpg",
-    "Drawing 2025-02-03 18.53.08.excalidraw.md",
     "Teste.md",
     "Assets/Attachments/Screenshot_20250131_182302_Firefox.jpg",
     "Assets/Attachments/IMG-20250203-WA0066.jpg",
