@@ -8,3 +8,4 @@ computador esta funcionando?
 
 officialmente funcionou só aprender a usar agr
 
+![[]]
