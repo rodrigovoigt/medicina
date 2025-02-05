@@ -1,218 +1,177 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>umdprsvc</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #00a66c;
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            background-color: #00ec99;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px;
-            display: block;
-        }
-        nav ul li a:hover {
-            background-color: #00a66c;
-            border-radius: 4px;
-        }
-        h1, h2 {
-            color: #00a66c;
-        }
-        section {
-            background-color: white;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="number"], select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #00a66c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #008d59;
-        }
-        .hidden {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-    </style>
-</head>
-<body>
-    <header>
-	   <img style="width: 25px;" src="icon.png" alt="Logo">
-        <h1 style="color: white;">UMSVC</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#" id="riskLink">Calculadora de Risco de Dez Anos</a></li>
-            <li><a href="#" id="ldlLink">Calculadora de Colesterol LDL</a></li>
-            <li><a href="#" id="gfrLink">Estimativa da Taxa de Filtração Glomerular (GFR)</a></li>
-            <li><a href="#" id="imcLink">Índice de Massa Corporal</a></li>
-        </ul>
-    </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>umdprsvc</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+                color: #333;
+            }
+            header {
+                background-color: #00a66c;
+                color: white;
+                padding: 15px 0;
+                text-align: center;
+            }
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                background-color: #00ec99;
+            }
+            nav ul li {
+                margin: 0 15px;
+            }
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 10px;
+                display: block;
+            }
+            nav ul li a:hover {
+                background-color: #00a66c;
+                border-radius: 4px;
+            }
+            h1,
+            h2 {
+                color: #00a66c;
+            }
+            section {
+                background-color: white;
+                padding: 20px;
+                margin: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+            input[type="number"],
+            select {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            button {
+                background-color: #00a66c;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #008d59;
+            }
+            .hidden {
+                display: none;
+            }
+            .active {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img style="width: 25px" src="icon.png" alt="Logo" />
+            <h1 style="color: white">UMSVC</h1>
+        </header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">Calculadoras</a>
+                    <ul>
+                        <li>
+                            <a href="#" id="riskLink"
+                                >Calculadora de Risco de Dez Anos</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#" id="ldlLink"
+                                >Calculadora de Colesterol LDL</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#" id="gfrLink"
+                                >Estimativa da Taxa de Filtração Glomerular
+                                (GFR)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#" id="imcLink"
+                                >Índice de Massa Corporal</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Exame Físico</a>
+                    <ul>
+                        <li><a href="#" id="coracaoLink">Coração</a></li>
+                        <li><a href="#" id="pulmaoLink">Pulmão</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-    <!-- Seção para a Calculadora de Risco de Dez Anos -->
-    <section id="riskCalculator" class="active">
-        <h2>Calculadora de Risco de Dez Anos</h2>
-        <form>
-            <label for="idade">Idade:</label>
-            <input type="number" id="idade" name="idade" required min="20" max="59">
+        <!-- Seções das Calculadoras -->
+        <section id="riskCalculator" class="hidden">
+            <h2>Calculadora de Risco de Dez Anos</h2>
+            <form>
+                <label for="idade">Idade:</label>
+                <input
+                    type="number"
+                    id="idade"
+                    name="idade"
+                    required
+                    min="20"
+                    max="59"
+                />
+                <button type="button" id="calcularRiscoBtn">
+                    Calcular Risco
+                </button>
+            </form>
+            <div id="resultadoRisco"></div>
+        </section>
 
-            <label for="colesterolTotal">Colesterol Total:</label>
-            <input type="number" id="colesterolTotal" name="colesterolTotal" required>
+        <section id="ldlCalculator" class="hidden">
+            <h2>Calculadora de Colesterol LDL</h2>
+            <form>
+                <label for="colesterolTotalLDL">Colesterol Total:</label>
+                <input
+                    type="number"
+                    id="colesterolTotalLDL"
+                    name="colesterolTotalLDL"
+                    required
+                />
+                <button type="button" id="calcularLDLBtn">Calcular LDL</button>
+            </form>
+            <div id="resultadoLDL"></div>
+        </section>
 
-            <label for="colesterolHDL">Colesterol HDL:</label>
-            <input type="number" id="colesterolHDL" name="colesterolHDL" required>
+        <!-- Seções do Exame Físico -->
+        <section id="coracaoExam" class="hidden">
+            <h2>Exame Físico - Coração</h2>
+            <p>Aqui será descrito o exame físico do coração.</p>
+        </section>
 
-            <label for="pressaoSistolica">Pressão Sistólica:</label>
-            <input type="number" id="pressaoSistolica" name="pressaoSistolica" required>
+        <section id="pulmaoExam" class="hidden">
+            <h2>Exame Físico - Pulmão</h2>
+            <p>Aqui será descrito o exame físico do pulmão.</p>
+        </section>
 
-            <label for="emMedicamentoHipertensao">Em Medicamento para Hipertensão:</label>
-            <select id="emMedicamentoHipertensao" name="emMedicamentoHipertensao" required>
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-            </select>
-
-            <label for="fumante">Fumante:</label>
-            <select id="fumante" name="fumante" required>
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-            </select>
-
-            <label for="diabetes">Diabetes:</label>
-            <select id="diabetes" name="diabetes" required>
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-            </select>
-
-            <label for="genero">Gênero:</label>
-            <select id="genero" name="genero" required>
-                <option value="homem">Masculino</option>
-                <option value="mulher">Feminino</option>
-            </select>
-
-            <label for="raca">Raça:</label>
-            <select id="raca" name="raca" required>
-                <option value="branco">Branco</option>
-                <option value="negro">Negro</option>
-            </select>
-
-            <button type="button" id="calcularRiscoBtn">Calcular Risco</button>
-        </form>
-	   <br>
-        <div id="resultadoRisco"></div>
-    </section>
-
-    <!-- Seção para a Calculadora de Colesterol LDL -->
-    <section id="ldlCalculator" class="hidden">
-        <h2>Calculadora de Colesterol LDL</h2>
-        <form>
-            <label for="colesterolTotalLDL">Colesterol Total:</label>
-            <input type="number" id="colesterolTotalLDL" name="colesterolTotalLDL" required>
-
-            <label for="colesterolHDL_LDL">Colesterol HDL:</label>
-            <input type="number" id="colesterolHDL_LDL" name="colesterolHDL_LDL" required>
-
-            <label for="triglicerideos">Triglicerídeos:</label>
-            <input type="number" id="triglicerideos" name="triglicerideos" required>
-
-            <button type="button" id="calcularLDLBtn">Calcular LDL</button>
-        </form>
-	   <br>
-        <div id="resultadoLDL"></div>
-    </section>
-
-    <!-- Seção para a Estimativa da Taxa de Filtração Glomerular (GFR) -->
-    <section id="gfrCalculator" class="hidden">
-        <h2>Estimativa da Taxa de Filtração Glomerular (GFR)</h2>
-        <form>
-            <label for="creatinina">Creatinina Sérica (mg/dL):</label>
-            <input type="number" id="creatinina" name="creatinina" required>
-
-            <label for="idadeGFR">Idade:</label>
-            <input type="number" id="idadeGFR" name="idadeGFR" required min="0">
-
-            <label for="sexoGFR">Sexo:</label>
-            <select id="sexoGFR" name="sexoGFR" required>
-                <option value="homem">Masculino</option>
-                <option value="mulher">Feminino</option>
-            </select>
-
-            <label for="racaGFR">Raça:</label>
-            <select id="racaGFR" name="racaGFR" required>
-                <option value="branco">Branco</option>
-                <option value="negro">Negro</option>
-            </select>
-
-            <button type="button" id="calcularGFRBtn">Calcular GFR</button>
-        </form>
-	   <br>
-        <div id="resultadoGFR"></div>
-    </section>
-
-    <!-- Seção para IMC -->
-    <section id="imcCalculator" class="hidden">
-        <h2>Índice de Massa Corporal</h2>
-        <form>
-            <label for="pesoIMC">Peso:</label>
-            <input type="number" id="pesoIMC" name="pesoIMC" required min="0">
-
-            <label for="alturaIMC">Altura (cm):</label>
-            <input type="number" id="alturaIMC" name="alturaIMC" required min="0">
-
-            <label for="idadeIMC">Idade:</label>
-            <input type="number" id="idadeIMC" name="idadeIMC" required min="0">
-
-            <button type="button" id="calcularIMCBtn">Calcular IMC</button>
-        </form>
-	   <br>
-        <div id="resultadoIMC"></div>
-    </section>
-
-    <script src="popup.js"></script>
-</body>
+        <script src="js/main.js"></script>
+    </body>
 </html>
