@@ -1,4 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".dropdown > a").forEach((menu) => {
+        menu.addEventListener("click", function (event) {
+            event.preventDefault();
+            let dropdown = this.parentElement;
+            dropdown.classList.toggle("active");
+
+            // Fecha outros dropdowns ao abrir um
+            document.querySelectorAll(".dropdown").forEach((otherDropdown) => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.classList.remove("active");
+                }
+            });
+        });
+    });
+
+    // Fecha dropdowns se clicar fora
+    document.addEventListener("click", function (event) {
+        if (!event.target.closest(".dropdown")) {
+            document.querySelectorAll(".dropdown").forEach((dropdown) => {
+                dropdown.classList.remove("active");
+            });
+        }
+    });
+
+
+
     function showSection(sectionId) {
         document.querySelectorAll("section").forEach((section) => {
             section.classList.toggle("active", section.id === sectionId);
