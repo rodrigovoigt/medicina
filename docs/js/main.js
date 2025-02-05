@@ -1,74 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Função para exibir a seção desejada
     function showSection(sectionId) {
-        const sections = document.querySelectorAll("section");
-        sections.forEach((section) => {
-            if (section.id === sectionId) {
-                section.classList.add("active");
-                section.classList.remove("hidden");
-            } else {
-                section.classList.remove("active");
-                section.classList.add("hidden");
-            }
+        document.querySelectorAll("section").forEach((section) => {
+            section.classList.toggle("active", section.id === sectionId);
+            section.classList.toggle("hidden", section.id !== sectionId);
         });
     }
 
-    // Event listeners para os links de navegação
-    document
-        .getElementById("riskLink")
-        .addEventListener("click", function (event) {
-            event.preventDefault();
-            showSection("riskCalculator");
-        });
+    const links = {
+        riskLink: "riskCalculator",
+        ldlLink: "ldlCalculator",
+        gfrLink: "gfrCalculator",
+        imcLink: "imcCalculator",
+        teste1Link: "teste1Section",
+        teste2Link: "teste2Section",
+    };
 
-    document
-        .getElementById("ldlLink")
-        .addEventListener("click", function (event) {
-            event.preventDefault();
-            showSection("ldlCalculator");
-        });
+    Object.keys(links).forEach((id) => {
+        const link = document.getElementById(id);
+        if (link) {
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+                showSection(links[id]);
+            });
+        }
+    });
 
-    document
-        .getElementById("gfrLink")
-        .addEventListener("click", function (event) {
-            event.preventDefault();
-            showSection("gfrCalculator");
-        });
-
-    document
-        .getElementById("imcLink")
-        .addEventListener("click", function (event) {
-            event.preventDefault();
-            showSection("imcCalculator");
-        });
-
-    // Event listener para o botão de calcular risco
-    document
-        .getElementById("calcularRiscoBtn")
-        .addEventListener("click", function () {
-            calcularRisco();
-        });
-
-    // Event listener para o botão de calcular LDL
-    document
-        .getElementById("calcularLDLBtn")
-        .addEventListener("click", function () {
-            calcularLDL();
-        });
-
-    // Event listener para o botão de calcular GFR
-    document
-        .getElementById("calcularGFRBtn")
-        .addEventListener("click", function () {
-            calcularGFR();
-        });
-
-    // Event listener para o botão de calcular IMC
-    document
-        .getElementById("calcularIMCBtn")
-        .addEventListener("click", function () {
-            calcularIMC();
-        });
+    ["calcularRiscoBtn", "calcularLDLBtn", "calcularGFRBtn", "calcularIMCBtn"].forEach((btnId) => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            btn.addEventListener("click", function () {
+                window[btnId.replace("calcular", "calcular")](); 
+            });
+        }
+    });
 });
 
 // Função para calcular o Risco de Dez Anos

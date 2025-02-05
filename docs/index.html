@@ -90,20 +90,22 @@
         </header>
         <nav>
             <ul>
-                <li>
-                    <a href="#" id="riskLink"
-                        >Calculadora de Risco de Dez Anos</a
-                    >
+                <li class="dropdown">
+                    <a href="#">Calculadoras</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="riskLink">Calculadora de Risco de Dez Anos</a></li>
+                        <li><a href="#" id="ldlLink">Calculadora de Colesterol LDL</a></li>
+                        <li><a href="#" id="gfrLink">Estimativa da Taxa de Filtração Glomerular (GFR)</a></li>
+                        <li><a href="#" id="imcLink">Índice de Massa Corporal</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="#" id="ldlLink">Calculadora de Colesterol LDL</a>
+                <li class="dropdown">
+                    <a href="#">Exame Físico</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="teste1Link">Teste 1</a></li>
+                        <li><a href="#" id="teste2Link">Teste 2</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="#" id="gfrLink"
-                        >Estimativa da Taxa de Filtração Glomerular (GFR)</a
-                    >
-                </li>
-                <li><a href="#" id="imcLink">Índice de Massa Corporal</a></li>
             </ul>
         </nav>
 
@@ -291,6 +293,7 @@
                     name="idadeIMC"
                     required
                     min="0"
+                    value="0"
                 />
 
                 <button type="button" id="calcularIMCBtn">Calcular IMC</button>
