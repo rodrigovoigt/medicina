@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const links = {
+        homeLink: "home",
         riskLink: "riskCalculator",
         ldlLink: "ldlCalculator",
         gfrLink: "gfrCalculator",
