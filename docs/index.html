@@ -144,22 +144,45 @@
 
 }
 
-input[type="checkbox"]:checked {
-    /* background-color: #00a66c; */
-    -webkit-appearance: none;
-    accent-color: red;
-}
-
-input[type="checkbox"]:checked::before {
-  content: "X";
-  color: white;
-}
-
 .checkbox label {
     margin: 0; /* Remove margens automáticas do label */
     line-height: 20px; /* Ajusta a altura da linha para alinhar com o checkbox */
     cursor: pointer;
 }
+
+/* Estilo do checkbox */
+.checkbox input[type="checkbox"] {
+    -webkit-appearance: none; /* Remove o estilo padrão */
+    -moz-appearance: none; /* Remove o estilo padrão */
+    appearance: none; /* Remove o estilo padrão */
+    width: 20px; /* Largura do checkbox */
+    height: 20px; /* Altura do checkbox */
+    border: 2px solid #4CAF50; /* Cor da borda do checkbox */
+    border-radius: 4px; /* Bordas arredondadas */
+    background-color: white; /* Cor de fundo quando desmarcado */
+    position: relative; /* Para permitir o uso de ::before */
+    cursor: pointer; /* Mostrar o cursor pointer */
+}
+
+/* Estilo do checkbox quando estiver marcado */
+.checkbox input[type="checkbox"]:checked {
+    background-color: #4CAF50; /* Cor de fundo quando marcado */
+    border-color: #4CAF50; /* Cor da borda quando marcado */
+}
+
+/* Criação do "check" verde dentro do checkbox */
+.checkbox input[type="checkbox"]:checked::before {
+    content: ''; /* Cria um pseudo-elemento vazio */
+    position: absolute; /* Posiciona dentro do checkbox */
+    top: 50%; /* Alinha verticalmente */
+    left: 50%; /* Alinha horizontalmente */
+    width: 10px; /* Tamanho do "check" */
+    height: 10px; /* Tamanho do "check" */
+    background-color: white; /* Cor do "check" */
+    border-radius: 50%; /* Tornando o "check" redondo */
+    transform: translate(-50%, -50%); /* Centraliza o "check" */
+}
+
 
         </style>
     </head>
@@ -391,7 +414,7 @@ input[type="checkbox"]:checked::before {
         </section>
 
         <section id="exameFisicoGeral" class="hidden">
-            <h2>Exame Físico Geral bababa</h2>
+            <h2>Exame Físico Geral</h2>
             <label>Quais foram realizados:</label><br>
                 <div class="checkbox">
                     <input type="checkbox" class="exame" id="exameGeral" data-text="O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente."> 
