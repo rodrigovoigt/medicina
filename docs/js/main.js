@@ -348,9 +348,9 @@ function calcularIMC() {
 function atualizarTexto(idResultado) {
     let texto = '';
     document.querySelectorAll('.exame:checked').forEach(checkbox => {
-        texto += checkbox.dataset.text + '\n\n';
+        texto += checkbox.dataset.text.replace(/\n/g, '<br>') + '<br><br>';
     });
-    document.getElementById(idResultado).textContent = texto || 'Clique para copiar';
+    document.getElementById(idResultado).innerHTML = texto || 'Clique para copiar';
 }
 
 function copiarTexto(idResultado) {
