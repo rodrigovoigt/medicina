@@ -21,10 +21,10 @@ $(document).ready(function () {
     // Mostrar a seção ao clicar nos links
     const links = {
         homeLink: "home",
-        riskLink: "riskCalculator",
-        ldlLink: "ldlCalculator",
-        gfrLink: "gfrCalculator",
-        imcLink: "imcCalculator",
+        riscoCardioDezLink: "riscoCardioDezCalculadora",
+        ldlLink: "ldlCalculadora",
+        gfrLink: "gfrCalculadora",
+        imcLink: "imcCalculadora",
         exameFisicoGeralLink: "exameFisicoGeral",
         teste1Link: "teste1Section",
         teste2Link: "teste2Section",
