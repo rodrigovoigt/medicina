@@ -297,18 +297,27 @@ function calcularGFR() {
         faixa = "< 15";
     }
 
+    // Definir TFG normal com base na idade
+    let tfgNormal = idade > 70 ? 75 : 120;
+
+    // Cálculo da porcentagem de função renal restante
+    let percentualFuncaoRenal = (gfr / tfgNormal) * 100;
+    
     // Exibir o resultado
     document.getElementById("resultadoGFR").innerText =
         "Taxa de Filtração Glomerular (GFR): " +
         gfr.toFixed(2) +
-        " mL/min/1.73m^2\n" +
+        " mL/min/1.73m²\n" +
         "Categoria: " +
         categoriaG +
         " - " +
         descricao +
         " (Faixa: " +
         faixa +
-        " mL/min/1.73m^2)";
+        " mL/min/1.73m²)\n" +
+        "Função renal restante: " +
+        percentualFuncaoRenal.toFixed(2) +
+        "%";
 }
 
 function calcularIMC() {
