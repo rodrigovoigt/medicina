@@ -43,12 +43,12 @@ document.addEventListener("DOMContentLoaded", function () {
         teste2Link: "teste2Section",
     };
 
-    Object.keys(links).forEach((id) => {
-        const link = document.getElementById(id);
+    Object.keys(links).forEach((name) => {
+        const link = document.getElementById(name);
         if (link) {
             link.addEventListener("click", function (event) {
                 event.preventDefault();
-                showSection(links[id]);
+                showSection(links[name]);
             });
         }
     });
