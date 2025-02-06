@@ -187,6 +187,33 @@
     transform: translate(-50%, -50%); /* Centraliza o "check" */
 }
 
+/* Estilo do card */
+.card {
+    display: block;
+    width: 200px; /* Largura do card */
+    height: 200px; /* Altura do card */
+    background: linear-gradient(145deg, #008d59, #00a66c, #00ec99); /* Gradiente de cores */
+    border-radius: 15px; /* Canto arredondado */
+    color: white; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado do link */
+    display: flex; /* Usado para centralizar o texto */
+    justify-content: center; /* Alinha o texto horizontalmente */
+    align-items: center; /* Alinha o texto verticalmente */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+}
+
+/* Efeito de hover */
+.card:hover {
+    transform: scale(1.05); /* Aumenta o card ligeiramente */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+/* Estilo do conteúdo dentro do card */
+.card-content {
+    font-size: 16px; /* Tamanho da fonte */
+    font-weight: bold; /* Deixa o texto mais forte */
+    text-align: center; /* Alinha o texto ao centro */
+}
 
         </style>
     </head>
@@ -222,6 +249,11 @@
             <h2>Ferramentas</h2>
             <br/>
             <div id="">Em memória aos bons tempos</div>
+            <a href="#" id="exameFisicoGeralLink" class="card">
+                <div class="card-content">
+                    Exame físico geral
+                </div>
+            </a>
         </section>
 
         <!-- Seção para a Calculadora de Risco de Dez Anos -->
