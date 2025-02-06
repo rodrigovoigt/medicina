@@ -57,7 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const btn = document.getElementById(btnId);
         if (btn) {
             btn.addEventListener("click", function () {
-                window[btnId.replace("calcular", "calcular")](); 
+                const functionName = btnId.replace("Btn", ""); // Remove "Btn" do nome do botão para obter a função correta
+                if (typeof window[functionName] === "function") {
+                    window[functionName](); // Chama a função correta
+                } else {
+                    console.error(`Função ${functionName} não encontrada`);
+                }
             });
         }
     });
