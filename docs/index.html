@@ -352,21 +352,88 @@
             <div id="resultadoIMC"></div>
         </section>
 
-        <section id="exameFisicoGeral" class="hidden">
+        <section id="exameFisicoGeral">
             <h2>Exame Físico Geral</h2>
             <label>Quais foram realizados:</label><br>
-            <input type="checkbox" class="exame" id="exameGeral" data-text="Bom estado geral, fácies atípica, boas condições de higiene..."> <label for="exameGeral">Exame Geral</label><br>
-            <input type="checkbox" class="exame" id="examePele" data-text="Lesão do tipo () localizada em (), simétrica, bordas definidas..."> <label for="examePele">Exame de Pele</label><br>
-            <input type="checkbox" class="exame" id="exameTorax" data-text="Tórax íntegro, sem massas, crostas ou descamação..."> <label for="exameTorax">Exame de Tórax e Pulmonar</label><br>
-            <input type="checkbox" class="exame" id="exameCardio" data-text="Palpação do pulso de frequência normal, amplitude mediana..."> <label for="exameCardio">Exame Cardiovascular</label><br>
-            <input type="checkbox" class="exame" id="exameAbdomen" data-text="Abdômen plano, depressível, com ruídos hidroaéreos presentes..."> <label for="exameAbdomen">Exame de Abdômen</label><br>
-            <input type="checkbox" class="exame" id="exameNeuro" data-text="Pupilas isocóricas e isofotorreagentes..."> <label for="exameNeuro">Exame Neurológico</label><br>
-            <input type="checkbox" class="exame" id="otoscopia" data-text="Pavilhão auricular sem hiperemia..."> <label for="otoscopia">Otoscopia</label><br>
-            <input type="checkbox" class="exame" id="oroscopia" data-text="Dentes em bom estado de conservação..."> <label for="oroscopia">Oroscopia</label><br>
+            <input type="checkbox" class="exame" id="exameGeral" data-text="O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente."> <label for="exameGeral">Exame Geral</label>
+            <input type="checkbox" class="exame" id="examePele" data-text="Exame físico de pele:
+    Lesão do tipo () localizada em (), simétrica, bordas definidas, cor (hiper/normo/hipocrômica/hiperemiada), diâmetro de (), de surgimento há () com/sem alterações significativas recentemente."> <label for="examePele">Exame de Pele</label>
+            <input type="checkbox" class="exame" id="exameTorax" data-text="Exame físico de tórax e pulmonar:
+    Tórax íntegro, sem massas, crostas ou descamação, simétrico, sem abaulamento, sem retração, formato elíptico, normolíneo (ângulo de charpy =90°)/longilíneo (ângulo de charpy <90°)/brevilíneo (ângulo de charpy >90°).
+    Som claro pulmonar à percussão.
+    Expansão simétrica bilateralmente.
+    Frêmito toracovocal presente sem alterações.
+    Murmúrios vesiculares presentes bilateralmente, simétricos, sem ruídos adventícios."> <label for="exameTorax">Exame de Tórax e Pulmonar</label>
+            <input type="checkbox" class="exame" id="exameCardio" data-text="Exame físico cardiovascular:
+    Palpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.
+    Ausência de turgência jugular.
+    Ictus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.
+    Ausência de impulsão paraesternal esquerda.
+    Ausência de frêmito cardiovascular.
+    Bulhas rítmicas regulares normofonéticas em dois tempos
+    Manobra Ribeiro Carvalho em tricúspide
+    Decúbito de Pachon mitral"> <label for="exameCardio">Exame Cardiovascular</label>
+            <input type="checkbox" class="exame" id="exameAbdomen" data-text="Exame físico de abdômen:
+    Abdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.
+    Sem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de Valsalva, normotenso bilateralmente.
+    Som predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.
+    Sinal de piparote negativo.
+    Macicez móvel normal.
+    Fígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio
+    Baço palpável à posição de Schuster
+    Sinal de Torres Homem
+    Hepatimetria:
+    Fígado localizado a () cm do rebordo costal inferior direito."> <label for="exameAbdomen">Exame de Abdômen</label>
+            <input type="checkbox" class="exame" id="exameNeuro" data-text="Exame físico neurológico:
+    Pupilas isocóricas e isofotorreagentes.
+    Pares cranianos sem alterações.
+    Força, sensibilidade e coordenação preservada nos quatro membros.
+    Reflexos osteotendíneos normais.
+    Marcha sem alterações.
+    Sem sinais meníngeos."> <label for="exameNeuro">Exame Neurológico</label>
+            <input type="checkbox" class="exame" id="otoscopia" data-text="Otoscopia:
+    Pavilhão auricular sem hiperemia.
+    Meato acústico externo com cerúmen em quantidade adequada, sem secreção, sem estreitamento, sem hiperemia e sem obstrução.
+    Membrana timpânica íntegra, translúcida, normotensa e sem hiperemia."> <label for="otoscopia">Otoscopia</label>
+            <input type="checkbox" class="exame" id="oroscopia" data-text="Oroscopia:
+    Dentes em bom estado de conservação.
+    Mucosa jugal brilhante úmida, normocorada e sem lesões visíveis.
+    Tonsilas e língua normotróficas e normocoradas, sem placas.
+    Ducto parotídeo e submandibular sem obstrução."> <label for="oroscopia">Oroscopia</label>
             
             <h3>Resumo do Exame:</h3>
             <div id="resultadoExameFisico" class="copy-box" onclick="copiarTexto('resultadoExameFisico')">Clique para copiar</div>
         </section>
+
+
+
+
+
+
+
+    <!-- Exame Físico de Pele -->
+    <section id="exameFisicoPele" class="hidden">
+        <h2>Exame Físico de Pele</h2>
+        <input type="checkbox" class="exame" id="examePele" data-text="Lesão do tipo () localizada em (), simétrica, bordas definidas..."> <label for="examePele">Exame de Pele</label><br>
+        <h3>Resumo do Exame:</h3>
+        <div id="resultadoExameFisicoPele" class="copy-box" onclick="copiarTexto('resultadoExameFisicoPele')">Clique para copiar</div>
+    </section>
+
+    <!-- Exame Físico Torácico e Pulmonar -->
+    <section id="exameFisicoTorax" class="hidden">
+        <h2>Exame Físico Torácico e Pulmonar</h2>
+        <input type="checkbox" class="exame" id="exameTorax" data-text="Tórax íntegro, sem massas, crostas ou descamação..."> <label for="exameTorax">Exame Torácico e Pulmonar</label><br>
+        <h3>Resumo do Exame:</h3>
+        <div id="resultadoExameFisicoTorax" class="copy-box" onclick="copiarTexto('resultadoExameFisicoTorax')">Clique para copiar</div>
+    </section>
+
+    <!-- Exame Físico Cardiovascular -->
+    <section id="exameFisicoCardiovascular" class="hidden">
+        <h2>Exame Físico Cardiovascular</h2>
+        <input type="checkbox" class="exame" id="exameCardio" data-text="Palpação do pulso de frequência normal, amplitude mediana..."> <label for="exameCardio">Exame Cardiovascular</label><br>
+        <h3>Resumo do Exame:</h3>
+        <div id="resultadoExameFisicoCardio" class="copy-box" onclick="copiarTexto('resultadoExameFisicoCardio')">Clique para copiar</div>
+    </section>
 
         <script src="js/main.js"></script>
     </body>
