@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     Object.keys(links).forEach((name) => {
-        const link = document.getElementByName(name);
+        const link = document.getElementsByName(name)[0]; // Seleciona o primeiro elemento com o atributo name
         if (link) {
             link.addEventListener("click", function (event) {
                 event.preventDefault();
