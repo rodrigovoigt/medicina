@@ -125,17 +125,7 @@
                 display: block;
             }
 
-            /* .checkbox {
-                display: flex;
-                align-items: center; Alinha os itens no eixo vertical
-                justify-content: flex-start; Alinha os itens à esquerda
-                margin-bottom: 10px; 
-                background-color: pink;
-            }
-
-            .checkbox label {
-                margin-left: 8px; 
-            } */
+         
 
 
             .checkbox {
@@ -154,10 +144,14 @@
 }
 
 input[type="checkbox"]:checked {
-    background-color: red;
+    background-color: #00a66c;
     -webkit-appearance: none;
 }
 
+input[type="checkbox"]:checked::before {
+  content: "X";
+  color: white;
+}
 
 .checkbox label {
     margin: 0; /* Remove margens automáticas do label */
