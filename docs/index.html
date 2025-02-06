@@ -124,6 +124,8 @@
             .dropdown.active .dropdown-menu {
                 display: block;
             }
+
+            
         </style>
     </head>
     <body>
@@ -356,24 +358,35 @@
         <section id="exameFisicoGeral" class="hidden">
             <h2>Exame Físico Geral</h2>
             <label>Quais foram realizados:</label><br>
-            <input type="checkbox" class="exame" id="exameGeral" data-text="O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente."> <label for="exameGeral">Exame Geral</label>
-            <input type="checkbox" class="exame" id="examePele" data-text="Exame físico de pele:
-    Lesão do tipo () localizada em (), simétrica, bordas definidas, cor (hiper/normo/hipocrômica/hiperemiada), diâmetro de (), de surgimento há () com/sem alterações significativas recentemente."> <label for="examePele">Exame de Pele</label>
-            <input type="checkbox" class="exame" id="exameTorax" data-text="Exame físico de tórax e pulmonar:
-    Tórax íntegro, sem massas, crostas ou descamação, simétrico, sem abaulamento, sem retração, formato elíptico, normolíneo (ângulo de charpy =90°)/longilíneo (ângulo de charpy <90°)/brevilíneo (ângulo de charpy >90°).
-    Som claro pulmonar à percussão.
-    Expansão simétrica bilateralmente.
-    Frêmito toracovocal presente sem alterações.
-    Murmúrios vesiculares presentes bilateralmente, simétricos, sem ruídos adventícios."> <label for="exameTorax">Exame de Tórax e Pulmonar</label>
-            <input type="checkbox" class="exame" id="exameCardio" data-text="Exame físico cardiovascular:
-    Palpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.
-    Ausência de turgência jugular.
-    Ictus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.
-    Ausência de impulsão paraesternal esquerda.
-    Ausência de frêmito cardiovascular.
-    Bulhas rítmicas regulares normofonéticas em dois tempos
-    Manobra Ribeiro Carvalho em tricúspide
-    Decúbito de Pachon mitral"> <label for="exameCardio">Exame Cardiovascular</label>
+                <div class="checkbox">
+                    <input type="checkbox" class="exame" id="exameGeral" data-text="O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente."> 
+                    <label for="exameGeral">Exame Geral</label>
+                </div>
+
+
+                <input type="checkbox" class="exame" id="examePele" data-text="Exame físico de pele:
+                    Lesão do tipo () localizada em (), simétrica, bordas definidas, cor (hiper/normo/hipocrômica/hiperemiada), diâmetro de (), de surgimento há () com/sem alterações significativas recentemente."> 
+                <label for="examePele">Exame de Pele</label>
+                
+                <input type="checkbox" class="exame" id="exameTorax" data-text="Exame físico de tórax e pulmonar:
+                    Tórax íntegro, sem massas, crostas ou descamação, simétrico, sem abaulamento, sem retração, formato elíptico, normolíneo (ângulo de charpy =90°)/longilíneo (ângulo de charpy <90°)/brevilíneo (ângulo de charpy >90°).
+                    Som claro pulmonar à percussão.
+                    Expansão simétrica bilateralmente.
+                    Frêmito toracovocal presente sem alterações.
+                    Murmúrios vesiculares presentes bilateralmente, simétricos, sem ruídos adventícios."> 
+                <label for="exameTorax">Exame de Tórax e Pulmonar</label>
+                
+                <input type="checkbox" class="exame" id="exameCardio" data-text="Exame físico cardiovascular:
+                    Palpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.
+                    Ausência de turgência jugular.
+                    Ictus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.
+                    Ausência de impulsão paraesternal esquerda.
+                    Ausência de frêmito cardiovascular.
+                    Bulhas rítmicas regulares normofonéticas em dois tempos
+                    Manobra Ribeiro Carvalho em tricúspide
+                    Decúbito de Pachon mitral"> 
+                <label for="exameCardio">Exame Cardiovascular</label>
+
             <input type="checkbox" class="exame" id="exameAbdomen" data-text="Exame físico de abdômen:
     Abdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.
     Sem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de Valsalva, normotenso bilateralmente.
