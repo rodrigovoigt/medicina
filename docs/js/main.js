@@ -1,37 +1,24 @@
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".dropdown > a").forEach((menu) => {
-        menu.addEventListener("click", function (event) {
-            event.preventDefault();
-            let dropdown = this.parentElement;
-            dropdown.classList.toggle("active");
+$(document).ready(function () {
+    // Toggle dropdowns
+    $(".dropdown > a").click(function (event) {
+        event.preventDefault();
+        var $dropdown = $(this).parent();
 
-            // Fecha outros dropdowns ao abrir um
-            document.querySelectorAll(".dropdown").forEach((otherDropdown) => {
-                if (otherDropdown !== dropdown) {
-                    otherDropdown.classList.remove("active");
-                }
-            });
-        });
+        // Toggle 'active' on the clicked dropdown
+        $dropdown.toggleClass("active");
+
+        // Remove 'active' class from other dropdowns
+        $(".dropdown").not($dropdown).removeClass("active");
     });
 
     // Fecha dropdowns se clicar fora
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest(".dropdown")) {
-            document.querySelectorAll(".dropdown").forEach((dropdown) => {
-                dropdown.classList.remove("active");
-            });
+    $(document).click(function (event) {
+        if (!$(event.target).closest(".dropdown").length) {
+            $(".dropdown").removeClass("active");
         }
     });
 
-
-
-    function showSection(sectionId) {
-        document.querySelectorAll("section").forEach((section) => {
-            section.classList.toggle("active", section.id === sectionId);
-            section.classList.toggle("hidden", section.id !== sectionId);
-        });
-    }
-
+    // Mostrar a seção ao clicar nos links
     const links = {
         homeLink: "home",
         riskLink: "riskCalculator",
@@ -43,33 +30,33 @@ document.addEventListener("DOMContentLoaded", function () {
         teste2Link: "teste2Section",
     };
 
-    Object.keys(links).forEach((name) => {
-        const linksArray = document.getElementsByName(name); // Obtém todos os elementos com o atributo 'name'
-        // Itera sobre cada elemento encontrado com o 'name' correspondente
-        linksArray.forEach((link) => {
-            if (link) {
-                link.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    showSection(links[name]);
-                });
-            }
+    // Usando jQuery para adicionar os eventos de clique
+    $.each(links, function (name, sectionId) {
+        $("[name='" + name + "']").click(function (event) {
+            event.preventDefault();
+            showSection(sectionId);
         });
     });
 
-    ["calcularRiscoBtn", "calcularLDLBtn", "calcularGFRBtn", "calcularIMCBtn"].forEach((btnId) => {
-        const btn = document.getElementById(btnId);
-        if (btn) {
-            btn.addEventListener("click", function () {
-                const functionName = btnId.replace("Btn", ""); // Remove "Btn" do nome do botão para obter a função correta
-                if (typeof window[functionName] === "function") {
-                    window[functionName](); // Chama a função correta
-                } else {
-                    console.error(`Função ${functionName} não encontrada`);
-                }
-            });
-        }
+    // Adicionando evento para os botões de cálculo
+    ["calcularRiscoBtn", "calcularLDLBtn", "calcularGFRBtn", "calcularIMCBtn"].forEach(function (btnId) {
+        $("#" + btnId).click(function () {
+            var functionName = btnId.replace("Btn", ""); // Remove "Btn" do nome do botão para obter a função correta
+            if (typeof window[functionName] === "function") {
+                window[functionName](); // Chama a função correta
+            } else {
+                console.error("Função " + functionName + " não encontrada");
+            }
+        });
     });
 });
+
+function showSection(sectionId) {
+    $("section").each(function () {
+        $(this).toggleClass("active", this.id === sectionId);
+        $(this).toggleClass("hidden", this.id !== sectionId);
+    });
+}
 
 // Função para calcular o Risco de Dez Anos
 function calcularRisco() {
