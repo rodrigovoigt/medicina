@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     Object.keys(links).forEach((name) => {
-        const link = document.getElementById(name);
+        const link = document.getElementByName(name);
         if (link) {
             link.addEventListener("click", function (event) {
                 event.preventDefault();
