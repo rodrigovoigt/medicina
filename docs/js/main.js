@@ -345,6 +345,11 @@ function calcularIMC() {
         "IMC: " + imc.toFixed(2) + " - " + resultado;
 }
 
+// Atualiza o texto conforme os checkboxes são selecionados
+document.querySelectorAll('.exame').forEach(checkbox => {
+    checkbox.addEventListener('change', () => atualizarTexto('resultadoExameFisico'));
+});
+
 function atualizarTexto(idResultado) {
     let textoPuro = ''; // Para cópia correta
     let textoFormatado = ''; // Para exibição correta
@@ -357,7 +362,7 @@ function atualizarTexto(idResultado) {
 
     let resultadoElement = document.getElementById(idResultado);
     
-    if (textoFormatado) {
+    if (textoFormatado.trim()) {
         resultadoElement.innerHTML = textoFormatado;
         resultadoElement.dataset.copyText = textoPuro.trim(); // Salva o texto puro para cópia
     } else {
@@ -366,12 +371,17 @@ function atualizarTexto(idResultado) {
     }
 }
 
-// Função para copiar o texto ao clicar
-document.getElementById('resultado').addEventListener('click', function () {
-    let textoParaCopiar = this.dataset.copyText || '';
+// Copia o texto formatado ao clicar no resultado
+function copiarTexto(id) {
+    let resultadoElement = document.getElementById(id);
+    let textoParaCopiar = resultadoElement.dataset.copyText || '';
+
     if (textoParaCopiar) {
         navigator.clipboard.writeText(textoParaCopiar).then(() => {
-            alert('Texto copiado!');
+            alert('Texto copiado com sucesso!');
+        }).catch(err => {
+            console.error('Erro ao copiar: ', err);
         });
     }
-});
+}
+
