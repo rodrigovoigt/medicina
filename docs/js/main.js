@@ -343,3 +343,22 @@ function calcularIMC() {
     document.getElementById("resultadoIMC").innerText =
         "IMC: " + imc.toFixed(2) + " - " + resultado;
 }
+
+function atualizarTexto(idResultado) {
+    let texto = '';
+    document.querySelectorAll('.exame:checked').forEach(checkbox => {
+        texto += checkbox.dataset.text + '\n\n';
+    });
+    document.getElementById(idResultado).textContent = texto || 'Clique para copiar';
+}
+
+function copiarTexto(idResultado) {
+    let outputDiv = document.getElementById(idResultado);
+    navigator.clipboard.writeText(outputDiv.textContent).then(() => {
+        alert('Texto copiado!');
+    });
+}
+
+document.querySelectorAll('.exame').forEach(checkbox => {
+    checkbox.addEventListener('change', () => atualizarTexto('resultadoExameFisico'));
+});
