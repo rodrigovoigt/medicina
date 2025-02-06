@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ldlLink: "ldlCalculator",
         gfrLink: "gfrCalculator",
         imcLink: "imcCalculator",
+        exameFisicoGeralLink: "exameFisicoGeral",
         teste1Link: "teste1Section",
         teste2Link: "teste2Section",
     };
