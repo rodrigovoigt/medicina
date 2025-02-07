@@ -107,110 +107,67 @@
             <h2>Calculadora de Risco de Dez Anos</h2>
             <form>
                 <label for="idade">Idade:</label>
-                <input
-                    type="number"
-                    id="idade"
-                    name="idade"
-                    required
-                    min="20"
-                    max="59"
-                />
-
+                <input type="number" id="idade" name="idade" required min="20" max="59" />
+        
                 <label for="colesterolTotal">Colesterol Total:</label>
-                <input
-                    type="number"
-                    id="colesterolTotal"
-                    name="colesterolTotal"
-                    required
-                />
-
+                <input type="number" id="colesterolTotal" name="colesterolTotal" required />
+        
                 <label for="colesterolHDL">Colesterol HDL:</label>
-                <input
-                    type="number"
-                    id="colesterolHDL"
-                    name="colesterolHDL"
-                    required
-                />
-
+                <input type="number" id="colesterolHDL" name="colesterolHDL" required />
+        
                 <label for="pressaoSistolica">Pressão Sistólica:</label>
-                <input
-                    type="number"
-                    id="pressaoSistolica"
-                    name="pressaoSistolica"
-                    required
-                />
-
-                <label for="emMedicamentoHipertensao"
-                    >Em Medicamento para Hipertensão:</label
-                >
-                <select
-                    id="emMedicamentoHipertensao"
-                    name="emMedicamentoHipertensao"
-                    required
-                >
+                <input type="number" id="pressaoSistolica" name="pressaoSistolica" required />
+        
+                <label for="emMedicamentoHipertensao">Em Medicamento para Hipertensão:</label>
+                <select id="emMedicamentoHipertensao" name="emMedicamentoHipertensao" required>
                     <option value="true">Sim</option>
                     <option value="false">Não</option>
                 </select>
-
+        
                 <label for="fumante">Fumante:</label>
                 <select id="fumante" name="fumante" required>
                     <option value="true">Sim</option>
                     <option value="false">Não</option>
                 </select>
-
+        
                 <label for="diabetes">Diabetes:</label>
                 <select id="diabetes" name="diabetes" required>
                     <option value="true">Sim</option>
                     <option value="false">Não</option>
                 </select>
-
+        
                 <label for="genero">Gênero:</label>
                 <select id="genero" name="genero" required>
                     <option value="homem">Masculino</option>
                     <option value="mulher">Feminino</option>
                 </select>
-
+        
                 <label for="raca">Raça:</label>
                 <select id="raca" name="raca" required>
                     <option value="branco">Branco</option>
                     <option value="negro">Negro</option>
                 </select>
-
+        
                 <button type="button" id="calcularRiscoBtn">
                     Calcular Risco
                 </button>
             </form>
             <br />
             <div id="resultadoRisco"></div>
-        </section>
+        </section>        
 
         <!-- Seção para a Calculadora de Colesterol LDL -->
         <section id="ldlCalculadora" class="hidden">
             <h2>Calculadora de Colesterol LDL</h2>
             <form>
                 <label for="colesterolTotalLDL">Colesterol Total:</label>
-                <input
-                    type="number"
-                    id="colesterolTotalLDL"
-                    name="colesterolTotalLDL"
-                    required
-                />
+                <input type="number" id="colesterolTotalLDL" name="colesterolTotalLDL" required />
 
                 <label for="colesterolHDL_LDL">Colesterol HDL:</label>
-                <input
-                    type="number"
-                    id="colesterolHDL_LDL"
-                    name="colesterolHDL_LDL"
-                    required
-                />
+                <input type="number" id="colesterolHDL_LDL" name="colesterolHDL_LDL" required />
 
                 <label for="triglicerideos">Triglicerídeos:</label>
-                <input
-                    type="number"
-                    id="triglicerideos"
-                    name="triglicerideos"
-                    required
-                />
+                <input type="number" id="triglicerideos" name="triglicerideos" required />
 
                 <button type="button" id="calcularLDLBtn">Calcular LDL</button>
             </form>
@@ -223,21 +180,10 @@
             <h2>Estimativa da Taxa de Filtração Glomerular (TFG)</h2>
             <form>
                 <label for="creatinina">Creatinina Sérica (mg/dL):</label>
-                <input
-                    type="number"
-                    id="creatinina"
-                    name="creatinina"
-                    required
-                />
+                <input type="number" id="creatinina" name="creatinina" required />
 
                 <label for="idadeTFG">Idade:</label>
-                <input
-                    type="number"
-                    id="idadeTFG"
-                    name="idadeTFG"
-                    required
-                    min="0"
-                />
+                <input type="number" id="idadeTFG" name="idadeTFG" required min="0" />
 
                 <label for="sexoTFG">Sexo:</label>
                 <select id="sexoTFG" name="sexoTFG" required>
@@ -262,31 +208,31 @@
             <h2>Calculadora de Índice de Massa Corporal</h2>
             <form id="imcForm">
                 <label for="pesoIMC">Peso (Kg):</label>
-                <input type="number" id="pesoIMC" name="pesoIMC" required min="0" step="any">
-                
+                <input type="number" id="pesoIMC" name="pesoIMC" required min="0" step="any" />
+
                 <label for="alturaIMC">Altura (cm):</label>
-                <input type="number" id="alturaIMC" name="alturaIMC" required min="0" step="any">
-                
+                <input type="number" id="alturaIMC" name="alturaIMC" required min="0" step="any" />
+
                 <label for="sexoIMC">Sexo:</label>
                 <select id="sexoIMC" name="sexoIMC" required>
                     <option value="homem">Masculino</option>
                     <option value="mulher">Feminino</option>
                 </select>
-                
+
                 <div>
                     <label for="anosIMC">Idade (anos):</label>
-                    <input type="number" id="anosIMC" name="anosIMC" min="0">
-                    
+                    <input type="number" id="anosIMC" name="anosIMC" min="0" />
+
                     <label for="mesesIMC">Meses:</label>
-                    <input type="number" id="mesesIMC" name="mesesIMC" min="0">
-                    
+                    <input type="number" id="mesesIMC" name="mesesIMC" min="0" />
+
                     <label for="semanasIMC">Semanas:</label>
-                    <input type="number" id="semanasIMC" name="semanasIMC" min="0">
-                    
+                    <input type="number" id="semanasIMC" name="semanasIMC" min="0" />
+
                     <label for="diasIMC">Dias:</label>
-                    <input type="number" id="diasIMC" name="diasIMC" min="0">
+                    <input type="number" id="diasIMC" name="diasIMC" min="0" />
                 </div>
-        
+
                 <button type="button" id="calcularIMCBtn">Calcular IMC</button>
             </form>
             <br />
@@ -297,11 +243,11 @@
             <h2>Calculadora de Índice de Massa Corporal</h2>
             <form id="cargaTabagicaForm">
                 <label for="cigarrosPorDiaCargaTabagica">Cigarros por dia:</label>
-                <input type="number" id="cigarrosPorDiaCargaTabagica" name="cigarrosPorDiaCargaTabagica" required min="0" step="any">
-                
+                <input type="number" id="cigarrosPorDiaCargaTabagica" name="cigarrosPorDiaCargaTabagica" required min="0" step="any" />
+
                 <label for="anosFumandoCargaTabagica">Anos fumando:</label>
-                <input type="number" id="anosFumandoCargaTabagica" name="anosFumandoCargaTabagica" required min="0" step="any">
-        
+                <input type="number" id="anosFumandoCargaTabagica" name="anosFumandoCargaTabagica" required min="0" step="any" />
+
                 <button type="button" id="calcularCargaTabagicaBtn">Calcular Carga Tabágica</button>
             </form>
             <br />
@@ -310,168 +256,203 @@
 
         <section id="exameFisicoGeral" class="hidden">
             <h2>Exame Físico Geral</h2>
-            <label>Quais foram realizados:</label><br>
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="exameGeral" data-text="O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente."> 
-                    <label for="exameGeral">Exame Geral</label>
-                </div>
-
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="examePele" data-text="Exame físico de pele:
-                    Lesão do tipo () localizada em (), simétrica, bordas definidas, cor (hiper/normo/hipocrômica/hiperemiada), diâmetro de (), de surgimento há () com/sem alterações significativas recentemente."> 
-                    <label for="examePele">Exame de Pele</label>
-                </div>
-                
-                
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="exameTorax" data-text="Exame físico de tórax e pulmonar:
-                    Tórax íntegro, sem massas, crostas ou descamação, simétrico, sem abaulamento, sem retração, formato elíptico, normolíneo (ângulo de charpy =90°)/longilíneo (ângulo de charpy <90°)/brevilíneo (ângulo de charpy >90°).
-                    Som claro pulmonar à percussão.
-                    Expansão simétrica bilateralmente.
-                    Frêmito toracovocal presente sem alterações.
-                    Murmúrios vesiculares presentes bilateralmente, simétricos, sem ruídos adventícios."> 
-                    <label for="exameTorax">Exame de Tórax e Pulmonar</label>
-                </div>
-
-
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="exameCardio" data-text="Exame físico cardiovascular:
-                    Palpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.
-                    Ausência de turgência jugular.
-                    Ictus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.
-                    Ausência de impulsão paraesternal esquerda.
-                    Ausência de frêmito cardiovascular.
-                    Bulhas rítmicas regulares normofonéticas em dois tempos
-                    Manobra Ribeiro Carvalho em tricúspide
-                    Decúbito de Pachon mitral"> 
-                    <label for="exameCardio">Exame Cardiovascular</label>
-                </div>
-
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="exameAbdomen" data-text="Exame físico de abdômen:
-                    Abdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.
-                    Sem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de Valsalva, normotenso bilateralmente.
-                    Som predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.
-                    Sinal de piparote negativo.
-                    Macicez móvel normal.
-                    Fígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio
-                    Baço palpável à posição de Schuster
-                    Sinal de Torres Homem
-                    Hepatimetria:
-                    Fígado localizado a () cm do rebordo costal inferior direito."> 
-                    <label for="exameAbdomen">Exame de Abdômen</label>
-                </div>
-                    
-                
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="exameNeuro" data-text="Exame físico neurológico:
-                    Pupilas isocóricas e isofotorreagentes.
-                    Pares cranianos sem alterações.
-                    Força, sensibilidade e coordenação preservada nos quatro membros.
-                    Reflexos osteotendíneos normais.
-                    Marcha sem alterações.
-                    Sem sinais meníngeos."> 
-                    <label for="exameNeuro">Exame Neurológico</label>
-                </div>
-
-
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="otoscopia" data-text="Otoscopia:
-                    Pavilhão auricular sem hiperemia.
-                    Meato acústico externo com cerúmen em quantidade adequada, sem secreção, sem estreitamento, sem hiperemia e sem obstrução.
-                    Membrana timpânica íntegra, translúcida, normotensa e sem hiperemia."> 
-                    <label for="otoscopia">Otoscopia</label>
-                </div>
-
-                <div class="checkbox">
-                    <input type="checkbox" class="exame" id="oroscopia" data-text="Oroscopia:
-                    Dentes em bom estado de conservação.
-                    Mucosa jugal brilhante úmida, normocorada e sem lesões visíveis.
-                    Tonsilas e língua normotróficas e normocoradas, sem placas.
-                    Ducto parotídeo e submandibular sem obstrução."> 
-                    <label for="oroscopia">Oroscopia</label>
-                </div>
-
+            <label>Quais foram realizados:</label><br />
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="exameGeral"
+                    data-text="O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente."
+                />
+                <label for="exameGeral">Exame Geral</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="examePele"
+                    data-text="Exame físico de pele:
+                            Lesão do tipo () localizada em (), simétrica, bordas definidas, cor (hiper/normo/hipocrômica/hiperemiada), diâmetro de (), de surgimento há () com/sem alterações significativas recentemente."
+                />
+                <label for="examePele">Exame de Pele</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="exameTorax"
+                    data-text="Exame físico de tórax e pulmonar:
+                            Tórax íntegro, sem massas, crostas ou descamação, simétrico, sem abaulamento, sem retração, formato elíptico, normolíneo (ângulo de charpy =90°)/longilíneo (ângulo de charpy <90°)/brevilíneo (ângulo de charpy >90°).
+                            Som claro pulmonar à percussão.
+                            Expansão simétrica bilateralmente.
+                            Frêmito toracovocal presente sem alterações.
+                            Murmúrios vesiculares presentes bilateralmente, simétricos, sem ruídos adventícios."
+                />
+                <label for="exameTorax">Exame de Tórax e Pulmonar</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="exameCardio"
+                    data-text="Exame físico cardiovascular:
+                            Palpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.
+                            Ausência de turgência jugular.
+                            Ictus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.
+                            Ausência de impulsão paraesternal esquerda.
+                            Ausência de frêmito cardiovascular.
+                            Bulhas rítmicas regulares normofonéticas em dois tempos
+                            Manobra Ribeiro Carvalho em tricúspide
+                            Decúbito de Pachon mitral"
+                />
+                <label for="exameCardio">Exame Cardiovascular</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="exameAbdomen"
+                    data-text="Exame físico de abdômen:
+                            Abdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.
+                            Sem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de Valsalva, normotenso bilateralmente.
+                            Som predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.
+                            Sinal de piparote negativo.
+                            Macicez móvel normal.
+                            Fígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio
+                            Baço palpável à posição de Schuster
+                            Sinal de Torres Homem
+                            Hepatimetria:
+                            Fígado localizado a () cm do rebordo costal inferior direito."
+                />
+                <label for="exameAbdomen">Exame de Abdômen</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="exameNeuro"
+                    data-text="Exame físico neurológico:
+                            Pupilas isocóricas e isofotorreagentes.
+                            Pares cranianos sem alterações.
+                            Força, sensibilidade e coordenação preservada nos quatro membros.
+                            Reflexos osteotendíneos normais.
+                            Marcha sem alterações.
+                            Sem sinais meníngeos."
+                />
+                <label for="exameNeuro">Exame Neurológico</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="otoscopia"
+                    data-text="Otoscopia:
+                            Pavilhão auricular sem hiperemia.
+                            Meato acústico externo com cerúmen em quantidade adequada, sem secreção, sem estreitamento, sem hiperemia e sem obstrução.
+                            Membrana timpânica íntegra, translúcida, normotensa e sem hiperemia."
+                />
+                <label for="otoscopia">Otoscopia</label>
+            </div>
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="oroscopia"
+                    data-text="Oroscopia:
+                            Dentes em bom estado de conservação.
+                            Mucosa jugal brilhante úmida, normocorada e sem lesões visíveis.
+                            Tonsilas e língua normotróficas e normocoradas, sem placas.
+                            Ducto parotídeo e submandibular sem obstrução."
+                />
+                <label for="oroscopia">Oroscopia</label>
+            </div>
+        
             <h3>Resumo do Exame:</h3>
             <div id="resultadoExameFisico" class="copy-box" onclick="copiarTexto('resultadoExameFisico')">Clique para copiar</div>
         </section>
-
-
-
-
-
-
-
-   <!-- Exame Físico de Pele -->
-    <section id="exameFisicoPele" class="hidden">
-        <h2>Exame Físico de Pele</h2>
-        <label>Quais foram realizados:</label><br>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="examePeleGeral" data-text="Exame físico de pele:
-            Paciente apresenta lesão do tipo () localizada em (), de distribuição (difusa/localizada), com superfície (lisa/áspera/verrugosa/crostosa), de formato (ovalar/irregular/arredondado/linear), simétrica/assimétrica, com bordas (definidas/irregulares), de coloração (hipercrômica/normocrômica/hipocrômica/eritematosa/violácea/acastanhada), medindo aproximadamente (***) cm de diâmetro.
-            Lesão de surgimento há (***) com/sem alterações significativas recentemente, apresentando (crescimento/proliferação/redução/manutenção) do tamanho, associada ou não a prurido, dor, descamação, ulceração ou secreção (serosa/purulenta/hemorrágica).
-            Pele adjacente com (temperatura normal/aumentada/reduzida), com presença/ausência de edema, infiltração ou atrofia.
-            Pele geral (íntegra/com múltiplas lesões), com turgor e elasticidade (preservados/reduzidos), hidratada/desidratada, sem sinais de icterícia, cianose ou livedo reticular.">
-            <label for="examePeleGeral">Exame Geral da Pele</label>
-        </div>
-
-        <h3>Sinais e Manobras:</h3>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="sinalNikolsky" data-text="Sinal de Nikolsky: (positivo/negativo) – verificado através da fricção da pele adjacente, com presença/ausência de descolamento epidérmico.">
-            <label for="sinalNikolsky">Sinal de Nikolsky</label>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="sinalAuspitz" data-text="Sinal de Auspitz: (positivo/negativo) – evidenciado pela remoção de escama, observando-se pontos hemorrágicos.">
-            <label for="sinalAuspitz">Sinal de Auspitz</label>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="sinalGota" data-text="Sinal da Gota de Orvalho: (presente/ausente) – lesões disseminadas após infecção estreptocócica.">
-            <label for="sinalGota">Sinal da Gota de Orvalho</label>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="sinalDarier" data-text="Sinal de Darier: (positivo/negativo) – observado pelo surgimento de urticária ao friccionar a lesão.">
-            <label for="sinalDarier">Sinal de Darier</label>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="sinalKoebner" data-text="Sinal de Koebner: (positivo/negativo) – aparecimento de lesões em áreas de trauma cutâneo.">
-            <label for="sinalKoebner">Sinal de Koebner</label>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox" class="exame" id="manobraVitropressao" data-text="Manobra de vitropressão: (branqueamento/persistência do eritema) indicando possível lesão vascular ou inflamatória.">
-            <label for="manobraVitropressao">Manobra de Vitropressão</label>
-        </div>
-
-        <h3>Resumo do Exame:</h3>
-        <div id="resultadoExameFisicoPele" class="copy-box" onclick="copiarTexto('resultadoExameFisicoPele')">Clique para copiar</div>
-    </section>
-
-    <!-- Exame Físico Torácico e Pulmonar -->
-    <section id="exameFisicoTorax" class="hidden">
-        <h2>Exame Físico Torácico e Pulmonar</h2>
-        <input type="checkbox" class="exame" id="exameTorax" data-text="Tórax íntegro, sem massas, crostas ou descamação..."> <label for="exameTorax">Exame Torácico e Pulmonar</label><br>
-        <h3>Resumo do Exame:</h3>
-        <div id="resultadoExameFisicoTorax" class="copy-box" onclick="copiarTexto('resultadoExameFisicoTorax')">Clique para copiar</div>
-    </section>
-
-    <!-- Exame Físico Cardiovascular -->
-    <section id="exameFisicoCardiovascular" class="hidden">
-        <h2>Exame Físico Cardiovascular</h2>
-        <input type="checkbox" class="exame" id="exameCardio" data-text="Palpação do pulso de frequência normal, amplitude mediana..."> <label for="exameCardio">Exame Cardiovascular</label><br>
-        <h3>Resumo do Exame:</h3>
-        <div id="resultadoExameFisicoCardio" class="copy-box" onclick="copiarTexto('resultadoExameFisicoCardio')">Clique para copiar</div>
-    </section>
-
-    <script type="text/javascript" src="js/imc-infantil/bfa_boys_p_exp.js"></script>
-    <script type="text/javascript" src="js/imc-infantil/bfa_girls_p_exp.js"></script>
-    <script type="text/javascript" src="js/imc-infantil/bmi_boys_perc_5-19_exp.js"></script>
-    <script type="text/javascript" src="js/imc-infantil/bmi_girls_perc_5-19_exp.js"></script>
-    <script src="js/main.js"></script>
+        
+        <!-- Exame Físico de Pele -->
+        <section id="exameFisicoPele" class="hidden">
+            <h2>Exame Físico de Pele</h2>
+            <label>Quais foram realizados:</label><br />
+        
+            <div class="checkbox">
+                <input
+                    type="checkbox"
+                    class="exame"
+                    id="examePeleGeral"
+                    data-text="Exame físico de pele:
+                    Paciente apresenta lesão do tipo () localizada em (), de distribuição (difusa/localizada), com superfície (lisa/áspera/verrugosa/crostosa), de formato (ovalar/irregular/arredondado/linear), simétrica/assimétrica, com bordas (definidas/irregulares), de coloração (hipercrômica/normocrômica/hipocrômica/eritematosa/violácea/acastanhada), medindo aproximadamente (***) cm de diâmetro.
+                    Lesão de surgimento há (***) com/sem alterações significativas recentemente, apresentando (crescimento/proliferação/redução/manutenção) do tamanho, associada ou não a prurido, dor, descamação, ulceração ou secreção (serosa/purulenta/hemorrágica).
+                    Pele adjacente com (temperatura normal/aumentada/reduzida), com presença/ausência de edema, infiltração ou atrofia.
+                    Pele geral (íntegra/com múltiplas lesões), com turgor e elasticidade (preservados/reduzidos), hidratada/desidratada, sem sinais de icterícia, cianose ou livedo reticular."
+                />
+                <label for="examePeleGeral">Exame Geral da Pele</label>
+            </div>
+        
+            <h3>Sinais e Manobras:</h3>
+        
+            <div class="checkbox">
+                <input type="checkbox" class="exame" id="sinalNikolsky" data-text="Sinal de Nikolsky: (positivo/negativo) – verificado através da fricção da pele adjacente, com presença/ausência de descolamento epidérmico." />
+                <label for="sinalNikolsky">Sinal de Nikolsky</label>
+            </div>
+        
+            <div class="checkbox">
+                <input type="checkbox" class="exame" id="sinalAuspitz" data-text="Sinal de Auspitz: (positivo/negativo) – evidenciado pela remoção de escama, observando-se pontos hemorrágicos." />
+                <label for="sinalAuspitz">Sinal de Auspitz</label>
+            </div>
+        
+            <div class="checkbox">
+                <input type="checkbox" class="exame" id="sinalGota" data-text="Sinal da Gota de Orvalho: (presente/ausente) – lesões disseminadas após infecção estreptocócica." />
+                <label for="sinalGota">Sinal da Gota de Orvalho</label>
+            </div>
+        
+            <div class="checkbox">
+                <input type="checkbox" class="exame" id="sinalDarier" data-text="Sinal de Darier: (positivo/negativo) – observado pelo surgimento de urticária ao friccionar a lesão." />
+                <label for="sinalDarier">Sinal de Darier</label>
+            </div>
+        
+            <div class="checkbox">
+                <input type="checkbox" class="exame" id="sinalKoebner" data-text="Sinal de Koebner: (positivo/negativo) – aparecimento de lesões em áreas de trauma cutâneo." />
+                <label for="sinalKoebner">Sinal de Koebner</label>
+            </div>
+        
+            <div class="checkbox">
+                <input type="checkbox" class="exame" id="manobraVitropressao" data-text="Manobra de vitropressão: (branqueamento/persistência do eritema) indicando possível lesão vascular ou inflamatória." />
+                <label for="manobraVitropressao">Manobra de Vitropressão</label>
+            </div>
+        
+            <h3>Resumo do Exame:</h3>
+            <div id="resultadoExameFisicoPele" class="copy-box" onclick="copiarTexto('resultadoExameFisicoPele')">Clique para copiar</div>
+        </section>
+        
+        <!-- Exame Físico Torácico e Pulmonar -->
+        <section id="exameFisicoTorax" class="hidden">
+            <h2>Exame Físico Torácico e Pulmonar</h2>
+            <input type="checkbox" class="exame" id="exameTorax" data-text="Tórax íntegro, sem massas, crostas ou descamação..." /> <label for="exameTorax">Exame Torácico e Pulmonar</label><br />
+            <h3>Resumo do Exame:</h3>
+            <div id="resultadoExameFisicoTorax" class="copy-box" onclick="copiarTexto('resultadoExameFisicoTorax')">Clique para copiar</div>
+        </section>
+        
+        <!-- Exame Físico Cardiovascular -->
+        <section id="exameFisicoCardiovascular" class="hidden">
+            <h2>Exame Físico Cardiovascular</h2>
+            <input type="checkbox" class="exame" id="exameCardio" data-text="Palpação do pulso de frequência normal, amplitude mediana..." /> <label for="exameCardio">Exame Cardiovascular</label><br />
+            <h3>Resumo do Exame:</h3>
+            <div id="resultadoExameFisicoCardio" class="copy-box" onclick="copiarTexto('resultadoExameFisicoCardio')">Clique para copiar</div>
+        </section>
+        
+        <script type="text/javascript" src="js/imc-infantil/bfa_boys_p_exp.js"></script>
+        <script type="text/javascript" src="js/imc-infantil/bfa_girls_p_exp.js"></script>
+        <script type="text/javascript" src="js/imc-infantil/bmi_boys_perc_5-19_exp.js"></script>
+        <script type="text/javascript" src="js/imc-infantil/bmi_girls_perc_5-19_exp.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
