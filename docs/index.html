@@ -230,7 +230,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#" name="riscoCardioDezLink">Calculadora de Risco de Dez Anos</a></li>
                         <li><a href="#" name="ldlLink">Calculadora de Colesterol LDL</a></li>
-                        <li><a href="#" name="gfrLink">Estimativa da Taxa de Filtração Glomerular (GFR)</a></li>
+                        <li><a href="#" name="tfgLink">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
                         <li><a href="#" name="imcLink">Índice de Massa Corporal</a></li>
                     </ul>
                 </li>
@@ -262,9 +262,9 @@
                     Calculadora de Colesterol LDL
                 </div>
             </a>
-            <a href="#" name="gfrLink" class="card">
+            <a href="#" name="tfgLink" class="card">
                 <div class="card-content">
-                    Estimativa da Taxa de Filtração Glomerular (GFR)
+                    Estimativa da Taxa de Filtração Glomerular (TFG)
                 </div>
             </a>
             <a href="#" name="imcLink" class="card">
@@ -407,9 +407,9 @@
             <div id="resultadoLDL"></div>
         </section>
 
-        <!-- Seção para a Estimativa da Taxa de Filtração Glomerular (GFR) -->
-        <section id="gfrCalculadora" class="hidden">
-            <h2>Estimativa da Taxa de Filtração Glomerular (GFR)</h2>
+        <!-- Seção para a Estimativa da Taxa de Filtração Glomerular (TFG) -->
+        <section id="tfgCalculadora" class="hidden">
+            <h2>Estimativa da Taxa de Filtração Glomerular (TFG)</h2>
             <form>
                 <label for="creatinina">Creatinina Sérica (mg/dL):</label>
                 <input
@@ -419,31 +419,31 @@
                     required
                 />
 
-                <label for="idadeGFR">Idade:</label>
+                <label for="idadeTFG">Idade:</label>
                 <input
                     type="number"
-                    id="idadeGFR"
-                    name="idadeGFR"
+                    id="idadeTFG"
+                    name="idadeTFG"
                     required
                     min="0"
                 />
 
-                <label for="sexoGFR">Sexo:</label>
-                <select id="sexoGFR" name="sexoGFR" required>
+                <label for="sexoTFG">Sexo:</label>
+                <select id="sexoTFG" name="sexoTFG" required>
                     <option value="homem">Masculino</option>
                     <option value="mulher">Feminino</option>
                 </select>
 
-                <label for="racaGFR">Raça:</label>
-                <select id="racaGFR" name="racaGFR" required>
+                <label for="racaTFG">Raça:</label>
+                <select id="racaTFG" name="racaTFG" required>
                     <option value="branco">Branco</option>
                     <option value="negro">Negro</option>
                 </select>
 
-                <button type="button" id="calcularGFRBtn">Calcular GFR</button>
+                <button type="button" id="calcularTFGBtn">Calcular TFG</button>
             </form>
             <br />
-            <div id="resultadoGFR"></div>
+            <div id="resultadoTFG"></div>
         </section>
 
         <!-- Seção para IMC -->
@@ -478,7 +478,7 @@
         
                 <button type="button" id="calcularIMCBtn">Calcular IMC</button>
             </form>
-        
+            <br />
             <div id="resultadoIMC"></div>
         </section>
 

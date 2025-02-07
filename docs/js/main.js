@@ -23,7 +23,7 @@ $(document).ready(function () {
         homeLink: "home",
         riscoCardioDezLink: "riscoCardioDezCalculadora",
         ldlLink: "ldlCalculadora",
-        gfrLink: "gfrCalculadora",
+        tfgLink: "tfgCalculadora",
         imcLink: "imcCalculadora",
         exameFisicoGeralLink: "exameFisicoGeral",
         teste1Link: "teste1Section",
@@ -39,7 +39,7 @@ $(document).ready(function () {
     });
 
     // Adicionando evento para os botões de cálculo
-    ["calcularRiscoBtn", "calcularLDLBtn", "calcularGFRBtn", "calcularIMCBtn"].forEach(function (btnId) {
+    ["calcularRiscoBtn", "calcularLDLBtn", "calcularTFGBtn", "calcularIMCBtn"].forEach(function (btnId) {
         $("#" + btnId).click(function () {
             var functionName = btnId.replace("Btn", ""); // Remove "Btn" do nome do botão para obter a função correta
             if (typeof window[functionName] === "function") {
@@ -263,29 +263,29 @@ $(document).ready(function () {
         $('#resultadoLDL').text(resultadoLDL).data('copyText', resultadoLDL).attr('data-copy', true);
     });
 
-    $('#calcularGFRBtn').click(function () {
+    $('#calcularTFGBtn').click(function () {
         let creatinina = parseFloat($('#creatinina').val());
-        let idade = parseFloat($('#idadeGFR').val());
-        let sexo = $('#sexoGFR').val();
-        let raca = $('#racaGFR').val();
+        let idade = parseFloat($('#idadeTFG').val());
+        let sexo = $('#sexoTFG').val();
+        let raca = $('#racaTFG').val();
         
         let sex = sexo === "mulher" ? 1.018 : 1;
         let alpha = sexo === "mulher" ? -0.329 : -0.411;
         let kappa = sexo === "mulher" ? 0.7 : 0.9;
         let race = raca === "negro" ? 1.159 : 1;
 
-        let gfr = 141 * Math.min(Math.pow(creatinina / kappa, alpha), Math.pow(creatinina / kappa, -1.209)) * Math.pow(0.993, idade) * sex * race;
+        let tfg = 141 * Math.min(Math.pow(creatinina / kappa, alpha), Math.pow(creatinina / kappa, -1.209)) * Math.pow(0.993, idade) * sex * race;
         
-        let categoriaG = gfr >= 90 ? "G1" : gfr >= 60 ? "G2" : gfr >= 45 ? "G3a" : gfr >= 30 ? "G3b" : gfr >= 15 ? "G4" : "G5";
-        let descricao = gfr >= 90 ? "Normal" : gfr >= 60 ? "Levemente diminuída" : gfr >= 45 ? "Leve/moderadamente diminuída" : gfr >= 30 ? "Moderadamente diminuída" : gfr >= 15 ? "Muito diminuída" : "Falência renal";
-        let faixa = gfr >= 90 ? "≥ 90" : gfr >= 60 ? "60-89" : gfr >= 45 ? "45-59" : gfr >= 30 ? "30-44" : gfr >= 15 ? "15-29" : "< 15";
+        let categoriaG = tfg >= 90 ? "G1" : tfg >= 60 ? "G2" : tfg >= 45 ? "G3a" : tfg >= 30 ? "G3b" : tfg >= 15 ? "G4" : "G5";
+        let descricao = tfg >= 90 ? "Normal" : tfg >= 60 ? "Levemente diminuída" : tfg >= 45 ? "Leve/moderadamente diminuída" : tfg >= 30 ? "Moderadamente diminuída" : tfg >= 15 ? "Muito diminuída" : "Falência renal";
+        let faixa = tfg >= 90 ? "≥ 90" : tfg >= 60 ? "60-89" : tfg >= 45 ? "45-59" : tfg >= 30 ? "30-44" : tfg >= 15 ? "15-29" : "< 15";
         
         let tfgNormal = idade > 70 ? 75 : 120;
-        let percentualFuncaoRenal = (gfr / tfgNormal) * 100;
+        let percentualFuncaoRenal = (tfg / tfgNormal) * 100;
         
-        let resultadoTexto = `Taxa de Filtração Glomerular (GFR): ${gfr.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\nFunção renal restante: ${percentualFuncaoRenal.toFixed(2)}%`;
+        let resultadoTexto = `Taxa de Filtração Glomerular (TFG): ${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\nFunção renal restante: ${percentualFuncaoRenal.toFixed(2)}%`;
         
-        $('#resultadoGFR').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
+        $('#resultadoTFG').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
     });
 
     $('#calcularIMCBtn').click(function() {
