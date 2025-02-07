@@ -75,7 +75,7 @@ $(document).ready(function () {
         section.find('.exame:checked').each(function () {
             let texto = $(this).data('text');
             textoPuro += texto.replace(/\n/g, '\n') + '\n';  // Apenas uma quebra de linha
-            textoFormatado += texto.replace(/\n/g, '<br>') + '<br>'; // Apenas um <br>
+            textoFormatado += texto.replace(/\n/g, '<br>') + '<br><br>'; // Apenas um <br>
         });
 
         // Atualiza o resultado
