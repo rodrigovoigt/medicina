@@ -74,8 +74,8 @@ $(document).ready(function () {
         // Para cada checkbox selecionado dentro da mesma seção
         section.find('.exame:checked').each(function () {
             let texto = $(this).data('text');
-            textoPuro += texto + '\n\n'; // Mantém as quebras de linha para cópia
-            textoFormatado += texto.replace(/\n/g, '<br>') + '<br><br>'; // Converte para exibição HTML
+            textoPuro += texto.replace(/\n/g, '\n') + '\n';  // Apenas uma quebra de linha
+            textoFormatado += texto.replace(/\n/g, '<br>') + '<br>'; // Apenas um <br>
         });
 
         // Atualiza o resultado
