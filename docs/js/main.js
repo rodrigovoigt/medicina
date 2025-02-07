@@ -109,9 +109,9 @@ $(document).ready(function () {
         let colesterolTotal = parseFloat($('#colesterolTotal').val());
         let colesterolHDL = parseFloat($('#colesterolHDL').val());
         let pressaoSistolica = parseFloat($('#pressaoSistolica').val());
-        let emMedicamentoHipertensao = $('#emMedicamentoHipertensao').val() === "true";
-        let fumante = $('#fumante').val() === "true";
-        let diabetes = $('#diabetes').val() === "true";
+        let emMedicamentoHipertensao = $('#emMedicamentoHipertensao').val() === "true" ? 1 : 0;
+        let fumante = $('#fumante').val() === "true" ? 1 : 0;
+        let diabetes = $('#diabetes').val() === "true" ? 1 : 0;
         let genero = $('#genero').val();
         let raca = $('#raca').val();
 
@@ -134,13 +134,19 @@ $(document).ready(function () {
         let c = coef[genero][raca];
 
         let Terms = c.C_Age * Math.log(idade) +
+            c.C_Sq_Age * Math.pow(Math.log(idade), 2) +
+            c.C_Total_Chol * Math.log(colesterolTotal) +
+            c.C_Age_Total_Chol * Math.log(idade) * Math.log(colesterolTotal) +
             c.C_HDL_Chol * Math.log(colesterolHDL) +
             c.C_Age_HDL_Chol * Math.log(idade) * Math.log(colesterolHDL) +
-            emMedicamentoHipertensao * c.C_On_Hypertension_Meds * Math.log(pressaoSistolica) +
-            !emMedicamentoHipertensao * c.C_Off_Hypertension_Meds * Math.log(pressaoSistolica) +
+            (emMedicamentoHipertensao ? c.C_On_Hypertension_Meds * Math.log(pressaoSistolica) +
+            c.C_Age_On_Hypertension_Meds * Math.log(idade) * Math.log(pressaoSistolica) :
+            c.C_Off_Hypertension_Meds * Math.log(pressaoSistolica) +
+            c.C_Age_Off_Hypertension_Meds * Math.log(idade) * Math.log(pressaoSistolica)) +
             c.C_Smoker * fumante +
             (c.C_Age_Smoker || 0) * Math.log(idade) * fumante +
             c.C_Diabetes * diabetes;
+
 
         let Risco_Dez_Anos = 100 * (1 - Math.pow(c.S10, Math.exp(Terms - c.Mean_Terms)));
 
