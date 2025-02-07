@@ -302,7 +302,7 @@ $(document).ready(function () {
         let idadeDias = (anos * 365) + (meses * 30) + (semanas * 7) + dias;
         
         // Validação
-        if (peso <= 0 || altura <= 0 || idadeDias <= 0) {
+        if (peso <= 0 || altura <= 0 || idadeDias <= 0 || sexo === "") {
             alert("Por favor, preencha todos os campos corretamente.");
             return;
         }
