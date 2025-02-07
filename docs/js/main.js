@@ -25,6 +25,7 @@ $(document).ready(function () {
         ldlLink: "ldlCalculadora",
         tfgLink: "tfgCalculadora",
         imcLink: "imcCalculadora",
+        cargaTabagicaLink: "cargaTabagicaCalculadora",
         exameFisicoGeralLink: "exameFisicoGeral",
         teste1Link: "teste1Section",
         teste2Link: "teste2Section",
@@ -389,6 +390,20 @@ $(document).ready(function () {
         }
     });
     
+    $('#calcularCargaTabagicaBtn').click(function () {
+        let cigarrosPorDia = parseFloat($('#cigarrosPorDiaCargaTabagica').val());
+        let anosFumando = parseFloat($('#anosFumandoCargaTabagica').val());
+    
+        if (isNaN(cigarrosPorDia) || isNaN(anosFumando) || cigarrosPorDia <= 0 || anosFumando <= 0) {
+            alert('Preencha todos os campos corretamente!');
+            return;
+        }
+    
+        let cargaTabagica = (cigarrosPorDia / 20) * anosFumando;
+        let resultadoCarga = `Carga Tabágica: ${cargaTabagica.toFixed(2)} maços-ano`;
+    
+        $('#resultadoCargaTabagica').text(resultadoCarga).data('copyText', resultadoCarga).attr('data-copy', true);
+    });
     
     
 });

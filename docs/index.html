@@ -188,25 +188,32 @@
     transform: translate(-50%, -50%); /* Centraliza o "check" */
 }
 
+/* Contêiner flexível para organizar os cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo se não couberem */
+    gap: 15px; /* Espaçamento entre os cards */
+    justify-content: center; /* Centraliza os cards horizontalmente */
+}
+
 /* Estilo do card */
 .card {
-    display: block;
     width: 200px; /* Largura do card */
     height: 200px; /* Altura do card */
     background: linear-gradient(145deg, #008d59, #00a66c, #00ec99); /* Gradiente de cores */
-    border-radius: 15px; /* Canto arredondado */
+    border-radius: 15px; /* Cantos arredondados */
     color: white; /* Cor do texto */
     text-decoration: none; /* Remove o sublinhado do link */
     display: flex; /* Usado para centralizar o texto */
     justify-content: center; /* Alinha o texto horizontalmente */
     align-items: center; /* Alinha o texto verticalmente */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Suaviza a mudança de cor e sombra */
 }
 
-/* Efeito de hover */
+/* Efeito de hover (sem aumentar o tamanho) */
 .card:hover {
-    transform: scale(1.05); /* Aumenta o card ligeiramente */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+    background: linear-gradient(145deg, #007a4e, #00935f, #00d789); /* Cores um pouco mais escuras no hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais sutil */
 }
 
 /* Estilo do conteúdo dentro do card */
@@ -232,6 +239,7 @@
                         <li><a href="#" name="ldlLink">Calculadora de Colesterol LDL</a></li>
                         <li><a href="#" name="tfgLink">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
                         <li><a href="#" name="imcLink">Índice de Massa Corporal</a></li>
+                        <li><a href="#" name="cargaTabagicaLink">Carga Tabágica</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -270,6 +278,11 @@
             <a href="#" name="imcLink" class="card">
                 <div class="card-content">
                     Índice de Massa Corporal
+                </div>
+            </a>
+            <a href="#" name="cargaTabagicaLink" class="card">
+                <div class="card-content">
+                    Carga Tabágica
                 </div>
             </a>
         
@@ -480,6 +493,21 @@
             </form>
             <br />
             <div id="resultadoIMC"></div>
+        </section>
+
+        <section id="cargaTabagicaCalculadora" class="hidden">
+            <h2>Calculadora de Índice de Massa Corporal</h2>
+            <form id="cargaTabagicaForm">
+                <label for="cigarrosPorDiaCargaTabagica">Cigarros por dia:</label>
+                <input type="number" id="cigarrosPorDiaCargaTabagica" name="cigarrosPorDiaCargaTabagica" required min="0" step="any">
+                
+                <label for="anosFumandoCargaTabagica">Anos fumando:</label>
+                <input type="number" id="anosFumandoCargaTabagica" name="anosFumandoCargaTabagica" required min="0" step="any">
+        
+                <button type="button" id="calcularIMCBtn">Calcular IMC</button>
+            </form>
+            <br />
+            <div id="resultadoCargaTabagica"></div>
         </section>
 
         <section id="exameFisicoGeral" class="hidden">
