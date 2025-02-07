@@ -312,64 +312,83 @@ $(document).ready(function () {
         
         // Inicializando variáveis para o cálculo do percentil
         let resultado = '';
-        let diff = 999999;
-        let perc = '';
         let ref = null;
+        let percentil = '';
     
         // Lógica para definir o IMC dependendo da idade e sexo
         if (sexo === 'homem') {
             if (idadeDias < 1857) {
-                // Tabelas para meninos (0-5 anos)
-                ref = b0_5[idadeDias]; // Tabela para meninos de 0 a 5 anos
-                resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
+                // Meninos (0-5 anos)
+                ref = b0_5[idadeDias]; 
             } else if (idadeDias < 6935) {
-                // Tabelas para meninos (5-19 anos)
-                ref = b5_19[idadeDias]; // Tabela para meninos de 5 a 19 anos
-                resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
+                // Meninos (5-19 anos)
+                let meses = Math.floor(idadeDias / 30) - 61; // Ajustando índice da tabela
+                ref = b5_19[meses];
             } else {
-                // Para meninos/adultos (maiores de 19 anos)
+                // Homens adultos
                 resultado = anos < 60 ?
-                    imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
+                    imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : 
+                    imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : 
+                    imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : 
+                    imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
                     : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
             }
         } else if (sexo === 'mulher') {
             if (idadeDias < 1857) {
-                // Tabelas para meninas (0-5 anos)
-                ref = g0_5[idadeDias]; // Tabela para meninas de 0 a 5 anos
-                resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
+                // Meninas (0-5 anos)
+                ref = g0_5[idadeDias]; 
             } else if (idadeDias < 6935) {
-                // Tabelas para meninas (5-19 anos)
-                ref = g5_19[idadeDias]; // Tabela para meninas de 5 a 19 anos
-                resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
+                // Meninas (5-19 anos)
+                let meses = Math.floor(idadeDias / 30) - 61; // Ajustando índice da tabela
+                ref = g5_19[meses];
             } else {
-                // Para meninas/adultas (maiores de 19 anos)
+                // Mulheres adultas
                 resultado = anos < 60 ?
-                    imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
+                    imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : 
+                    imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : 
+                    imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : 
+                    imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
                     : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
             }
         }
     
-        // Se a faixa etária permite o cálculo do percentil
+        // Se estiver dentro da faixa etária que usa percentil (0-5 anos ou 5-19 anos)
         if (ref) {
-            // Calculando o percentil (valor mais próximo)
-            for (let i in ref) {
-                if (Math.abs(ref[i] - imc) < diff) {
-                    diff = Math.abs(ref[i] - imc);
-                    perc = i;
+            let percentilMaisProximo = null;
+            let menorDiferenca = Infinity;
+    
+            // Iterando sobre todos os percentis disponíveis na referência
+            for (let p in ref) {
+                let diferenca = Math.abs(imc - ref[p]);
+                if (diferenca < menorDiferenca) {
+                    menorDiferenca = diferenca;
+                    percentilMaisProximo = p;
                 }
             }
     
-            // Exibindo resultado com percentil
-            let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}, Percentil: ${perc.toUpperCase()} (${ref[perc]})`;
+            // Determinar classificação do IMC
+            if (imc < ref.p3) {
+                resultado = "Baixo IMC para idade";
+            } else if (imc >= ref.p3 && imc <= ref.p85) {
+                resultado = "IMC adequado";
+            } else if (imc > ref.p85 && imc <= ref.p97) {
+                resultado = "Sobrepeso";
+            } else {
+                resultado = "Obesidade";
+            }
+    
+            // Exibindo resultado com percentil correto
+            let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}, Percentil: ${percentilMaisProximo.toUpperCase()} (${ref[percentilMaisProximo]})`;
             $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
-            $('#resultadoIMC').show();  // Fazendo o resultado visível
+            $('#resultadoIMC').show();
         } else {
-            // Se não houver tabela para a faixa etária, não exibe percentil
+            // Se for adulto, não exibe percentil
             let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}`;
             $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
-            $('#resultadoIMC').show();  // Fazendo o resultado visível
+            $('#resultadoIMC').show();
         }
     });
+    
     
     
 });
