@@ -221,20 +221,18 @@ $(document).ready(function () {
         let Risco_Dez_Anos =
             100 * (1 - Math.pow(S10, Math.exp(Terms - Mean_Terms)));
     
-        let resultado = "";
+        let resultadoRiscoCardio = "Risco de Dez Anos: " + Risco_Dez_Anos.toFixed(2) + "% - ";
         if (Risco_Dez_Anos < 5) {
-            resultado = "Baixo risco (<5%)";
+            resultadoRiscoCardio = resultadoRiscoCardio + "Baixo risco (<5%)";
         } else if (Risco_Dez_Anos >= 5 && Risco_Dez_Anos <= 7.4) {
-            resultado = "Limítrofe (5% a 7.4%)";
+            resultadoRiscoCardio = resultadoRiscoCardio + "Limítrofe (5% a 7.4%)";
         } else if (Risco_Dez_Anos >= 7.5 && Risco_Dez_Anos <= 19.9) {
-            resultado = "Risco intermediário (7.5% a 19.9%)";
+            resultadoRiscoCardio = resultadoRiscoCardio + "Risco intermediário (7.5% a 19.9%)";
         } else {
-            resultado = "Alto risco (≥20%)";
+            resultadoRiscoCardio = resultadoRiscoCardio + "Alto risco (≥20%)";
         }
     
-        $('#resultadoRisco').text(
-            "Risco de Dez Anos: " + Risco_Dez_Anos.toFixed(2) + "% - " + resultado
-        );
+        $('#resultadoRisco').text(resultadoRiscoCardio).data('copyText', resultadoRiscoCardio).attr('data-copy', true);
     });
     
 
