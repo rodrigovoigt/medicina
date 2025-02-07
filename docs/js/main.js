@@ -320,8 +320,10 @@ $(document).ready(function () {
             let ref = bmi_boys_perc_5_19_exp[idadeDias]; // Tabela para adolescentes
             resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
         } else {
-            // Tabelas para adultos e idosos
-            resultado = (imc < 18.5) ? "Baixo peso" : (imc < 25) ? "Peso normal" : (imc < 30) ? "Sobrepeso" : "Obesidade";
+            // Para adultos e idosos, usando a lógica que você forneceu
+            resultado = anos < 60 ?
+                imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
+                : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
         }
 
         // Exibindo resultado
