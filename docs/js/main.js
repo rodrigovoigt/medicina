@@ -292,10 +292,11 @@ $(document).ready(function () {
         // Pegando os valores dos inputs
         let peso = parseFloat($('#pesoIMC').val());
         let altura = parseFloat($('#alturaIMC').val()) / 100; // Convertendo para metros
-        let anos = parseInt($('#anos').val()) || 0;
-        let meses = parseInt($('#meses').val()) || 0;
-        let semanas = parseInt($('#semanas').val()) || 0;
-        let dias = parseInt($('#dias').val()) || 0;
+        let anos = parseInt($('#anosIMC').val()) || 0;
+        let meses = parseInt($('#mesesIMC').val()) || 0;
+        let semanas = parseInt($('#semanasIMC').val()) || 0;
+        let dias = parseInt($('#diasIMC').val()) || 0;
+        let sexo = $('#sexoIMC').val(); // Obtendo o valor selecionado no <select>
         
         // Calculando a idade total em dias
         let idadeDias = (anos * 365) + (meses * 30) + (semanas * 7) + dias;
@@ -308,26 +309,44 @@ $(document).ready(function () {
         
         // Calculando IMC
         let imc = peso / (altura * altura);
-
-        // Lógica para definir o IMC dependendo da idade
+    
+        // Lógica para definir o IMC dependendo da idade e sexo
         let resultado = '';
-        if (idadeDias < 1857) {
-            // Tabelas para crianças
-            let ref = bfa_boys_p_exp[idadeDias]; // Exemplo de como a tabela seria usada
-            resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
-        } else if (idadeDias < 6935) {
-            // Tabelas para adolescentes
-            let ref = bmi_boys_perc_5_19_exp[idadeDias]; // Tabela para adolescentes
-            resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
-        } else {
-            // Para adultos e idosos, usando a lógica que você forneceu
-            resultado = anos < 60 ?
-                imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
-                : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
+        if (sexo === 'homem') {
+            if (idadeDias < 1857) {
+                // Tabelas para meninos (0-5 anos)
+                let ref = b0_5[idadeDias]; // Tabela para meninos de 0 a 5 anos
+                resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
+            } else if (idadeDias < 6935) {
+                // Tabelas para meninos (5-19 anos)
+                let ref = b5_19[idadeDias]; // Tabela para meninos de 5 a 19 anos
+                resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
+            } else {
+                // Para meninos/adultos (maiores de 19 anos)
+                resultado = anos < 60 ?
+                    imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
+                    : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
+            }
+        } else if (sexo === 'mulher') {
+            if (idadeDias < 1857) {
+                // Tabelas para meninas (0-5 anos)
+                let ref = g0_5[idadeDias]; // Tabela para meninas de 0 a 5 anos
+                resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
+            } else if (idadeDias < 6935) {
+                // Tabelas para meninas (5-19 anos)
+                let ref = g5_19[idadeDias]; // Tabela para meninas de 5 a 19 anos
+                resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
+            } else {
+                // Para meninas/adultas (maiores de 19 anos)
+                resultado = anos < 60 ?
+                    imc < 16 ? "Magreza grau III" : imc < 17 ? "Magreza grau II" : imc < 18.5 ? "Magreza grau I" : imc < 25 ? "Peso normal" : imc < 30 ? "Sobrepeso" : imc < 35 ? "Obesidade grau I" : imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
+                    : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
+            }
         }
-
+    
         // Exibindo resultado
         let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}`;
         $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
     });
+    
 });

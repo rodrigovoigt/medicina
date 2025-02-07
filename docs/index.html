@@ -456,24 +456,24 @@
                 <label for="alturaIMC">Altura (cm):</label>
                 <input type="number" id="alturaIMC" name="alturaIMC" required min="0" step="any">
                 
-                <label>Sexo:</label>
-                <label for="sexoMasculino">Masculino</label>
-                <input type="radio" id="sexoMasculino" name="sexo" value="masculino" required>
-                <label for="sexoFeminino">Feminino</label>
-                <input type="radio" id="sexoFeminino" name="sexo" value="feminino" required>
+                <label for="sexoIMC">Sexo:</label>
+                <select id="sexoIMC" name="sexoIMC" required>
+                    <option value="homem">Masculino</option>
+                    <option value="mulher">Feminino</option>
+                </select>
                 
                 <div>
-                    <label for="anos">Idade (anos):</label>
-                    <input type="number" id="anos" name="anos" min="0">
+                    <label for="anosIMC">Idade (anos):</label>
+                    <input type="number" id="anosIMC" name="anosIMC" min="0">
                     
-                    <label for="meses">Meses:</label>
-                    <input type="number" id="meses" name="meses" min="0">
+                    <label for="mesesIMC">Meses:</label>
+                    <input type="number" id="mesesIMC" name="mesesIMC" min="0">
                     
-                    <label for="semanas">Semanas:</label>
-                    <input type="number" id="semanas" name="semanas" min="0">
+                    <label for="semanasIMC">Semanas:</label>
+                    <input type="number" id="semanasIMC" name="semanasIMC" min="0">
                     
-                    <label for="dias">Dias:</label>
-                    <input type="number" id="dias" name="dias" min="0">
+                    <label for="diasIMC">Dias:</label>
+                    <input type="number" id="diasIMC" name="diasIMC" min="0">
                 </div>
         
                 <button type="button" id="calcularIMCBtn">Calcular IMC</button>
