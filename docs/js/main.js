@@ -27,6 +27,7 @@ $(document).ready(function () {
         imcLink: "imcCalculadora",
         cargaTabagicaLink: "cargaTabagicaCalculadora",
         exameFisicoGeralLink: "exameFisicoGeral",
+        exameFisicoPeleLink: "exameFisicoPele",
         teste1Link: "teste1Section",
         teste2Link: "teste2Section",
     };
@@ -39,18 +40,6 @@ $(document).ready(function () {
         });
     });
 
-    // Adicionando evento para os botões de cálculo
-    ["calcularRiscoBtn", "calcularLDLBtn", "calcularTFGBtn", "calcularIMCBtn"].forEach(function (btnId) {
-        $("#" + btnId).click(function () {
-            var functionName = btnId.replace("Btn", ""); // Remove "Btn" do nome do botão para obter a função correta
-            if (typeof window[functionName] === "function") {
-                window[functionName](); // Chama a função correta
-            } else {
-                console.error("Função " + functionName + " não encontrada");
-            }
-        });
-    });
-
     function showSection(sectionId) {
         $("section").each(function () {
             $(this).toggleClass("active", this.id === sectionId);
@@ -60,15 +49,17 @@ $(document).ready(function () {
 
     // Atualiza o texto conforme os checkboxes são selecionados
     $('.exame').change(function () {
-        atualizarTexto('resultadoExameFisico');
+        let section = $(this).closest('section'); // Encontra a seção do checkbox alterado
+        let resultadoId = section.find('.copy-box').attr('id'); // Pega o ID do resumo da seção
+        atualizarTexto(resultadoId, section);
     });
 
-    function atualizarTexto(idResultado) {
+    function atualizarTexto(idResultado, section) {
         let textoPuro = ''; // Texto para cópia
         let textoFormatado = ''; // Texto para exibição HTML
 
-        // Para cada checkbox selecionado
-        $('.exame:checked').each(function () {
+        // Para cada checkbox selecionado dentro da mesma seção
+        section.find('.exame:checked').each(function () {
             let texto = $(this).data('text');
             textoPuro += texto + '\n\n'; // Mantém as quebras de linha para cópia
             textoFormatado += texto.replace(/\n/g, '<br>') + '<br><br>'; // Converte para exibição HTML

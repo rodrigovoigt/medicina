@@ -246,6 +246,7 @@
                     <a href="#">Exame Físico</a>
                     <ul class="dropdown-menu">
                         <li><a href="#" name="exameFisicoGeralLink">Exame físico geral</a></li>
+                        <li><a href="#" name="exameFisicoPeleLink">Exame físico de pele e fâneros</a></li>
                         <li><a href="#" name="teste1Link">Teste 1</a></li>
                         <li><a href="#" name="teste2Link">Teste 2</a></li>
                     </ul>
@@ -290,6 +291,11 @@
             <a href="#" name="exameFisicoGeralLink" class="card">
                 <div class="card-content">
                     Exame físico geral
+                </div>
+            </a>
+            <a href="#" name="exameFisicoPeleLink" class="card">
+                <div class="card-content">
+                    Exame físico de pele e fâneros
                 </div>
             </a>
             <a href="#" name="teste1Link" class="card">
@@ -604,10 +610,52 @@
 
 
 
-    <!-- Exame Físico de Pele -->
+   <!-- Exame Físico de Pele -->
     <section id="exameFisicoPele" class="hidden">
         <h2>Exame Físico de Pele</h2>
-        <input type="checkbox" class="exame" id="examePele" data-text="Lesão do tipo () localizada em (), simétrica, bordas definidas..."> <label for="examePele">Exame de Pele</label><br>
+        <label>Quais foram realizados:</label><br>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="examePeleGeral" data-text="Exame físico de pele:
+            Paciente apresenta lesão do tipo () localizada em (), de distribuição (difusa/localizada), com superfície (lisa/áspera/verrugosa/crostosa), de formato (ovalar/irregular/arredondado/linear), simétrica/assimétrica, com bordas (definidas/irregulares), de coloração (hipercrômica/normocrômica/hipocrômica/eritematosa/violácea/acastanhada), medindo aproximadamente (***) cm de diâmetro.
+            Lesão de surgimento há (***) com/sem alterações significativas recentemente, apresentando (crescimento/proliferação/redução/manutenção) do tamanho, associada ou não a prurido, dor, descamação, ulceração ou secreção (serosa/purulenta/hemorrágica).
+            Pele adjacente com (temperatura normal/aumentada/reduzida), com presença/ausência de edema, infiltração ou atrofia.
+            Pele geral (íntegra/com múltiplas lesões), com turgor e elasticidade (preservados/reduzidos), hidratada/desidratada, sem sinais de icterícia, cianose ou livedo reticular.">
+            <label for="examePeleGeral">Exame Geral da Pele</label>
+        </div>
+
+        <h3>Sinais e Manobras:</h3>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="sinalNikolsky" data-text="Sinal de Nikolsky: (positivo/negativo) – verificado através da fricção da pele adjacente, com presença/ausência de descolamento epidérmico.">
+            <label for="sinalNikolsky">Sinal de Nikolsky</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="sinalAuspitz" data-text="Sinal de Auspitz: (positivo/negativo) – evidenciado pela remoção de escama, observando-se pontos hemorrágicos.">
+            <label for="sinalAuspitz">Sinal de Auspitz</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="sinalGota" data-text="Sinal da Gota de Orvalho: (presente/ausente) – lesões disseminadas após infecção estreptocócica.">
+            <label for="sinalGota">Sinal da Gota de Orvalho</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="sinalDarier" data-text="Sinal de Darier: (positivo/negativo) – observado pelo surgimento de urticária ao friccionar a lesão.">
+            <label for="sinalDarier">Sinal de Darier</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="sinalKoebner" data-text="Sinal de Koebner: (positivo/negativo) – aparecimento de lesões em áreas de trauma cutâneo.">
+            <label for="sinalKoebner">Sinal de Koebner</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" class="exame" id="manobraVitropressao" data-text="Manobra de vitropressão: (branqueamento/persistência do eritema) indicando possível lesão vascular ou inflamatória.">
+            <label for="manobraVitropressao">Manobra de Vitropressão</label>
+        </div>
+
         <h3>Resumo do Exame:</h3>
         <div id="resultadoExameFisicoPele" class="copy-box" onclick="copiarTexto('resultadoExameFisicoPele')">Clique para copiar</div>
     </section>
