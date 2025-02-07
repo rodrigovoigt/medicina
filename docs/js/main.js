@@ -155,6 +155,7 @@ $(document).ready(function () {
                 Risco_Dez_Anos <= 19.9 ? "Risco intermediário (7.5% a 19.9%)" :
                     "Alto risco (≥20%)";
 
+                    console.log(Risco_Dez_Anos);
         let resultadoTexto = `Risco de Dez Anos: ${Risco_Dez_Anos.toFixed(2)}% - ${resultado}`;
         $('#resultadoRisco').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
     });
