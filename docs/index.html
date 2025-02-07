@@ -9,7 +9,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <style>
-            
+            .hidden {
+                display: none;
+            }
+            .active {
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -57,71 +62,45 @@
               </div>
             </div>
           </nav>
-        <nav>
-            <ul>
-                <li class="dropdown">
-                    <a href="#">Calculadoras</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" name="riscoCardioDezLink">Calculadora de Risco de Dez Anos</a></li>
-                        <li><a href="#" name="ldlLink">Calculadora de Colesterol LDL</a></li>
-                        <li><a href="#" name="tfgLink">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
-                        <li><a href="#" name="imcLink">Índice de Massa Corporal</a></li>
-                        <li><a href="#" name="cargaTabagicaLink">Carga Tabágica</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Exame Físico</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" name="exameFisicoGeralLink">Exame físico geral</a></li>
-                        <li><a href="#" name="exameFisicoPeleLink">Exame físico de pele e fâneros</a></li>
-                        <li><a href="#" name="teste1Link">Teste 1</a></li>
-                        <li><a href="#" name="teste2Link">Teste 2</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-
-
-        <section id="home" class="active">
+          <section id="home" class="active">
             <h2>Ferramentas</h2>
             <br />
             <div id="">Em memória aos bons tempos</div>
-            
+        
             <!-- Contêiner para os cards -->
-<div class="card-container">
-    <!-- Cards das Calculadoras -->
-    <a href="#" name="riscoCardioDezLink" class="card">
-        <div class="card-content">Calculadora de Risco de Dez Anos</div>
-    </a>
-    <a href="#" name="ldlLink" class="card">
-        <div class="card-content">Calculadora de Colesterol LDL</div>
-    </a>
-    <a href="#" name="tfgLink" class="card">
-        <div class="card-content">Estimativa da TFG</div>
-    </a>
-    <a href="#" name="imcLink" class="card">
-        <div class="card-content">Índice de Massa Corporal</div>
-    </a>
-    <a href="#" name="cargaTabagicaLink" class="card">
-        <div class="card-content">Carga Tabágica</div>
-    </a>
-
-    <!-- Cards dos Exames Físicos -->
-    <a href="#" name="exameFisicoGeralLink" class="card">
-        <div class="card-content">Exame Físico Geral</div>
-    </a>
-    <a href="#" name="exameFisicoPeleLink" class="card">
-        <div class="card-content">Exame Físico de Pele</div>
-    </a>
-    <a href="#" name="teste1Link" class="card">
-        <div class="card-content">Teste 1</div>
-    </a>
-    <a href="#" name="teste2Link" class="card">
-        <div class="card-content">Teste 2</div>
-    </a>
-</div>
-
-        </section>
+            <div class="card-container">
+                <!-- Cards das Calculadoras -->
+                <a href="#" name="riscoCardioDezLink" class="card">
+                    <div class="card-content">Calculadora de Risco de Dez Anos</div>
+                </a>
+                <a href="#" name="ldlLink" class="card">
+                    <div class="card-content">Calculadora de Colesterol LDL</div>
+                </a>
+                <a href="#" name="tfgLink" class="card">
+                    <div class="card-content">Estimativa da TFG</div>
+                </a>
+                <a href="#" name="imcLink" class="card">
+                    <div class="card-content">Índice de Massa Corporal</div>
+                </a>
+                <a href="#" name="cargaTabagicaLink" class="card">
+                    <div class="card-content">Carga Tabágica</div>
+                </a>
+        
+                <!-- Cards dos Exames Físicos -->
+                <a href="#" name="exameFisicoGeralLink" class="card">
+                    <div class="card-content">Exame Físico Geral</div>
+                </a>
+                <a href="#" name="exameFisicoPeleLink" class="card">
+                    <div class="card-content">Exame Físico de Pele</div>
+                </a>
+                <a href="#" name="teste1Link" class="card">
+                    <div class="card-content">Teste 1</div>
+                </a>
+                <a href="#" name="teste2Link" class="card">
+                    <div class="card-content">Teste 2</div>
+                </a>
+            </div>
+        </section>        
 
         <!-- Seção para a Calculadora de Risco de Dez Anos -->
         <section id="riscoCardioDezCalculadora" class="hidden">
