@@ -347,6 +347,7 @@ $(document).ready(function () {
         // Exibindo resultado
         let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}`;
         $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
+        $('#resultadoIMC').show();  // Fazendo o resultado visível
     });
     
 });
