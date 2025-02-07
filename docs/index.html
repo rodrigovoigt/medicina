@@ -13,13 +13,9 @@
         </style>
     </head>
     <body>
-        <header>
-            <img style="width: 70px" src="assets/img/icon.png" alt="Logo" />
-            <a href="#" name="homeLink"><h1 style="color: white">DocGO!</h1></a>
-        </header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">DocGO!</a>
+              <a class="navbar-brand" href="#"><img style="width: 70px" src="assets/img/icon.png" alt="Logo" /> DocGO!</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -38,11 +34,20 @@
                       <li><a class="dropdown-item" href="#" name="tfgLink">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
                       <li><a class="dropdown-item" href="#" name="imcLink">Índice de Massa Corporal</a></li>
                       <li><a class="dropdown-item" href="#" name="cargaTabagicaLink">Carga Tabágica</a></li>
-                      <li><hr class="dropdown-divider"></li>
                     </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Exame físico
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#" name="exameFisicoGeralLink">Exame físico geral</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#" name="exameFisicoPeleLink">Exame físico de pele e fâneros</a></li>
+                      <li><a class="dropdown-item" href="#" name="tfgLink">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
+                      <li><a class="dropdown-item" href="#" name="imcLink">Índice de Massa Corporal</a></li>
+                      <li><a class="dropdown-item" href="#" name="cargaTabagicaLink">Carga Tabágica</a></li>
+                    </ul>
                   </li>
                 </ul>
                 <form class="d-flex" role="search">
