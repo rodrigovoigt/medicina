@@ -1,3 +1,16 @@
+// Função genérica para copiar texto de qualquer elemento
+function copiarTexto(id) {
+    let textoParaCopiar = $('#' + id).data('copyText') || $('#' + id).text();
+
+    if (textoParaCopiar.trim()) {
+        navigator.clipboard.writeText(textoParaCopiar.trim()).then(() => {
+            alert('Texto copiado com sucesso!');
+        }).catch(err => {
+            console.error('Erro ao copiar: ', err);
+        });
+    }
+}
+
 $(document).ready(function () {
     // Toggle dropdowns
     $(".dropdown > a").click(function (event) {
@@ -74,19 +87,6 @@ $(document).ready(function () {
         } else {
             $resultadoElement.html('Clique para copiar');
             $resultadoElement.data('copyText', ''); // Reseta caso nenhum item esteja selecionado
-        }
-    }
-
-    // Função genérica para copiar texto de qualquer elemento
-    function copiarTexto(id) {
-        let textoParaCopiar = $('#' + id).data('copyText') || $('#' + id).text();
-
-        if (textoParaCopiar.trim()) {
-            navigator.clipboard.writeText(textoParaCopiar.trim()).then(() => {
-                alert('Texto copiado com sucesso!');
-            }).catch(err => {
-                console.error('Erro ao copiar: ', err);
-            });
         }
     }
 
