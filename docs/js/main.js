@@ -309,17 +309,22 @@ $(document).ready(function () {
         
         // Calculando IMC
         let imc = peso / (altura * altura);
+        
+        // Inicializando variáveis para o cálculo do percentil
+        let resultado = '';
+        let diff = 999999;
+        let perc = '';
+        let ref = null;
     
         // Lógica para definir o IMC dependendo da idade e sexo
-        let resultado = '';
         if (sexo === 'homem') {
             if (idadeDias < 1857) {
                 // Tabelas para meninos (0-5 anos)
-                let ref = b0_5[idadeDias]; // Tabela para meninos de 0 a 5 anos
+                ref = b0_5[idadeDias]; // Tabela para meninos de 0 a 5 anos
                 resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
             } else if (idadeDias < 6935) {
                 // Tabelas para meninos (5-19 anos)
-                let ref = b5_19[idadeDias]; // Tabela para meninos de 5 a 19 anos
+                ref = b5_19[idadeDias]; // Tabela para meninos de 5 a 19 anos
                 resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
             } else {
                 // Para meninos/adultos (maiores de 19 anos)
@@ -330,11 +335,11 @@ $(document).ready(function () {
         } else if (sexo === 'mulher') {
             if (idadeDias < 1857) {
                 // Tabelas para meninas (0-5 anos)
-                let ref = g0_5[idadeDias]; // Tabela para meninas de 0 a 5 anos
+                ref = g0_5[idadeDias]; // Tabela para meninas de 0 a 5 anos
                 resultado = (imc < ref.p3) ? "Baixo IMC para idade" : (imc >= ref.p3 && imc <= ref.p85) ? "IMC adequado" : "Sobrepeso";
             } else if (idadeDias < 6935) {
                 // Tabelas para meninas (5-19 anos)
-                let ref = g5_19[idadeDias]; // Tabela para meninas de 5 a 19 anos
+                ref = g5_19[idadeDias]; // Tabela para meninas de 5 a 19 anos
                 resultado = (imc < ref.p85) ? "Peso normal" : "Sobrepeso";
             } else {
                 // Para meninas/adultas (maiores de 19 anos)
@@ -344,10 +349,27 @@ $(document).ready(function () {
             }
         }
     
-        // Exibindo resultado
-        let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}`;
-        $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
-        $('#resultadoIMC').show();  // Fazendo o resultado visível
+        // Se a faixa etária permite o cálculo do percentil
+        if (ref) {
+            // Calculando o percentil (valor mais próximo)
+            for (let i in ref) {
+                if (Math.abs(ref[i] - imc) < diff) {
+                    diff = Math.abs(ref[i] - imc);
+                    perc = i;
+                }
+            }
+    
+            // Exibindo resultado com percentil
+            let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}, Percentil: ${perc.toUpperCase()} (${ref[perc]})`;
+            $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
+            $('#resultadoIMC').show();  // Fazendo o resultado visível
+        } else {
+            // Se não houver tabela para a faixa etária, não exibe percentil
+            let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}`;
+            $('#resultadoIMC').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
+            $('#resultadoIMC').show();  // Fazendo o resultado visível
+        }
     });
+    
     
 });
