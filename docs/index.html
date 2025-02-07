@@ -191,36 +191,43 @@
 /* Contêiner flexível para organizar os cards */
 .card-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo se não couberem */
+    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo */
     gap: 15px; /* Espaçamento entre os cards */
     justify-content: center; /* Centraliza os cards horizontalmente */
+    padding: 20px; /* Espaçamento interno */
 }
 
 /* Estilo do card */
 .card {
-    width: 200px; /* Largura do card */
-    height: 200px; /* Altura do card */
+    width: 220px; /* Largura ajustada */
+    height: 220px; /* Altura ajustada */
     background: linear-gradient(145deg, #008d59, #00a66c, #00ec99); /* Gradiente de cores */
     border-radius: 15px; /* Cantos arredondados */
     color: white; /* Cor do texto */
     text-decoration: none; /* Remove o sublinhado do link */
-    display: flex; /* Usado para centralizar o texto */
-    justify-content: center; /* Alinha o texto horizontalmente */
-    align-items: center; /* Alinha o texto verticalmente */
-    transition: background 0.3s ease, box-shadow 0.3s ease; /* Suaviza a mudança de cor e sombra */
-}
-
-/* Efeito de hover (sem aumentar o tamanho) */
-.card:hover {
-    background: linear-gradient(145deg, #007a4e, #00935f, #00d789); /* Cores um pouco mais escuras no hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais sutil */
-}
-
-/* Estilo do conteúdo dentro do card */
-.card-content {
-    font-size: 16px; /* Tamanho da fonte */
+    display: flex; /* Para alinhar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    text-align: center; /* Centraliza o texto dentro do card */
+    font-size: 16px; /* Tamanho do texto */
     font-weight: bold; /* Deixa o texto mais forte */
-    text-align: center; /* Alinha o texto ao centro */
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+    transition: transform 0.2s ease, box-shadow 0.3s ease; /* Suaviza efeitos */
+}
+
+/* Efeito de hover */
+.card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+}
+
+/* Responsividade - Reduz tamanho dos cards em telas menores */
+@media (max-width: 768px) {
+    .card {
+        width: 180px; 
+        height: 180px;
+        font-size: 14px;
+    }
 }
 
         </style>
@@ -260,54 +267,40 @@
             <br />
             <div id="">Em memória aos bons tempos</div>
             
-            <!-- Card para cada item da lista de "Calculadoras" -->
-            <a href="#" name="riscoCardioDezLink" class="card">
-                <div class="card-content">
-                    Calculadora de Risco de Dez Anos
-                </div>
-            </a>
-            <a href="#" name="ldlLink" class="card">
-                <div class="card-content">
-                    Calculadora de Colesterol LDL
-                </div>
-            </a>
-            <a href="#" name="tfgLink" class="card">
-                <div class="card-content">
-                    Estimativa da Taxa de Filtração Glomerular (TFG)
-                </div>
-            </a>
-            <a href="#" name="imcLink" class="card">
-                <div class="card-content">
-                    Índice de Massa Corporal
-                </div>
-            </a>
-            <a href="#" name="cargaTabagicaLink" class="card">
-                <div class="card-content">
-                    Carga Tabágica
-                </div>
-            </a>
-        
-            <!-- Card para cada item da lista de "Exame Físico" -->
-            <a href="#" name="exameFisicoGeralLink" class="card">
-                <div class="card-content">
-                    Exame físico geral
-                </div>
-            </a>
-            <a href="#" name="exameFisicoPeleLink" class="card">
-                <div class="card-content">
-                    Exame físico de pele e fâneros
-                </div>
-            </a>
-            <a href="#" name="teste1Link" class="card">
-                <div class="card-content">
-                    Teste 1
-                </div>
-            </a>
-            <a href="#" name="teste2Link" class="card">
-                <div class="card-content">
-                    Teste 2
-                </div>
-            </a>
+            <!-- Contêiner para os cards -->
+<div class="card-container">
+    <!-- Cards das Calculadoras -->
+    <a href="#" name="riscoCardioDezLink" class="card">
+        <div class="card-content">Calculadora de Risco de Dez Anos</div>
+    </a>
+    <a href="#" name="ldlLink" class="card">
+        <div class="card-content">Calculadora de Colesterol LDL</div>
+    </a>
+    <a href="#" name="tfgLink" class="card">
+        <div class="card-content">Estimativa da TFG</div>
+    </a>
+    <a href="#" name="imcLink" class="card">
+        <div class="card-content">Índice de Massa Corporal</div>
+    </a>
+    <a href="#" name="cargaTabagicaLink" class="card">
+        <div class="card-content">Carga Tabágica</div>
+    </a>
+
+    <!-- Cards dos Exames Físicos -->
+    <a href="#" name="exameFisicoGeralLink" class="card">
+        <div class="card-content">Exame Físico Geral</div>
+    </a>
+    <a href="#" name="exameFisicoPeleLink" class="card">
+        <div class="card-content">Exame Físico de Pele</div>
+    </a>
+    <a href="#" name="teste1Link" class="card">
+        <div class="card-content">Teste 1</div>
+    </a>
+    <a href="#" name="teste2Link" class="card">
+        <div class="card-content">Teste 2</div>
+    </a>
+</div>
+
         </section>
 
         <!-- Seção para a Calculadora de Risco de Dez Anos -->
