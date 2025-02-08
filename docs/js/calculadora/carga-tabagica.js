@@ -17,21 +17,20 @@ $(document).ready(function () {
         copiarTexto($(this).attr('id'));
     });
 
-    // Calculadora de Colesterol LDL
+    // Calculadora de Carga Tabágica
     $('#calcular').click(function () {
-        let colesterolTotal = parseFloat($('#colesterolTotal').val());
-        let colesterolHDL = parseFloat($('#colesterolHDL').val());
-        let triglicerideos = parseFloat($('#triglicerideos').val());
-
-        if (isNaN(colesterolTotal) || isNaN(colesterolHDL) || isNaN(triglicerideos)) {
+        let cigarrosPorDia = parseFloat($('#cigarrosPorDia').val());
+        let anosFumando = parseFloat($('#anosFumando').val());
+    
+        if (isNaN(cigarrosPorDia) || isNaN(anosFumando) || cigarrosPorDia <= 0 || anosFumando <= 0) {
             alert('Preencha todos os campos corretamente!');
             return;
         }
-
-        let ldl = colesterolTotal - colesterolHDL - triglicerideos / 5;
-        let resultadoLDL = "Colesterol LDL: " + ldl.toFixed(2);
-
-        $('#resultado').text(resultadoLDL).data('copyText', resultadoLDL).attr('data-copy', true);
+    
+        let cargaTabagica = (cigarrosPorDia / 20) * anosFumando;
+        let resultadoCarga = `Carga Tabágica: ${cargaTabagica.toFixed(2)} maços-ano`;
+    
+        $('#resultado').text(resultadoCarga).data('copyText', resultadoCarga).attr('data-copy', true);
     });
 
 });

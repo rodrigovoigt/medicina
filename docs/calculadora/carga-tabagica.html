@@ -86,24 +86,19 @@
             </div>
         </nav>
 
-        <!-- Seção para a Calculadora de LDL -->
+        <!-- Seção para a Calculadora de Carga Tabágica -->
         <div class="d-flex justify-content-center">
             <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Calculadora de LDL</h4>
+                <h4>Calculadora de Carga Tabágica</h4>
                 <form>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="colesterolTotal">Colesterol Total:</span>
-                        <input type="number" id="colesterolTotal" name="colesterolTotal" required min="0" class="form-control" placeholder="Ex: 100">
+                      <span class="input-group-text" for="cigarrosPorDia">Cigarros por dia:</span>
+                      <input type="number" id="cigarrosPorDia" name="cigarrosPorDia" required min="0" class="form-control" placeholder="Ex: 20">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="colesterolHDL">Colesterol HDL:</span>
-                        <input type="number" id="colesterolHDL" name="colesterolHDL" required min="0" class="form-control" placeholder="Ex: 50">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="triglicerideos">Triglicerídeos:</span>
-                        <input type="number" id="triglicerideos" name="triglicerideos" required min="0" class="form-control" placeholder="Ex: 150">
+                      <span class="input-group-text" for="anosFumando">Anos fumando:</span>
+                      <input type="number" id="anosFumando" name="anosFumando" required min="0" class="form-control" placeholder="Ex: 4">
                     </div>
             
                     <button id="calcular" type="button" class="btn btn-success">Calcular</button>
@@ -113,6 +108,6 @@
             </section>
         </div>
 
-        <script src="../js/calculadora/ldl.js"></script>
+        <script src="../js/calculadora/carga-tabagica.js"></script>
     </body>
 </html>
