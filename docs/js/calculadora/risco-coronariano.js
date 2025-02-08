@@ -23,11 +23,11 @@ $(document).ready(function () {
         let colesterolTotal = parseFloat($('#colesterolTotal').val());
         let colesterolHDL = parseFloat($('#colesterolHDL').val());
         let pressaoSistolica = parseFloat($('#pressaoSistolica').val());
-        let medicamentoHipertensao = $('#medicamentoHipertensao').val() === 'true';
-        let tabagista = $('#tabagista').val() === 'true';
-        let diabetico = $('#diabetico').val() === 'true';
-        let genero = $('#genero').val();
-        let etnia = $('#etnia').val();
+        let medicamentoHipertensao = $('.medicamentoHipertensao').val() === 'true';
+        let tabagista = $('.tabagista').val() === 'true';
+        let diabetico = $('.diabetico').val() === 'true';
+        let genero = $('.genero').val();
+        let etnia = $('.etnia').val();
 
         let C_Age,
             C_Sq_Age,
