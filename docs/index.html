@@ -58,18 +58,18 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" name="linkHome">Home</a>
+                    <a class="nav-link active" aria-current="page" href="index.html" name="linkHome">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Calculadoras
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#" name="linkRiscoCoronariano">Calculadora de Risco de Dez Anos</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkLDL">Calculadora de Colesterol LDL</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkTFG">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkIMC">Índice de Massa Corporal</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkCargaTabagica">Carga Tabágica</a></li>
+                      <li><a class="dropdown-item" href="calculadora/risco-coronariano.html" name="linkRiscoCoronariano">Calculadora de Risco de Dez Anos</a></li>
+                      <li><a class="dropdown-item" href="calculadora/risco-coronariano.html" name="linkLDL">Calculadora de Colesterol LDL</a></li>
+                      <li><a class="dropdown-item" href="calculadora/risco-coronariano.html" name="linkTFG">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
+                      <li><a class="dropdown-item" href="calculadora/risco-coronariano.html" name="linkIMC">Índice de Massa Corporal</a></li>
+                      <li><a class="dropdown-item" href="calculadora/risco-coronariano.html" name="linkCargaTabagica">Carga Tabágica</a></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown">
@@ -200,13 +200,23 @@
                 <h4>Calculadora de Risco Coronariano em Dez Anos</h2>
                 <form>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="riscoCoronarianoIdade">Idade</span>
+                        <span class="input-group-text" for="riscoCoronarianoIdade">Idade:</span>
                         <input type="number" id="riscoCoronarianoIdade" name="riscoCoronarianoIdade" required min="20" max="59" class="form-control" placeholder="Ex: 10">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="riscoCoronarianoColesterolTotal">Colesterol Total</span>
+                        <span class="input-group-text" for="riscoCoronarianoColesterolTotal">Colesterol Total:</span>
                         <input type="number" id="riscoCoronarianoColesterolTotal" name="riscoCoronarianoColesterolTotal" required min="0" class="form-control" placeholder="Ex: 100">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="riscoCoronarianoColesterolHDL">Colesterol HDL:</span>
+                        <input type="number" id="riscoCoronarianoColesterolHDL" name="riscoCoronarianoColesterolHDL" required min="0" class="form-control" placeholder="Ex: 100">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="riscoCoronarianoPressaoSistolica">Pressão Sistólica:</span>
+                        <input type="number" id="riscoCoronarianoPressaoSistolica" name="riscoCoronarianoPressaoSistolica" required min="0" class="form-control" placeholder="Ex: 100">
                     </div>
                     
                       
