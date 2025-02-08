@@ -26,8 +26,8 @@ $(document).ready(function () {
         let medicamentoHipertensao = $('input[name="medicamentoHipertensao"]:checked').val() === 'true';
         let tabagista = $('input[name="tabagista"]:checked').val() === 'true';
         let diabetico = $('input[name="diabetico"]:checked').val() === 'true';
-        let genero = $('input[name="genero"]:checked').val() === 'true';
-        let etnia = $('input[name="etnia"]:checked').val() === 'true';
+        let genero = $('input[name="genero"]:checked').val();
+        let etnia = $('input[name="etnia"]:checked').val();
 
         let C_Age,
             C_Sq_Age,
