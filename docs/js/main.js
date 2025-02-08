@@ -33,12 +33,12 @@ $(document).ready(function () {
 
     // Mostrar a seção ao clicar nos links
     const links = {
-        homeLink: "home",
-        riscoCardioDezLink: "riscoCardioDezCalculadora",
-        ldlLink: "ldlCalculadora",
-        tfgLink: "tfgCalculadora",
-        imcLink: "imcCalculadora",
-        cargaTabagicaLink: "cargaTabagicaCalculadora",
+        linkHome: "home",
+        linkRiscoCoronariano: "calculadoraRiscoCoronariano",
+        linkLDL: "calculadoraLDL",
+        linkTFG: "calculadoraTFG",
+        linkIMC: "calculadoraIMC",
+        linkCargaTabagica: "calculadoraCargaTabagica",
         exameFisicoGeralLink: "exameFisicoGeral",
         exameFisicoPeleLink: "exameFisicoPele",
         teste1Link: "teste1Section",
