@@ -113,75 +113,83 @@
 
                     
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Em medicamento para hipertensão?</label>
+                        <label class="form-label">Em medicamento para hipertensão?</label>
                         <div class="form-check">
-                            <label class="form-check-label text-success w-100 py-2 rounded border border-success" for="medicamentoSim">
+                            <label class="form-check-label" for="medicamentoSim">
                                 <input class="form-check-input bg-success border-success me-2" type="radio" name="medicamentoHipertensao" id="medicamentoSim" value="true">
                                 Sim
                             </label>
                         </div>
                         <div class="form-check">
-                            <label class="form-check-label text-success w-100 py-2 rounded border border-success" for="medicamentoNao">
+                            <label class="form-check-label" for="medicamentoNao">
                                 <input class="form-check-input bg-success border-success me-2" type="radio" name="medicamentoHipertensao" id="medicamentoNao" value="false" checked>
                                 Não
                             </label>
                         </div>
                     </div>
 
-                    <span class="input-group-text" for="tabagista">Tabagista:</span>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tabagista" value="true">
-                        <label class="form-check-label" for="tabagista">
-                        Sim
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tabagista" value="false" checked>
-                        <label class="form-check-label" for="tabagista">
-                        Não
-                        </label>
-                    </div>
-
-                    <span class="input-group-text" for="diabetico">Diabético:</span>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="diabetico" value="true">
-                        <label class="form-check-label" for="diabetico">
-                        Sim
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="diabetico" value="false" checked>
-                        <label class="form-check-label" for="diabetico">
-                        Não
-                        </label>
+                    <div class="mb-3">
+                        <label class="form-label">Tabagista?</label>
+                        <div class="form-check">
+                            <label class="form-check-label" for="tabagistaSim">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="tabagista" id="tabagistaSim" value="true">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="tabagistaNao">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="tabagista" id="tabagistaNao" value="false" checked>
+                                Não
+                            </label>
+                        </div>
                     </div>
 
-                    <span class="input-group-text" for="genero">Gênero:</span>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="genero" value="masculino" checked>
-                        <label class="form-check-label" for="genero">
-                        Masculino
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="genero" value="feminino">
-                        <label class="form-check-label" for="genero">
-                        Feminino
-                        </label>
+                    <div class="mb-3">
+                        <label class="form-label">Diabético?</label>
+                        <div class="form-check">
+                            <label class="form-check-label" for="diabeticoSim">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="diabetico" id="diabeticoSim" value="true">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="diabeticoNao">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="diabetico" id="diabeticoNao" value="false" checked>
+                                Não
+                            </label>
+                        </div>
                     </div>
 
-                    <span class="input-group-text" for="etnia">Etnia:</span>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="etnia" value="branco" checked>
-                        <label class="form-check-label" for="etnia">
-                        Branco
-                        </label>
+                    <div class="mb-3">
+                        <label class="form-label">Gênero:</label>
+                        <div class="form-check">
+                            <label class="form-check-label" for="generoMasculino">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="genero" id="generoMasculino" value="masculino">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="generoFeminino">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="genero" id="generoFeminino" value="feminino" checked>
+                                Não
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="etnia" value="negro">
-                        <label class="form-check-label" for="etnia">
-                        Negro
-                        </label>
+
+                    <div class="mb-3">
+                        <label class="form-label">Etnia:</label>
+                        <div class="form-check">
+                            <label class="form-check-label" for="etniaBranco">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="etnia" id="etniaBranco" value="masculino">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="etniaNegro">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="etnia" id="etniaNegro" value="feminino" checked>
+                                Não
+                            </label>
+                        </div>
                     </div>
             
                     <button type="button" id="calcular">
