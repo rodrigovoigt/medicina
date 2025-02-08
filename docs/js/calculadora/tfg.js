@@ -21,8 +21,8 @@ $(document).ready(function () {
     $('#calcular').click(function () {
         let creatinina = parseFloat($('#creatinina').val());
         let idade = parseFloat($('#idade').val());
-        let sexo = $('#sexo').val();
-        let etnia = $('#etnia').val();
+        let sexo = $('input[name="sexo"]:checked').val();
+        let etnia = $('input[name="etnia"]:checked').val();
         
         let sex = sexo === "mulher" ? 1.018 : 1;
         let alpha = sexo === "mulher" ? -0.329 : -0.411;

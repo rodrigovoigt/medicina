@@ -101,18 +101,6 @@
                         <input type="number" id="altura" name="altura" required min="0" class="form-control" placeholder="Ex: 185">
                     </div>
 
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" for="anos">Idade (anos):</span>
-                      <input type="number" id="anos" name="anos" required min="0" class="form-control" placeholder="Ex: 18">
-                      <span class="input-group-text" for="meses">Meses:</span>
-                      <input type="number" id="meses" name="meses" required min="0" class="form-control" placeholder="Ex: 12">
-                      <span class="input-group-text" for="semanas">Semanas:</span>
-                      <input type="number" id="semanas" name="semanas" required min="0" class="form-control" placeholder="Ex: 4">
-                      <span class="input-group-text" for="dias">Dias:</span>
-                      <input type="number" id="dias" name="dias" required min="0" class="form-control" placeholder="Ex: 30">
-                  </div>
-          
-                    <button id="calcular" type="button" class="btn btn-success">Calcular</button>
                     <div class="mb-3">
                       <label class="form-label">Sexo:</label>
                       <div class="form-check">
@@ -127,7 +115,20 @@
                               Feminino
                           </label>
                       </div>
-                  </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" for="anos">Idade (anos):</span>
+                      <input type="number" id="anos" name="anos" required min="0" class="form-control" placeholder="Ex: 18">
+                      <span class="input-group-text" for="meses">Meses:</span>
+                      <input type="number" id="meses" name="meses" required min="0" class="form-control" placeholder="Ex: 12">
+                      <span class="input-group-text" for="semanas">Semanas:</span>
+                      <input type="number" id="semanas" name="semanas" required min="0" class="form-control" placeholder="Ex: 4">
+                      <span class="input-group-text" for="dias">Dias:</span>
+                      <input type="number" id="dias" name="dias" required min="0" class="form-control" placeholder="Ex: 30">
+                    </div>
+          
+                    <button id="calcular" type="button" class="btn btn-success">Calcular</button>
                 </form>
                 <br/>
                 <div id="resultado"></div>

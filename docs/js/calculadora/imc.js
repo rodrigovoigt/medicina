@@ -26,7 +26,7 @@ $(document).ready(function () {
         let meses = parseInt($('#meses').val()) || 0;
         let semanas = parseInt($('#semanas').val()) || 0;
         let dias = parseInt($('#dias').val()) || 0;
-        let sexo = $('#sexo').val(); // Obtendo o valor selecionado no <select>
+        let sexo = $('input[name="sexo"]:checked').val();
         
         // Calculando a idade total em dias
         let idadeDias = (anos * 365) + (meses * 30) + (semanas * 7) + dias;
