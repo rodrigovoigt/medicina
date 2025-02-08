@@ -26,7 +26,7 @@ $(document).ready(function () {
         let medicamentoHipertensao = $('input[name="medicamentoHipertensao"]:checked').val() === 'true';
         let tabagista = $('input[name="tabagista"]:checked').val() === 'true';
         let diabetico = $('input[name="diabetico"]:checked').val() === 'true';
-        let genero = $('input[name="genero"]:checked').val();
+        let sexo = $('input[name="sexo"]:checked').val();
         let etnia = $('input[name="etnia"]:checked').val();
 
         let C_Age,
@@ -45,7 +45,7 @@ $(document).ready(function () {
             S10,
             Mean_Terms;
 
-        if (genero === "feminino") {
+        if (sexo === "feminino") {
             if (etnia === "negro") {
                 C_Age = 17.114;
                 C_Sq_Age = 0;
@@ -79,7 +79,7 @@ $(document).ready(function () {
                 S10 = 0.9665;
                 Mean_Terms = -29.18;
             }
-        } else if (genero === "masculino") {
+        } else if (sexo === "masculino") {
             if (etnia === "negro") {
                 C_Age = 2.469;
                 C_Sq_Age = 0;
