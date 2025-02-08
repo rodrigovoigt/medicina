@@ -50,18 +50,18 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" name="linkHome">Home</a>
+                    <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Calculadoras
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#" name="linkRiscoCoronariano">Calculadora de Risco de Dez Anos</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkLDL">Calculadora de Colesterol LDL</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkTFG">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkIMC">Índice de Massa Corporal</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkCargaTabagica">Carga Tabágica</a></li>
+                      <li><a class="dropdown-item" href="../calculadora/risco-coronariano.html">Calculadora de Risco de Dez Anos</a></li>
+                      <li><a class="dropdown-item" href="../calculadora/ldl.html">Calculadora de Colesterol LDL</a></li>
+                      <li><a class="dropdown-item" href="../calculadora/tfg.html">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
+                      <li><a class="dropdown-item" href="../calculadora/imc.html">Índice de Massa Corporal</a></li>
+                      <li><a class="dropdown-item" href="../calculadora/carga-tabagica.html">Carga Tabágica</a></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown">
@@ -69,12 +69,12 @@
                       Exame físico
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#" name="exameFisicoGeralLink">Exame físico geral</a></li>
+                      <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Exame físico geral</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#" name="exameFisicoPeleLink">Exame físico de pele e fâneros</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkTFG">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkIMC">Índice de Massa Corporal</a></li>
-                      <li><a class="dropdown-item" href="#" name="linkCargaTabagica">Carga Tabágica</a></li>
+                      <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pele-faneros.html">Exame físico de pele e fâneros</a></li>
+                      <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
+                      <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Índice de Massa Corporal</a></li>
+                      <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Carga Tabágica</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -84,12 +84,12 @@
                 </form>
               </div>
             </div>
-          </nav>
+        </nav>
 
         <!-- Seção para a Calculadora de Risco de Dez Anos -->
         <div class="d-flex justify-content-center">
             <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Calculadora de Risco Coronariano em Dez Anos</h2>
+                <h4>Calculadora de Risco Coronariano em Dez Anos</h4>
                 <form>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="idade">Idade:</span>
@@ -103,12 +103,12 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="colesterolHDL">Colesterol HDL:</span>
-                        <input type="number" id="colesterolHDL" name="colesterolHDL" required min="0" class="form-control" placeholder="Ex: 100">
+                        <input type="number" id="colesterolHDL" name="colesterolHDL" required min="0" class="form-control" placeholder="Ex: 50">
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="pressaoSistolica">Pressão Sistólica:</span>
-                        <input type="number" id="pressaoSistolica" name="pressaoSistolica" required min="0" class="form-control" placeholder="Ex: 100">
+                        <input type="number" id="pressaoSistolica" name="pressaoSistolica" required min="0" class="form-control" placeholder="Ex: 120">
                     </div>
 
                     
@@ -192,9 +192,8 @@
                         </div>
                     </div>
             
-                    <button type="button" id="calcular">
-                        Calcular Risco
-                    </button>
+                    <button id="calcular" type="button" class="btn btn-success">Calcular</button>
+
                 </form>
                 <br />
                 <div id="resultado"></div>
