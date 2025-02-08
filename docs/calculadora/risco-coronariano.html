@@ -166,58 +166,64 @@
                             </label>
                         </div>
                     </div>
-                      
-                    <label for="idade">Idade:</label>
-                    <input type="number" id="idade" name="idade" required min="20" max="59" />
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="diabetico">Diabético:</span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="diabetico" value="true">
+                            <label class="form-check-label" for="diabetico">
+                            Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="diabetico" value="false" checked>
+                            <label class="form-check-label" for="diabetico">
+                            Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="genero">Gênero:</span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="genero" value="masculino" checked>
+                            <label class="form-check-label" for="genero">
+                            Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="genero" value="feminino">
+                            <label class="form-check-label" for="genero">
+                            Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="etnia">Etnia:</span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="etnia" value="branco" checked>
+                            <label class="form-check-label" for="etnia">
+                            Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="etnia" value="negro">
+                            <label class="form-check-label" for="etnia">
+                            Não
+                            </label>
+                        </div>
+                    </div>
             
-                    <label for="colesterolTotal">Colesterol Total:</label>
-                    <input type="number" id="colesterolTotal" name="colesterolTotal" required />
-            
-                    <label for="colesterolHDL">Colesterol HDL:</label>
-                    <input type="number" id="colesterolHDL" name="colesterolHDL" required />
-            
-                    <label for="pressaoSistolica">Pressão Sistólica:</label>
-                    <input type="number" id="pressaoSistolica" name="pressaoSistolica" required />
-            
-                    <label for="emMedicamentoHipertensao">Em Medicamento para Hipertensão:</label>
-                    <select id="emMedicamentoHipertensao" name="emMedicamentoHipertensao" required>
-                        <option value="true">Sim</option>
-                        <option value="false">Não</option>
-                    </select>
-            
-                    <label for="fumante">Fumante:</label>
-                    <select id="fumante" name="fumante" required>
-                        <option value="true">Sim</option>
-                        <option value="false">Não</option>
-                    </select>
-            
-                    <label for="diabetes">Diabetes:</label>
-                    <select id="diabetes" name="diabetes" required>
-                        <option value="true">Sim</option>
-                        <option value="false">Não</option>
-                    </select>
-            
-                    <label for="genero">Gênero:</label>
-                    <select id="genero" name="genero" required>
-                        <option value="homem">Masculino</option>
-                        <option value="mulher">Feminino</option>
-                    </select>
-            
-                    <label for="raca">Raça:</label>
-                    <select id="raca" name="raca" required>
-                        <option value="branco">Branco</option>
-                        <option value="negro">Negro</option>
-                    </select>
-            
-                    <button type="button" id="calcularRiscoBtn">
+                    <button type="button" id="calcular">
                         Calcular Risco
                     </button>
                 </form>
                 <br />
-                <div id="resultadoRisco"></div>
+                <div id="resultado"></div>
             </section>
         </div>
 
-        <script src="js/main.js"></script>
+        <script src="js/risco-coronariano.js"></script>
     </body>
 </html>
