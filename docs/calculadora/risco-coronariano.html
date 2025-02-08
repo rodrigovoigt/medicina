@@ -88,7 +88,7 @@
 
         <!-- Seção para a Calculadora de Risco de Dez Anos -->
         <div class="d-flex justify-content-center">
-            <section id="calculadoraRiscoCoronariano" class="text-center mt-4 bg-white rounded p-4 shadow-sm">
+            <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Calculadora de Risco Coronariano em Dez Anos</h2>
                 <form>
                     <div class="input-group mb-3">
@@ -112,21 +112,20 @@
                     </div>
 
                     
-                    <div class="col-auto">
-                        <label for="" class="col-form-label">Em medicamento para hipertensão:</label>
-                    </div>                        
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="medicamentoHipertensao" value="true">
-                        <label class="form-check-label" for="medicamentoHipertensao">
-                        Sim
-                        </label>
-                    </div>
-                    <br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="medicamentoHipertensao" value="false" checked>
-                        <label class="form-check-label" for="medicamentoHipertensao">
-                        Não
-                        </label>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Em medicamento para hipertensão?</label>
+                        <div class="form-check">
+                            <label class="form-check-label text-success w-100 py-2 rounded border border-success" for="medicamentoSim">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="medicamentoHipertensao" id="medicamentoSim" value="true">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label text-success w-100 py-2 rounded border border-success" for="medicamentoNao">
+                                <input class="form-check-input bg-success border-success me-2" type="radio" name="medicamentoHipertensao" id="medicamentoNao" value="false" checked>
+                                Não
+                            </label>
+                        </div>
                     </div>
 
                     <span class="input-group-text" for="tabagista">Tabagista:</span>
