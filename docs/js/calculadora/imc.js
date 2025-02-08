@@ -46,7 +46,7 @@ $(document).ready(function () {
         let percentil = '';
     
         // Lógica para definir o IMC dependendo da idade e sexo
-        if (sexo === 'homem') {
+        if (sexo === 'masculino') {
             if (idadeDias < 1857) {
                 // Meninos (0-5 anos)
                 ref = b0_5[idadeDias]; 
@@ -63,7 +63,7 @@ $(document).ready(function () {
                     imc < 40 ? "Obesidade grau II" : "Obesidade grau III"
                     : imc < 22 ? "Baixo peso" : imc <= 27 ? "Peso normal" : "Obesidade";
             }
-        } else if (sexo === 'mulher') {
+        } else if (sexo === 'feminino') {
             if (idadeDias < 1857) {
                 // Meninas (0-5 anos)
                 ref = g0_5[idadeDias]; 

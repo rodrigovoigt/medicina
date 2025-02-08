@@ -24,9 +24,9 @@ $(document).ready(function () {
         let sexo = $('input[name="sexo"]:checked').val();
         let etnia = $('input[name="etnia"]:checked').val();
         
-        let sex = sexo === "mulher" ? 1.018 : 1;
-        let alpha = sexo === "mulher" ? -0.329 : -0.411;
-        let kappa = sexo === "mulher" ? 0.7 : 0.9;
+        let sex = sexo === "feminino" ? 1.018 : 1;
+        let alpha = sexo === "feminino" ? -0.329 : -0.411;
+        let kappa = sexo === "feminino" ? 0.7 : 0.9;
         let race = etnia === "negro" ? 1.159 : 1;
 
         let tfg = 141 * Math.min(Math.pow(creatinina / kappa, alpha), Math.pow(creatinina / kappa, -1.209)) * Math.pow(0.993, idade) * sex * race;
