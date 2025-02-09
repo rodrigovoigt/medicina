@@ -41,7 +41,7 @@ $(document).ready(function () {
         }
     
         let textoFinal = textoGerado.length > 0 ? textoGerado.join("\n") : "Selecione os exames para gerar o texto...";
-        $("#resultado").html(textoFinal.replace(/\n/g, "<br>"));
+        $("#resultado").text(textoFinal);
     }
     
     $('.exame').change(atualizarTexto);
