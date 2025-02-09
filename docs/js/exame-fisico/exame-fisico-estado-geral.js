@@ -44,7 +44,9 @@ $(document).ready(function () {
         $("#resultado").text(textoFinal);
     }
     
-    $('input[type="checkbox"]').change(atualizarTexto);
+    $('.exame').change(atualizarTexto);
+
+    
     
     $("#textoCopiavel").click(function() {
         let texto = $(this).text();
