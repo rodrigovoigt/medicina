@@ -88,41 +88,36 @@
 
         <!-- Seção para a Exame Físico Geral -->
         <div class="d-flex justify-content-center">
-            <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
+            <section class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Exame Físico Geral</h4>
                 <div class="mb-3">
                     <label class="form-label">Quais foram realizados:</label>
                     <div class="form-check">
-                        <label class="form-check-label" for="exameFisicoEstadoGeral">
-                            <input class="form-check-input bg-success border-success me-2" type="checkbox" name="exame" id="exameFisicoEstadoGeral" value="">
-                            Estado Geral
-                        </label>
+                        <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral">
+                        <label class="form-check-label" for="exameFisicoEstadoGeral">Estado Geral</label>
                     </div>
                     <div class="form-check">
-                        <label class="form-check-label" for="exameFisicoPele">
-                            <input class="form-check-input bg-success border-success me-2" type="checkbox" name="exame" id="exameFisicoPele" value="">
-                            Exame físico de pele
-                        </label>
+                        <input class="form-check-input exame" type="checkbox" id="exameFisicoPele">
+                        <label class="form-check-label" for="exameFisicoPele">Exame físico de pele</label>
                     </div>
                     <div class="form-check">
-                        <label class="form-check-label" for="exameFisicoTorax">
-                            <input class="form-check-input bg-success border-success me-2" type="checkbox" name="exame" id="exameFisicoTorax" value="">
-                            Exame físico de pele
-                        </label>
+                        <input class="form-check-input exame" type="checkbox" id="exameFisicoTorax">
+                        <label class="form-check-label" for="exameFisicoTorax">Exame físico de tórax</label>
                     </div>
                     <div class="form-check">
-                        <label class="form-check-label" for="exameFisicoCardio">
-                            <input class="form-check-input bg-success border-success me-2" type="checkbox" name="exame" id="exameFisicoCardio" value="">
-                            Exame físico de pele
-                        </label>
+                        <input class="form-check-input exame" type="checkbox" id="exameFisicoCardio">
+                        <label class="form-check-label" for="exameFisicoCardio">Exame físico cardiovascular</label>
                     </div>
-                  </div>
-
-                    
-                        <h3>Resumo do Exame:</h3>
-                        <div id="resultado" class="copy-box" onclick="copiarTexto('resultado')">Clique para copiar</div>
-                    </section>
+                    <div class="form-check">
+                        <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomen">
+                        <label class="form-check-label" for="exameFisicoAbdomen">Exame físico abdominal</label>
+                    </div>
                 </div>
-        <script src="../js/calculadora/tfg.js"></script>
+        
+                <h3>Resumo do Exame:</h3>
+                <div id="resultado" class="copy-box" onclick="copiarTexto('resultado')">Clique para copiar</div>
+            </section>
+        </div>        
+        <script src="../js/calculadora/exame-fisico-geral.js"></script>
     </body>
 </html>
