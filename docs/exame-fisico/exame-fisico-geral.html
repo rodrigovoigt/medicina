@@ -37,13 +37,19 @@
                 background-color: #e4e4e4;
             }
 
-
+            #resultado {
+                white-space: pre-wrap; /* Quebra as linhas automaticamente quando necessário */
+                word-wrap: break-word; /* Garante que o texto se ajuste e quebre as palavras longas */
+                max-width: 100%; /* Garante que a largura da caixa não ultrapasse o limite da tela */
+                overflow-wrap: break-word; /* Garante que palavras longas sejam quebradas */
+                word-break: break-word; /* Impede que o texto estoure a largura da caixa */
+            }
         </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img style="width: 70px" src="/assets/img/icon.png" alt="Logo" /> DocGO!</a>
+                <a class="navbar-brand" href="/"><img style="width: 70px" src="../assets/img/icon.png" alt="Logo" /> DocGO!</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -94,8 +100,8 @@
         </nav>
 
         <!-- Seção para a Exame Físico Geral -->
-        <div class="d-flex justify-content-center">
-            <section class="mt-4 bg-white rounded p-4 shadow-sm" style="width: 100vw;">
+        <div class="justify-content-center">
+            <section class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Exame Físico Geral</h4>
                 <div class="mb-3">
                     <label class="form-label">Quais foram realizados:</label>
