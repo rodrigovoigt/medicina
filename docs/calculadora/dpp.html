@@ -22,22 +22,19 @@
             }
 
             .card {
-                min-height: 150px; /* Ajuste para parecer mais quadrado */
-                border-radius: 10px; /* Bordas arredondadas suaves */
-                background-color: #00a66c; /* Cor inicial */
-                transition: background-color 0.3s ease; /* Suaviza a troca de cor */
+                min-height: 150px;
+                border-radius: 10px;
+                background-color: #00a66c;
+                transition: background-color 0.3s ease;
             }
 
-            /* Efeito hover (mudar cor ao passar o mouse) */
             .card:hover {
-                background-color: #03cd87; /* Cor ao passar o mouse */
+                background-color: #03cd87;
             }
 
             section {
                 background-color: #e4e4e4;
             }
-
-
         </style>
     </head>
     <body>
@@ -63,27 +60,7 @@
                               <li><a class="dropdown-item" href="tfg.html">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
                               <li><a class="dropdown-item" href="imc.html">Índice de Massa Corporal</a></li>
                               <li><a class="dropdown-item" href="carga-tabagica.html">Carga Tabágica</a></li>
-                              <li><a class="dropdown-item" href="dpp.html">Carga Tabágica</a></li>
-                          </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Exame físico
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Exame Físico Geral</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-ginecologico.html">Exame Físico Ginecológico</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-mamas.html">Exame Físico das Mamas</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-musculoesqueletico.html">Exame Físico Musculoesquelético</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-nasal.html">Exame Físico Nasal</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-neurologico.html">Exame Físico Neurológico</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-oral.html">Exame Físico Oral (Boca e Orofaringe)</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-otologico.html">Exame Físico Otológico (Ouvido)</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pele-faneros.html">Exame Físico da Pele e Fâneros</a></li>
-                              <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li>
+                              <li><a class="dropdown-item" href="dpp.html">Calculadora de Data Provável do Parto</a></li>
                           </ul>
                       </li>
                   </ul>
@@ -95,28 +72,36 @@
           </div>
         </nav>
 
-        <!-- Seção para a Calculadora de Carga Tabágica -->
+        <!-- Seção para a Calculadora de Data Provável do Parto -->
         <div class="d-flex justify-content-center">
-            <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
+            <section id="calculadoraDPP" class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Calculadora de Data Provável do Parto</h4>
                 <form>
                     <div class="input-group mb-3">
-                      <span class="input-group-text" for="cigarrosPorDia">Cigarros por dia:</span>
-                      <input type="number" id="cigarrosPorDia" name="cigarrosPorDia" required min="0" class="form-control" placeholder="Ex: 20">
+                      <span class="input-group-text" for="tipoData">Escolha a data para calcular a DPP:</span>
+                      <select id="tipoData" name="tipoData" class="form-control">
+                        <option value="dum">Data da Última Menstruação (DUM)</option>
+                        <option value="ultrassom">Data do Último Ultrassom</option>
+                      </select>
                     </div>
 
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" for="anosFumando">Anos fumando:</span>
-                      <input type="number" id="anosFumando" name="anosFumando" required min="0" class="form-control" placeholder="Ex: 4">
+                    <div class="input-group mb-3" id="inputDUM">
+                      <span class="input-group-text" for="dataDUM">Data da Última Menstruação (DUM):</span>
+                      <input type="date" id="dataDUM" name="dataDUM" class="form-control">
                     </div>
-            
-                    <button id="calcular" type="button" class="btn btn-success">Calcular</button>
+
+                    <div class="input-group mb-3" id="inputUltimoUltra" style="display:none;">
+                      <span class="input-group-text" for="dataUltimoUltra">Data do Último Ultrassom:</span>
+                      <input type="date" id="dataUltimoUltra" name="dataUltimoUltra" class="form-control">
+                    </div>
+
+                    <button id="calcularDPP" type="button" class="btn btn-success">Calcular DPP</button>
                 </form>
                 <br />
-                <div id="resultado"></div>
+                <div id="resultadoDPP"></div>
             </section>
         </div>
 
-        <script src="../js/calculadora/carga-tabagica.js"></script>
+        <script src="../js/calculadora/dpp.js"></script>
     </body>
 </html>

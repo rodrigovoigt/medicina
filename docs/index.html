@@ -49,14 +49,8 @@
         </style>
     </head>
     <body>
-        <div id="navbar-placeholder"></div>
-        <script>
-            fetch("assets/files/nav.html")
-                .then(response => response.text())
-                .then(data => document.getElementById("navbar-placeholder").innerHTML = data)
-                .catch(error => console.error("Erro ao carregar a navbar:", error));
-        </script>
-        
+        <script src="assets/files/nav.js"></script>
+
           <div class="d-flex justify-content-center">
             <section id="home" class="active text-center mt-4 bg-white rounded p-4 shadow-sm">
                 <h2>Ferramentas</h2>
