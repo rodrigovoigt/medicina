@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>DocGO!</title>
+        <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #a3a3a3;
+                color: #000;
+            }
+
+            nav {
+                background-color: #00a66c;
+            }
+
+            .card {
+                min-height: 150px;
+                border-radius: 10px;
+                background-color: #00a66c;
+                transition: background-color 0.3s ease;
+            }
+
+            .card:hover {
+                background-color: #03cd87;
+            }
+
+            section {
+                background-color: #e4e4e4;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- navbar.html -->
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="/"><img style="width: 70px" src="../assets/img/icon.png" alt="Logo" /> DocGO!</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Calculadoras
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="risco-coronariano.html">Risco Coronariano em Dez Anos</a></li>
+                              <li><a class="dropdown-item" href="ldl.html">Colesterol LDL</a></li>
+                              <li><a class="dropdown-item" href="tfg.html">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
+                              <li><a class="dropdown-item" href="imc.html">Índice de Massa Corporal</a></li>
+                              <li><a class="dropdown-item" href="carga-tabagica.html">Carga Tabágica</a></li>
+                              <li><a class="dropdown-item" href="dpp.html">Data Provável do Parto</a></li>
+                              <li><a class="dropdown-item" href="idade-gestacional.html">Idade Gestacional</a></li>
+                          </ul>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Exame físico
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Exame Físico Geral</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-ginecologico.html">Exame Físico Ginecológico</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-mamas.html">Exame Físico das Mamas</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-musculoesqueletico.html">Exame Físico Musculoesquelético</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-nasal.html">Exame Físico Nasal</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-neurologico.html">Exame Físico Neurológico</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-oral.html">Exame Físico Oral (Boca e Orofaringe)</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-otologico.html">Exame Físico Otológico (Ouvido)</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pele-faneros.html">Exame Físico da Pele e Fâneros</a></li>
+                            <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" onsubmit="pesquisar(event)">
+                    <input id="searchQuery" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                    <button class="btn btn-success" type="submit">Buscar</button>
+                </form>
+              </div>
+          </div>
+        </nav>
+
+        <!-- Seção para a Calculadora de Data Provável do Parto -->
+        <div class="d-flex justify-content-center">
+            <section id="calculadoraDPP" class="mt-4 bg-white rounded p-4 shadow-sm">
+                <h4>Idade Gestacional</h4>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="tipoCalculo">Escolha a base para cálculo:</span>
+                    <select id="tipoCalculo" class="form-control">
+                        <option value="dum">Data da Última Menstruação (DUM)</option>
+                        <option value="exame">Data de um Exame Anterior</option>
+                        <option value="dpp">Data Provável do Parto (DPP)</option>
+                    </select>
+                </div>
+        
+                <!-- Input para DUM -->
+                <div class="input-group mb-3" id="inputDUM">
+                    <span class="input-group-text">Data da Última Menstruação (DUM):</span>
+                    <input type="date" id="dataDUM" class="form-control">
+                </div>
+        
+                <!-- Inputs para Exame Anterior -->
+                <div id="inputExame" style="display: none;">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Data do Exame Anterior:</span>
+                        <input type="date" id="dataExame" class="form-control">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Idade Gestacional na Época (semanas.dias):</span>
+                        <input type="text" id="idadeGestacionalExame" class="form-control" placeholder="Ex: 12.3 para 12 semanas e 3 dias">
+                    </div>
+                </div>
+        
+                <!-- Input para DPP -->
+                <div class="input-group mb-3" id="inputDPP" style="display: none;">
+                    <span class="input-group-text">Data Provável do Parto (DPP):</span>
+                    <input type="date" id="dataDPP" class="form-control">
+                </div>
+        
+                <button id="calcularIG" type="button" class="btn btn-success">Calcular Idade Gestacional</button>
+        
+                <br />
+                <div id="resultadoIG" class="mt-3 p-2 bg-light text-dark border rounded" data-copy>
+                    Clique para copiar o resultado
+                </div>
+            </section>
+        </div>
+
+        <script src="../js/calculadora/idade-gestacional.js"></script>
+    </body>
+</html>
