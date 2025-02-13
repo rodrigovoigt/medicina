@@ -30,7 +30,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#calcularDPP').click(function () {
+    $('#calcular').click(function () {
         let tipoData = $('#tipoData').val();
         let dataDUM = $('#dataDUM').val();
         let dataUltimoUltra = $('#dataUltimoUltra').val();
@@ -48,7 +48,7 @@ $(document).ready(function () {
         }
 
         let resultadoTexto = `Data Provável do Parto: ${dppResultado}`;
-        $('#resultadoDPP').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
+        $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
     });
 
     // Função para copiar texto ao clicar no resultado

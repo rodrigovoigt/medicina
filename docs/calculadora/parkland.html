@@ -22,19 +22,22 @@
             }
 
             .card {
-                min-height: 150px;
-                border-radius: 10px;
-                background-color: #00a66c;
-                transition: background-color 0.3s ease;
+                min-height: 150px; /* Ajuste para parecer mais quadrado */
+                border-radius: 10px; /* Bordas arredondadas suaves */
+                background-color: #00a66c; /* Cor inicial */
+                transition: background-color 0.3s ease; /* Suaviza a troca de cor */
             }
 
+            /* Efeito hover (mudar cor ao passar o mouse) */
             .card:hover {
-                background-color: #03cd87;
+                background-color: #03cd87; /* Cor ao passar o mouse */
             }
 
             section {
                 background-color: #e4e4e4;
             }
+
+
         </style>
     </head>
     <body>
@@ -62,6 +65,7 @@
                                 <li><a class="dropdown-item" href="carga-tabagica.html">Carga Tabágica</a></li>
                                 <li><a class="dropdown-item" href="dpp.html">Data Provável do Parto</a></li>
                                 <li><a class="dropdown-item" href="idade-gestacional.html">Idade Gestacional</a></li>
+                                <li><a class="dropdown-item" href="parkland.html">Ressuscitação volêmica de queimadura em adulto</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -84,6 +88,14 @@
                               <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li>
                           </ul>
                       </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ferramentas externas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../ferramenta-externa/ajuda-pediatria.html">Ajuda Pediatria</a></li>
+                        </ul>
+                    </li>
                   </ul>
                   <form class="d-flex" role="search" onsubmit="pesquisar(event)">
                       <input id="searchQuery" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
@@ -91,49 +103,41 @@
                   </form>
                 </div>
             </div>
-          </nav>
-  
-  
-        <!-- Seção para a Calculadora de Data Provável do Parto -->
+        </nav>
+            
+        <!-- Seção para a Calculadora de TFG -->
         <div class="d-flex justify-content-center">
-            <section id="calculadoraDPP" class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Calculadora de Data Provável do Parto</h4>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" for="tipoData">Escolha a base para cálculo:</span>
-                    <select id="tipoData" name="tipoData" class="form-control">
-                        <option value="dum">Data da Última Menstruação (DUM)</option>
-                        <option value="ultrassom">Data do Último Ultrassom</option>
-                    </select>
-                </div>
-                
-                <div class="input-group mb-3" id="inputDUM">
-                    <span class="input-group-text" for="dataDUM">Data da Última Menstruação (DUM):</span>
-                    <input type="date" id="dataDUM" name="dataDUM" class="form-control">
-                </div>
-                
-                <div id="inputUltimoUltra" style="display:none;">
+            <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
+                <h4>Ressuscitação volêmica de queimadura em adulto</h4>
+                <form>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="dataUltimoUltra">Data do Último Ultrassom:</span>
-                        <input type="date" id="dataUltimoUltra" name="dataUltimoUltra" class="form-control">
+                        <span class="input-group-text" for="quantidadeMl">Escolha o número de ml:</span>
+                        <select id="quantidadeMl" class="form-control">
+                            <option value="2">2ml</option>
+                            <option value="3">3ml</option>
+                            <option value="4">4ml</option>
+                        </select>
                     </div>
-                </div>
-                
-                <div id="inputIdadeGestacional" style="display:none;">
+
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="idadeGestacional">Idade Gestacional (semanas.dias):</span>
-                        <input type="text" id="idadeGestacional" name="idadeGestacional" class="form-control" placeholder="Ex: 12.3 para 12 semanas e 3 dias">
+                        <span class="input-group-text">Peso (kg):</span>
+                        <input type="number" id="peso" class="form-control" required min="1" placeholder="Ex: 70">
                     </div>
-                </div>
-                
-                <button id="calcular" type="button" class="btn btn-success">Calcular DPP</button>
-                
-                <br />
-                <div id="resultado" class="mt-3 p-2 bg-light text-dark border rounded" data-copy>
-                    Clique para copiar o resultado
-                </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">% Superfície Corporal Queimada:</span>
+                        <input type="number" id="scq" class="form-control" required min="1" max="100" placeholder="Ex: 30">
+                    </div>
+                    <br><br>
+                    <img src="../assets/img/calculadora/scq.jpg" width="100%">
+                    <br><br>
+                  <button id="calcular" type="button" class="btn btn-success">Calcular</button>
+                </form>
+                <br/>
+                <div id="resultado"></div>
             </section>
         </div>
 
-        <script src="../js/calculadora/dpp.js"></script>
+        <script src="../js/calculadora/parkland.js"></script>
     </body>
 </html>

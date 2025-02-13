@@ -52,7 +52,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#calcularIG').click(function () {
+    $('#calcular').click(function () {
         let tipo = $('#tipoCalculo').val();
         let resultadoTexto = "";
 
@@ -88,10 +88,10 @@ $(document).ready(function () {
             resultadoTexto = `Idade Gestacional: ${idade.semanas} semanas e ${idade.dias} dias.`;
         }
 
-        $('#resultadoIG').text(resultadoTexto).data('copyText', resultadoTexto);
+        $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto);
     });
 
-    $('#resultadoIG').click(function () {
-        copiarTexto('resultadoIG');
+    $('#resultado').click(function () {
+        copiarTexto('resultado');
     });
 });
