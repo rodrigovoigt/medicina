@@ -45,8 +45,9 @@ $(document).ready(function () {
         let cargaTabagica = (cigarrosPorDia / 20) * anosFumando;
         let resultadoCarga = `${cargaTabagica.toFixed(2)} maços-ano`;
     
-        $('#texto1').text("Carga Tabágica: ").data('copyText', "Carga Tabágica: ").attr('data-copy', true);
+        $('#texto1').text("Carga Tabágica: ");
         $('#resultado').text(resultadoCarga).data('copyText', resultadoCarga).attr('data-copy', true);
+        $('#texto2').text("\nRastreio se: Duração > 5 anos ou + de 20 maços-ano");
     });
 
 });
