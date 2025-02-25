@@ -158,7 +158,7 @@ $(document).ready(function () {
         let Risco_Dez_Anos =
             100 * (1 - Math.pow(S10, Math.exp(Terms - Mean_Terms)));
 
-        let resultadoRiscoCardio = "Risco de Dez Anos: " + Risco_Dez_Anos.toFixed(2) + "% - ";
+        let resultadoRiscoCardio = "Risco coronariano em 10 anos: " + Risco_Dez_Anos.toFixed(2) + "% - ";
         if (Risco_Dez_Anos < 5) {
             resultadoRiscoCardio = resultadoRiscoCardio + "Baixo risco (<5%)";
         } else if (Risco_Dez_Anos >= 5 && Risco_Dez_Anos <= 7.4) {

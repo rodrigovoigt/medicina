@@ -123,12 +123,14 @@ $(document).ready(function () {
             }
     
             // Exibindo resultado com percentil correto
-            let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}, Percentil: ${percentilMaisProximo.toUpperCase()} (${ref[percentilMaisProximo]})`;
+            let resultadoTexto = ` ${imc.toFixed(2)} - ${resultado}, Percentil: ${percentilMaisProximo.toUpperCase()} (${ref[percentilMaisProximo]})`;
+            $('#texto1').text(`IMC: `);
             $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
             $('#resultado').show();
         } else {
             // Se for adulto, não exibe percentil
-            let resultadoTexto = `IMC: ${imc.toFixed(2)} - ${resultado}`;
+            let resultadoTexto = `${imc.toFixed(2)} - ${resultado}`;
+            $('#texto1').text(`IMC: `);
             $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
             $('#resultado').show();
         }
