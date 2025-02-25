@@ -43,8 +43,9 @@ $(document).ready(function () {
         }
     
         let cargaTabagica = (cigarrosPorDia / 20) * anosFumando;
-        let resultadoCarga = `Carga Tabágica: ${cargaTabagica.toFixed(2)} maços-ano`;
+        let resultadoCarga = `${cargaTabagica.toFixed(2)} maços-ano`;
     
+        $('#texto1').text("Carga Tabágica: ").data('copyText', "Carga Tabágica: ").attr('data-copy', true);
         $('#resultado').text(resultadoCarga).data('copyText', resultadoCarga).attr('data-copy', true);
     });
 

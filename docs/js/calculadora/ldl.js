@@ -44,8 +44,9 @@ $(document).ready(function () {
         }
 
         let ldl = colesterolTotal - colesterolHDL - triglicerideos / 5;
-        let resultadoLDL = "Colesterol LDL: " + ldl.toFixed(2);
+        let resultadoLDL = ldl.toFixed(2);
 
+        $('#texto1').text("Colesterol LDL: ");
         $('#resultado').text(resultadoLDL).data('copyText', resultadoLDL).attr('data-copy', true);
     });
 

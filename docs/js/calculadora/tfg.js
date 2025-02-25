@@ -53,9 +53,11 @@ $(document).ready(function () {
         let tfgNormal = idade > 70 ? 75 : 120;
         let percentualFuncaoRenal = (tfg / tfgNormal) * 100;
         
-        let resultadoTexto = `Taxa de Filtração Glomerular (TFG): ${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\nFunção renal restante: ${percentualFuncaoRenal.toFixed(2)}%`;
+        let resultadoTexto = `${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\n`;
         
+        $('#texto1').text("Taxa de Filtração Glomerular (TFG): ");
         $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
+        $('#texto2').text(`Função renal restante: ${percentualFuncaoRenal.toFixed(2)}%`).data('copyText', `Função renal restante: ${percentualFuncaoRenal.toFixed(2)}%`).attr('data-copy', true);
     });
 
 });

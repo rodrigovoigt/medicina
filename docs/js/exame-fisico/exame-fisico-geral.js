@@ -23,6 +23,10 @@ $(document).ready(function () {
         if ($('#exameFisicoEstadoGeral').is(':checked')) {
             textoGerado.push("O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente.\n");
         }
+
+        if ($('#exameFisicoLabs').is(':checked')) {
+            textoGerado.push("Exame laboratorial (/2025):\nHb XXX / Ht XXX / Leuco XXX / Plaq XXX\nGlicose XXX / HbA1c XXX\nCTotal XXX / CHdl XXX / CLdl XXX / Trig XXX\nVit D XXX / Vit B12 XXX / Vit C XXX\nTGO XXX / TGP XXX\n");
+        }
     
         if ($('#exameFisicoPele').is(':checked')) {
             textoGerado.push("Exame físico de pele:\nLesão do tipo () localizada em (), simétrica, bordas definidas, cor (hiper/normo/hipocrômica/hiperemiada), diâmetro de (), de surgimento há () com/sem alterações significativas recentemente.\n");
@@ -37,6 +41,14 @@ $(document).ready(function () {
         }
     
         if ($('#exameFisicoAbdomen').is(':checked')) {
+            textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
+        }
+
+        if ($('#exameFisicoNeuro').is(':checked')) {
+            textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
+        }
+
+        if ($('#exameFisicoGineco').is(':checked')) {
             textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
         }
     
@@ -57,3 +69,18 @@ $(document).ready(function () {
         });
     });
 });
+
+function pesquisar(event) {
+    event.preventDefault(); // Impede o envio do formulário
+
+    let query = document.getElementById("searchQuery").value.trim();
+
+    if (!query) {
+        alert("Digite algo para buscar.");
+        return;
+    }
+
+    let searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(query)}+site:msdmanuals.com+OR+site:consultaremedios.com.br+OR+site:pedb.com.br`;
+
+    window.open(searchUrl, "_blank"); // Abre em uma nova aba
+}
