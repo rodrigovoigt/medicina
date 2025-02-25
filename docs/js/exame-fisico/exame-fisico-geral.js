@@ -49,7 +49,7 @@ $(document).ready(function () {
         }
 
         if ($('#exameFisicoGineco').is(':checked')) {
-            textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
+            textoGerado.push("Exame físico ginecológico:\nMamas simétricas, formato arredondado, volume grande/médio/pequeno, sem sinais flogísticos. Mamilos normoposicionados, protrusos, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica. Expressão papilar sem saída de secreção. Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis.\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofia ou outras alterações morfológicas.\nColo uterino de aspecto habitual, sem lesões visíveis ou secreção anômala.\nToque vaginal com útero em posição antevertida, de volume e consistência normais, móvel e indolor. Anexos não palpáveis.\n");
         }
     
         let textoFinal = textoGerado.length > 0 ? textoGerado.join("\n") : "Selecione os exames para gerar o texto...";
