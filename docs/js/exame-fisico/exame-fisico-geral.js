@@ -51,6 +51,10 @@ $(document).ready(function () {
         if ($('#exameFisicoGineco').is(':checked')) {
             textoGerado.push("Exame físico ginecológico:\nMamas simétricas, formato arredondado, volume grande/médio/pequeno, sem sinais flogísticos. Mamilos normoposicionados, protrusos, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica. Expressão papilar sem saída de secreção. Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis.\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofia ou outras alterações morfológicas.\nColo uterino de aspecto habitual, sem lesões visíveis ou secreção anômala.\nToque vaginal com útero em posição antevertida, de volume e consistência normais, móvel e indolor. Anexos não palpáveis.\n");
         }
+
+        if ($('#exameFisicoOsteoarticular').is(':checked')) {
+            textoGerado.push("Baby, I'm preying on you tonight\nHunt you down eat you alive\nJust like animals\nAnimals\nLike animals-mals");
+        }
     
         let textoFinal = textoGerado.length > 0 ? textoGerado.join("\n") : "Selecione os exames para gerar o texto...";
         $("#resultado").text(textoFinal);
