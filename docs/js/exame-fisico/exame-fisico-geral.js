@@ -53,8 +53,8 @@ $(document).ready(function () {
         }
 
         if ($('#exameFisicoOsteoarticular').is(':checked')) {
-            textoGerado.push("Baby, I'm preying on you tonight\nHunt you down eat you alive\nJust like animals\nAnimals\nLike animals-mals");
-        }
+            textoGerado.push("Exame físico osteoarticular:\nInspeção sem assimetrias ou atrofias musculares evidentes. Ausência de lesões cutâneas. Sem sinais flogísticos articulares. Sem deformidades articulares aparentes.\nPalpação sem dor ou edema nas interfaces articulares. Ausência de crepitação à mobilização. Sem hipertrofia sinovial ou edema sinovial palpável.\nAmplitude de movimento preservada, sem limitações ou hipermobilidade articular. Força muscular preservada.\nTeste de Neer e Hawkins negativos para impacto no ombro. Teste de Jobe sem evidências de lesão do supraespinhal. Teste de Phalen e Tinel negativos para síndrome do túnel do carpo. Testes de gaveta anterior e posterior negativos para instabilidade ligamentar do joelho. Sem sinais de derrame articular ao teste do choque da patela.\n");
+        }        
     
         let textoFinal = textoGerado.length > 0 ? textoGerado.join("\n") : "Selecione os exames para gerar o texto...";
         $("#resultado").text(textoFinal);
