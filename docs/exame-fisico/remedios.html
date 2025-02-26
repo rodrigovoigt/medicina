@@ -80,19 +80,19 @@
                                 Exame físico
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-geral.html">Exame Físico Geral</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-geral.html">Exame Físico Geral</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-ginecologico.html">Exame Físico Ginecológico</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-mamas.html">Exame Físico das Mamas</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-musculoesqueletico.html">Exame Físico Musculoesquelético</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-nasal.html">Exame Físico Nasal</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-neurologico.html">Exame Físico Neurológico</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-oral.html">Exame Físico Oral (Boca e Orofaringe)</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-otologico.html">Exame Físico Otológico (Ouvido)</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pele-faneros.html">Exame Físico da Pele e Fâneros</a></li>
-                                <li><a class="dropdown-item" href="../exame-fisico/exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-ginecologico.html">Exame Físico Ginecológico</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-mamas.html">Exame Físico das Mamas</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-musculoesqueletico.html">Exame Físico Musculoesquelético</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-nasal.html">Exame Físico Nasal</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-neurologico.html">Exame Físico Neurológico</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-oral.html">Exame Físico Oral (Boca e Orofaringe)</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-otologico.html">Exame Físico Otológico (Ouvido)</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-pele-faneros.html">Exame Físico da Pele e Fâneros</a></li>
+                                <li><a class="dropdown-item" href="exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -100,7 +100,7 @@
                                 Ferramentas externas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="ajuda-pediatria.html">Ajuda Pediatria</a></li>
+                                <li><a class="dropdown-item" href="../ajuda-pediatria.html">Ajuda Pediatria</a></li>
                             </ul>
                         </li>
 
@@ -115,19 +115,19 @@
 
         
         <div class="d-flex justify-content-center">
-            <section id="home" class="active text-center mt-4 bg-white rounded p-4 shadow-sm">
-                <h2>Ajuda Pediatria</h2>
-                <br/>
-
-                <!-- Formulário de pesquisa -->
-                <form id="searchForm" onsubmit="pesquisarAjudaPediatria(event)">
-                    <div class="input-group">
-                        <input id="pesquisarAjudaPediatria" class="form-control" type="search" placeholder="Buscar no pedb.com.br" aria-label="Search">
-                        <button class="btn btn-success" type="submit">Buscar</button>
+            <section id="home" class="mt-4 bg-white rounded p-4 shadow-sm">
+                <form>
+                    <h2>Formatar medicações</h2>
+                    <br>
+                    <div class="mb-3">
+                        <label for="inputMedicacoes" class="form-label">Insira a lista de medicações:</label>
+                        <textarea id="inputMedicacoes" class="form-control" placeholder="Cole as medicações aqui..."></textarea>
                     </div>
-                </form>
+                    <button id="formatar" type="button" class="btn btn-success">Formatar</button>                </form>
+                <br>
+                <span id="resultado" class="mt-3 p-2 bg-light text-dark border rounded"></span>
             </section>
         </div>
-        <script src="../js/ferramenta-externa/ajuda-pediatria.js"></script>
+        <script src="../js/exame-fisico/remedios.js"></script>
     </body>
 </html>
