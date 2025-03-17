@@ -40,30 +40,42 @@ $(document).ready(function () {
             "tarde": "0-1-0",
             "noite": "0-0-1",
             "à noite": "0-0-1",
+            "de noite": "0-0-1",
             "dia": "1-0-0",
             "12/12h": "1-0-1",
+            "12 em 12 horas",
             "8/8h": "1-1-1",
+            "8 em 8 horas",
             "6/6h": "1-1-1-1",
-            "24h": "1-0-0"
+            "6 em 6 horas",
+            "24h": "1-0-0",
+            "3x ao dia": "1-1-1",
+            "4x ao dia": "1-1-1-1",
+            "duas vezes ao dia": "1-0-1",
+            "de manhã e à noite": "1-0-1",
+            "de manhã e de noite": "1-0-1",
+            "de manhã e à tarde": "1-1-0",
+            "de manhã e de tarde": "1-1-0",
+            "de tarde e à noite": "0-1-1",
+            "de tarde e à noite": "0-1-1"
         };
 
         for (let i = 0; i < linhas.length; i += 6) {
             if (linhas.length >= i + 6) {
                 let nome = linhas[i + 1].replace(/MG/g, "mg"); // Nome com "mg" minúsculo
-                let quantidadeTexto = linhas[i + 3].toLowerCase(); // Captura a parte "Tomar 2cp"
-                let horario = quantidadeTexto; // O próprio texto contém o horário
-                let quantidadeMatch = quantidadeTexto.match(/(\d+)\s?(cp|comprimidos?)/); // Extrai a quantidade de cp
+                let quantidadeTexto = linhas[i + 3].toLowerCase(); // Captura a descrição da dose
+                let quantidadeMatch = quantidadeTexto.match(/(\d+)\s?(cp|comprimidos?)/); // Extrai a quantidade
 
                 let quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1]) : 1; // Padrão 1 caso não encontre
                 
                 let frequenciaBase = "0-0-0"; // Padrão
                 Object.keys(padrao).forEach(h => {
-                    if (horario.includes(h)) {
+                    if (quantidadeTexto.includes(h)) {
                         frequenciaBase = padrao[h];
                     }
                 });
 
-                // Multiplica a quantidade pela frequência base
+                // Multiplica a quantidade pelo padrão encontrado
                 let frequencia = frequenciaBase.split('-').map(num => num * quantidade).join('-');
 
                 resultado.push(`${nome} (${frequencia}) / `);
