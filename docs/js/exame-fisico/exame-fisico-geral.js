@@ -39,6 +39,7 @@ $(document).ready(function () {
         if ($('#exameFisicoCardio').is(':checked')) {
             textoGerado.push("Exame físico cardiovascular:\nPalpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.\nAusência de turgência jugular.\nIctus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.\nAusência de impulsão paraesternal esquerda.\nAusência de frêmito cardiovascular.\nBulhas rítmicas regulares normofonéticas em dois tempos.\n");
         }
+        
     
         if ($('#exameFisicoAbdomen').is(':checked')) {
             textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
