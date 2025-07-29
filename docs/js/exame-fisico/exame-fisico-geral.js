@@ -19,6 +19,9 @@ $(document).ready(function () {
 
     function atualizarTexto() {
         let textoGerado = [];
+
+        console.log($('#exameFisicoEstadoGeral').is(':checked'));
+        console.log($('#exameFisicoEstadoGeral'));
     
         if ($('#exameFisicoEstadoGeral').is(':checked')) {
             textoGerado.push("O: Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente.\n");

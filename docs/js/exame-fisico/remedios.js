@@ -47,7 +47,7 @@ $(document).ready(function () {
             "8/8h": "1-1-1",
             "8 em 8 horas": "1-1-1",
             "6/6h": "1-1-1-1",
-            "6 em 6 horas": 1-1-1-1,
+            "6 em 6 horas": "1-1-1-1",
             "24h": "1-0-0",
             "3x ao dia": "1-1-1",
             "4x ao dia": "1-1-1-1",
@@ -57,7 +57,8 @@ $(document).ready(function () {
             "de manhã e à tarde": "1-1-0",
             "de manhã e de tarde": "1-1-0",
             "de tarde e à noite": "0-1-1",
-            "de tarde e à noite": "0-1-1"
+            "de tarde e à noite": "0-1-1",
+            "30 min antes do caf": "1-0-0"
         };
 
         for (let i = 0; i < linhas.length; i += 6) {
@@ -83,7 +84,7 @@ $(document).ready(function () {
         }
 
         if (resultado.length > 0) {
-            $('#resultado').text(resultado.join("\n")).data('copyText', resultado.join("\n")).attr('data-copy', true);
+            $('#resultado').text(resultado.join("")).data('copyText', resultado.join("")).attr('data-copy', true);
         } else {
             $('#resultado').text("Nenhuma medicação formatada. Verifique o formato de entrada.");
         }

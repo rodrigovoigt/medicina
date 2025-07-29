@@ -50,8 +50,22 @@ $(document).ready(function () {
         let descricao = tfg >= 90 ? "Normal" : tfg >= 60 ? "Levemente diminuída" : tfg >= 45 ? "Leve/moderadamente diminuída" : tfg >= 30 ? "Moderadamente diminuída" : tfg >= 15 ? "Muito diminuída" : "Falência renal";
         let faixa = tfg >= 90 ? "≥ 90" : tfg >= 60 ? "60-89" : tfg >= 45 ? "45-59" : tfg >= 30 ? "30-44" : tfg >= 15 ? "15-29" : "< 15";
         
-        let tfgNormal = idade > 70 ? 75 : 120;
+        // let tfgNormal = idade > 70 ? 75 : 125;
+        let tfgNormal  = 0
+        if (idade > 70) {
+            tfgNormal = 75; // TFG normal para idosos
+        } else if (idade > 50) {
+            tfgNormal = 108; // TFG normal para adultos
+        } else {
+            tfgNormal = 125; // TFG normal para jovens
+        }
+
         let percentualFuncaoRenal = (tfg / tfgNormal) * 100;
+        if (percentualFuncaoRenal < 0) {
+            percentualFuncaoRenal = 0; // Evita valores negativos
+        } else if (percentualFuncaoRenal > 100) {
+            percentualFuncaoRenal = 100; // Limita a 100%
+        }
         
         let resultadoTexto = `${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\n`;
         

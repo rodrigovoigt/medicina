@@ -17,10 +17,6 @@
                 color: #000;
             }
 
-            nav {
-                background-color: #00a66c;
-            }
-
             .card {
                 min-height: 150px; /* Ajuste para parecer mais quadrado */
                 border-radius: 10px; /* Bordas arredondadas suaves */
@@ -47,77 +43,197 @@
         </style>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.html"><img style="width: 70px" src="../assets/img/icon.png" alt="Logo" /> DocGO!</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Calculadoras
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../calculadora/risco-coronariano.html">Calculadora de Risco de Dez Anos</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/ldl.html">Calculadora de Colesterol LDL</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/tfg.html">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/imc.html">Índice de Massa Corporal</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/carga-tabagica.html">Carga Tabágica</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/dpp.html">Data Provável do Parto</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/idade-gestacional.html">Idade Gestacional</a></li>
-                                <li><a class="dropdown-item" href="../calculadora/parkland.html">Ressuscitação volêmica de queimadura em adulto</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Exame físico
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="exame-fisico-geral.html">Exame Físico Geral</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-ginecologico.html">Exame Físico Ginecológico</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-mamas.html">Exame Físico das Mamas</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-musculoesqueletico.html">Exame Físico Musculoesquelético</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-nasal.html">Exame Físico Nasal</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-neurologico.html">Exame Físico Neurológico</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-oral.html">Exame Físico Oral (Boca e Orofaringe)</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-otologico.html">Exame Físico Otológico (Ouvido)</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-pele-faneros.html">Exame Físico da Pele e Fâneros</a></li>
-                                <li><a class="dropdown-item" href="exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ferramentas externas
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../ferramenta-externa/ajuda-pediatria.html">Ajuda Pediatria</a></li>
-                            </ul>
-                        </li>
+        <div id="navbar-placeholder"></div>
 
-                    </ul>
-                    <form class="d-flex" role="search" onsubmit="pesquisar(event)">
-                        <input id="searchQuery" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-                        <button class="btn btn-success" type="submit">Buscar</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+        <script src="../js/navbar-loader.js" defer></script>
+        <script>
+            fetch("../navbar.html")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("navbar-placeholder").innerHTML = data;
+                });
+        </script>
 
         <!-- Seção para a Exame Físico Geral -->
         <div class="justify-content-center">
             <section class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Exame Físico Geral</h4>
-                <div class="mb-3">
-                    <label class="form-label">Quais foram realizados:</label>
-                    <div class="form-check">
+                <label class="form-label">Quais foram realizados:</label>
+                <div class="accordion" id="">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoEstadoGeral" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral" hidden>
+                                Exame físico geral
+                            </label>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoLabs" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoLabs" hidden>
+                                Exames laboratoriais
+                            </label>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoTorax" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoTorax" hidden>
+                                Exame físico pulmonar
+                            </label>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoCardio" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoCardio" hidden>
+                                Exame físico cardiovascular
+                            </label>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoPele" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoPele" hidden>
+                                Exame físico de pele
+                            </label>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoAbdomen" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomen" hidden>
+                                Exame físico abdominal
+                            </label>
+                        </h2>
+                        <div id="collapse5" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoNeuro" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoNeuro" hidden>
+                                Exame físico neurológico
+                            </label>
+                        </h2>
+                        <div id="collapse6" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoGineco" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoGineco" hidden>
+                                Exame físico ginecológico
+                            </label>
+                        </h2>
+                        <div id="collapse7" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="">
+                            <label for="exameFisicoOsteoarticular" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false">
+                            <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticular" hidden>
+                                Exame físico osteoarticular
+                            </label>
+                        </h2>
+                        <div id="collapse8" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                            <div class="accordion-body">
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+                    <!-- <div class="form-check">
                         <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral">
                         <label class="form-check-label" for="exameFisicoEstadoGeral">Estado Geral</label>
                     </div>
@@ -152,7 +268,7 @@
                     <div class="form-check">
                         <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticular">
                         <label class="form-check-label" for="exameFisicoOsteoarticular">Exame físico osteoarticular</label>
-                    </div>
+                    </div> -->
                 </div>
         
                 <h3>Resumo do Exame:</h3>
