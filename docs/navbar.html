@@ -2,84 +2,208 @@
     nav {
         background-color: #00a66c;
     }
+    
+    .navbar-nav .nav-link {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 0.95rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    /* Estilo do botão do menu lateral */
+    .btn-outline-light {
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+    }
+    
+    .btn-outline-light:hover {
+        background-color: rgba(255,255,255,0.1);
+        border-color: white;
+        color: white;
+    }
+    
+    /* Estilo do offcanvas */
+    .offcanvas-body {
+        background-color: #f8f9fa;
+    }
+    
+    .list-group-item-action:hover {
+        background-color: #e3f2fd;
+        color: #00a66c;
+    }
+    
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: #00a66c;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: #e8f5e8;
+        color: #00a66c;
+    }
+    
+    /* Responsivo */
+    @media (max-width: 991.98px) {
+        .navbar-nav .nav-link {
+            font-size: 0.9rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        
+        /* Esconder barra de busca em telas pequenas */
+        .d-flex[role="search"] {
+            display: none !important;
+        }
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="Logo" /> Voigt Teste Nav!</a>
+        
+        <!-- Botão do menu lateral (offcanvas) -->
+        <button class="btn btn-outline-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                 </li>
+                <!-- Itens principais mais usados -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Calculadoras
+                        Calculadoras Principais
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="calculadora/risco-coronariano.html">Calculadora de Risco de Dez Anos</a></li>
-                        <li><a class="dropdown-item" href="calculadora/ldl.html">Calculadora de Colesterol LDL</a></li>
-                        <li><a class="dropdown-item" href="calculadora/tfg.html">Estimativa da Taxa de Filtração Glomerular (TFG)</a></li>
-                        <li><a class="dropdown-item" href="calculadora/imc.html">Índice de Massa Corporal</a></li>
-                        <li><a class="dropdown-item" href="calculadora/carga-tabagica.html">Carga Tabágica</a></li>
+                        <li><a class="dropdown-item" href="calculadora/imc.html">IMC</a></li>
+                        <li><a class="dropdown-item" href="calculadora/tfg.html">TFG</a></li>
+                        <li><a class="dropdown-item" href="calculadora/risco-coronariano.html">Risco Cardiovascular</a></li>
                         <li><a class="dropdown-item" href="calculadora/dpp.html">Data Provável do Parto</a></li>
-                        <li><a class="dropdown-item" href="calculadora/idade-gestacional.html">Idade Gestacional</a></li>
-                        <li><a class="dropdown-item" href="calculadora/parkland.html">Ressuscitação volêmica de queimadura em adulto</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Exame físico
+                        Prontuário
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="exame-fisico/exame-fisico-geral.html">Exame Físico Geral</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="exame-fisico/remedios.html">Formatar medicações IPM</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <!-- <li><a class="dropdown-item" href="exame-fisico/exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-ginecologico.html">Exame Físico Ginecológico</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-mamas.html">Exame Físico das Mamas</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-musculoesqueletico.html">Exame Físico Musculoesquelético</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-nasal.html">Exame Físico Nasal</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-neurologico.html">Exame Físico Neurológico</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-oral.html">Exame Físico Oral (Boca e Orofaringe)</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-otologico.html">Exame Físico Otológico (Ouvido)</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-pele-faneros.html">Exame Físico da Pele e Fâneros</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-pulmonar.html">Exame Físico do Sistema Respiratório</a></li> -->
+                        <li><a class="dropdown-item" href="exame-fisico/radiologia-laudos.html">Modelos de Laudos</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ferramentas externas
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ferramenta-externa/ajuda-pediatria.html">Ajuda Pediatria</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Secreto
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="https://voigt0.github.io/PythonHTML-Questoes-Comentadas/">Banco</a></li>
-                    </ul>
-                </li>
-
             </ul>
-            <form class="d-flex position-relative" role="search" onsubmit="return false;">
-                <input id="buscarInterno" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" autocomplete="off" oninput="filterSuggestions()">
+            <form class="d-flex position-relative me-3" role="search" onsubmit="return false;">
+                <input id="buscarInterno" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" autocomplete="off" oninput="filterSuggestions()" style="min-width: 200px;">
                 <button class="btn btn-success" type="submit">Buscar</button>
 
                 <ul id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3" style="max-height: 300px; overflow-y: auto;"></ul>
             </form>
-            <form class="d-flex" role="search" onsubmit="pesquisar(event)">
-                <input id="searchQuery" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-                <button class="btn btn-success" type="submit">Buscar</button>
-            </form>
         </div>
     </div>
 </nav>
+
+<!-- Offcanvas Sidebar com todas as opções -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header" style="background-color: #00a66c; color: white;">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Completo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Todas as Calculadoras -->
+        <div class="mb-4">
+            <h6 class="text-success fw-bold mb-3">🧮 Todas as Calculadoras</h6>
+            <div class="list-group list-group-flush">
+                <a href="calculadora/imc.html" class="list-group-item list-group-item-action">Índice de Massa Corporal (IMC)</a>
+                <a href="calculadora/tfg.html" class="list-group-item list-group-item-action">Taxa de Filtração Glomerular (TFG)</a>
+                <a href="calculadora/risco-coronariano.html" class="list-group-item list-group-item-action">Risco Cardiovascular</a>
+                <a href="calculadora/ldl.html" class="list-group-item list-group-item-action">Colesterol LDL</a>
+                <a href="calculadora/carga-tabagica.html" class="list-group-item list-group-item-action">Carga Tabágica</a>
+                <a href="calculadora/dpp.html" class="list-group-item list-group-item-action">Data Provável do Parto</a>
+                <a href="calculadora/idade-gestacional.html" class="list-group-item list-group-item-action">Idade Gestacional</a>
+                <a href="calculadora/parkland.html" class="list-group-item list-group-item-action">Ressuscitação Volêmica (Parkland)</a>
+            </div>
+        </div>
+
+        <!-- Especialidades Médicas -->
+        <div class="mb-4">
+            <h6 class="text-success fw-bold mb-3">🩺 Por Especialidade</h6>
+            
+            <!-- Atenção Primária -->
+            <div class="accordion" id="accordionEspecialidades">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAtencao">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAtencao" aria-expanded="false" aria-controls="collapseAtencao">
+                            Atenção Primária
+                        </button>
+                    </h2>
+                    <div id="collapseAtencao" class="accordion-collapse collapse" aria-labelledby="headingAtencao" data-bs-parent="#accordionEspecialidades">
+                        <div class="accordion-body p-2">
+                            <a href="calculadora/imc.html" class="d-block text-decoration-none py-1">• IMC</a>
+                            <a href="calculadora/tfg.html" class="d-block text-decoration-none py-1">• TFG</a>
+                            <a href="calculadora/risco-coronariano.html" class="d-block text-decoration-none py-1">• Risco Cardiovascular</a>
+                            <a href="calculadora/ldl.html" class="d-block text-decoration-none py-1">• Colesterol LDL</a>
+                            <a href="calculadora/carga-tabagica.html" class="d-block text-decoration-none py-1">• Carga Tabágica</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gineco/Obstetrícia -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingGineco">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGineco" aria-expanded="false" aria-controls="collapseGineco">
+                            Ginecologia/Obstetrícia
+                        </button>
+                    </h2>
+                    <div id="collapseGineco" class="accordion-collapse collapse" aria-labelledby="headingGineco" data-bs-parent="#accordionEspecialidades">
+                        <div class="accordion-body p-2">
+                            <a href="calculadora/dpp.html" class="d-block text-decoration-none py-1">• Data Provável do Parto</a>
+                            <a href="calculadora/idade-gestacional.html" class="d-block text-decoration-none py-1">• Idade Gestacional</a>
+                            <a href="exame-fisico/exame-fisico-ginecologico.html" class="d-block text-decoration-none py-1">• Exame Ginecológico</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pediatria -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingPediatria">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePediatria" aria-expanded="false" aria-controls="collapsePediatria">
+                            Pediatria
+                        </button>
+                    </h2>
+                    <div id="collapsePediatria" class="accordion-collapse collapse" aria-labelledby="headingPediatria" data-bs-parent="#accordionEspecialidades">
+                        <div class="accordion-body p-2">
+                            <span class="text-muted">Em desenvolvimento...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ferramentas do Prontuário -->
+        <div class="mb-4">
+            <h6 class="text-success fw-bold mb-3">📋 Prontuário</h6>
+            <div class="list-group list-group-flush">
+                <a href="exame-fisico/exame-fisico-geral.html" class="list-group-item list-group-item-action">Exame Físico Geral</a>
+                <a href="exame-fisico/remedios.html" class="list-group-item list-group-item-action">Formatar Medicações IPM</a>
+                <a href="exame-fisico/radiologia-laudos.html" class="list-group-item list-group-item-action">Modelos de Laudos Radiologia</a>
+            </div>
+        </div>
+
+        <!-- Ferramentas Externas -->
+        <div class="mb-4">
+            <h6 class="text-success fw-bold mb-3">🔗 Ferramentas Externas</h6>
+            <div class="list-group list-group-flush">
+                <a href="ferramenta-externa/ajuda-pediatria.html" class="list-group-item list-group-item-action">Ajuda Pediatria</a>
+                <a href="https://voigt0.github.io/PythonHTML-Questoes-Comentadas/" class="list-group-item list-group-item-action" target="_blank">Banco de Questões</a>
+            </div>
+        </div>
+    </div>
+</div>

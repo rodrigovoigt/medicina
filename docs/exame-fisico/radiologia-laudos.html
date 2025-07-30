@@ -8,6 +8,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous"/>  
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -57,220 +60,249 @@
         <!-- Seção para a Exame Físico Geral -->
         <div class="justify-content-center">
             <section class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Modelos de Exames Físicos e Complementares</h4>
-                <label class="form-label">Quais foram realizados:</label>
-                <div class="accordion" id="">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoEstadoGeral" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral" hidden>
-                                Exame físico geral
-                            </label>
-                        </h2>
-                        <div id="collapse1" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoLabs" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoLabs" hidden>
-                                Exames laboratoriais
-                            </label>
-                        </h2>
-                        <div id="collapse2" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoTorax" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoTorax" hidden>
-                                Exame físico pulmonar
-                            </label>
-                        </h2>
-                        <div id="collapse3" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoCardio" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoCardio" hidden>
-                                Exame físico cardiovascular
-                            </label>
-                        </h2>
-                        <div id="collapse3" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoPele" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoPele" hidden>
-                                Exame físico de pele
-                            </label>
-                        </h2>
-                        <div id="collapse4" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoAbdomen" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomen" hidden>
-                                Exame físico abdominal
-                            </label>
-                        </h2>
-                        <div id="collapse5" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoNeuro" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoNeuro" hidden>
-                                Exame físico neurológico
-                            </label>
-                        </h2>
-                        <div id="collapse6" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoGineco" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoGineco" hidden>
-                                Exame físico ginecológico
-                            </label>
-                        </h2>
-                        <div id="collapse7" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoOsteoarticular" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticular" hidden>
-                                Exame físico osteoarticular
-                            </label>
-                        </h2>
-                        <div id="collapse8" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                            <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            
-                    <!-- <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral">
-                        <label class="form-check-label" for="exameFisicoEstadoGeral">Estado Geral</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoLabs">
-                        <label class="form-check-label" for="exameFisicoLabs">Exame Laboratorial</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoPele">
-                        <label class="form-check-label" for="exameFisicoPele">Exame físico de pele</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoTorax">
-                        <label class="form-check-label" for="exameFisicoTorax">Exame físico de tórax</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoCardio">
-                        <label class="form-check-label" for="exameFisicoCardio">Exame físico cardiovascular</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomen">
-                        <label class="form-check-label" for="exameFisicoAbdomen">Exame físico abdominal</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoNeuro">
-                        <label class="form-check-label" for="exameFisicoNeuro">Exame físico neurológico</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoGineco">
-                        <label class="form-check-label" for="exameFisicoGineco">Exame físico ginecológico</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticular">
-                        <label class="form-check-label" for="exameFisicoOsteoarticular">Exame físico osteoarticular</label>
-                    </div> -->
-                </div>
-        
+                <h4>Modelos de Laudos Radiogologia e Imaginologia</h4>
+                <h2>Visualizador de Laudos</h2>
+                <label for="selectLaudo">Escolha um modelo:</label>
+                <select class="" id="selectLaudo" onchange="">
+                    <option value=""> -- Selecione --</option>
+                    <optgroup label="Raio-X" data-alias="radiografia,raio x,raiox,raio-x,rx,röntgen,x-ray,imagem,imagem simples,imagem convencional,raios x">
+                        <option value="Raio-x\Abdome - Normal" data-alias="gastro, abdome,abdominal,raio x abdomen,abdome simples">Raio-x\Abdome - Normal</option>
+                        <option value="Raio-x\Abdome - Patologico" data-alias="gastro, abdome,abdominal,raio x abdomen,abdome simples">Raio-x\Abdome - Patologico</option>
+                        <option value="Raio-x\Abdome - PS" data-alias="gastro, abdome,abdominal,raio x abdomen,abdome simples">Raio-x\Abdome - PS</option>
+                        <option value="Raio-x\Cavum - Normal" data-alias="pediatria, cavum, cabeça, crânio, facial, faringe, adenoide, sinusite">Raio-x\Cavum - Normal</option>
+                        <option value="Raio-x\Cavum - Patologico" data-alias="pediatria, cavum, cabeça, crânio, facial, faringe, adenoide, sinusite">Raio-x\Cavum - Patologico</option>
+                        <option value="Raio-x\Coluna Cervical - Incipiente" data-alias="ortopedia, coluna cervical, pescoço, vértebra">Raio-x\Coluna Cervical - Incipiente</option>
+                        <option value="Raio-x\Coluna Cervical - Normal" data-alias="ortopedia, coluna cervical, pescoço, vértebra">Raio-x\Coluna Cervical - Normal</option>
+                        <option value="Raio-x\Coluna Cervical - Patologico" data-alias="ortopedia, coluna cervical, pescoço, vértebra">Raio-x\Coluna Cervical - Patologico</option>
+                        <option value="Raio-x\Coluna Dorsal - Incipiente" data-alias="ortopedia, coluna dorsal, dorso, vértebra, tórax, torácico, costas">Raio-x\Coluna Dorsal - Incipiente</option>
+                        <option value="Raio-x\Coluna Dorsal - Normal" data-alias="ortopedia, coluna dorsal, dorso, vértebra, tórax, torácico, costas">Raio-x\Coluna Dorsal - Normal</option>
+                        <option value="Raio-x\Coluna Dorsal - Patologico" data-alias="ortopedia, coluna dorsal, dorso, vértebra, tórax, torácico, costas">Raio-x\Coluna Dorsal - Patologico</option>
+                        <option value="Raio-x\Coluna Dorsolombar - Escoliose" data-alias="ortopedia, coluna dorso-lombar, dorso, lombar, vértebra, tórax, torácico, costas">Raio-x\Coluna Dorsolombar - Escoliose</option>
+                        <option value="Raio-x\Coluna Lombar - Incipiente" data-alias="ortopedia, coluna lombar, vértebra, lombalgia, costas">Raio-x\Coluna Lombar - Incipiente</option>
+                        <option value="Raio-x\Coluna Lombar - Normal" data-alias="ortopedia, coluna lombar, vértebra, lombalgia, costas">Raio-x\Coluna Lombar - Normal</option>
+                        <option value="Raio-x\Coluna Lombar - Patologico" data-alias="ortopedia, coluna lombar, vértebra, lombalgia, costas">Raio-x\Coluna Lombar - Patologico</option>
+                        <option value="Raio-x\Coluna Total" data-alias="ortopedia, coluna lombar, vértebra, dorsal, tórax, cervical">Raio-x\Coluna Total</option>
+                        <option value="Raio-x\Crânio" data-alias="cabeça, crânio, facial, ortopedia">Raio-x\Crânio</option>
+                        <option value="Raio-x\Dacriocistografia" data-alias="dacriocistografia">Raio-x\Dacriocistografia</option>
+                        <option value="Raio-x\Densitometria Completa" data-alias="densitometria óssea, ortopedia">Raio-x\Densitometria Completa</option>
+                        <option value="Raio-x\Densitometria Corpo" data-alias="densitometria óssea, ortopedia">Raio-x\Densitometria Corpo</option>
+                        <option value="Raio-x\Densitometria T-Score" data-alias="densitometria óssea, ortopedia, t-score">Raio-x\Densitometria T-Score</option>
+                        <option value="Raio-x\EED - Normal" data-alias="esôfago, estômago, duodeno, gastro">Raio-x\EED - Normal</option>
+                        <option value="Raio-x\EED - Refluxo" data-alias="esôfago, estômago, duodeno, gastro">Raio-x\EED - Refluxo</option>
+                        <option value="Raio-x\Enema opaco" data-alias="cólon, colo, reto, ânus, gastro">Raio-x\Enema opaco</option>
+                        <option value="Raio-x\Escanometria" data-alias="">Raio-x\Escanometria</option>
+                        <option value="Raio-x\Histerosalpingografia" data-alias="útero, tuba, ovário">Raio-x\Histerosalpingografia</option>
+                        <option value="Raio-x\Idade Ossea" data-alias="">Raio-x\Idade Ossea</option>
+                        <option value="Raio-x\MAMA DENSA CALCIF" data-alias="mamografia, ginecológico">Raio-x\MAMA DENSA CALCIF</option>
+                        <option value="Raio-x\MAMA DENSA" data-alias="mamografia, ginecológico">Raio-x\MAMA DENSA</option>
+                        <option value="Raio-x\MAMA LIPO CALCIF" data-alias="mamografia, ginecológico">Raio-x\MAMA LIPO CALCIF</option>
+                        <option value="Raio-x\MAMA LIPO" data-alias="mamografia, ginecológico">Raio-x\MAMA LIPO</option>
+                        <option value="Raio-x\Osso" data-alias="ortopedia">Raio-x\Osso</option>
+                        <option value="Raio-x\Ossos - Arcos Costais" data-alias="ortopedia">Raio-x\Ossos - Arcos Costais</option>
+                        <option value="Raio-x\Ossos - Bacia Patologico" data-alias="ortopedia">Raio-x\Ossos - Bacia Patologico</option>
+                        <option value="Raio-x\Ossos - Bacia" data-alias="ortopedia">Raio-x\Ossos - Bacia</option>
+                        <option value="Raio-x\Ossos - Cotovelo" data-alias="ortopedia">Raio-x\Ossos - Cotovelo</option>
+                        <option value="Raio-x\Ossos - Joelho Patologico" data-alias="ortopedia">Raio-x\Ossos - Joelho Patologico</option>
+                        <option value="Raio-x\Ossos - Joelho" data-alias="ortopedia">Raio-x\Ossos - Joelho</option>
+                        <option value="Raio-x\Ossos - Ombro Patologico" data-alias="ortopedia">Raio-x\Ossos - Ombro Patologico</option>
+                        <option value="Raio-x\Ossos - Ombro" data-alias="ortopedia">Raio-x\Ossos - Ombro</option>
+                        <option value="Raio-x\Ossos - Punho-Mao" data-alias="ortopedia">Raio-x\Ossos - Punho-Mao</option>
+                        <option value="Raio-x\Ossos - Tornozelo Patologico" data-alias="ortopedia">Raio-x\Ossos - Tornozelo Patologico</option>
+                        <option value="Raio-x\Ossos - Tornozelo" data-alias="ortopedia">Raio-x\Ossos - Tornozelo</option>
+                        <option value="Raio-x\SAF - Normal 2 INC" data-alias="">Raio-x\SAF - Normal 2 INC</option>
+                        <option value="Raio-x\SAF - Normal 3 INC" data-alias="">Raio-x\SAF - Normal 3 INC</option>
+                        <option value="Raio-x\SAF - Patologico" data-alias="">Raio-x\SAF - Patologico</option>
+                        <option value="Raio-x\Toracoabdominal - Infantil" data-alias="">Raio-x\Toracoabdominal - Infantil</option>
+                        <option value="Raio-x\Toracoabdominal - SNE" data-alias="">Raio-x\Toracoabdominal - SNE</option>
+                        <option value="Raio-x\Torax - Criança PNM" data-alias="">Raio-x\Torax - Criança PNM</option>
+                        <option value="Raio-x\Torax - Idoso" data-alias="">Raio-x\Torax - Idoso</option>
+                        <option value="Raio-x\Torax - Leito Normal" data-alias="">Raio-x\Torax - Leito Normal</option>
+                        <option value="Raio-x\Torax - Leito" data-alias="">Raio-x\Torax - Leito</option>
+                        <option value="Raio-x\Torax - Normal" data-alias="">Raio-x\Torax - Normal</option>
+                        <option value="Raio-x\Torax - PA" data-alias="">Raio-x\Torax - PA</option>
+                        <option value="Raio-x\Torax - Patologico" data-alias="">Raio-x\Torax - Patologico</option>
+                        <option value="Raio-x\Torax e SAF" data-alias="">Raio-x\Torax e SAF</option>
+                        <option value="Raio-x\Trânsito intestinal" data-alias="gastro">Raio-x\Trânsito intestinal</option>
+                        <option value="Raio-x\Uretrocistografia" data-alias="urinário, bexiga">Raio-x\Uretrocistografia</option>
+                        <option value="Raio-x\Urografia Excretora" data-alias="urinário, bexiga">Raio-x\Urografia Excretora</option>
+                    </optgroup>
+                    <optgroup label="AngioRM" data-alias="angiorressonância, angiografia, arteriografia, RM, ressoância magnética, ressonância nuclear magnética, RNM">
+                        <option value="AngioRM\ARTERIAS CERVICAIS" data-alias="">AngioRM\ARTERIAS CERVICAIS</option>
+                        <option value="AngioRM\POLÍGONO DE WILLIS" data-alias="">AngioRM\POLÍGONO DE WILLIS</option>
+                        <option value="AngioRM\SISTEMA VENOSO CEREBRAL" data-alias="">AngioRM\SISTEMA VENOSO CEREBRAL</option>
+                        <option value="AngioRM\ANEURISMA" data-alias="">AngioRM\ANEURISMA</option>
+                        <option value="AngioRM\AORTA CRIANÇA" data-alias="">AngioRM\AORTA CRIANÇA</option>
+                        <option value="AngioRM\AORTA" data-alias="">AngioRM\AORTA</option>
+                        <option value="AngioRM\ARTERIAS CERVICAIS" data-alias="">AngioRM\ARTERIAS CERVICAIS</option>
+                        <option value="AngioRM\POLÍGONO DE WILLIS" data-alias="">AngioRM\POLÍGONO DE WILLIS</option>
+                        <option value="AngioRM\TORAX" data-alias="">AngioRM\TORAX</option>
+                    </optgroup>
+                    <option value="ColangioRM">ColangioRM</option>
+                    <option value="RM\ABDOME SUPERIOR (FERRO)">RM\ABDOME SUPERIOR (FERRO)</option>
+                    <option value="RM\ABDOME SUPERIOR">RM\ABDOME SUPERIOR</option>
+                    <option value="RM\ABDOME TOTAL FEMININO">RM\ABDOME TOTAL FEMININO</option>
+                    <option value="RM\ABDOME TOTAL MASCULINO">RM\ABDOME TOTAL MASCULINO</option>
+                    <option value="RM\ARTRO OMBRO MODELO">RM\ARTRO OMBRO MODELO</option>
+                    <option value="RM\ARTRO QUADRIL MODELO">RM\ARTRO QUADRIL MODELO</option>
+                    <option value="RM\ATM MODELO">RM\ATM MODELO</option>
+                    <option value="RM\ATM PATOLOGICO">RM\ATM PATOLOGICO</option>
+                    <option value="RM\BACIA MODELO">RM\BACIA MODELO</option>
+                    <option value="RM\CANAL ANAL">RM\CANAL ANAL</option>
+                    <option value="RM\COLUNA CERVICAL MODELO">RM\COLUNA CERVICAL MODELO</option>
+                    <option value="RM\COLUNA CERVICAL PATOLOGICO">RM\COLUNA CERVICAL PATOLOGICO</option>
+                    <option value="RM\COLUNA LOMBAR MODELO">RM\COLUNA LOMBAR MODELO</option>
+                    <option value="RM\COLUNA LOMBAR NOVO PATOLOGICO">RM\COLUNA LOMBAR NOVO PATOLOGICO</option>
+                    <option value="RM\COLUNA TORACICA MODELO">RM\COLUNA TORACICA MODELO</option>
+                    <option value="RM\COLUNA TORACICA PATOLOGICO">RM\COLUNA TORACICA PATOLOGICO</option>
+                    <option value="RM\COTOVELO MODELO">RM\COTOVELO MODELO</option>
+                    <option value="RM\CRANIO CONTRASTE">RM\CRANIO CONTRASTE</option>
+                    <option value="RM\CRANIO FOCOS INESPECIFICOS">RM\CRANIO FOCOS INESPECIFICOS</option>
+                    <option value="RM\CRANIO MICROANG LACUNAS">RM\CRANIO MICROANG LACUNAS</option>
+                    <option value="RM\CRANIO MICROANG REDUCAO VOLUMETRICA">RM\CRANIO MICROANG REDUCAO VOLUMETRICA</option>
+                    <option value="RM\CRANIO PATOLÓGICO">RM\CRANIO PATOLÓGICO</option>
+                    <option value="RM\CRANIO REDUCAO VOLUMETRICA">RM\CRANIO REDUCAO VOLUMETRICA</option>
+                    <option value="RM\CRANIO SEM CONTRASTE">RM\CRANIO SEM CONTRASTE</option>
+                    <option value="RM\DEDO MODELO">RM\DEDO MODELO</option>
+                    <option value="RM\JOELHO MODELO">RM\JOELHO MODELO</option>
+                    <option value="RM\JOELHO PATOLOGICO">RM\JOELHO PATOLOGICO</option>
+                    <option value="RM\MAMAS">RM\MAMAS</option>
+                    <option value="RM\MAO MODELO">RM\MAO MODELO</option>
+                    <option value="RM\MEMBRO OU ARTICULAÇÃO MODELO">RM\MEMBRO OU ARTICULAÇÃO MODELO</option>
+                    <option value="RM\OMBRO MODELO">RM\OMBRO MODELO</option>
+                    <option value="RM\OMBRO PATOLOGICO">RM\OMBRO PATOLOGICO</option>
+                    <option value="RM\ORBITAS">RM\ORBITAS</option>
+                    <option value="RM\OSSOS TEMPORAIS">RM\OSSOS TEMPORAIS</option>
+                    <option value="RM\PELVE FEMININA">RM\PELVE FEMININA</option>
+                    <option value="RM\PELVE MASCULINA">RM\PELVE MASCULINA</option>
+                    <option value="RM\PELVE NEOPLASIA DE RETO">RM\PELVE NEOPLASIA DE RETO</option>
+                    <option value="RM\PESCOCO">RM\PESCOCO</option>
+                    <option value="RM\PLEXO BRAQUIAL MODELO">RM\PLEXO BRAQUIAL MODELO</option>
+                    <option value="RM\PRÓSTATA PI-RADS 2">RM\PRÓSTATA PI-RADS 2</option>
+                    <option value="RM\PRÓSTATA PI-RADS 3">RM\PRÓSTATA PI-RADS 3</option>
+                    <option value="RM\PRÓSTATA PI-RADS 4">RM\PRÓSTATA PI-RADS 4</option>
+                    <option value="RM\PRÓSTATA PI-RADS 5">RM\PRÓSTATA PI-RADS 5</option>
+                    <option value="RM\PUNHO MODELO">RM\PUNHO MODELO</option>
+                    <option value="RM\PÉ e ANTEPÉ MODELO">RM\PÉ e ANTEPÉ MODELO</option>
+                    <option value="RM\PÉ e ANTEPÉ PATOLOGICO">RM\PÉ e ANTEPÉ PATOLOGICO</option>
+                    <option value="RM\QUADRIL MODELO">RM\QUADRIL MODELO</option>
+                    <option value="RM\QUADRIL PATOLOGICO">RM\QUADRIL PATOLOGICO</option>
+                    <option value="RM\RETO">RM\RETO</option>
+                    <option value="RM\SEIOS DA FACE">RM\SEIOS DA FACE</option>
+                    <option value="RM\SELA TURCICA">RM\SELA TURCICA</option>
+                    <option value="RM\TORAX">RM\TORAX</option>
+                    <option value="RM\TORNOZELO  MODELO">RM\TORNOZELO  MODELO</option>
+                    <option value="RM\TORNOZELO PATOLOGICO">RM\TORNOZELO PATOLOGICO</option>
+                    <option value="TC\ABD INF FEMININO">TC\ABD INF FEMININO</option>
+                    <option value="TC\ABD INF MASCULINO">TC\ABD INF MASCULINO</option>
+                    <option value="TC\ABD SUPERIOR">TC\ABD SUPERIOR</option>
+                    <option value="TC\ABD TOT CC PATOL GERAL">TC\ABD TOT CC PATOL GERAL</option>
+                    <option value="TC\ABD TOT FEM CC - Normal">TC\ABD TOT FEM CC - Normal</option>
+                    <option value="TC\ABD TOT FEM CC">TC\ABD TOT FEM CC</option>
+                    <option value="TC\ABD TOT MAS CC - Normal">TC\ABD TOT MAS CC - Normal</option>
+                    <option value="TC\ABD TOT MAS CC">TC\ABD TOT MAS CC</option>
+                    <option value="TC\ABD TOTAL SC - Normal">TC\ABD TOTAL SC - Normal</option>
+                    <option value="TC\ABD TOTAL SC - Patologico">TC\ABD TOTAL SC - Patologico</option>
+                    <option value="TC\COLONOVIRTUAL">TC\COLONOVIRTUAL</option>
+                    <option value="TC\COLUNA - Patologico">TC\COLUNA - Patologico</option>
+                    <option value="TC\COLUNA">TC\COLUNA</option>
+                    <option value="TC\CRANIO CC">TC\CRANIO CC</option>
+                    <option value="TC\CRANIO IDOSO">TC\CRANIO IDOSO</option>
+                    <option value="TC\CRANIO PATOLOGICO COMPLETO">TC\CRANIO PATOLOGICO COMPLETO</option>
+                    <option value="TC\CRANIO SC.">TC\CRANIO SC.</option>
+                    <option value="TC\ENTEROTOMO">TC\ENTEROTOMO</option>
+                    <option value="TC\JOELHO TAGT UNILATERAL">TC\JOELHO TAGT UNILATERAL</option>
+                    <option value="TC\JOELHOS TAGT">TC\JOELHOS TAGT</option>
+                    <option value="TC\MASTOIDE CC">TC\MASTOIDE CC</option>
+                    <option value="TC\MASTOIDE PATOLOGICO">TC\MASTOIDE PATOLOGICO</option>
+                    <option value="TC\MASTOIDE SC">TC\MASTOIDE SC</option>
+                    <option value="TC\MSK">TC\MSK</option>
+                    <option value="TC\ORBITAS">TC\ORBITAS</option>
+                    <option value="TC\PESCOCO">TC\PESCOCO</option>
+                    <option value="TC\SEIOS DA FACE PATOLÓGICO">TC\SEIOS DA FACE PATOLÓGICO</option>
+                    <option value="TC\SEIOS DA FACE">TC\SEIOS DA FACE</option>
+                    <option value="TC\SELA TURCICA">TC\SELA TURCICA</option>
+                    <option value="TC\TORAX CC">TC\TORAX CC</option>
+                    <option value="TC\TORAX COVID-19">TC\TORAX COVID-19</option>
+                    <option value="TC\TORAX PATOLOGICO">TC\TORAX PATOLOGICO</option>
+                    <option value="TC\TORAX SC">TC\TORAX SC</option>
+                    <option value="UroTC Patologico">UroTC Patologico</option>
+                    <option value="UroTC Com Contraste">UroTC Com Contraste</option>
+                    <option value="UroTC Sem Contraste">UroTC Sem Contraste</option>
+                    <option value="UroTC Separado - Patologico">UroTC Separado - Patologico</option>
+                    <option value="USG\BIOPSIA FIGADO">USG\BIOPSIA FIGADO</option>
+                    <option value="USG\BIOPSIA MAMA">USG\BIOPSIA MAMA</option>
+                    <option value="USG\BIOPSIA PAAF">USG\BIOPSIA PAAF</option>
+                    <option value="USG\BIOPSIA PROSTATA">USG\BIOPSIA PROSTATA</option>
+                    <option value="USG\BIOPSIA RIM">USG\BIOPSIA RIM</option>
+                    <option value="USG\ABDOME NORMAL">USG\ABDOME NORMAL</option>
+                    <option value="USG\ABDOME PATOLOGICO.">USG\ABDOME PATOLOGICO.</option>
+                    <option value="USG\ABDOME SUPERIOR PATOLOGICO.">USG\ABDOME SUPERIOR PATOLOGICO.</option>
+                    <option value="USG\ABDOME SUPERIOR">USG\ABDOME SUPERIOR</option>
+                    <option value="USG\ABDOME URGÊNCIA">USG\ABDOME URGÊNCIA</option>
+                    <option value="USG\ABDOME VESICULA E ESTEATOSE">USG\ABDOME VESICULA E ESTEATOSE</option>
+                    <option value="USG\APARELHO URINARIO PATOLOGICO">USG\APARELHO URINARIO PATOLOGICO</option>
+                    <option value="USG\APARELHO URINARIO">USG\APARELHO URINARIO</option>
+                    <option value="USG\BOLSA TESTICULAR DOPPLER PATOLOGICO">USG\BOLSA TESTICULAR DOPPLER PATOLOGICO</option>
+                    <option value="USG\BOLSA TESTICULAR DOPPLER">USG\BOLSA TESTICULAR DOPPLER</option>
+                    <option value="USG\BOLSA TESTICULAR PATOLOGICO">USG\BOLSA TESTICULAR PATOLOGICO</option>
+                    <option value="USG\BOLSA TESTICULAR">USG\BOLSA TESTICULAR</option>
+                    <option value="USG\CAROTIDAS PATOLOGICO">USG\CAROTIDAS PATOLOGICO</option>
+                    <option value="USG\CAROTIDAS">USG\CAROTIDAS</option>
+                    <option value="USG\CERVICAL">USG\CERVICAL</option>
+                    <option value="USG\COLUNA RN">USG\COLUNA RN</option>
+                    <option value="USG\COTOVELO PATOLOGICO">USG\COTOVELO PATOLOGICO</option>
+                    <option value="USG\COTOVELO">USG\COTOVELO</option>
+                    <option value="USG\CRANIO DOPPLER">USG\CRANIO DOPPLER</option>
+                    <option value="USG\CRANIO">USG\CRANIO</option>
+                    <option value="USG\DOPPLER ARTERIAL MMII">USG\DOPPLER ARTERIAL MMII</option>
+                    <option value="USG\DOPPLER ARTERIAS RENAIS">USG\DOPPLER ARTERIAS RENAIS</option>
+                    <option value="USG\DOPPLER VENOSO MI">USG\DOPPLER VENOSO MI</option>
+                    <option value="USG\DOPPLER VENOSO MMII">USG\DOPPLER VENOSO MMII</option>
+                    <option value="USG\JOELHO PATOLOGICO">USG\JOELHO PATOLOGICO</option>
+                    <option value="USG\JOELHO">USG\JOELHO</option>
+                    <option value="USG\MAMAS PATOLOGICO">USG\MAMAS PATOLOGICO</option>
+                    <option value="USG\MAMAS">USG\MAMAS</option>
+                    <option value="USG\MAPEAMENTO VENOSO">USG\MAPEAMENTO VENOSO</option>
+                    <option value="USG\MÃO E DEDO">USG\MÃO E DEDO</option>
+                    <option value="USG\OBST DOPPLER">USG\OBST DOPPLER</option>
+                    <option value="USG\OBST G.O. DOPPLER 2-3 TRIM">USG\OBST G.O. DOPPLER 2-3 TRIM</option>
+                    <option value="USG\OBST G.O. MORF 2 TRIM">USG\OBST G.O. MORF 2 TRIM</option>
+                    <option value="USG\OBST G.O. SIMPLES 2-3 TRIM">USG\OBST G.O. SIMPLES 2-3 TRIM</option>
+                    <option value="USG\OBST G.O. xGEMELAR 2-3 TRIM">USG\OBST G.O. xGEMELAR 2-3 TRIM</option>
+                    <option value="USG\OBST GEMELAR DOPPLER">USG\OBST GEMELAR DOPPLER</option>
+                    <option value="USG\OBST GEMELAR">USG\OBST GEMELAR</option>
+                    <option value="USG\OBST INICIAL">USG\OBST INICIAL</option>
+                    <option value="USG\OBST MORFOLOGICO">USG\OBST MORFOLOGICO</option>
+                    <option value="USG\OBST SEGUNDO TRIM">USG\OBST SEGUNDO TRIM</option>
+                    <option value="USG\OBST TERCEIRO TRIM">USG\OBST TERCEIRO TRIM</option>
+                    <option value="USG\OBST TV">USG\OBST TV</option>
+                    <option value="USG\OMBRO NORMAL">USG\OMBRO NORMAL</option>
+                    <option value="USG\OMBRO PATOLOGICO">USG\OMBRO PATOLOGICO</option>
+                    <option value="USG\PAREDE ABDOMINAL">USG\PAREDE ABDOMINAL</option>
+                    <option value="USG\PARTES MOLES PATOLOGICO">USG\PARTES MOLES PATOLOGICO</option>
+                    <option value="USG\PARTES MOLES">USG\PARTES MOLES</option>
+                    <option value="USG\PELVICO ABD FEM">USG\PELVICO ABD FEM</option>
+                    <option value="USG\PROSTATA ABD NORMAL">USG\PROSTATA ABD NORMAL</option>
+                    <option value="USG\PROSTATA ABD PATOLOGICO">USG\PROSTATA ABD PATOLOGICO</option>
+                    <option value="USG\PROSTATA TRANS-RETAL">USG\PROSTATA TRANS-RETAL</option>
+                    <option value="USG\PUNHO PATOLOGICO">USG\PUNHO PATOLOGICO</option>
+                    <option value="USG\PUNHO">USG\PUNHO</option>
+                    <option value="USG\PÉ">USG\PÉ</option>
+                    <option value="USG\QUADRIL PATOLOGICO">USG\QUADRIL PATOLOGICO</option>
+                    <option value="USG\QUADRIL RN">USG\QUADRIL RN</option>
+                    <option value="USG\QUADRIL">USG\QUADRIL</option>
+                    <option value="USG\REGIÃO INGUINAL PATOLOGICO">USG\REGIÃO INGUINAL PATOLOGICO</option>
+                    <option value="USG\REGIÃO INGUINAL">USG\REGIÃO INGUINAL</option>
+                    <option value="USG\TIREOIDE COM DOPPLER">USG\TIREOIDE COM DOPPLER</option>
+                    <option value="USG\TIREOIDE PATOLOGICO">USG\TIREOIDE PATOLOGICO</option>
+                    <option value="USG\TIREOIDE">USG\TIREOIDE</option>
+                    <option value="USG\TORNOZELO PATOLOGICO">USG\TORNOZELO PATOLOGICO</option>
+                    <option value="USG\TORNOZELO">USG\TORNOZELO</option>
+                    <option value="USG\TRANSVAGINAL MENOPAUSA">USG\TRANSVAGINAL MENOPAUSA</option>
+                    <option value="USG\TRANSVAGINAL MIOMA">USG\TRANSVAGINAL MIOMA</option>
+                    <option value="USG\TRANSVAGINAL NORMAL">USG\TRANSVAGINAL NORMAL</option>
+                    <option value="USG\TÓRAX">USG\TÓRAX</option>
+                </select>
                 <h3>Resumo do Exame:</h3>
                 <pre id="resultado" class="copy-box" onclick="copiarTexto('resultado')">Clique para copiar</pre>
             </section>
