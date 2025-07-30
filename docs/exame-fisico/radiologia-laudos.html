@@ -42,6 +42,37 @@
                 max-width: 100%; /* Garante que a largura da caixa não ultrapasse o limite da tela */
                 overflow-wrap: break-word; /* Garante que palavras longas sejam quebradas */
                 word-break: break-word; /* Impede que o texto estoure a largura da caixa */
+                font-family: 'Courier New', 'Lucida Console', Monaco, monospace; /* Fonte tipo bloco de notas */
+                background-color: #f8f9fa; /* Fundo claro */
+                border: 1px solid #dee2e6; /* Borda sutil */
+                border-radius: 0 0 5px 5px; /* Bordas arredondadas apenas na parte inferior */
+                padding: 15px; /* Espaçamento interno */
+                min-height: 150px; /* Altura mínima */
+                font-size: 14px; /* Tamanho da fonte */
+                line-height: 1.4; /* Espaçamento entre linhas */
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Sombra interna sutil */
+                margin: 0; /* Remove margem padrão do pre */
+                cursor: pointer; /* Indica que é clicável */
+                transition: background-color 0.2s ease;
+            }
+
+            #resultado:hover {
+                background-color: #e9ecef; /* Mudança sutil ao hover */
+            }
+
+            /* Container para o resultado */
+            .resultado-container {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .resultado-header {
+                background-color: #e9ecef;
+                padding: 8px 15px;
+                border-bottom: 1px solid #dee2e6;
+                font-size: 12px;
             }
         </style>
     </head>
@@ -303,8 +334,15 @@
                     <option value="USG\TRANSVAGINAL NORMAL">USG\TRANSVAGINAL NORMAL</option>
                     <option value="USG\TÓRAX">USG\TÓRAX</option>
                 </select>
-                <h3>Resumo do Exame:</h3>
-                <pre id="resultado" class="copy-box" onclick="copiarTexto('resultado')">Clique para copiar</pre>
+                <div class="mt-4">
+                    <h3 class="mb-3">📋 Resumo do Exame:</h3>
+                    <div class="resultado-container">
+                        <div class="resultado-header">
+                            <small class="text-muted">Clique no texto para copiar</small>
+                        </div>
+                        <pre id="resultado" class="copy-box" onclick="copiarTexto('resultado')">Clique para copiar</pre>
+                    </div>
+                </div>
             </section>
         </div>        
         <script src="../js/exame-fisico/radiologia-laudos.js"></script>
