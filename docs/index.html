@@ -25,16 +25,35 @@
                 display: block;
             }
 
-            .card {
-                min-height: 150px; /* Ajuste para parecer mais quadrado */
-                border-radius: 10px; /* Bordas arredondadas suaves */
-                background-color: #00a66c; /* Cor inicial */
-                transition: background-color 0.3s ease; /* Suaviza a troca de cor */
+            /* Novos estilos para o menu reorganizado */
+            .menu-card {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                cursor: pointer;
             }
 
-            /* Efeito hover (mudar cor ao passar o mouse) */
+            .menu-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+            }
+
+            .menu-card .btn {
+                transition: all 0.2s ease;
+            }
+
+            .menu-card:hover .btn {
+                transform: scale(1.05);
+            }
+
+            /* Remove os cards antigos */
+            .card {
+                min-height: 150px;
+                border-radius: 10px;
+                background-color: #00a66c;
+                transition: background-color 0.3s ease;
+            }
+
             .card:hover {
-                background-color: #03cd87; /* Cor ao passar o mouse */
+                background-color: #03cd87;
             }
 
             section {
@@ -58,146 +77,180 @@
                 });
         </script>
 
-        <div class="d-flex justify-content-center">
-        <section id="home" class="active text-center mt-4 bg-white rounded p-4 shadow-sm">
-            <h2>Ferramentas</h2>
-            <br/>
-            <!-- os cards -->
-            <div class="row">
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="exame-fisico/exame-fisico-geral.html" class="list-group-item list-group-item-action p-0 border-0" name="exameFisicoGeralLink">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Exame Físico Geral</h5>
-                            <p class="card-text"></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="exame-fisico/remedios.html" class="list-group-item list-group-item-action p-0 border-0" name="linkFormatarMedicacoes">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <h5 class="card-title stretched-link">Formatar medicações IPM</h5>
-                                <p class="card-text"></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+        <div class="d-flex justify-content-center px-0 px-md-3 px-lg-5">
+        <section id="home" class="active text-center mt-4 bg-white rounded p-4 shadow-sm w-100">
+            <div class="mb-4">
+                <h1 class="text-success mb-2">🏥 DocGO Medical</h1>
+                <p class="text-muted">Ferramentas médicas integradas para estudantes e profissionais</p>
             </div>
+
+            <!-- Menu Principal Organizado -->
             
-            <div class="row">
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="ferramenta-externa/ajuda-pediatria.html" class="list-group-item list-group-item-action p-0 border-0" name="linkAjudaPediatria">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <h5 class="card-title stretched-link">Ajuda Pediatria</h5>
-                                <p class="card-text"></p>
+            <!-- Seção Prontuário e Exame Físico -->
+            <div class="mb-5">
+                <h3 class="text-start mb-3">📋 Prontuário e Documentação</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-success" style="font-size: 2rem;">🩺</i>
                             </div>
+                            <h5 class="card-title mb-2">Exame Físico Geral</h5>
+                            <p class="card-text text-muted small">Modelos completos de exame físico e prontuários</p>
+                            <a href="exame-fisico/exame-fisico-geral.html" class="btn btn-success btn-sm w-100">Acessar</a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="https://voigt0.github.io/PythonHTML-Questoes-Comentadas/" class="list-group-item list-group-item-action p-0 border-0" name="linkBancoSecreto" target="_blank">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <h5 class="card-title stretched-link">Banco</h5>
-                                <p class="card-text"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-success" style="font-size: 2rem;">💊</i>
                             </div>
+                            <h5 class="card-title mb-2">Formatar Medicações</h5>
+                            <p class="card-text text-muted small">Formatador para medicações do IPM</p>
+                            <a href="exame-fisico/remedios.html" class="btn btn-success btn-sm w-100">Acessar</a>
                         </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/ldl.html" class="list-group-item list-group-item-action p-0 border-0" name="linkLDL">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Calculadora de Colesterol LDL</h5>
-                            <p class="card-text"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-success" style="font-size: 2rem;">📄</i>
                             </div>
+                            <h5 class="card-title mb-2">Modelos de Laudos</h5>
+                            <p class="card-text text-muted small">Templates para laudos de radiologia</p>
+                            <a href="exame-fisico/radiologia-laudos.html" class="btn btn-success btn-sm w-100">Acessar</a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/carga-tabagica.html" class="list-group-item list-group-item-action p-0 border-0" name="linkCargaTabagica">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Calculadora da Carga Tabágica</h5>
-                            <p class="card-text"></p>
-                            </div>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/idade-gestacional.html" class="list-group-item list-group-item-action p-0 border-0" name="linkCargaTabagica">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Calculadora da Idade Gestacional</h5>
-                            <p class="card-text"></p>
+            <!-- Seção Calculadoras Médicas -->
+            <div class="mb-5">
+                <h3 class="text-start mb-3">🧮 Calculadoras Médicas</h3>
+                <div class="row g-3">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">⚖️</i>
                             </div>
+                            <h6 class="card-title mb-2">IMC</h6>
+                            <p class="card-text text-muted small">Índice de Massa Corporal</p>
+                            <a href="calculadora/imc.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/dpp.html" class="list-group-item list-group-item-action p-0 border-0" name="#">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Data Provável do Parto</h5>
-                            <p class="card-text"></p>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">🫀</i>
                             </div>
+                            <h6 class="card-title mb-2">Risco Cardiovascular</h6>
+                            <p class="card-text text-muted small">Risco em 10 anos</p>
+                            <a href="calculadora/risco-coronariano.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
                         </div>
-                    </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">🧪</i>
+                            </div>
+                            <h6 class="card-title mb-2">TFG</h6>
+                            <p class="card-text text-muted small">Taxa Filtração Glomerular</p>
+                            <a href="calculadora/tfg.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">🔬</i>
+                            </div>
+                            <h6 class="card-title mb-2">LDL</h6>
+                            <p class="card-text text-muted small">Colesterol LDL</p>
+                            <a href="calculadora/ldl.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">🚬</i>
+                            </div>
+                            <h6 class="card-title mb-2">Carga Tabágica</h6>
+                            <p class="card-text text-muted small">Anos-maço</p>
+                            <a href="calculadora/carga-tabagica.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">🤱</i>
+                            </div>
+                            <h6 class="card-title mb-2">DPP</h6>
+                            <p class="card-text text-muted small">Data Provável do Parto</p>
+                            <a href="calculadora/dpp.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">👶</i>
+                            </div>
+                            <h6 class="card-title mb-2">Idade Gestacional</h6>
+                            <p class="card-text text-muted small">Semanas gestacionais</p>
+                            <a href="calculadora/idade-gestacional.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-warning" style="font-size: 1.5rem;">🔥</i>
+                            </div>
+                            <h6 class="card-title mb-2">Parkland</h6>
+                            <p class="card-text text-muted small">Ressuscitação Volêmica</p>
+                            <a href="calculadora/parkland.html" class="btn btn-outline-success btn-sm w-100">Calcular</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/risco-coronariano.html" class="list-group-item list-group-item-action p-0 border-0" name="linkRiscoCoronariano">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Calculadora de Risco de Dez Anos</h5>
-                            <p class="card-text"></p>
+            <!-- Seção Especialidades -->
+            <div class="mb-5">
+                <h3 class="text-start mb-3">🩺 Especialidades</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-info" style="font-size: 2rem;">👶</i>
                             </div>
+                            <h5 class="card-title mb-2">Sistema de Pediatria</h5>
+                            <p class="card-text text-muted small">Medicamentos, doses e protocolos pediátricos</p>
+                            <a href="pediatria/ajuda-pediatria.html" class="btn btn-info btn-sm w-100">Acessar</a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/tfg.html" class="list-group-item list-group-item-action p-0 border-0" name="linkTFG">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Estimativa da Taxa de Filtração Glomerular</h5>
-                            <p class="card-text"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-info" style="font-size: 2rem;">🩺</i>
                             </div>
+                            <h5 class="card-title mb-2">Ajuda Pediatria</h5>
+                            <p class="card-text text-muted small">Ferramenta de auxílio para consultas pediátricas</p>
+                            <a href="pediatria/ajuda-pediatria.html" class="btn btn-info btn-sm w-100">Acessar</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/imc.html" class="list-group-item list-group-item-action p-0 border-0" name="linkIMC">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Calculadora do Índice de Massa Corporal</h5>
-                            <p class="card-text"></p>
+            <!-- Seção Ferramentas Externas -->
+            <div class="mb-4">
+                <h3 class="text-start mb-3">🔗 Recursos Externos</h3>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
+                            <div class="text-center mb-2">
+                                <i class="text-primary" style="font-size: 2rem;">📚</i>
                             </div>
+                            <h5 class="card-title mb-2">Banco de Questões</h5>
+                            <p class="card-text text-muted small">Questões comentadas para estudo e revisão</p>
+                            <a href="https://voigt0.github.io/PythonHTML-Questoes-Comentadas/" class="btn btn-primary btn-sm w-100" target="_blank">Acessar</a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-12 col-sm-6 mb-3">
-                    <a href="calculadora/parkland.html" class="list-group-item list-group-item-action p-0 border-0" name="#">
-                        <div class="card text-center">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="card-title stretched-link">Ressuscitação volêmica de queimadura em adulto</h5>
-                            <p class="card-text"></p>
-                            </div>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>

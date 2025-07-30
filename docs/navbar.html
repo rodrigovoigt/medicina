@@ -13,7 +13,18 @@
         font-size: 1.1rem;
     }
     
-    /* Estilo do botão do menu lateral */
+                <div class="list-group list-group-flush">
+                <a href="exame-fisico/exame-fisico-geral.html" class="list-group-item list-group-item-action">Exame Físico Geral</a>
+                <a href="exame-fisico/remedios.html" class="list-group-item list-group-item-action">Formatar Medicações IPM</a>
+                <a href="exame-fisico/radiologia-laudos.html" class="list-group-item list-group-item-action">Modelos de Laudos Radiologia</a>
+            </div>
+        </div>
+
+        <!-- Ferramentas Externas -->
+        <div class="mb-4">
+            <h6 class="text-success fw-bold mb-3">🔗 Recursos Externos</h6>
+            <div class="list-group list-group-flush">
+                <a href="pediatria/ajuda-pediatria.html" class="list-group-item list-group-item-action">Ajuda Pediatria</a> botão do menu lateral */
     .btn-outline-light {
         border: 2px solid rgba(255,255,255,0.3);
         color: white;
@@ -31,8 +42,63 @@
     }
     
     .list-group-item-action:hover {
-        background-color: #e3f2fd;
-        color: #00a66c;
+        background-color: #e8f5e8;
+        color: #000;
+    }
+
+    .list-group-item-action {
+        color: #000;
+        text-decoration: none;
+        border: none;
+    }
+
+    .list-group-item-action:focus {
+        background-color: #e8f5e8;
+        color: #000;
+        box-shadow: none;
+    }
+
+    /* Remove efeitos azuis de links */
+    a, a:link, a:visited, a:active {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* Links na navbar principal */
+    .navbar-nav .nav-link {
+        color: rgba(255,255,255,0.95) !important;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: white !important;
+        background-color: rgba(255,255,255,0.1);
+        border-radius: 4px;
+    }
+
+    .navbar-nav .nav-link.active {
+        color: white !important;
+        font-weight: 500;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu .dropdown-item {
+        color: #000;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #e8f5e8;
+        color: #000;
+    }
+
+    /* Links do accordion no offcanvas */
+    .accordion-body a {
+        color: #000;
+        transition: color 0.2s ease;
+    }
+
+    .accordion-body a:hover {
+        color: #000;
+        text-decoration: none;
     }
     
     .accordion-button:focus {
@@ -53,8 +119,9 @@
             padding-right: 0.5rem;
         }
         
-        /* Esconder barra de busca em telas pequenas */
-        .d-flex[role="search"] {
+        /* Esconder barras de busca em telas pequenas */
+        .d-flex[role="search"], 
+        .d-flex[action*="duckduckgo"] {
             display: none !important;
         }
     }
@@ -62,7 +129,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="Logo" /> Voigt Teste Nav!</a>
+        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="Logo" /> Voigt Doc TESTE NAVBAR UNIVERSAL!</a>
         
         <!-- Botão do menu lateral (offcanvas) -->
         <button class="btn btn-outline-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -104,12 +171,30 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex position-relative me-3" role="search" onsubmit="return false;">
-                <input id="buscarInterno" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" autocomplete="off" oninput="filterSuggestions()" style="min-width: 200px;">
-                <button class="btn btn-success" type="submit">Buscar</button>
+            
+            <!-- Duas opções de busca -->
+            <div class="d-flex gap-2">
+                <!-- Busca interna do site -->
+                <form class="d-flex position-relative" role="search" onsubmit="return false;">
+                    <div class="input-group input-group-sm">
+                        <input id="buscarInterno" class="form-control" type="search" placeholder="Buscar ferramenta..." aria-label="Search" autocomplete="off" oninput="filterSuggestions()" style="min-width: 150px;">
+                        <button class="btn btn-success btn-sm" type="submit" title="Buscar no site">
+                            <small>🔍</small>
+                        </button>
+                    </div>
+                    <ul id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3" style="max-height: 300px; overflow-y: auto;"></ul>
+                </form>
 
-                <ul id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3" style="max-height: 300px; overflow-y: auto;"></ul>
-            </form>
+                <!-- Busca externa (DuckDuckGo) -->
+                <form class="d-flex" action="https://duckduckgo.com/" method="get" target="_blank">
+                    <div class="input-group input-group-sm">
+                        <input name="q" class="form-control" type="search" placeholder="Buscar na web..." aria-label="Web Search" style="min-width: 150px;">
+                        <button class="btn btn-outline-light btn-sm" type="submit" title="Buscar na web">
+                            <small>🌐</small>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
@@ -184,7 +269,7 @@
                     </h2>
                     <div id="collapsePediatria" class="accordion-collapse collapse" aria-labelledby="headingPediatria" data-bs-parent="#accordionEspecialidades">
                         <div class="accordion-body p-2">
-                            <a href="pediatria/index.html" class="d-block text-decoration-none py-1">• Sistema de Pediatria</a>
+                            <a href="pediatria/ajuda-pediatria.html" class="d-block text-decoration-none py-1">• Sistema de Pediatria</a>
                             <span class="text-muted">Outras funcionalidades em desenvolvimento...</span>
                         </div>
                     </div>
