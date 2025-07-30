@@ -59,174 +59,165 @@
             <section class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Modelos de Exames Físicos e Complementares</h4>
                 <label class="form-label">Quais foram realizados:</label>
-                <div class="accordion" id="">
+                <div class="accordion" id="accordionExame">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoEstadoGeral" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral" hidden>
+                        <h2 class="accordion-header" id="headingEstadoGeral">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                                 Exame físico geral
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse1" class="accordion-collapse collapse">
+                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="headingEstadoGeral">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeral">
+                                <label class="form-check-label" for="exameFisicoEstadoGeral">Estado Geral</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralOpcao2">
+                                <label class="form-check-label" for="exameFisicoEstadoGeralOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoLabs" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoLabs" hidden>
+                        <h2 class="accordion-header" id="headingLabs">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                                 Exames laboratoriais
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse2" class="accordion-collapse collapse">
+                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="headingLabs">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoLabs">
+                                <label class="form-check-label" for="exameFisicoLabs">Exames de laboratório</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoLabsOpcao2">
+                                <label class="form-check-label" for="exameFisicoLabsOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoTorax" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoTorax" hidden>
+                        <h2 class="accordion-header" id="headingTorax">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
                                 Exame físico pulmonar
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse3" class="accordion-collapse collapse">
+                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="headingTorax">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoTorax">
+                                <label class="form-check-label" for="exameFisicoTorax">Exame pulmonar</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoToraxOpcao2">
+                                <label class="form-check-label" for="exameFisicoToraxOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoCardio" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoCardio" hidden>
+                        <h2 class="accordion-header" id="headingCardio">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                                 Exame físico cardiovascular
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse3" class="accordion-collapse collapse">
+                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="headingCardio">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoCardio">
+                                <label class="form-check-label" for="exameFisicoCardio">Exame cardiovascular</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoCardioOpcao2">
+                                <label class="form-check-label" for="exameFisicoCardioOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoPele" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoPele" hidden>
+                        <h2 class="accordion-header" id="headingPele">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
                                 Exame físico de pele
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse4" class="accordion-collapse collapse">
+                        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="headingPele">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoPele">
+                                <label class="form-check-label" for="exameFisicoPele">Exame de pele</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoPeleOpcao2">
+                                <label class="form-check-label" for="exameFisicoPeleOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoAbdomen" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomen" hidden>
+                        <h2 class="accordion-header" id="headingAbdomen">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
                                 Exame físico abdominal
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse5" class="accordion-collapse collapse">
+                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="headingAbdomen">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomen">
+                                <label class="form-check-label" for="exameFisicoAbdomen">Exame abdominal</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoAbdomenOpcao2">
+                                <label class="form-check-label" for="exameFisicoAbdomenOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoNeuro" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoNeuro" hidden>
+                        <h2 class="accordion-header" id="headingNeuro">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
                                 Exame físico neurológico
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse6" class="accordion-collapse collapse">
+                        <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="headingNeuro">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoNeuro">
+                                <label class="form-check-label" for="exameFisicoNeuro">Exame neurológico</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoNeuroOpcao2">
+                                <label class="form-check-label" for="exameFisicoNeuroOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoGineco" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoGineco" hidden>
+                        <h2 class="accordion-header" id="headingGineco">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
                                 Exame físico ginecológico
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse7" class="accordion-collapse collapse">
+                        <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="headingGineco">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoGineco">
+                                <label class="form-check-label" for="exameFisicoGineco">Exame ginecológico</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoGinecoOpcao2">
+                                <label class="form-check-label" for="exameFisicoGinecoOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="">
-                            <label for="exameFisicoOsteoarticular" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false">
-                            <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticular" hidden>
+                        <h2 class="accordion-header" id="headingOsteoarticular">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
                                 Exame físico osteoarticular
-                            </label>
+                            </button>
                         </h2>
-                        <div id="collapse8" class="accordion-collapse collapse">
+                        <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="headingOsteoarticular">
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticular">
+                                <label class="form-check-label" for="exameFisicoOsteoarticular">Exame osteoarticular</label>
                             </div>
                             <div class="accordion-body">
-                                <input class="form-check-input exame" type="checkbox" id="exameFisicoEstadoGeralALGUMACOISA">
-                                <label class="form-check-label" for="exameFisicoEstadoGeralALGUMACOISA">Estado Geral</label>
+                                <input class="form-check-input exame" type="checkbox" id="exameFisicoOsteoarticularOpcao2">
+                                <label class="form-check-label" for="exameFisicoOsteoarticularOpcao2">Outra opção</label>
                             </div>
                         </div>
                     </div>

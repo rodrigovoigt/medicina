@@ -17,6 +17,46 @@ $(document).ready(function () {
         copiarTexto($(this).attr('id'));
     });
 
+    // Mapeamento de accordion para o primeiro checkbox de cada seção
+    const accordionCheckboxMap = {
+        'collapse1': 'exameFisicoEstadoGeral',
+        'collapse2': 'exameFisicoLabs', 
+        'collapse3': 'exameFisicoTorax',
+        'collapse4': 'exameFisicoCardio',
+        'collapse5': 'exameFisicoPele',
+        'collapse6': 'exameFisicoAbdomen',
+        'collapse7': 'exameFisicoNeuro',
+        'collapse8': 'exameFisicoGineco',
+        'collapse9': 'exameFisicoOsteoarticular'
+    };
+
+    // Evento para quando accordion abrir
+    $('.accordion-collapse').on('shown.bs.collapse', function () {
+        const collapseId = $(this).attr('id');
+        const checkboxId = accordionCheckboxMap[collapseId];
+        
+        if (checkboxId) {
+            $('#' + checkboxId).prop('checked', true);
+            atualizarTexto(); // Atualiza o texto quando marcar
+        }
+    });
+
+    // Evento para quando accordion fechar
+    $('.accordion-collapse').on('hidden.bs.collapse', function () {
+        const collapseId = $(this).attr('id');
+        const checkboxId = accordionCheckboxMap[collapseId];
+        
+        if (checkboxId) {
+            $('#' + checkboxId).prop('checked', false);
+            atualizarTexto(); // Atualiza o texto quando desmarcar
+        }
+    });
+
+    // Evento para mudanças nos checkboxes individuais
+    $('.exame').on('change', function() {
+        atualizarTexto();
+    });
+
     function atualizarTexto() {
         let textoGerado = [];
 
@@ -43,13 +83,12 @@ $(document).ready(function () {
             textoGerado.push("Exame físico cardiovascular:\nPalpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.\nAusência de turgência jugular.\nIctus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.\nAusência de impulsão paraesternal esquerda.\nAusência de frêmito cardiovascular.\nBulhas rítmicas regulares normofonéticas em dois tempos.\n");
         }
         
-    
         if ($('#exameFisicoAbdomen').is(':checked')) {
             textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
         }
 
         if ($('#exameFisicoNeuro').is(':checked')) {
-            textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
+            textoGerado.push("Exame físico neurológico:\nPaciente consciente e orientado, sem déficits cognitivos aparentes. Pupilas isocóricas e fotorreagentes. Movimentos oculares preservados em todas as direções. Reflexos pupilares direto e consensual presentes. Não há nistagmo ou diplopia. Força muscular grau V/V em todos os grupos musculares testados. Reflexos tendinosos simétricos e normoativos. Coordenação preservada aos testes dedo-nariz e calcanhar-joelho. Marcha normal, sem alterações do equilíbrio.\n");
         }
 
         if ($('#exameFisicoGineco').is(':checked')) {
@@ -63,10 +102,9 @@ $(document).ready(function () {
         let textoFinal = textoGerado.length > 0 ? textoGerado.join("\n") : "Selecione os exames para gerar o texto...";
         $("#resultado").text(textoFinal);
     }
-    
-    $('.exame').change(atualizarTexto);
 
-    
+    // Inicializar o texto
+    atualizarTexto();
     
     $("#textoCopiavel").click(function() {
         let texto = $(this).text();
