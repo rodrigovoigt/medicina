@@ -33,6 +33,48 @@
                 background-color: #e4e4e4;
             }
 
+            /* Estilo melhorado para resultado */
+            #resultado {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                font-family: 'Courier New', 'Lucida Console', Monaco, monospace;
+                background-color: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-radius: 0 0 5px 5px;
+                padding: 15px;
+                min-height: 60px;
+                font-size: 14px;
+                line-height: 1.4;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+                margin: 0;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                display: block;
+            }
+
+            #resultado:hover {
+                background-color: #e9ecef;
+            }
+
+            /* Container para o resultado */
+            .resultado-container {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin-top: 20px;
+            }
+
+            .resultado-header {
+                background-color: #e9ecef;
+                padding: 8px 15px;
+                border-bottom: 1px solid #dee2e6;
+                font-size: 12px;
+            }
+
 
         </style>
     </head>
@@ -97,10 +139,13 @@
             
                   <button id="calcular" type="button" class="btn btn-success">Calcular</button>
                 </form>
-                <br/>
-                <span id="texto1"></span>
-                <span id="resultado" class="mt-3 p-2 bg-light text-dark border rounded"></span>
-                <span id="texto2"></span>
+                
+                <div class="resultado-container">
+                    <div class="resultado-header">
+                        <small class="text-muted">🧬 Resultado da TFG - Clique para copiar</small>
+                    </div>
+                    <div id="resultado"></div>
+                </div>
             </section>
         </div>
 
