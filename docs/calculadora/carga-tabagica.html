@@ -91,6 +91,10 @@
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById("navbar-placeholder").innerHTML = data;
+                    // Executar correção de links após carregar a navbar
+                    if (typeof fixNavbarLinks === 'function') {
+                        fixNavbarLinks();
+                    }
                 });
         </script>
           

@@ -87,7 +87,28 @@
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById("navbar-placeholder").innerHTML = data;
-                });
+                    
+                    // Aguardar um momento maior para o DOM processar completamente
+                    setTimeout(() => {
+                        console.log('Executando correção da navbar...');
+                        // Executar correção de links após carregar a navbar
+                        if (typeof fixNavbarLinks === 'function') {
+                            fixNavbarLinks();
+                            
+                            // Verificação adicional para garantir que as imagens carreguem
+                            setTimeout(() => {
+                                const logoImg = document.querySelector('#navbar-placeholder img[alt*="Logo"]');
+                                if (logoImg && !logoImg.complete) {
+                                    console.log('Forçando reload da logo...');
+                                    const currentSrc = logoImg.src;
+                                    logoImg.src = '';
+                                    logoImg.src = currentSrc;
+                                }
+                            }, 100);
+                        }
+                    }, 300);
+                })
+                .catch(error => console.error('Erro ao carregar navbar:', error));
         </script>
            
         <!-- Seção para a Calculadora de LDL -->
