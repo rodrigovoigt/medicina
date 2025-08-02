@@ -1,4 +1,7 @@
 <style>
+    /* Importar Bootstrap Icons */
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css");
+    
     nav {
         background-color: #00a66c;
     }
@@ -99,6 +102,51 @@
         color: #00a66c;
     }
     
+    /* Estilo das sugestões de busca */
+    #searchSuggestions {
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        background: white;
+        z-index: 1050;
+        margin-top: 2px;
+    }
+    
+    #searchSuggestions .list-group-item {
+        border: none;
+        border-bottom: 1px solid #f8f9fa;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease;
+    }
+    
+    #searchSuggestions .list-group-item:last-child {
+        border-bottom: none;
+        border-radius: 0 0 0.375rem 0.375rem;
+    }
+    
+    #searchSuggestions .list-group-item:first-child {
+        border-radius: 0.375rem 0.375rem 0 0;
+    }
+    
+    #searchSuggestions .list-group-item:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    #searchSuggestions .list-group-item .badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    #searchSuggestions .text-success {
+        font-size: 1.2rem;
+        transition: opacity 0.2s ease;
+    }
+    
+    #searchSuggestions .list-group-item:hover .text-success {
+        opacity: 0.8;
+    }
+    
     /* Responsivo */
     @media (max-width: 991.98px) {
         .navbar-nav .nav-link {
@@ -117,7 +165,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="DocGO Logo" /> Voigt Doc</a>
+        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="DocGO Logo" />DocGO!</a>
         
         <!-- Botão do menu lateral (offcanvas) -->
         <button class="btn btn-outline-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -170,14 +218,14 @@
                             <small>🔍</small>
                         </button>
                     </div>
-                    <ul id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3" style="max-height: 300px; overflow-y: auto;"></ul>
+                    <ul id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3" style="max-height: 300px; overflow-y: auto; display: none;"></ul>
                 </form>
 
-                <!-- Busca externa (DuckDuckGo) -->
-                <form class="d-flex" action="https://duckduckgo.com/" method="get" target="_blank">
+                <!-- Busca externa (DuckDuckGo) com filtros de sites confiáveis -->
+                <form class="d-flex" action="https://duckduckgo.com/" method="get" target="_blank" onsubmit="addMedicalSiteFilter(event)">
                     <div class="input-group input-group-sm">
-                        <input name="q" class="form-control" type="search" placeholder="Buscar na web..." aria-label="Web Search" style="min-width: 150px;">
-                        <button class="btn btn-outline-light btn-sm" type="submit" title="Buscar na web">
+                        <input name="q" id="webSearch" class="form-control" type="search" placeholder="Buscar na web..." aria-label="Web Search" style="min-width: 150px;">
+                        <button class="btn btn-outline-light btn-sm" type="submit" title="Buscar em sites médicos confiáveis">
                             <small>🌐</small>
                         </button>
                     </div>
@@ -186,6 +234,166 @@
         </div>
     </div>
 </nav>
+
+<!-- Script para funcionalidades de busca -->
+<script>
+// Base de dados das páginas do site para busca interna
+const sitePages = [
+    { title: "Índice de Massa Corporal (IMC)", url: "calculadora/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
+    { title: "Taxa de Filtração Glomerular (TFG)", url: "calculadora/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
+    { title: "Risco Cardiovascular", url: "calculadora/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
+    { title: "Colesterol LDL", url: "calculadora/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
+    { title: "Carga Tabágica", url: "calculadora/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo", "tabaco"] },
+    { title: "Data Provável do Parto", url: "calculadora/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação", "naegele"] },
+    { title: "Idade Gestacional", url: "calculadora/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez", "semanas", "dum"] },
+    { title: "Ressuscitação Volêmica (Parkland)", url: "calculadora/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
+    { title: "Exame Físico Geral", url: "exame-fisico/exame-fisico-geral.html", category: "Prontuário", keywords: ["exame", "físico", "geral", "semiologia"] },
+    { title: "Formatar Medicações IPM", url: "exame-fisico/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar", "prescrição"] },
+    { title: "Modelos de Laudos Radiologia", url: "exame-fisico/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x", "tc", "ressonância"] },
+    { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Especialidade", keywords: ["pediatria", "criança", "pediátrico", "doses"] },
+    { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência", "concurso"] }
+];
+
+// Sites médicos confiáveis para filtrar a busca web
+const trustedMedicalSites = [
+    "pubmed.ncbi.nlm.nih.gov",
+    "uptodate.com",
+    "nejm.org",
+    "bmj.com",
+    "thelancet.com",
+    "jama.jamanetwork.com",
+    "cochrane.org",
+    "who.int",
+    "cdc.gov",
+    "anvisa.gov.br",
+    "portal.cfm.org.br",
+    "scielo.br",
+    "rmmg.org",
+    "rbcp.org.br",
+    "sciencedirect.com",
+    "nature.com",
+    "medscape.com",
+    "mayoclinic.org",
+    "hopkinsmedicine.org",
+    "msdmanuals.com"
+];
+
+// Função para busca interna do site
+function filterSuggestions() {
+    const query = document.getElementById('buscarInterno').value.toLowerCase().trim();
+    const suggestions = document.getElementById('searchSuggestions');
+    
+    if (query.length < 2) {
+        suggestions.innerHTML = '';
+        suggestions.style.display = 'none';
+        return;
+    }
+    
+    const filteredPages = sitePages.filter(page => {
+        return page.title.toLowerCase().includes(query) ||
+               page.category.toLowerCase().includes(query) ||
+               page.keywords.some(keyword => keyword.includes(query));
+    });
+    
+    if (filteredPages.length === 0) {
+        suggestions.innerHTML = '<li class="list-group-item text-muted text-center py-3"><i class="bi bi-search"></i> Nenhum resultado encontrado</li>';
+    } else {
+        suggestions.innerHTML = filteredPages.slice(0, 6).map(page => {
+            // Definir cor do badge baseado na categoria
+            let badgeColor = 'secondary';
+            switch(page.category) {
+                case 'Calculadora': badgeColor = 'primary'; break;
+                case 'Prontuário': badgeColor = 'success'; break;
+                case 'Especialidade': badgeColor = 'info'; break;
+                case 'Externa': badgeColor = 'warning'; break;
+            }
+            
+            return `<li class="list-group-item list-group-item-action" onclick="navigateToPage('${page.url}')" style="cursor: pointer;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <strong class="text-dark">${page.title}</strong>
+                            <span class="badge bg-${badgeColor} text-white">${page.category}</span>
+                        </div>
+                        <small class="text-muted">
+                            <i class="bi bi-tags-fill me-1"></i>
+                            ${page.keywords.slice(0, 3).join(', ')}
+                        </small>
+                    </div>
+                    <div class="text-success fw-bold">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                </div>
+            </li>`;
+        }).join('');
+    }
+    
+    suggestions.style.display = 'block';
+}
+
+// Função para navegar para página selecionada
+function navigateToPage(url) {
+    if (url.startsWith('http')) {
+        window.open(url, '_blank');
+    } else {
+        window.location.href = url;
+    }
+    document.getElementById('searchSuggestions').style.display = 'none';
+    document.getElementById('buscarInterno').value = '';
+}
+
+// Função para adicionar filtro de sites médicos à busca web
+function addMedicalSiteFilter(event) {
+    const searchInput = document.getElementById('webSearch');
+    const query = searchInput.value.trim();
+    
+    if (query) {
+        // Criar um input hidden com a consulta filtrada
+        const form = event.target;
+        
+        // Remove input hidden anterior se existir
+        const existingHidden = form.querySelector('input[name="q"][type="hidden"]');
+        if (existingHidden) {
+            existingHidden.remove();
+        }
+        
+        // Criar novo input hidden com a consulta filtrada
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'q';
+        
+        // Adicionar filtro de sites confiáveis à consulta
+        const siteFilter = trustedMedicalSites.map(site => `site:${site}`).join(' OR ');
+        hiddenInput.value = `${query} (${siteFilter})`;
+        
+        form.appendChild(hiddenInput);
+        
+        // Limpar o campo visível para não mostrar a consulta complexa
+        searchInput.name = 'q_visible';
+    }
+}
+
+// Fechar sugestões ao clicar fora
+document.addEventListener('click', function(event) {
+    const searchContainer = event.target.closest('.position-relative');
+    if (!searchContainer) {
+        document.getElementById('searchSuggestions').style.display = 'none';
+    }
+});
+
+// Navegação por teclado nas sugestões
+document.getElementById('buscarInterno').addEventListener('keydown', function(event) {
+    const suggestions = document.getElementById('searchSuggestions');
+    const items = suggestions.querySelectorAll('.list-group-item-action');
+    
+    if (event.key === 'Enter' && items.length > 0) {
+        event.preventDefault();
+        items[0].click();
+    } else if (event.key === 'Escape') {
+        suggestions.style.display = 'none';
+    }
+});
+</script>
 
 <!-- Offcanvas Sidebar com todas as opções -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -280,7 +488,7 @@
             <h6 class="text-success fw-bold mb-3">🔗 Ferramentas Externas</h6>
             <div class="list-group list-group-flush">
                 <a href="ferramenta-externa/ajuda-pediatria.html" class="list-group-item list-group-item-action">Ajuda Pediatria</a>
-                <a href="https://voigt0.github.io/PythonHTML-Questoes-Comentadas/" class="list-group-item list-group-item-action" target="_blank">Banco de Questões</a>
+                <a href="https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/" class="list-group-item list-group-item-action" target="_blank">Banco de Questões</a>
             </div>
         </div>
     </div>

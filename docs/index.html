@@ -74,6 +74,20 @@
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById("navbar-placeholder").innerHTML = data;
+                    
+                    // Extrair e executar scripts da navbar
+                    const scripts = document.getElementById("navbar-placeholder").querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        document.head.appendChild(newScript);
+                        script.remove(); // Remove o script original para evitar duplicação
+                    });
+                    
                     // Executar correção de links após carregar a navbar
                     if (typeof fixNavbarLinks === 'function') {
                         fixNavbarLinks();
@@ -84,7 +98,7 @@
         <div class="d-flex justify-content-center px-0 px-md-3 px-lg-5">
         <section id="home" class="active text-center mt-4 bg-white rounded p-4 shadow-sm w-100">
             <div class="mb-4">
-                <h1 class="text-success mb-2">🏥 DocGO Medical</h1>
+                <h1 class="text-success mb-2">🏥 DocGO!</h1>
                 <p class="text-muted">Ferramentas médicas integradas para estudantes e profissionais</p>
             </div>
 
@@ -260,7 +274,7 @@
                 <h3 class="text-start mb-3">🔗 Recursos Externos</h3>
                 <div class="row g-3">
                     <div class="col-md-12">
-                        <a href="https://voigt0.github.io/PythonHTML-Questoes-Comentadas/" class="text-decoration-none" target="_blank">
+                        <a href="https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/" class="text-decoration-none" target="_blank">
                             <div class="menu-card h-100 p-3 border rounded shadow-sm bg-light">
                                 <div class="text-center mb-2">
                                     <i class="text-primary" style="font-size: 2rem;">📚</i>
