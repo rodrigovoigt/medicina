@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             Exame físico
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/exame-fisico/exame-fisico-geral.html">Exame Físico Geral</a></li>
+                            <li><a class="dropdown-item" href="/prontuario/consulta-geral.html">Consulta Geral</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/exame-fisico/exame-fisico-abdomen.html">Exame Físico do Abdômen</a></li>
                             <li><a class="dropdown-item" href="/exame-fisico/exame-fisico-cardiovascular.html">Exame Físico Cardiovascular</a></li>

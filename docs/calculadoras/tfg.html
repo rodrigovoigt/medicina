@@ -81,7 +81,7 @@
     <body>
         <div id="navbar-placeholder"></div>
 
-        <script src="../js/navbar-loader.js" defer></script>
+        <script src="../assets/js/navbar-loader.js" defer></script>
         <script>
             fetch("../navbar.html")
                 .then(res => res.text())
@@ -92,46 +92,74 @@
                         fixNavbarLinks();
                     }
                 });
+                
+            // Garantir que a correção rode quando a página estiver totalmente carregada
+            window.addEventListener('load', function() {
+                if (typeof fixNavbarLinks === 'function') {
+                    fixNavbarLinks();
+                }
+            });
         </script>
             
         <!-- Seção para a Calculadora de TFG -->
         <div class="d-flex justify-content-center">
             <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Ressuscitação volêmica de queimadura em adulto</h4>
+                <h4>Estimativa da Taxa de Filtração Glomerular pela Fórmula CKD-EPI</h4>
                 <form>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="quantidadeMl">Escolha o número de ml:</span>
-                        <select id="quantidadeMl" class="form-control">
-                            <option value="2">2ml</option>
-                            <option value="3">3ml</option>
-                            <option value="4">4ml</option>
-                        </select>
-                    </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" for="idade">Idade:</span>
+                    <input type="number" id="idade" name="idade" required min="0" class="form-control" placeholder="Ex: 10">
+                  </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Peso (kg):</span>
-                        <input type="number" id="peso" class="form-control" required min="1" placeholder="Ex: 70">
-                    </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" for="creatinina">Creatinina Sérica (mg/dL):</span>
+                    <input type="number" id="creatinina" name="creatinina" required min="0" class="form-control" placeholder="Ex: 0.8">
+                  </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">% Superfície Corporal Queimada:</span>
-                        <input type="number" id="scq" class="form-control" required min="1" max="100" placeholder="Ex: 30">
+                  <div class="mb-3">
+                    <label class="form-label">Sexo:</label>
+                    <div class="form-check">
+                        <label class="form-check-label" for="sexoMasculino">
+                            <input class="form-check-input bg-success border-success me-2" type="radio" name="sexo" id="sexoMasculino" value="masculino">
+                            Masculino
+                        </label>
                     </div>
-                    <br><br>
-                    <img src="../assets/img/calculadora/scq.jpg" width="100%">
-                    <br><br>
+                    <div class="form-check">
+                        <label class="form-check-label" for="sexoFeminino">
+                            <input class="form-check-input bg-success border-success me-2" type="radio" name="sexo" id="sexoFeminino" value="feminino" checked>
+                            Feminino
+                        </label>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Etnia:</label>
+                    <div class="form-check">
+                        <label class="form-check-label" for="etniaBranco">
+                            <input class="form-check-input bg-success border-success me-2" type="radio" name="etnia" id="etniaBranco" value="branco">
+                            Branco
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="etniaNegro">
+                            <input class="form-check-input bg-success border-success me-2" type="radio" name="etnia" id="etniaNegro" value="negro" checked>
+                            Negro
+                        </label>
+                    </div>
+                  </div>
+            
                   <button id="calcular" type="button" class="btn btn-success">Calcular</button>
                 </form>
                 
                 <div class="resultado-container">
                     <div class="resultado-header">
-                        <small class="text-muted">🔥 Resultado da Fórmula Parkland - Clique para copiar</small>
+                        <small class="text-muted">🧬 Resultado da TFG - Clique para copiar</small>
                     </div>
                     <div id="resultado"></div>
                 </div>
             </section>
         </div>
 
-        <script src="../js/calculadora/parkland.js"></script>
+        <script src="../assets/js/calculadoras/tfg.js"></script>
     </body>
 </html>

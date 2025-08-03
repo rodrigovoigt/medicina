@@ -31,7 +31,7 @@ function lerFormula (tipo, i) {
         "nomeComercial": ["NAN AR", "Aptamil AR"],
         "precoMedio": [42, 44],
         "marca": ["NESTLÉ", "DANONE"],
-        "imagem": ["nan-ar", "aptamil-ar"],
+        "imagem": ["nan-ar", "nan-ar"],
     }
     
     var NanAR = ["Proteína: 1.2g/100mL", "Carboidrato: 7.6g/100mL", "Amido pré-gelatinizado", "Lipídio: 3.5g/100mL", "DHA/ARA", "Baixa Osmolaridade"];
@@ -55,7 +55,7 @@ function lerFormula (tipo, i) {
         "nomeComercial": ["NAN Soy", "Aptamil Soja 2"],
         "precoMedio": [70, 62],
         "marca": ["NESTLÉ", "DANONE"],
-        "imagem": ["nan-soy", "aptamil-soja"],
+        "imagem": ["nan-soy", "nan-soy"],
     }
     
     var NanSoy = ["Proteína: 1.8g/100mL", "Carboidrato: 7.3g/100mL", "100% Maltodextrina", "Lipídio: 3.4g/100mL", "DHA/ARA"];
@@ -67,7 +67,7 @@ function lerFormula (tipo, i) {
         "nomeComercial": ["Nan Supreme 2", "Nan Comfor 2", "Nestogeno 2", "Aptamil Premium 2", "Milupa 2"],
         "precoMedio": [50, 37, 31, 36, 28],
         "marca": ["NESTLÉ", "NESTLÉ", "NESTLÉ", "DANONE", "DANONE"],
-        "imagem": ["nan2-supreme", "nan2-comfor", "nestogeno2", "aptamil2", "milupa2"],
+        "imagem": ["nan2-supreme", "nan2-comfor", "nestogeno2", "aptamil1", "milupa1"],
     }
     
     var NanSupreme2 = ["Proteína: 1.5g/100mL", "Carboidrato: 8.3g/100mL", "100% Lactose", "Lipídio: 3.1g/100mL", "DHA/ARA", "Nucleotídeos", "Proteína Nestlé® (parcialmente hidrolisada)"];
@@ -87,7 +87,7 @@ function lerFormula (tipo, i) {
         idade =  "0 - 6<br/><span>MESES</span>";
         precoMedio = "R$ " + formulasPartida["precoMedio"][i] + "<br/><span>PREÇO MÉDIO</span>";
         marca = formulasPartida["marca"][i] + "<br/><span>MARCA</span>";
-        imagem = "<img src='assets/imagens/formulas/" + formulasPartida["imagem"][i] + ".jpg' />";
+        imagem = "<img src='../assets/imagens/formulas/" + formulasPartida["imagem"][i] + ".jpg' />";
         numFormulas = formulasPartida["nomeComercial"].length;
         
         switch(nomeComercial) {
@@ -111,7 +111,7 @@ function lerFormula (tipo, i) {
         idade =  "ACIMA DE 6<br/><span>MESES</span>";
         precoMedio = "R$ " + formulasSeguimento["precoMedio"][i] + "<br/><span>PREÇO MÉDIO</span>";
         marca = formulasSeguimento["marca"][i] + "<br/><span>MARCA</span>";
-        imagem = "<img src='assets/imagens/formulas/" + formulasSeguimento["imagem"][i] + ".jpg' />";
+        imagem = "<img src='../assets/imagens/formulas/" + formulasSeguimento["imagem"][i] + ".jpg' />";
         numFormulas = formulasSeguimento["nomeComercial"].length;
         
         switch(nomeComercial) {
@@ -135,7 +135,7 @@ function lerFormula (tipo, i) {
         idade =  "PREMATUROS<br/><span>BAIXO PESO</span>";
         precoMedio = "R$ " + formulasPrematuro["precoMedio"][i] + "<br/><span>PREÇO MÉDIO</span>";
         marca = formulasPrematuro["marca"][i] + "<br/><span>MARCA</span>";
-        imagem = "<img src='assets/imagens/formulas/" + formulasPrematuro["imagem"][i] + ".jpg' />";
+        imagem = "<img src='../assets/imagens/formulas/" + formulasPrematuro["imagem"][i] + ".jpg' />";
         numFormulas = formulasPrematuro["nomeComercial"].length;
         
         switch(nomeComercial) {
@@ -151,7 +151,7 @@ function lerFormula (tipo, i) {
         idade =  "0 - 24<br/><span>MESES</span>";
         precoMedio = "R$ " + formulasAR["precoMedio"][i] + "<br/><span>PREÇO MÉDIO</span>";
         marca = formulasAR["marca"][i] + "<br/><span>MARCA</span>";
-        imagem = "<img src='assets/imagens/formulas/" + formulasAR["imagem"][i] + ".jpg' />";
+        imagem = "<img src='../assets/imagens/formulas/" + formulasAR["imagem"][i] + ".jpg' />";
         numFormulas = formulasAR["nomeComercial"].length;
         
         switch(nomeComercial) {
@@ -167,7 +167,7 @@ function lerFormula (tipo, i) {
         idade =  "ACIMA DE 6<br/><span>MESES</span>";
         precoMedio = "R$ " + formulasSoja["precoMedio"][i] + "<br/><span>PREÇO MÉDIO</span>";
         marca = formulasSoja["marca"][i] + "<br/><span>MARCA</span>";
-        imagem = "<img src='assets/imagens/formulas/" + formulasSoja["imagem"][i] + ".jpg' />";
+        imagem = "<img src='../assets/imagens/formulas/" + formulasSoja["imagem"][i] + ".jpg' />";
         numFormulas = formulasSoja["nomeComercial"].length;
         
         switch(nomeComercial) {
@@ -183,7 +183,7 @@ function lerFormula (tipo, i) {
         idade =  "0 - 24<br/><span>MESES</span>";
         precoMedio = "R$ " + formulasHA["precoMedio"][i] + "<br/><span>PREÇO MÉDIO</span>";
         marca = formulasHA["marca"][i] + "<br/><span>MARCA</span>";
-        imagem = "<img src='assets/imagens/formulas/" + formulasHA["imagem"][i] + ".jpg' />";
+        imagem = "<img src='../assets/imagens/formulas/" + formulasHA["imagem"][i] + ".jpg' />";
         numFormulas = formulasHA["nomeComercial"].length;
         
         switch(nomeComercial) {

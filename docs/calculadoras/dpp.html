@@ -82,84 +82,61 @@
     <body>
         <div id="navbar-placeholder"></div>
 
-        <script src="../js/navbar-loader.js" defer></script>
+        <script src="../assets/js/navbar-loader.js" defer></script>
         <script>
             fetch("../navbar.html")
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById("navbar-placeholder").innerHTML = data;
-                    
-                    // Aguardar um momento maior para o DOM processar completamente
-                    setTimeout(() => {
-                        console.log('Executando correção da navbar...');
-                        // Executar correção de links após carregar a navbar
-                        if (typeof fixNavbarLinks === 'function') {
-                            fixNavbarLinks();
-                            
-                            // Verificação adicional para garantir que as imagens carreguem
-                            setTimeout(() => {
-                                const logoImg = document.querySelector('#navbar-placeholder img[alt*="Logo"]');
-                                if (logoImg && !logoImg.complete) {
-                                    console.log('Forçando reload da logo...');
-                                    const currentSrc = logoImg.src;
-                                    logoImg.src = '';
-                                    logoImg.src = currentSrc;
-                                }
-                            }, 100);
-                        }
-                    }, 300);
-                })
-                .catch(error => console.error('Erro ao carregar navbar:', error));
+                    // Executar correção de links após carregar a navbar
+                    if (typeof fixNavbarLinks === 'function') {
+                        fixNavbarLinks();
+                    }
+                });
         </script>
-
+  
         <!-- Seção para a Calculadora de Data Provável do Parto -->
         <div class="d-flex justify-content-center">
             <section id="calculadoraDPP" class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Idade Gestacional</h4>
+                <h4>Calculadora de Data Provável do Parto</h4>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" for="tipoCalculo">Escolha a base para cálculo:</span>
-                    <select id="tipoCalculo" class="form-control">
+                    <span class="input-group-text" for="tipoData">Escolha a base para cálculo:</span>
+                    <select id="tipoData" name="tipoData" class="form-control">
                         <option value="dum">Data da Última Menstruação (DUM)</option>
-                        <option value="exame">Data de um Exame Anterior</option>
-                        <option value="dpp">Data Provável do Parto (DPP)</option>
+                        <option value="ultrassom">Data do Último Ultrassom</option>
                     </select>
                 </div>
-        
-                <!-- Input para DUM -->
+                
                 <div class="input-group mb-3" id="inputDUM">
-                    <span class="input-group-text">Data da Última Menstruação (DUM):</span>
-                    <input type="date" id="dataDUM" class="form-control">
+                    <span class="input-group-text" for="dataDUM">Data da Última Menstruação (DUM):</span>
+                    <input type="date" id="dataDUM" name="dataDUM" class="form-control">
                 </div>
-        
-                <!-- Inputs para Exame Anterior -->
-                <div id="inputExame" style="display: none;">
+                
+                <div id="inputUltimoUltra" style="display:none;">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Data do Exame Anterior:</span>
-                        <input type="date" id="dataExame" class="form-control">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Idade Gestacional na Época (semanas.dias):</span>
-                        <input type="text" id="idadeGestacionalExame" class="form-control" placeholder="Ex: 12.3 para 12 semanas e 3 dias">
+                        <span class="input-group-text" for="dataUltimoUltra">Data do Último Ultrassom:</span>
+                        <input type="date" id="dataUltimoUltra" name="dataUltimoUltra" class="form-control">
                     </div>
                 </div>
-        
-                <!-- Input para DPP -->
-                <div class="input-group mb-3" id="inputDPP" style="display: none;">
-                    <span class="input-group-text">Data Provável do Parto (DPP):</span>
-                    <input type="date" id="dataDPP" class="form-control">
+                
+                <div id="inputIdadeGestacional" style="display:none;">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="idadeGestacional">Idade Gestacional (semanas.dias):</span>
+                        <input type="text" id="idadeGestacional" name="idadeGestacional" class="form-control" placeholder="Ex: 12.3 para 12 semanas e 3 dias">
+                    </div>
                 </div>
-        
-                <button id="calcular" type="button" class="btn btn-success">Calcular Idade Gestacional</button>
-        
+                
+                <button id="calcular" type="button" class="btn btn-success">Calcular DPP</button>
+                
                 <div class="resultado-container">
                     <div class="resultado-header">
-                        <small class="text-muted">🤰 Resultado da Idade Gestacional - Clique para copiar</small>
+                        <small class="text-muted">📅 Resultado da DPP - Clique para copiar</small>
                     </div>
                     <div id="resultado" data-copy>Clique para copiar o resultado</div>
                 </div>
             </section>
         </div>
 
-        <script src="../js/calculadora/idade-gestacional.js"></script>
+        <script src="../assets/js/calculadoras/dpp.js"></script>
     </body>
 </html>

@@ -187,14 +187,14 @@
                         Calculadoras
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="calculadora/imc.html">Índice de Massa Corporal (IMC)</a></li>
-                        <li><a class="dropdown-item" href="calculadora/tfg.html">Taxa de Filtração Glomerular (TFG)</a></li>
-                        <li><a class="dropdown-item" href="calculadora/risco-coronariano.html">Risco Cardiovascular</a></li>
-                        <li><a class="dropdown-item" href="calculadora/ldl.html">Colesterol LDL</a></li>
-                        <li><a class="dropdown-item" href="calculadora/carga-tabagica.html">Carga Tabágica</a></li>
-                        <li><a class="dropdown-item" href="calculadora/dpp.html">Data Provável do Parto</a></li>
-                        <li><a class="dropdown-item" href="calculadora/idade-gestacional.html">Idade Gestacional</a></li>
-                        <li><a class="dropdown-item" href="calculadora/parkland.html">Ressuscitação Volêmica (Parkland)</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/imc.html">Índice de Massa Corporal (IMC)</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/tfg.html">Taxa de Filtração Glomerular (TFG)</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/risco-coronariano.html">Risco Cardiovascular</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/ldl.html">Colesterol LDL</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/carga-tabagica.html">Carga Tabágica</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/dpp.html">Data Provável do Parto</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/idade-gestacional.html">Idade Gestacional</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/parkland.html">Ressuscitação Volêmica (Parkland)</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -202,8 +202,9 @@
                         Prontuário
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="exame-fisico/exame-fisico-geral.html">Exame Físico Geral</a></li>
-                        <li><a class="dropdown-item" href="exame-fisico/radiologia-laudos.html">Modelos de Laudos</a></li>
+                        <li><a class="dropdown-item" href="prontuario/consulta-geral.html">Consulta Geral</a></li>
+                        <li><a class="dropdown-item" href="prontuario/remedios.html">Formatar Remédios IPM Sistemas</a></li>
+                        <li><a class="dropdown-item" href="prontuario/radiologia-laudos.html">Modelos de Laudos</a></li>
                     </ul>
                 </li>
             </ul>
@@ -239,17 +240,17 @@
 <script>
 // Base de dados das páginas do site para busca interna
 const sitePages = [
-    { title: "Índice de Massa Corporal (IMC)", url: "calculadora/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
-    { title: "Taxa de Filtração Glomerular (TFG)", url: "calculadora/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
-    { title: "Risco Cardiovascular", url: "calculadora/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
-    { title: "Colesterol LDL", url: "calculadora/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
-    { title: "Carga Tabágica", url: "calculadora/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo", "tabaco"] },
-    { title: "Data Provável do Parto", url: "calculadora/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação", "naegele"] },
-    { title: "Idade Gestacional", url: "calculadora/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez", "semanas", "dum"] },
-    { title: "Ressuscitação Volêmica (Parkland)", url: "calculadora/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
-    { title: "Exame Físico Geral", url: "exame-fisico/exame-fisico-geral.html", category: "Prontuário", keywords: ["exame", "físico", "geral", "semiologia"] },
-    { title: "Formatar Medicações IPM", url: "exame-fisico/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar", "prescrição"] },
-    { title: "Modelos de Laudos Radiologia", url: "exame-fisico/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x", "tc", "ressonância"] },
+    { title: "Índice de Massa Corporal (IMC)", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
+    { title: "Taxa de Filtração Glomerular (TFG)", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
+    { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
+    { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
+    { title: "Carga Tabágica", url: "calculadoras/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo", "tabaco"] },
+    { title: "Data Provável do Parto", url: "calculadoras/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação", "naegele"] },
+    { title: "Idade Gestacional", url: "calculadoras/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez", "semanas", "dum"] },
+    { title: "Ressuscitação Volêmica (Parkland)", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
+    { title: "Consulta Geral", url: "prontuario/consulta-geral.html", category: "Prontuário", keywords: ["consulta", "geral", "exame", "físico", "semiologia"] },
+    { title: "Formatar Medicações IPM", url: "prontuario/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar", "prescrição"] },
+    { title: "Modelos de Laudos Radiologia", url: "prontuario/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x", "tc", "ressonância"] },
     { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Especialidade", keywords: ["pediatria", "criança", "pediátrico", "doses"] },
     { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência", "concurso"] }
 ];
@@ -406,14 +407,14 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
         <div class="mb-4">
             <h6 class="text-success fw-bold mb-3">🧮 Todas as Calculadoras</h6>
             <div class="list-group list-group-flush">
-                <a href="calculadora/imc.html" class="list-group-item list-group-item-action">Índice de Massa Corporal (IMC)</a>
-                <a href="calculadora/tfg.html" class="list-group-item list-group-item-action">Taxa de Filtração Glomerular (TFG)</a>
-                <a href="calculadora/risco-coronariano.html" class="list-group-item list-group-item-action">Risco Cardiovascular</a>
-                <a href="calculadora/ldl.html" class="list-group-item list-group-item-action">Colesterol LDL</a>
-                <a href="calculadora/carga-tabagica.html" class="list-group-item list-group-item-action">Carga Tabágica</a>
-                <a href="calculadora/dpp.html" class="list-group-item list-group-item-action">Data Provável do Parto</a>
-                <a href="calculadora/idade-gestacional.html" class="list-group-item list-group-item-action">Idade Gestacional</a>
-                <a href="calculadora/parkland.html" class="list-group-item list-group-item-action">Ressuscitação Volêmica (Parkland)</a>
+                <a href="calculadoras/imc.html" class="list-group-item list-group-item-action">Índice de Massa Corporal (IMC)</a>
+                <a href="calculadoras/tfg.html" class="list-group-item list-group-item-action">Taxa de Filtração Glomerular (TFG)</a>
+                <a href="calculadoras/risco-coronariano.html" class="list-group-item list-group-item-action">Risco Cardiovascular</a>
+                <a href="calculadoras/ldl.html" class="list-group-item list-group-item-action">Colesterol LDL</a>
+                <a href="calculadoras/carga-tabagica.html" class="list-group-item list-group-item-action">Carga Tabágica</a>
+                <a href="calculadoras/dpp.html" class="list-group-item list-group-item-action">Data Provável do Parto</a>
+                <a href="calculadoras/idade-gestacional.html" class="list-group-item list-group-item-action">Idade Gestacional</a>
+                <a href="calculadoras/parkland.html" class="list-group-item list-group-item-action">Ressuscitação Volêmica (Parkland)</a>
             </div>
         </div>
 
@@ -431,11 +432,11 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
                     </h2>
                     <div id="collapseAtencao" class="accordion-collapse collapse" aria-labelledby="headingAtencao" data-bs-parent="#accordionEspecialidades">
                         <div class="accordion-body p-2">
-                            <a href="calculadora/imc.html" class="d-block text-decoration-none py-1">• IMC</a>
-                            <a href="calculadora/tfg.html" class="d-block text-decoration-none py-1">• TFG</a>
-                            <a href="calculadora/risco-coronariano.html" class="d-block text-decoration-none py-1">• Risco Cardiovascular</a>
-                            <a href="calculadora/ldl.html" class="d-block text-decoration-none py-1">• Colesterol LDL</a>
-                            <a href="calculadora/carga-tabagica.html" class="d-block text-decoration-none py-1">• Carga Tabágica</a>
+                            <a href="calculadoras/imc.html" class="d-block text-decoration-none py-1">• IMC</a>
+                            <a href="calculadoras/tfg.html" class="d-block text-decoration-none py-1">• TFG</a>
+                            <a href="calculadoras/risco-coronariano.html" class="d-block text-decoration-none py-1">• Risco Cardiovascular</a>
+                            <a href="calculadoras/ldl.html" class="d-block text-decoration-none py-1">• Colesterol LDL</a>
+                            <a href="calculadoras/carga-tabagica.html" class="d-block text-decoration-none py-1">• Carga Tabágica</a>
                         </div>
                     </div>
                 </div>
@@ -449,9 +450,9 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
                     </h2>
                     <div id="collapseGineco" class="accordion-collapse collapse" aria-labelledby="headingGineco" data-bs-parent="#accordionEspecialidades">
                         <div class="accordion-body p-2">
-                            <a href="calculadora/dpp.html" class="d-block text-decoration-none py-1">• Data Provável do Parto</a>
-                            <a href="calculadora/idade-gestacional.html" class="d-block text-decoration-none py-1">• Idade Gestacional</a>
-                            <a href="exame-fisico/exame-fisico-ginecologico.html" class="d-block text-decoration-none py-1">• Exame Ginecológico</a>
+                            <a href="calculadoras/dpp.html" class="d-block text-decoration-none py-1">• Data Provável do Parto</a>
+                            <a href="calculadoras/idade-gestacional.html" class="d-block text-decoration-none py-1">• Idade Gestacional</a>
+                            <a href="prontuario/exame-fisico-ginecologico.html" class="d-block text-decoration-none py-1">• Exame Ginecológico</a>
                         </div>
                     </div>
                 </div>
@@ -477,9 +478,9 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
         <div class="mb-4">
             <h6 class="text-success fw-bold mb-3">📋 Prontuário</h6>
             <div class="list-group list-group-flush">
-                <a href="exame-fisico/exame-fisico-geral.html" class="list-group-item list-group-item-action">Exame Físico Geral</a>
-                <a href="exame-fisico/remedios.html" class="list-group-item list-group-item-action">Formatar Medicações IPM</a>
-                <a href="exame-fisico/radiologia-laudos.html" class="list-group-item list-group-item-action">Modelos de Laudos Radiologia</a>
+                <a href="prontuario/consulta-geral.html" class="list-group-item list-group-item-action">Consulta Geral</a>
+                <a href="prontuario/remedios.html" class="list-group-item list-group-item-action">Formatar Medicações IPM</a>
+                <a href="prontuario/radiologia-laudos.html" class="list-group-item list-group-item-action">Modelos de Laudos Radiologia</a>
             </div>
         </div>
 

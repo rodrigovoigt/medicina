@@ -143,6 +143,8 @@
         
         
         
+        
+        
         <!-- ***** [INI] SECTION - MEDICACOES ***** --->
         <section class="section scrollHere" id="lista-suplementacao" style="padding-top: 0px; display: none; background-color: #FFF;">
             <div class="container">
@@ -208,50 +210,6 @@
         
         
         
-        <!-- ***** [INI] RODAPÉ ***** --->
-        <footer>
-            <div class="container">
-                <div class="row infopc">
-                    
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="card h-100">
-                            <img src="../assets/imagens/logo.png" width="195">
-                            <p>Projeto desenvolvido por doutorandos do curso de Medicina da Universidade Federal do Rio Grande do Norte (UFRN) e docentes do Internato de Pediatria.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div class="card h-100">
-                            <h5>Links Úteis</h5>
-                            <ul class="footer-nav">
-                                <li><a href="http://www.sbp.com.br" target="_blank"><i class="fa fa-chevron-right"></i><span>SBP</span></a></li>
-                                <li><a href="https://www.nestlenutrition-institute.org/country/br/" target="_blank"><i class="fa fa-chevron-right"></i><span>Nestlé Nutrition</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div class="card h-100">
-                            <h5>Redes Sociais</h5>
-                            <a href="https://www.facebook.com/pedajuda.med/" target="_blank"><i class="fab fa-facebook-square"></i><p>Facebook</p></a>
-                            <a href="https://www.instagram.com/pedajuda.med" target="_blank"><i class="fab fa-instagram"></i><p>Instagram</p></a>
-                        </div>
-                    </div>
-            
-                </div>
-            
-                <div class="row copyright">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 ">
-                        © 2019 PedAjuda. Todos os Direitos Reservados.
-                    </div>
-                </div>
-                
-            </div>
-        </footer>
-        <!-- ***** [END] RODAPÉ ***** --->
-        
-        
-        
         <!-- [INI] JS -->
         <script src="../assets/js/jquery.js"></script>
         <script src="../assets/js/bootstrap.min.js"></script>
@@ -288,12 +246,20 @@
                 
                 var idade = qtdeDias(data);
                 
-                if(data == "" || peso == "" || peso <= 1000 || maturidade == "" || idade <= 0) {
+                if(data == "" || peso == "" || peso <= 500 || maturidade == "" || idade <= 0) {
                     $(".input-data").addClass('erro');
                     $(".input-data").addClass('erro');
                     $("button.suplementacao").addClass('erro');
                     $("#buttonSuplementar").html('SUPLEMENTAR');
                     $("#lista-suplementacao").css('display', 'none');
+                    
+                    if(peso <= 500) {
+                        swal("Erro de Validação", "O peso deve ser maior que 500 gramas.", "error");
+                    } else if(idade <= 0) {
+                        swal("Erro de Validação", "A data de nascimento deve ser válida.", "error");
+                    } else {
+                        swal("Erro de Validação", "Preencha todos os campos obrigatórios.", "error");
+                    }
                 } else {
                     
                     $("#lista-suplementacao").css('display', 'none');
@@ -306,20 +272,41 @@
                     swal({
                         title: "Recém Nascido Prematuro",
                         text: "Insira o peso da criança ao nascimento (em gramas):",
-                        content: "input",
+                        content: {
+                            element: "input",
+                            attributes: {
+                                placeholder: "Ex: 1800",
+                                type: "number",
+                                min: "500",
+                                max: "4500"
+                            }
+                        },
                         icon: "warning",
-                        buttons: "Confirmar",
-                        dangerMode: true,
+                        buttons: {
+                            cancel: "Cancelar",
+                            confirm: "Confirmar"
+                        },
+                        dangerMode: false,
                     })
                         .then((value) => {
-                            var respostaSuplementacao = suplementacao(idade, peso, maturidade, value);
+                            if (value === null) {
+                                return; // Usuário cancelou
+                            }
+                            
+                            var pesoNascimento = parseInt(value);
+                            if (isNaN(pesoNascimento) || pesoNascimento < 500 || pesoNascimento > 4500) {
+                                swal("Erro", "Peso ao nascer deve estar entre 500g e 4500g", "error");
+                                return;
+                            }
+                            
+                            var respostaSuplementacao = suplementacao(idade, peso, maturidade, pesoNascimento);
                     
                         $("#vitaminaA-box h2").html("Vitamina A + D");
                         $("#vitaminaD-box h2").html("Vitamina C");
                         $("#vitaminaD-icon").html('C');
                         
                         if(respostaSuplementacao[0] == null) {
-                            respostaSuplementacao[0] = "<li> Não há necessidade da suplementação de Vitamina A, devendo ser iniciada após os 6 meses de vida e suspendendo após 6 anos de vida.</li>";
+                            respostaSuplementacao[0] = "<li> Não há necessidade da suplementação de Vitamina A, devendo ser iniciada após os 6 meses de vida.</li>";
                             $("#vitaminaA-lista").html(respostaSuplementacao[0]);
                             $("#vitaminaA-box div").addClass('erro');
                             $("#vitaminaA-box h2").addClass('erro');
@@ -341,13 +328,7 @@
                         }
                     
                         if(respostaSuplementacao[2] == null) {
-                            
-                            if(maturidade == "RNT") {
-                                respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro, devendo ser iniciado ao 3º mês de vida e suspenso aos 2 anos de vida.</li>";    
-                            } else {
-                                respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro, devendo ser iniciado aos 30 dias de vida e suspenso aos 2 anos de vida.</li>";
-                            }
-                            
+                            respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro profilático no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#ferro-lista").html(respostaSuplementacao[2]);
                             $("#ferro-box div").addClass('erro');
                             $("#ferro-box h2").addClass('erro');
@@ -402,7 +383,7 @@
                         var respostaSuplementacao = suplementacao(idade, peso, maturidade, null, 1);
                     
                         if(respostaSuplementacao[0] == null) {
-                            respostaSuplementacao[0] = "<li> Não há necessidade da suplementação de Vitamina A, devendo ser iniciada após os 6 meses de vida e suspendendo após 6 anos de vida.</li>";
+                            respostaSuplementacao[0] = "<li> Não há necessidade da suplementação de Vitamina A no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#vitaminaA-lista").html(respostaSuplementacao[0]);
                             $("#vitaminaA-box div").addClass('erro');
                             $("#vitaminaA-box h2").addClass('erro');
@@ -413,7 +394,7 @@
                         }
                     
                         if(respostaSuplementacao[1] == null) {
-                            respostaSuplementacao[1] = "<li> Não há necessidade da suplementação de Vitamina D, devendo ser iniciada após os 7 dias de vida ou peso superior a 1.500g e suspendendo após 2 anos de vida.</li>";
+                            respostaSuplementacao[1] = "<li> Não há necessidade da suplementação de Vitamina D no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#vitaminaD-lista").html(respostaSuplementacao[1]);
                             $("#vitaminaD-box div").addClass('erro');
                             $("#vitaminaD-box h2").addClass('erro');
@@ -424,13 +405,7 @@
                         }
                     
                         if(respostaSuplementacao[2] == null) {
-                            
-                            if(maturidade == "RNT") {
-                                respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro.</li>";    
-                            } else {
-                                respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro.</li>";
-                            }
-                            
+                            respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro profilático no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#ferro-lista").html(respostaSuplementacao[2]);
                             $("#ferro-box div").addClass('erro');
                             $("#ferro-box h2").addClass('erro');
@@ -456,7 +431,7 @@
                         var respostaSuplementacao = suplementacao(idade, peso, maturidade, null, null);
                     
                         if(respostaSuplementacao[0] == null) {
-                            respostaSuplementacao[0] = "<li> Não há necessidade da suplementação de Vitamina A, devendo ser iniciada após os 6 meses de vida e suspendendo após 6 anos de vida.</li>";
+                            respostaSuplementacao[0] = "<li> Não há necessidade da suplementação de Vitamina A no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#vitaminaA-lista").html(respostaSuplementacao[0]);
                             $("#vitaminaA-box div").addClass('erro');
                             $("#vitaminaA-box h2").addClass('erro');
@@ -467,7 +442,7 @@
                         }
                     
                         if(respostaSuplementacao[1] == null) {
-                            respostaSuplementacao[1] = "<li> Não há necessidade da suplementação de Vitamina D, devendo ser iniciada após os 7 dias de vida ou peso superior a 1.500g e suspendendo após 2 anos de vida.</li>";
+                            respostaSuplementacao[1] = "<li> Não há necessidade da suplementação de Vitamina D no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#vitaminaD-lista").html(respostaSuplementacao[1]);
                             $("#vitaminaD-box div").addClass('erro');
                             $("#vitaminaD-box h2").addClass('erro');
@@ -478,13 +453,7 @@
                         }
                     
                         if(respostaSuplementacao[2] == null) {
-                            
-                            if(maturidade == "RNT") {
-                                respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro.</li>";    
-                            } else {
-                                respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro.</li>";
-                            }
-                            
+                            respostaSuplementacao[2] = "<li> Não há necessidade da suplementação de ferro profilático no momento (Consenso SBP/SPSP 2018).</li>";
                             $("#ferro-lista").html(respostaSuplementacao[2]);
                             $("#ferro-box div").addClass('erro');
                             $("#ferro-box h2").addClass('erro');

@@ -81,7 +81,7 @@
     <body>
         <div id="navbar-placeholder"></div>
 
-        <script src="../js/navbar-loader.js" defer></script>
+        <script src="../assets/js/navbar-loader.js" defer></script>
         <script>
             fetch("../navbar.html")
                 .then(res => res.text())
@@ -92,6 +92,13 @@
                         fixNavbarLinks();
                     }
                 });
+                
+            // Garantir que a correção rode quando a página estiver totalmente carregada
+            window.addEventListener('load', function() {
+                if (typeof fixNavbarLinks === 'function') {
+                    fixNavbarLinks();
+                }
+            });
         </script>
           
         <!-- Seção para a Calculadora de IMC -->
@@ -150,10 +157,10 @@
                 </div>
     </section>
         </div>
-        <script type="text/javascript" src="../js/imc-infantil/bfa_boys_p_exp.js"></script>
-        <script type="text/javascript" src="../js/imc-infantil/bfa_girls_p_exp.js"></script>
-        <script type="text/javascript" src="../js/imc-infantil/bmi_boys_perc_5-19_exp.js"></script>
-        <script type="text/javascript" src="../js/imc-infantil/bmi_girls_perc_5-19_exp.js"></script>
-        <script src="../js/calculadora/imc.js"></script>
+        <script type="text/javascript" src="../assets/js/imc-infantil/bfa_boys_p_exp.js"></script>
+        <script type="text/javascript" src="../assets/js/imc-infantil/bfa_girls_p_exp.js"></script>
+        <script type="text/javascript" src="../assets/js/imc-infantil/bmi_boys_perc_5-19_exp.js"></script>
+        <script type="text/javascript" src="../assets/js/imc-infantil/bmi_girls_perc_5-19_exp.js"></script>
+        <script src="../assets/js/calculadora/imc.js"></script>
     </body>
 </html>

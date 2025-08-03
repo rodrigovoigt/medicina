@@ -2337,6 +2337,12 @@ PUERICULTURA
 .tabela-vacina.cor4a td { border-color: #8fdaf9; }
 .tabela-vacina.cor4a th { background-color: #8fdaf9; color: #FFF; border-top: 1px solid #8fdaf9;}
 
+.tabela-vacina.cor10 td { border-color: #ff6b6b; }
+.tabela-vacina.cor10 th { background-color: #ff6b6b; color: #FFF; border-top: 1px solid #ff6b6b;}
+
+.tabela-vacina.cor11 td { border-color: #4ecdc4; }
+.tabela-vacina.cor11 th { background-color: #4ecdc4; color: #FFF; border-top: 1px solid #4ecdc4;}
+
 /* 
 ---------------------------------------------
 CONDUTAS - CLASSIFICAÇÃO

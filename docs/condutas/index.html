@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guia de Prescrição da Loira</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<link
+  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+  rel="stylesheet"
+/>  
+
+
+  
+    <nav class="abas">
+        <a href="https://loiradaodonto.github.io/clone/">PedAjuda</a>
+        <a href="https://loiradaodonto.github.io/prescricoes/">Prescrições</a>
+        <a href="https://loiradaodonto.github.io/prescricoes/">Copi-Cola</a>
+        <a href="https://loiradaodonto.github.io/dengue/">Calculadora Dengue</a>
+        <a href="https://loiradaodonto.github.io/receitas/">ECG</a>
+        
+    </nav>
+  
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2>Adicionar Doença</h2>
+        <form id="add-form">
+          <label for="doenca">Nome da Doença:</label>
+          <input type="text" id="doenca" name="doenca" required>
+          <label for="medicacao">Medicação:</label>
+          <textarea id="medicacao" name="medicacao" required></textarea>
+          <button type="submit">Adicionar</button>
+        </form>
+      </div>
+    </div>
+<nav class="sidebar">
+  
+  <div class="menu-bar">
+    <div class="menu">
+      <li >
+        <button class="adicionar-button">ADICIONAR DOENÇA</button>
+      </li>
+      <li class="search-bar">
+        <i class="bx bx-search icons"></i>
+        <input type="search" id="search-input" placeholder="Pesquisar..." />
+      </li>
+
+      
+
+      <ul class="menu-links">
+      </ul>
+    </div>
+
+    <div class="bottom-content">
+      <li class="mode">
+        <div class="moon-sun">
+          <i class="bx bx-moon icons moon"></i>
+          <i class="bx bx-sun icons sun"></i>
+        </div>
+        <span class="mode-text text">Modo Escuro</span>
+        <div class="toggle-switch">
+          <span class="switch"></span>
+        </div>
+      </li>
+    </div>
+  </div>
+</nav>
+
+<div class="content-block">
+  <h2 class="content-title"></h2>
+  <textarea class="content-textarea" rows="10"></textarea>
+</div>
+
+
+<script src="./script.js"></script>
+<script>
+  const body = document.querySelector("body"),
+  sidebar = document.querySelector(".sidebar"),
+  toggle = document.querySelector(".toggle"),
+  modeSwitch = document.querySelector(".toggle-switch"),
+  modeText = document.querySelector(".mode-text"),
+  searchBtn = document.querySelector(".search-bar");
+  body.classList.toggle("dark");
+modeSwitch.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  //   document.querySelector(".mode-text").innertext=""
+
+  if (body.classList.contains("dark")) {
+    modeText.innerText = " Modo Claro ";
+  } else modeText.innerText = " Modo Escuro ";
+});
+
+toggle.addEventListener("click", () => {
+  sidebar.classList.toggle("close");
+});
+
+searchBtn.addEventListener("click", () => {
+  sidebar.classList.remove("close");
+});
+</script>
+</body>
+</html>
