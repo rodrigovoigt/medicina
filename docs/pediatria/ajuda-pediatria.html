@@ -71,6 +71,16 @@
                 justify-content: space-between;
             }
 
+            /* Alinhamento específico para as barras de busca */
+            .navbar-isolated .d-flex.gap-2 {
+                margin-left: auto;
+                gap: 0.5rem !important;
+            }
+
+            .navbar-isolated .d-flex[role="search"] {
+                position: relative;
+            }
+
             .navbar-isolated .navbar-brand {
                 display: inline-block;
                 padding-top: 0.3125rem;
@@ -196,6 +206,84 @@
                 color: #000;
                 background-color: rgba(255,255,255,0.1);
                 border-color: white;
+            }
+
+            /* Estilos específicos para as barras de busca isoladas */
+            .navbar-isolated .input-group {
+                display: flex;
+                position: relative;
+                align-items: stretch;
+                width: 100%;
+                flex-wrap: nowrap;
+            }
+
+            .navbar-isolated .input-group > * {
+                position: relative;
+                flex: 1 1 auto;
+                width: 1%;
+                min-width: 0;
+            }
+
+            .navbar-isolated .input-group-sm > .form-control,
+            .navbar-isolated .input-group-sm > .input-group-text,
+            .navbar-isolated .input-group-sm > .btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+                border-radius: 0.2rem;
+            }
+
+            /* Remover bordas entre os elementos conectados */
+            .navbar-isolated .input-group > .form-control:not(:last-child),
+            .navbar-isolated .input-group > .btn:not(:last-child) {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .navbar-isolated .input-group > .form-control:not(:first-child),
+            .navbar-isolated .input-group > .btn:not(:first-child) {
+                margin-left: -1px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .navbar-isolated .input-group > .btn {
+                flex: 0 0 auto;
+                width: auto;
+            }
+
+            .navbar-isolated .form-control {
+                display: block;
+                width: 100%;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #212529;
+                background-color: #fff;
+                background-image: none;
+                border: 1px solid #ced4da;
+                border-radius: 0.375rem;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+            .navbar-isolated .form-control:focus {
+                color: #212529;
+                background-color: #fff;
+                border-color: #86b7fe;
+                outline: 0;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+
+            .navbar-isolated .btn-success {
+                color: #fff;
+                background-color: #198754;
+                border-color: #198754;
+            }
+
+            .navbar-isolated .btn-success:hover {
+                color: #fff;
+                background-color: #157347;
+                border-color: #146c43;
             }
 
             .navbar-isolated .navbar-toggler {
@@ -511,6 +599,52 @@
                 height: auto;
             }
 
+            /* Estilos para lista de sugestões de busca */
+            .navbar-isolated .list-group {
+                display: flex;
+                flex-direction: column;
+                padding-left: 0;
+                margin-bottom: 0;
+                border-radius: 0.375rem;
+            }
+
+            .navbar-isolated .list-group-item {
+                position: relative;
+                display: block;
+                padding: 0.5rem 1rem;
+                color: #212529;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid rgba(0,0,0,0.125);
+            }
+
+            .navbar-isolated .list-group-item:hover {
+                z-index: 1;
+                color: #1e2125;
+                text-decoration: none;
+                background-color: #f8f9fa;
+            }
+
+            .navbar-isolated .position-absolute {
+                position: absolute !important;
+            }
+
+            .navbar-isolated .top-100 {
+                top: 100% !important;
+            }
+
+            .navbar-isolated .start-0 {
+                left: 0 !important;
+            }
+
+            .navbar-isolated .w-100 {
+                width: 100% !important;
+            }
+
+            .navbar-isolated .z-3 {
+                z-index: 3 !important;
+            }
+
             /* Responsive */
             @media (max-width: 991.98px) {
                 .navbar-isolated .navbar-nav {
@@ -704,7 +838,7 @@
         
         <!-- ***** [INI] SECTION - PUERICULTURA ***** --->
         
-        <section id="puericultura" class="section">
+        <section id="puericultura" class="section" style="background: #00a66c !important; background-image: none !important; background-attachment: initial !important;">
             <div class="container">
                 
                 <h1 class="titulo">Puericultura</h1>

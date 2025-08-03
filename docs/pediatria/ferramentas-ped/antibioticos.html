@@ -34,38 +34,55 @@
         
         <!-- ***** [INI] HEADER ***** -->
         <header class="header-area branco">
-		<div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        
-                        <a href="../ajuda-pediatria.html" class="logo">
-							<img src="../assets/imagens/logo.png" alt="PedAjuda">
-						</a>
-
-						<ul class="nav">
-							<li><a href="../ajuda-pediatria.html" class="branco">Página Inicial</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Ferramentas <i class="fas fa-angle-down"></i></a>
-								<ul>
-									<li><a href="../ajuda-pediatria.html#categorias">Cálculo de Doses</a></li>
-                                    <li><a href="../ajuda-pediatria.html#puericultura">Puericultura</a></li>
-									<li><a href="../ajuda-pediatria.html#condutas">Condutas em Urgência</a></li>
-								</ul>
-                            </li>
-                            <li><a href="sobre-projeto.html" class="branco">Sobre o Projeto</a></li>
-                            <li><a href="contato.html" class="branco">Contato</a></li>
-						</ul>
-						
-                        <a class="menu-trigger">
-							<span>Menu</span>
-						</a>
-                    </nav>
+            <nav class="main-nav" style="background-color: #00a66c; padding: 15px 0; width: 100%; margin-bottom: 20px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Link de voltar -->
+                                <div>
+                                    <a href="../ajuda-pediatria.html" class="logo d-flex align-items-center text-decoration-none" style="color: white; font-weight: 500;">
+                                        <i class="fas fa-arrow-left me-2"></i>
+                                        <span>Voltar ao Sistema de Pediatria</span>
+                                    </a>
+                                </div>
+                                
+                                <!-- Título da seção -->
+                                <div style="color: white; font-weight: 500;">
+                                    <i class="fas fa-pills me-2"></i>
+                                    <span id="navbar-title">Antibióticos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </nav>
         </header>
         <!-- ***** [END] HEADER ***** -->
+
+        <style>
+        /* Estilos simples para a navbar */
+        .main-nav .logo:hover {
+            color: rgba(255,255,255,0.8) !important;
+        }
+        
+        .main-nav {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-nav .d-flex {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 10px;
+            }
+            
+            .main-nav .logo span {
+                font-size: 0.9rem !important;
+            }
+        }
+        </style>
         
         
         

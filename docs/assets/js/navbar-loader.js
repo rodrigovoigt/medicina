@@ -8,10 +8,11 @@ function fixNavbarLinks() {
     const isInCalculadoras = currentPath.includes("/calculadoras/");
     const isInProntuario = currentPath.includes("/prontuario/");
     const isInPediatria = currentPath.includes("/pediatria/");
-    const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria;
+    const isInCondutas = currentPath.includes("/condutas/");
+    const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas;
     
     console.log('Corrigindo navbar - Path:', currentPath);
-    console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria);
+    console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria, 'Em condutas:', isInCondutas);
     
     // Corrigir apenas os links e imagens dentro da navbar
     const navbarContainer = document.getElementById("navbar-placeholder");
@@ -33,6 +34,11 @@ function fixNavbarLinks() {
                 else if (isInProntuario && originalHref.startsWith("prontuario/")) {
                     correctedHref = originalHref.substring(11); // Remove "prontuario/"
                     console.log('Link prontuario corrigido:', originalHref, '->', correctedHref);
+                }
+                // Caso especial: se estamos em condutas e o link é para outra página de condutas
+                else if (isInCondutas && originalHref.startsWith("condutas/")) {
+                    correctedHref = originalHref.substring(9); // Remove "condutas/"
+                    console.log('Link condutas corrigido:', originalHref, '->', correctedHref);
                 }
                 // Se estivermos em uma subpasta e o link NÃO começa com "../"
                 else if (isInSubfolder && !originalHref.startsWith("../")) {

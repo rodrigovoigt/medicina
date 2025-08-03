@@ -48,12 +48,38 @@
         <div class="container-fluid mt-4">
             <div class="row">
                 <!-- Sidebar com busca e lista de doenças -->
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-4 disease-list-section">
                     <div class="card shadow-sm">
                         <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="bx bx-plus-circle me-2"></i>Guia de Prescrição</h5>
+                            <h5 class="mb-0">
+                                <i class="bx bx-plus-circle me-2"></i>Guia de Prescrição
+                                <small class="d-block mt-1" id="userStatus">Carregando...</small>
+                            </h5>
                         </div>
                         <div class="card-body">
+                            <!-- Toggle modo escuro e filtros -->
+                            <div class="mb-3 pb-3 border-bottom">
+                                <div class="row g-2">
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                                            <label class="form-check-label" for="darkModeToggle">
+                                                <i class="bx bx-moon me-2"></i>Modo Escuro
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="showAllToggle">
+                                            <label class="form-check-label" for="showAllToggle">
+                                                <i class="bx bx-show me-2"></i>Mostrar Todos
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">Desativado: apenas itens editáveis</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <!-- Botão adicionar doença -->
                             <button class="btn btn-success w-100 mb-3 adicionar-button" data-bs-toggle="modal" data-bs-target="#addModal">
                                 <i class="bx bx-plus me-2"></i>ADICIONAR DOENÇA
@@ -69,28 +95,21 @@
                             <div class="list-group menu-links" id="disease-list">
                                 <!-- As doenças serão adicionadas aqui dinamicamente -->
                             </div>
-                            
-                            <!-- Toggle modo escuro -->
-                            <div class="mt-4 pt-3 border-top">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
-                                    <label class="form-check-label" for="darkModeToggle">
-                                        <i class="bx bx-moon me-2"></i>Modo Escuro
-                                    </label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Área de conteúdo principal -->
-                <div class="col-lg-9 col-md-8">
+                <div class="col-lg-9 col-md-8 content-section">
                     <div class="card shadow-sm">
-                        <div class="card-header">
-                            <h4 class="mb-0 content-title">Selecione uma doença</h4>
+                        <div class="card-header d-flex align-items-center">
+                            <h4 class="mb-0 content-title flex-grow-1">Selecione uma doença</h4>
                         </div>
                         <div class="card-body">
                             <textarea class="form-control content-textarea" rows="15" placeholder="Selecione uma doença da lista para ver as informações de prescrição..."></textarea>
+                            <small class="text-muted mt-2 d-block readonly-hint" style="display: none;">
+                                <i class="bx bx-info-circle me-1"></i>Clique no texto acima para copiar para área de transferência
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -127,18 +146,75 @@
             </div>
         </div>
 
+        <!-- Modal para login/senha -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">
+                            <i class="bx bx-key me-2"></i>Acessar Sistema
+                        </h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p class="mb-3">Como você deseja acessar o sistema?</p>
+                        
+                        <!-- Opção sem senha -->
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-outline-primary w-100" id="accessWithoutPassword">
+                                <i class="bx bx-book-open me-2"></i>Apenas Visualizar
+                                <small class="d-block text-white">Não poderá editar ou adicionar</small>
+                            </button>
+                        </div>
+                        
+                        <!-- Divisor -->
+                        <div class="mb-3">
+                            <hr class="my-3">
+                            <small class="text-muted">ou</small>
+                        </div>
+                        
+                        <!-- Opção com senha -->
+                        <div class="mb-3">
+                            <label for="userPassword" class="form-label">Digite sua senha (5 dígitos):</label>
+                            <input type="password" class="form-control text-center" id="userPassword" 
+                                   placeholder="•••••" maxlength="5" pattern="[0-9]{5}">
+                            <small class="text-muted">Apenas números de 0-9</small>
+                        </div>
+                        
+                        <button type="button" class="btn btn-success w-100" id="accessWithPassword">
+                            <i class="bx bx-edit me-2"></i>Entrar para Editar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <script src="./script.js"></script>
 <script>
+// Sistema de controle de acesso com prefixos
+let userPassword = null;
+let isReadOnly = false;
+
 // Adaptação para o novo layout Bootstrap
 document.addEventListener('DOMContentLoaded', function() {
     const body = document.querySelector("body");
     const darkModeToggle = document.querySelector("#darkModeToggle");
+    const showAllToggle = document.querySelector("#showAllToggle");
     const searchInput = document.querySelector("#search-input");
+    
+    // Mostrar modal de login na inicialização
+    showLoginModal();
     
     // Inicializar modo escuro
     if (localStorage.getItem('darkMode') === 'true') {
         body.classList.add("dark");
         darkModeToggle.checked = true;
+    }
+    
+    // Inicializar filtro "mostrar todos" (padrão: ativado)
+    if (localStorage.getItem('showAll') === null || localStorage.getItem('showAll') === 'true') {
+        showAllToggle.checked = true;
+    } else {
+        showAllToggle.checked = false;
     }
     
     // Toggle modo escuro
@@ -147,21 +223,206 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('darkMode', body.classList.contains("dark"));
     });
     
-    // Funcionalidade de busca
+    // Toggle mostrar todos
+    showAllToggle.addEventListener("change", () => {
+        localStorage.setItem('showAll', showAllToggle.checked);
+        // Aplica os filtros imediatamente
+        setTimeout(() => {
+            applyFilters();
+        }, 50);
+    });
+    
+    // Funcionalidade de busca combinada com filtro
     searchInput.addEventListener("input", function() {
-        const filter = this.value.toLowerCase();
-        const listItems = document.querySelectorAll("#disease-list .list-group-item");
-        
-        listItems.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            if (text.includes(filter)) {
-                item.style.display = "";
-            } else {
-                item.style.display = "none";
-            }
-        });
+        applyFilters();
     });
 });
+
+// Função para aplicar filtros combinados
+function applyFilters() {
+    const searchInput = document.querySelector("#search-input");
+    const showAllToggle = document.querySelector("#showAllToggle");
+    const filter = searchInput.value.toLowerCase();
+    const showAll = showAllToggle.checked;
+    const listItems = document.querySelectorAll("#disease-list .doenca-item");
+    
+    // Contar tipos de doenças
+    let countWithPrefix = 0;
+    let countWithUserPrefix = 0;
+    let countWithoutPrefix = 0;
+    
+    listItems.forEach((item, index) => {
+        const doencaData = item.getAttribute('data-doenca');
+        const originalName = decodeURIComponent(doencaData);
+        
+        if (/^\d{5}/.test(originalName)) {
+            countWithPrefix++;
+            if (userPassword && originalName.startsWith(userPassword)) {
+                countWithUserPrefix++;
+            }
+        } else {
+            countWithoutPrefix++;
+        }
+    });
+    
+    let totalVisible = 0;
+    let totalHidden = 0;
+    let userItems = 0;
+    let oldItems = 0;
+    
+    listItems.forEach((item, index) => {
+        const text = item.textContent.toLowerCase();
+        const doencaData = item.getAttribute('data-doenca');
+        const originalName = decodeURIComponent(doencaData);
+        
+        let displayName;
+        try {
+            displayName = removePasswordPrefix(originalName);
+        } catch (error) {
+            displayName = originalName; // fallback
+        }
+        
+        // 1. Primeiro verifica se passa na busca por texto
+        const matchesSearch = displayName.toLowerCase().includes(filter);
+        
+        let shouldShow = false; // Começa com false
+        
+        if (matchesSearch) {
+            if (showAll) {
+                // Se "mostrar todos" está ligado, mostra tudo que passou na busca
+                shouldShow = true;
+            } else if (!isReadOnly && userPassword) {
+                // Se "mostrar todos" está desligado, só mostra as doenças do usuário
+                const startsWithUserPassword = originalName.startsWith(userPassword);
+                shouldShow = startsWithUserPassword;
+                if (startsWithUserPassword) userItems++;
+            }
+        }
+        
+        if (shouldShow) {
+            item.style.display = "";
+            item.style.visibility = "visible";
+            item.classList.remove("hidden-by-filter");
+            totalVisible++;
+        } else {
+            // FORÇA esconder com múltiplas técnicas
+            item.style.display = "none !important";
+            item.style.visibility = "hidden";
+            item.classList.add("hidden-by-filter");
+            totalHidden++;
+        }
+        
+        // Conta itens antigos vs novos
+        if (/^\d{5}/.test(originalName)) {
+            // Tem prefixo numérico
+        } else {
+            oldItems++;
+        }
+    });
+}
+
+// Funções de controle de acesso
+function showLoginModal() {
+    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    loginModal.show();
+    
+    // Event listeners para os botões de login
+    document.getElementById('accessWithoutPassword').addEventListener('click', function() {
+        isReadOnly = true;
+        userPassword = null;
+        updateUserStatus();
+        loginModal.hide();
+        initializeApp();
+    });
+    
+    document.getElementById('accessWithPassword').addEventListener('click', function() {
+        const password = document.getElementById('userPassword').value.trim();
+        
+        if (password.length !== 5 || !/^\d{5}$/.test(password)) {
+            alert('A senha deve ter exatamente 5 dígitos numéricos!');
+            return;
+        }
+        
+        isReadOnly = false;
+        userPassword = password;
+        updateUserStatus();
+        loginModal.hide();
+        initializeApp();
+    });
+    
+    // Permitir enter no campo de senha
+    document.getElementById('userPassword').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('accessWithPassword').click();
+        }
+    });
+}
+
+function updateUserStatus() {
+    const statusElement = document.getElementById('userStatus');
+    const addButton = document.querySelector('.adicionar-button');
+    
+    if (isReadOnly) {
+        statusElement.textContent = '👁️ Modo Visualização';
+        addButton.style.display = 'none';
+    } else {
+        statusElement.textContent = `🔑 Usuário: ${userPassword}`;
+        addButton.style.display = 'block';
+    }
+}
+
+function initializeApp() {
+    // Inicializar o sistema após o login
+    if (typeof fetchDoencas === 'function') {
+        fetchDoencas();
+    }
+    
+    // Aplica filtros após carregar os dados
+    setTimeout(() => {
+        if (typeof applyFilters === 'function') {
+            applyFilters();
+        }
+    }, 500);
+}
+
+// Funções auxiliares para trabalhar com prefixos (globais)
+function addPasswordPrefix(doencaName) {
+    if (!userPassword) return doencaName;
+    return userPassword + doencaName;
+}
+
+function removePasswordPrefix(doencaName) {
+    // Remove prefixo de 5 dígitos se existir
+    if (/^\d{5}/.test(doencaName)) {
+        return doencaName.substring(5);
+    }
+    return doencaName;
+}
+
+function extractPasswordFromName(doencaName) {
+    if (/^\d{5}/.test(doencaName)) {
+        return doencaName.substring(0, 5);
+    }
+    return null;
+}
+
+function canUserEdit(doencaName) {
+    if (isReadOnly) return false;
+    
+    const doencaPassword = extractPasswordFromName(doencaName);
+    
+    // Se não tem prefixo (doença antiga), ninguém pode editar
+    if (!doencaPassword) return false;
+    
+    // Se tem prefixo, só pode editar quem tem a mesma senha
+    return doencaPassword === userPassword;
+}
+
+// Função para verificar se deve mostrar todos os itens
+function shouldShowAll() {
+    const showAllToggle = document.querySelector("#showAllToggle");
+    return showAllToggle ? showAllToggle.checked : true;
+}
 </script>
 </body>
 </html>

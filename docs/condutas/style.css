@@ -110,9 +110,32 @@ body.dark .input-group-text {
   color: var(--text-color);
 }
 
-body.dark .form-check-input:checked {
-  background-color: var(--success-color);
+/* Estilos para switches customizados */
+.form-check-input {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  width: 2.5em;
+  height: 1.25em;
+}
+
+.form-check-input:checked {
+  background-color: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+}
+
+.form-check-input:focus {
   border-color: var(--success-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 166, 108, 0.25);
+}
+
+body.dark .form-check-input {
+  background-color: #495057;
+  border-color: #6c757d;
+}
+
+body.dark .form-check-input:checked {
+  background-color: var(--success-color) !important;
+  border-color: var(--success-color) !important;
 }
 
 /* Estilos específicos da aplicação */
@@ -122,6 +145,18 @@ body.dark .form-check-input:checked {
   font-size: 14px;
   line-height: 1.5;
   resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.content-textarea[readonly] {
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+.content-textarea[readonly]:hover {
+  background-color: #e9ecef;
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 166, 108, 0.15);
 }
 
 #disease-list .list-group-item {
@@ -161,12 +196,81 @@ body.dark .form-check-input:checked {
 
 /* Responsividade */
 @media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  
+  .col-md-4 {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .col-md-8 {
+    width: 100%;
+  }
+  
+  /* Em mobile, coloca o conteúdo primeiro */
+  .content-section {
+    order: -1;
+  }
+  
+  .disease-list-section {
+    order: 1;
+  }
+  
   .content-textarea {
-    min-height: 300px;
+    min-height: 250px;
+  }
+  
+  .disease-list {
+    max-height: 300px;
   }
   
   .card-body {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+  
+  /* Ajustes de texto em mobile */
+  .content-title {
+    font-size: 1.25rem;
+  }
+  
+  .btn-group .btn {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+  }
+  
+  /* Melhor espaçamento dos filtros em mobile */
+  .filter-section {
+    margin-bottom: 1rem;
+  }
+  
+  .form-check {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 0.5rem;
+  }
+  
+  .card {
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn-group {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .btn-group .btn {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .content-textarea {
+    min-height: 200px;
   }
 }
 
@@ -198,4 +302,318 @@ body.dark .form-check-input:checked {
 .copied {
   background-color: rgba(0, 166, 108, 0.1) !important;
   transition: background-color 0.3s ease;
+}
+
+/* Estilos para diferentes tipos de entradas */
+.doenca-item[data-owned="true"] {
+  border-left: 4px solid var(--success-color);
+}
+
+.doenca-item[data-readonly="true"] {
+  opacity: 0.8;
+}
+
+.content-textarea[readonly] {
+  background-color: var(--primary-color-light);
+  cursor: default;
+}
+
+body.dark .content-textarea[readonly] {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+body.dark .content-textarea[readonly]:hover {
+  background-color: var(--primary-color-light);
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 166, 108, 0.15);
+}
+
+/* Modo de edição */
+.card-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  position: relative;
+  min-height: 60px;
+  padding: 0.75rem 1.25rem;
+}
+
+.card-header .content-title {
+  flex-grow: 1;
+  margin: 0;
+  padding-right: 1rem;
+}
+
+.card-header .btn-group {
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.card-header.editing-mode {
+  background: linear-gradient(45deg, var(--success-color), #20c997) !important;
+  color: white !important;
+}
+
+.card-header.editing-mode .content-title::after {
+  content: " ✏️";
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.content-textarea:not([readonly]) {
+  border: 2px solid var(--success-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 166, 108, 0.25);
+}
+
+/* Botões de ação */
+.btn-group .btn {
+  transition: all 0.2s ease;
+  border-width: 1px;
+  font-weight: 500;
+}
+
+.btn-group .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Botões com background preenchido */
+.btn-outline-info {
+  background-color: #17a2b8;
+  color: white;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+  color: white;
+}
+
+.btn-outline-primary {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  color: white;
+}
+
+.btn-outline-danger {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+  color: white;
+}
+
+/* Botões com background preenchido - removido outline-secondary que causava problema */
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Modo escuro para botões */
+body.dark .btn-outline-info {
+  background-color: #20c997;
+  border-color: #20c997;
+}
+
+body.dark .btn-outline-info:hover {
+  background-color: #1abc9c;
+  border-color: #16a085;
+}
+
+body.dark .btn-outline-primary {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+body.dark .btn-outline-primary:hover {
+  background-color: #009974;
+  border-color: #008967;
+}
+
+/* Animação para feedback */
+.copied {
+  background-color: rgba(0, 166, 108, 0.2) !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilos para botão de copiar */
+.copy-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.copy-btn.btn-success {
+  animation: copySuccess 0.3s ease;
+}
+
+@keyframes copySuccess {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Estilos para notificações toast */
+.notification-toast {
+  min-width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: none;
+}
+
+.notification-toast .toast-header {
+  border-bottom: none;
+  font-weight: 500;
+}
+
+.notification-toast .toast-body {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+}
+
+/* Animação de entrada para toast */
+.notification-toast.show {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Estilos para modo escuro das notificações */
+body.dark .notification-toast {
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+}
+
+body.dark .notification-toast .toast-body {
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+}
+
+/* Estilos para controles superiores */
+.form-check-label {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 166, 108, 0.25);
+}
+
+body.dark .form-check-input {
+  background-color: var(--primary-color);
+  border-color: #666;
+}
+
+body.dark .form-check-input:checked {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+/* Estilos para mensagem vazia */
+.list-group-item.text-muted {
+  font-style: italic;
+  padding: 1rem;
+}
+
+/* Animação suave para mudanças de filtro */
+.doenca-item {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.doenca-item.filtering-out {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+/* Responsividade para controles */
+@media (max-width: 768px) {
+  .form-check-label {
+    font-size: 0.85rem;
+  }
+  
+  .form-check-label i {
+    margin-right: 0.5rem !important;
+  }
+  
+  .card-header .btn-group {
+    flex-direction: column;
+    width: auto;
+  }
+  
+  .card-header .btn-group .btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .notification-toast {
+    min-width: 280px;
+    margin: 1rem !important;
+  }
+  
+  .content-textarea {
+    min-height: 300px;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+/* Badges personalizados */
+.badge.bg-success {
+  background-color: var(--success-color) !important;
+}
+
+.badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #fff !important;
+}
+
+/* Lista de doenças escondidas pelo filtro */
+.hidden-by-filter {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.list-group-item .bx-edit {
+  color: var(--success-color) !important;
+}
+
+.list-group-item .bx-lock {
+  color: #ffc107 !important;
+}
+
+.list-group-item .bx-archive {
+  color: #6c757d !important;
 }
