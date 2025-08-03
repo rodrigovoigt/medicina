@@ -1,106 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Guia de Prescrição da Loira</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocGO! - Guia de Prescrição</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<link
-  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-  rel="stylesheet"
-/>  
+<body>  
 
+        <!-- Onde a navbar será injetada -->
+        <div id="navbar-placeholder"></div>
 
-  
-    <nav class="abas">
-        <a href="https://loiradaodonto.github.io/clone/">PedAjuda</a>
-        <a href="https://loiradaodonto.github.io/prescricoes/">Prescrições</a>
-        <a href="https://loiradaodonto.github.io/prescricoes/">Copi-Cola</a>
-        <a href="https://loiradaodonto.github.io/dengue/">Calculadora Dengue</a>
-        <a href="https://loiradaodonto.github.io/receitas/">ECG</a>
-        
-    </nav>
-  
+        <!-- Carregar a navbar dinamicamente -->
+        <script src="../assets/js/navbar-loader.js" defer></script>
+        <script>
+            fetch("../navbar.html")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("navbar-placeholder").innerHTML = data;
+                    
+                    // Extrair e executar scripts da navbar
+                    const scripts = document.getElementById("navbar-placeholder").querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        document.head.appendChild(newScript);
+                        script.remove(); // Remove o script original para evitar duplicação
+                    });
+                    
+                    // Executar correção de links após carregar a navbar
+                    if (typeof fixNavbarLinks === 'function') {
+                        fixNavbarLinks();
+                    }
+                });
+        </script>
 
-    <div id="popup" class="popup">
-      <div class="popup-content">
-        <span class="close">&times;</span>
-        <h2>Adicionar Doença</h2>
-        <form id="add-form">
-          <label for="doenca">Nome da Doença:</label>
-          <input type="text" id="doenca" name="doenca" required>
-          <label for="medicacao">Medicação:</label>
-          <textarea id="medicacao" name="medicacao" required></textarea>
-          <button type="submit">Adicionar</button>
-        </form>
-      </div>
-    </div>
-<nav class="sidebar">
-  
-  <div class="menu-bar">
-    <div class="menu">
-      <li >
-        <button class="adicionar-button">ADICIONAR DOENÇA</button>
-      </li>
-      <li class="search-bar">
-        <i class="bx bx-search icons"></i>
-        <input type="search" id="search-input" placeholder="Pesquisar..." />
-      </li>
-
-      
-
-      <ul class="menu-links">
-      </ul>
-    </div>
-
-    <div class="bottom-content">
-      <li class="mode">
-        <div class="moon-sun">
-          <i class="bx bx-moon icons moon"></i>
-          <i class="bx bx-sun icons sun"></i>
+        <!-- Container principal com layout Bootstrap -->
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <!-- Sidebar com busca e lista de doenças -->
+                <div class="col-lg-3 col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="bx bx-plus-circle me-2"></i>Guia de Prescrição</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Botão adicionar doença -->
+                            <button class="btn btn-success w-100 mb-3 adicionar-button" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <i class="bx bx-plus me-2"></i>ADICIONAR DOENÇA
+                            </button>
+                            
+                            <!-- Barra de busca -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bx bx-search"></i></span>
+                                <input type="search" id="search-input" class="form-control" placeholder="Pesquisar..." />
+                            </div>
+                            
+                            <!-- Lista de doenças -->
+                            <div class="list-group menu-links" id="disease-list">
+                                <!-- As doenças serão adicionadas aqui dinamicamente -->
+                            </div>
+                            
+                            <!-- Toggle modo escuro -->
+                            <div class="mt-4 pt-3 border-top">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                                    <label class="form-check-label" for="darkModeToggle">
+                                        <i class="bx bx-moon me-2"></i>Modo Escuro
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Área de conteúdo principal -->
+                <div class="col-lg-9 col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            <h4 class="mb-0 content-title">Selecione uma doença</h4>
+                        </div>
+                        <div class="card-body">
+                            <textarea class="form-control content-textarea" rows="15" placeholder="Selecione uma doença da lista para ver as informações de prescrição..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <span class="mode-text text">Modo Escuro</span>
-        <div class="toggle-switch">
-          <span class="switch"></span>
+
+        <!-- Modal para adicionar doença -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">
+                            <i class="bx bx-plus-circle me-2"></i>Adicionar Doença
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add-form">
+                            <div class="mb-3">
+                                <label for="doenca" class="form-label">Nome da Doença:</label>
+                                <input type="text" class="form-control" id="doenca" name="doenca" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="medicacao" class="form-label">Medicação/Prescrição:</label>
+                                <textarea class="form-control" id="medicacao" name="medicacao" rows="4" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" form="add-form" class="btn btn-success">Adicionar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </li>
-    </div>
-  </div>
-</nav>
-
-<div class="content-block">
-  <h2 class="content-title"></h2>
-  <textarea class="content-textarea" rows="10"></textarea>
-</div>
-
 
 <script src="./script.js"></script>
 <script>
-  const body = document.querySelector("body"),
-  sidebar = document.querySelector(".sidebar"),
-  toggle = document.querySelector(".toggle"),
-  modeSwitch = document.querySelector(".toggle-switch"),
-  modeText = document.querySelector(".mode-text"),
-  searchBtn = document.querySelector(".search-bar");
-  body.classList.toggle("dark");
-modeSwitch.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  //   document.querySelector(".mode-text").innertext=""
-
-  if (body.classList.contains("dark")) {
-    modeText.innerText = " Modo Claro ";
-  } else modeText.innerText = " Modo Escuro ";
-});
-
-toggle.addEventListener("click", () => {
-  sidebar.classList.toggle("close");
-});
-
-searchBtn.addEventListener("click", () => {
-  sidebar.classList.remove("close");
+// Adaptação para o novo layout Bootstrap
+document.addEventListener('DOMContentLoaded', function() {
+    const body = document.querySelector("body");
+    const darkModeToggle = document.querySelector("#darkModeToggle");
+    const searchInput = document.querySelector("#search-input");
+    
+    // Inicializar modo escuro
+    if (localStorage.getItem('darkMode') === 'true') {
+        body.classList.add("dark");
+        darkModeToggle.checked = true;
+    }
+    
+    // Toggle modo escuro
+    darkModeToggle.addEventListener("change", () => {
+        body.classList.toggle("dark");
+        localStorage.setItem('darkMode', body.classList.contains("dark"));
+    });
+    
+    // Funcionalidade de busca
+    searchInput.addEventListener("input", function() {
+        const filter = this.value.toLowerCase();
+        const listItems = document.querySelectorAll("#disease-list .list-group-item");
+        
+        listItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(filter)) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
 });
 </script>
 </body>

@@ -1,7 +1,7 @@
 $(document).ready(function() {
   function fetchDoencas(query = '') {
     $.get('https://xvencedor.pythonanywhere.com/doencas', function(data) {
-      $('.menu-links').empty(); // Limpa a lista existente
+      $('#disease-list').empty(); // Limpa a lista existente
 
       // Filtra as doenças com base na consulta
       const filteredDoencas = data.filter(doenca => doenca.doenca.toLowerCase().includes(query.toLowerCase()));
@@ -11,58 +11,83 @@ $(document).ready(function() {
 
       // Adiciona as doenças filtradas e ordenadas à lista
       filteredDoencas.forEach(function(doenca) {
-        $('.menu-links').append(`
-          <li class="nav-link">
-            <a href="#" class="doenca-link" data-doenca="${encodeURIComponent(doenca.doenca)}">
-              <span class="text nav-text">${doenca.doenca}</span>
-            </a>
-            <button class="delete-button" data-doenca="${encodeURIComponent(doenca.doenca)}">
-              <i class="bx bx-trash"></i> <!-- Ícone de lixeira -->
+        $('#disease-list').append(`
+          <div class="list-group-item d-flex justify-content-between align-items-center doenca-item" 
+               data-doenca="${encodeURIComponent(doenca.doenca)}">
+            <span class="doenca-name">${doenca.doenca}</span>
+            <button class="btn btn-sm btn-outline-danger delete-button" 
+                    data-doenca="${encodeURIComponent(doenca.doenca)}" 
+                    title="Excluir doença">
+              <i class="bx bx-trash"></i>
             </button>
-          </li>
+          </div>
         `);
       });
+      
+      // Adiciona event listeners
+      addEventListeners();
     }).fail(function() {
       console.error('Erro ao buscar doenças');
+      $('#disease-list').html(`
+        <div class="list-group-item text-danger">
+          <i class="bx bx-error me-2"></i>Erro ao carregar doenças
+        </div>
+      `);
     });
   }
 
   function fetchMedicacao(doenca) {
+    $('.content-title').text(decodeURIComponent(doenca)); // Atualiza o título com o nome da doença
+    $('.content-textarea').addClass('loading');
+    
     $.get(`https://xvencedor.pythonanywhere.com/doencas/${encodeURIComponent(doenca)}`, function(data) {
-      $('.content-title').text(decodeURIComponent(doenca)); // Atualiza o título com o nome da doença
-      $('.content-textarea').val(data.medicacao); // Atualiza a medicação na área de texto
+      $('.content-textarea').val(data.medicacao).removeClass('loading'); // Atualiza a medicação na área de texto
     }).fail(function() {
       console.error('Erro ao buscar medicação');
+      $('.content-textarea').val('Erro ao carregar medicação para esta doença.').removeClass('loading');
     });
   }
 
   function updateMedicacao(doenca, medicacao) {
     $.ajax({
-      url: `https://xvencedor.pythonanywhere.com/doencas/${encodeURIComponent(doenca)}`, // Endpoint para atualizar a medicação
+      url: `https://xvencedor.pythonanywhere.com/doencas/${encodeURIComponent(doenca)}`,
       type: 'PUT',
       contentType: 'application/json',
       data: JSON.stringify({ medicacao: medicacao }),
       success: function(response) {
         console.log('Medicação atualizada com sucesso');
+        // Mostrar feedback visual
+        $('.content-textarea').addClass('copied');
+        setTimeout(() => $('.content-textarea').removeClass('copied'), 1000);
       },
       error: function() {
         console.error('Erro ao atualizar medicação');
+        alert('Erro ao atualizar medicação. Tente novamente.');
       }
     });
   }
 
   function deleteDoenca(doenca) {
-    $.ajax({
-      url: `https://xvencedor.pythonanywhere.com/doencas/${encodeURIComponent(doenca)}`, // Endpoint para deletar a doença
-      type: 'DELETE',
-      success: function(response) {
-        console.log('Doença deletada com sucesso');
-        fetchDoencas($('#search-input').val()); // Atualiza a lista de doenças após a exclusão
-      },
-      error: function() {
-        console.error('Erro ao deletar doença');
-      }
-    });
+    if (confirm(`Tem certeza que deseja excluir a doença "${decodeURIComponent(doenca)}"?`)) {
+      $.ajax({
+        url: `https://xvencedor.pythonanywhere.com/doencas/${encodeURIComponent(doenca)}`,
+        type: 'DELETE',
+        success: function(response) {
+          console.log('Doença deletada com sucesso');
+          fetchDoencas($('#search-input').val());
+          
+          // Limpar área de conteúdo se a doença deletada estava sendo exibida
+          if ($('.content-title').text() === decodeURIComponent(doenca)) {
+            $('.content-title').text('Selecione uma doença');
+            $('.content-textarea').val('Selecione uma doença da lista para ver as informações de prescrição...');
+          }
+        },
+        error: function() {
+          console.error('Erro ao deletar doença');
+          alert('Erro ao excluir doença. Tente novamente.');
+        }
+      });
+    }
   }
 
   function addDoenca(doenca, medicacao) {
@@ -73,68 +98,87 @@ $(document).ready(function() {
       data: JSON.stringify({ doenca: doenca, medicacao: medicacao }),
       success: function(response) {
         console.log('Doença adicionada com sucesso');
-        fetchDoencas($('#search-input').val()); // Atualiza a lista de doenças após a adição
-        closePopup(); // Fecha o popup após adicionar
+        fetchDoencas($('#search-input').val());
+        $('#addModal').modal('hide');
+        $('#add-form')[0].reset();
+        
+        // Selecionar a doença recém-adicionada
+        setTimeout(() => {
+          $(`.doenca-item[data-doenca="${encodeURIComponent(doenca)}"]`).click();
+        }, 500);
       },
       error: function() {
         console.error('Erro ao adicionar doença');
+        alert('Erro ao adicionar doença. Tente novamente.');
       }
     });
   }
 
-  // Mostrar o popup
-  $('.adicionar-button').on('click', function() {
-    $('#popup').show();
-  });
+  function addEventListeners() {
+    // Click na doença
+    $('.doenca-item').off('click').on('click', function() {
+      const doenca = $(this).data('doenca');
+      
+      // Remove active de todos e adiciona ao clicado
+      $('.doenca-item').removeClass('active');
+      $(this).addClass('active');
+      
+      fetchMedicacao(doenca);
+    });
 
-  // Fechar o popup
-  $('.close').on('click', function() {
-    closePopup();
-  });
-
-  function closePopup() {
-    $('#popup').hide();
-    $('#add-form')[0].reset(); // Limpa o formulário
+    // Click no botão deletar
+    $('.delete-button').off('click').on('click', function(e) {
+      e.stopPropagation(); // Previne o click no item da lista
+      const doenca = $(this).data('doenca');
+      deleteDoenca(doenca);
+    });
   }
 
-  // Adicionar a doença ao banco de dados
+  // Event listeners principais
   $('#add-form').on('submit', function(event) {
     event.preventDefault();
-    var doenca = $('#doenca').val();
-    var medicacao = $('#medicacao').val();
-    addDoenca(doenca, medicacao);
+    const doenca = $('#doenca').val().trim();
+    const medicacao = $('#medicacao').val().trim();
+    
+    if (doenca && medicacao) {
+      addDoenca(doenca, medicacao);
+    } else {
+      alert('Por favor, preencha todos os campos.');
+    }
   });
 
-  // Chama a função ao carregar a página
-  fetchDoencas(); // Carrega todas as doenças inicialmente
-
-  // Adiciona um evento de input ao campo de pesquisa
+  // Busca em tempo real
   $('#search-input').on('input', function() {
-    var query = $(this).val();
-    fetchDoencas(query); // Atualiza a lista de doenças com base na pesquisa
+    const query = $(this).val();
+    fetchDoencas(query);
   });
 
-  // Adiciona um evento de clique aos links de doenças
-  $(document).on('click', '.doenca-link', function(event) {
-    event.preventDefault(); // Impede o comportamento padrão do link
-    var doenca = decodeURIComponent($(this).data('doenca')); // Decodifica o nome da doença
-    fetchMedicacao(doenca); // Busca a medicação correspondente
-  });
-
-  // Adiciona um evento de input para atualizar a medicação em tempo real
+  // Atualização automática da medicação quando editada
+  let updateTimeout;
   $('.content-textarea').on('input', function() {
-    var doenca = $('.content-title').text(); // Obtém o nome da doença atual
-    var medicacao = $(this).val(); // Obtém o conteúdo do textarea
-    if (doenca) {
-      updateMedicacao(doenca, medicacao); // Atualiza a medicação no banco de dados
+    const currentDoenca = $('.content-title').text();
+    const medicacao = $(this).val();
+    
+    if (currentDoenca && currentDoenca !== 'Selecione uma doença') {
+      clearTimeout(updateTimeout);
+      updateTimeout = setTimeout(() => {
+        updateMedicacao(encodeURIComponent(currentDoenca), medicacao);
+      }, 1000); // Delay de 1 segundo após parar de digitar
     }
   });
 
-  // Adiciona um evento de clique ao ícone de lixeira
-  $(document).on('click', '.delete-button', function() {
-    var doenca = decodeURIComponent($(this).data('doenca')); // Decodifica o nome da doença
-    if (confirm('Você tem certeza que deseja excluir esta doença?')) { // Confirma a exclusão
-      deleteDoenca(doenca); // Deleta a doença do banco de dados
+  // Função para copiar texto
+  $('.content-textarea').on('click', function() {
+    if ($(this).val() && $(this).val() !== 'Selecione uma doença da lista para ver as informações de prescrição...') {
+      $(this).select();
+      document.execCommand('copy');
+      
+      // Feedback visual
+      $(this).addClass('copied');
+      setTimeout(() => $(this).removeClass('copied'), 1000);
     }
   });
+
+  // Inicialização
+  fetchDoencas();
 });
