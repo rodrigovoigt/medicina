@@ -112,7 +112,7 @@
         color: #00a66c;
     }
     
-    /* Estilo das sugestões de busca */
+    /* Estilo das sugestões de busca - MELHORADO */
     #searchSuggestions {
         border: 1px solid #dee2e6;
         border-radius: 0.375rem;
@@ -120,6 +120,8 @@
         background: white;
         z-index: 1050;
         margin-top: 2px;
+        max-width: 400px; /* Limitar largura máxima */
+        min-width: 300px; /* Largura mínima */
     }
     
     #searchSuggestions .list-group-item {
@@ -127,6 +129,8 @@
         border-bottom: 1px solid #f8f9fa;
         padding: 0.75rem 1rem;
         transition: all 0.2s ease;
+        word-wrap: break-word; /* Quebrar palavras longas */
+        overflow: hidden; /* Evitar overflow */
     }
     
     #searchSuggestions .list-group-item:last-child {
@@ -144,17 +148,16 @@
     }
     
     #searchSuggestions .list-group-item .badge {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+        white-space: nowrap; /* Evitar quebra do badge */
     }
     
-    #searchSuggestions .text-success {
-        font-size: 1.2rem;
-        transition: opacity 0.2s ease;
-    }
-    
-    #searchSuggestions .list-group-item:hover .text-success {
-        opacity: 0.8;
+    /* Truncar texto longo */
+    #searchSuggestions .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     
     /* Responsivo */
@@ -175,7 +178,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="../assets/img/icon.png" alt="DocGO Logo" />DocGO!</a>
+        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="DocGO Logo" />DocGO!</a>
         
         <!-- Botão do menu lateral (offcanvas) -->
         <button class="btn btn-outline-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -252,50 +255,47 @@
 
 <!-- Script para funcionalidades de busca -->
 <script>
-// Base de dados das páginas do site para busca interna
+// Base de dados das páginas do site para busca interna - ATUALIZADA
 const sitePages = [
-    { title: "Índice de Massa Corporal (IMC)", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
-    { title: "Taxa de Filtração Glomerular (TFG)", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
+    // Calculadoras
+    { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
+    { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
     { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
     { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
     { title: "Carga Tabágica", url: "calculadoras/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo", "tabaco"] },
     { title: "Data Provável do Parto", url: "calculadoras/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação", "naegele"] },
     { title: "Idade Gestacional", url: "calculadoras/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez", "semanas", "dum"] },
-    { title: "Ressuscitação Volêmica (Parkland)", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
+    { title: "Parkland", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
+    
+    // Prontuário
     { title: "Consulta Geral", url: "prontuario/consulta-geral.html", category: "Prontuário", keywords: ["consulta", "geral", "exame", "físico", "semiologia"] },
-    { title: "Formatar Medicações IPM", url: "prontuario/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar", "prescrição"] },
-    { title: "Modelos de Laudos Radiologia", url: "prontuario/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x", "tc", "ressonância"] },
+    { title: "Formatar Medicações", url: "prontuario/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar", "prescrição"] },
+    { title: "Modelos de Laudos", url: "prontuario/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x", "tc", "ressonância"] },
     { title: "Guia de Prescrição", url: "condutas/index.html", category: "Prontuário", keywords: ["prescrição", "medicação", "condutas", "tratamento", "doença"] },
-    { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Especialidade", keywords: ["pediatria", "criança", "pediátrico", "doses"] },
-    { title: "Agradecimentos", url: "extras/agradecimentos.html", category: "Geral", keywords: ["agradecimentos", "créditos", "colaboradores", "equipe"] },
-    { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência", "concurso"] }
+    
+    // Pediatria
+    { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Pediatria", keywords: ["pediatria", "criança", "pediátrico", "doses"] },
+    
+    // Externos
+    { title: "PedBook", url: "https://www.pedb.com.br/", category: "Externa", keywords: ["pedbook", "pediatria", "site", "externo"] },
+    { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência", "concurso"] },
+    
+    // Geral
+    { title: "Agradecimentos", url: "extras/agradecimentos.html", category: "Geral", keywords: ["agradecimentos", "créditos", "colaboradores", "equipe"] }
 ];
 
 // Sites médicos confiáveis para filtrar a busca web
 const trustedMedicalSites = [
     "pubmed.ncbi.nlm.nih.gov",
     "uptodate.com",
-    "nejm.org",
-    "bmj.com",
-    "thelancet.com",
-    "jama.jamanetwork.com",
     "cochrane.org",
-    "who.int",
-    "cdc.gov",
-    "anvisa.gov.br",
     "portal.cfm.org.br",
     "scielo.br",
-    "rmmg.org",
-    "rbcp.org.br",
-    "sciencedirect.com",
-    "nature.com",
-    "medscape.com",
-    "mayoclinic.org",
-    "hopkinsmedicine.org",
-    "msdmanuals.com"
+    "msdmanuals.com",
+    "consultaremedios.com.br"
 ];
 
-// Função para busca interna do site
+// Função para busca interna do site - CORRIGIDO PARA FUNCIONAR EM TODAS AS PÁGINAS
 function filterSuggestions() {
     const query = document.getElementById('buscarInterno').value.toLowerCase().trim();
     const suggestions = document.getElementById('searchSuggestions');
@@ -318,28 +318,25 @@ function filterSuggestions() {
         suggestions.innerHTML = filteredPages.slice(0, 6).map(page => {
             // Definir cor do badge baseado na categoria
             let badgeColor = 'secondary';
+            let badgeText = page.category;
             switch(page.category) {
                 case 'Calculadora': badgeColor = 'primary'; break;
                 case 'Prontuário': badgeColor = 'success'; break;
-                case 'Especialidade': badgeColor = 'info'; break;
+                case 'Pediatria': badgeColor = 'info'; break;
                 case 'Geral': badgeColor = 'danger'; break;
-                case 'Externa': badgeColor = 'warning'; break;
+                case 'Externa': badgeColor = 'warning'; badgeText = 'Externo'; break;
             }
             
             return `<li class="list-group-item list-group-item-action" onclick="navigateToPage('${page.url}')" style="cursor: pointer;">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="flex-grow-1">
+                    <div class="flex-grow-1 text-truncate me-2">
                         <div class="d-flex align-items-center gap-2 mb-1">
-                            <strong class="text-dark">${page.title}</strong>
-                            <span class="badge bg-${badgeColor} text-white">${page.category}</span>
+                            <strong class="text-dark text-truncate">${page.title}</strong>
+                            <span class="badge bg-${badgeColor} text-white flex-shrink-0">${badgeText}</span>
                         </div>
-                        <small class="text-muted">
-                            <i class="bi bi-tags-fill me-1"></i>
-                            ${page.keywords.slice(0, 3).join(', ')}
+                        <small class="text-muted text-truncate d-block">
+                            ${page.keywords.slice(0, 3).join(' • ')}
                         </small>
-                    </div>
-                    <div class="text-success fw-bold">
-                        <i class="bi bi-arrow-right"></i>
                     </div>
                 </div>
             </li>`;
@@ -349,12 +346,26 @@ function filterSuggestions() {
     suggestions.style.display = 'block';
 }
 
-// Função para navegar para página selecionada
+// Função para navegar para página selecionada - CORRIGIDO PARA CAMINHOS RELATIVOS
 function navigateToPage(url) {
     if (url.startsWith('http')) {
         window.open(url, '_blank');
     } else {
-        window.location.href = url;
+        // Detectar se estamos na página inicial ou em subpasta
+        const currentPath = window.location.pathname;
+        let finalUrl = url;
+        
+        // Se não estamos na raiz (index.html), ajustar caminho relativo
+        if (!currentPath.endsWith('index.html') && !currentPath.endsWith('/')) {
+            // Contar quantos níveis de pasta estamos
+            const pathParts = currentPath.split('/').filter(part => part && part !== 'index.html');
+            const levels = pathParts.length - 1; // -1 porque o último é o arquivo atual
+            
+            // Adicionar ../ para cada nível
+            finalUrl = '../'.repeat(levels) + url;
+        }
+        
+        window.location.href = finalUrl;
     }
     document.getElementById('searchSuggestions').style.display = 'none';
     document.getElementById('buscarInterno').value = '';

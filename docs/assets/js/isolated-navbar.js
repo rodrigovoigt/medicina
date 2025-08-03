@@ -573,6 +573,10 @@ function loadIsolatedNavbar(pathToNavbar = '../../navbar.html') {
                                 logoImg.src = currentSrc;
                             }
                         }, 100);
+                        
+                        // Garantir que a funcionalidade de busca funcione
+                        ensureSearchFunctionality();
+                        
                     } catch (error) {
                         console.error('Erro ao executar fixNavbarLinks:', error);
                     }
@@ -593,6 +597,7 @@ function loadIsolatedNavbar(pathToNavbar = '../../navbar.html') {
                     setTimeout(() => {
                         waitForNavbarLoader(() => {
                             fixNavbarLinks();
+                            ensureSearchFunctionality();
                         });
                     }, 500);
                 })
@@ -600,4 +605,178 @@ function loadIsolatedNavbar(pathToNavbar = '../../navbar.html') {
                     console.error('Erro mesmo com caminho alternativo:', altError);
                 });
         });
+}
+
+// Função para corrigir links da navbar baseado na página atual
+function fixNavbarLinks() {
+    const currentPath = window.location.pathname;
+    const navbar = document.querySelector('nav');
+    
+    if (!navbar) return;
+    
+    // Detectar se estamos em uma subpasta
+    const pathParts = currentPath.split('/').filter(part => part && part !== 'index.html');
+    const isInSubfolder = pathParts.length > 1 || (pathParts.length === 1 && !currentPath.endsWith('index.html'));
+    
+    if (isInSubfolder) {
+        // Contar níveis de profundidade
+        const levels = pathParts.length - 1;
+        const prefix = '../'.repeat(levels);
+        
+        // Corrigir todos os links relativos na navbar
+        const links = navbar.querySelectorAll('a[href]:not([href^="http"]):not([href^="#"]):not([href^="javascript"])');
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href.startsWith('../') && !href.startsWith('/')) {
+                link.setAttribute('href', prefix + href);
+            }
+        });
+        
+        // Corrigir ação dos formulários
+        const forms = navbar.querySelectorAll('form[action]:not([action^="http"])');
+        forms.forEach(form => {
+            const action = form.getAttribute('action');
+            if (action && !action.startsWith('../') && !action.startsWith('/')) {
+                form.setAttribute('action', prefix + action);
+            }
+        });
+    }
+}
+
+// Garantir funcionalidade de busca em todas as páginas
+function ensureSearchFunctionality() {
+    // Verificar se as funções de busca já existem
+    if (typeof window.filterSuggestions === 'function' && typeof window.navigateToPage === 'function') {
+        return; // Já existem, não fazer nada
+    }
+    
+    console.log('Criando funcionalidades de busca para navbar isolada...');
+    
+    // Lista de páginas para busca (simplificada para funcionar isoladamente)
+    const sitePages = [
+        { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
+        { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
+        { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração"] },
+        { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio"] },
+        { title: "Carga Tabágica", url: "calculadoras/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo"] },
+        { title: "Data Provável do Parto", url: "calculadoras/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação"] },
+        { title: "Idade Gestacional", url: "calculadoras/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez"] },
+        { title: "Parkland", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação"] },
+        { title: "Consulta Geral", url: "prontuario/consulta-geral.html", category: "Prontuário", keywords: ["consulta", "geral", "exame", "físico"] },
+        { title: "Formatar Medicações", url: "prontuario/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar"] },
+        { title: "Modelos de Laudos", url: "prontuario/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x"] },
+        { title: "Guia de Prescrição", url: "condutas/index.html", category: "Prontuário", keywords: ["prescrição", "medicação", "condutas"] },
+        { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Pediatria", keywords: ["pediatria", "criança", "pediátrico"] },
+        { title: "Agradecimentos", url: "extras/agradecimentos.html", category: "Geral", keywords: ["agradecimentos", "créditos", "colaboradores"] },
+        { title: "PedBook", url: "https://www.pedb.com.br/", category: "Externa", keywords: ["pedbook", "pediatria", "site", "externo"] },
+        { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência"] }
+    ];
+    
+    // Definir função de busca global
+    window.filterSuggestions = function() {
+        const query = document.getElementById('buscarInterno').value.toLowerCase().trim();
+        const suggestions = document.getElementById('searchSuggestions');
+        
+        if (query.length < 2) {
+            suggestions.innerHTML = '';
+            suggestions.style.display = 'none';
+            return;
+        }
+        
+        const filteredPages = sitePages.filter(page => {
+            return page.title.toLowerCase().includes(query) ||
+                   page.category.toLowerCase().includes(query) ||
+                   page.keywords.some(keyword => keyword.includes(query));
+        });
+        
+        if (filteredPages.length === 0) {
+            suggestions.innerHTML = '<li class="list-group-item text-muted text-center py-3">Nenhum resultado encontrado</li>';
+        } else {
+            suggestions.innerHTML = filteredPages.slice(0, 6).map(page => {
+                let badgeColor = 'secondary';
+                let badgeText = page.category;
+                switch(page.category) {
+                    case 'Calculadora': badgeColor = 'primary'; break;
+                    case 'Prontuário': badgeColor = 'success'; break;
+                    case 'Pediatria': badgeColor = 'info'; break;
+                    case 'Geral': badgeColor = 'danger'; break;
+                    case 'Externa': badgeColor = 'warning'; badgeText = 'Externo'; break;
+                }
+                
+                return `<li class="list-group-item list-group-item-action" onclick="navigateToPage('${page.url}')" style="cursor: pointer;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="flex-grow-1 text-truncate me-2">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <strong class="text-dark text-truncate">${page.title}</strong>
+                                <span class="badge bg-${badgeColor} text-white flex-shrink-0">${badgeText}</span>
+                            </div>
+                            <small class="text-muted text-truncate d-block">
+                                ${page.keywords.slice(0, 3).join(' • ')}
+                            </small>
+                        </div>
+                    </div>
+                </li>`;
+            }).join('');
+        }
+        
+        suggestions.style.display = 'block';
+    };
+    
+    // Definir função de navegação global
+    window.navigateToPage = function(url) {
+        if (url.startsWith('http')) {
+            window.open(url, '_blank');
+        } else {
+            // Detectar caminho atual e ajustar URL
+            const currentPath = window.location.pathname;
+            let finalUrl = url;
+            
+            const pathParts = currentPath.split('/').filter(part => part && part !== 'index.html');
+            const isInSubfolder = pathParts.length > 1 || (pathParts.length === 1 && !currentPath.endsWith('index.html'));
+            
+            if (isInSubfolder) {
+                const levels = pathParts.length - 1;
+                finalUrl = '../'.repeat(levels) + url;
+            }
+            
+            window.location.href = finalUrl;
+        }
+        document.getElementById('searchSuggestions').style.display = 'none';
+        document.getElementById('buscarInterno').value = '';
+    };
+    
+    // Adicionar event listeners se ainda não existirem
+    setTimeout(() => {
+        const searchInput = document.getElementById('buscarInterno');
+        const suggestions = document.getElementById('searchSuggestions');
+        
+        if (searchInput && !searchInput.hasAttribute('data-listeners-added')) {
+            // Marcar que os listeners foram adicionados
+            searchInput.setAttribute('data-listeners-added', 'true');
+            
+            // Event listener para fechar sugestões ao clicar fora
+            document.addEventListener('click', function(event) {
+                const searchContainer = event.target.closest('.position-relative');
+                if (!searchContainer && suggestions) {
+                    suggestions.style.display = 'none';
+                }
+            });
+
+            // Event listener para navegação por teclado
+            searchInput.addEventListener('keydown', function(event) {
+                if (!suggestions) return;
+                
+                const items = suggestions.querySelectorAll('.list-group-item-action');
+                
+                if (event.key === 'Enter' && items.length > 0) {
+                    event.preventDefault();
+                    items[0].click();
+                } else if (event.key === 'Escape') {
+                    suggestions.style.display = 'none';
+                }
+            });
+            
+            console.log('Event listeners de busca adicionados com sucesso');
+        }
+    }, 100);
 }

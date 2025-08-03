@@ -9,10 +9,11 @@ function fixNavbarLinks() {
     const isInProntuario = currentPath.includes("/prontuario/");
     const isInPediatria = currentPath.includes("/pediatria/");
     const isInCondutas = currentPath.includes("/condutas/");
-    const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas;
+    const isInExtras = currentPath.includes("/extras/");
+    const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas || isInExtras;
     
     console.log('Corrigindo navbar - Path:', currentPath);
-    console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria, 'Em condutas:', isInCondutas);
+    console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria, 'Em condutas:', isInCondutas, 'Em extras:', isInExtras);
     
     // Corrigir apenas os links e imagens dentro da navbar
     const navbarContainer = document.getElementById("navbar-placeholder");
@@ -39,6 +40,11 @@ function fixNavbarLinks() {
                 else if (isInCondutas && originalHref.startsWith("condutas/")) {
                     correctedHref = originalHref.substring(9); // Remove "condutas/"
                     console.log('Link condutas corrigido:', originalHref, '->', correctedHref);
+                }
+                // Caso especial: se estamos em extras e o link é para outra página de extras
+                else if (isInExtras && originalHref.startsWith("extras/")) {
+                    correctedHref = originalHref.substring(7); // Remove "extras/"
+                    console.log('Link extras corrigido:', originalHref, '->', correctedHref);
                 }
                 // Se estivermos em uma subpasta e o link NÃO começa com "../"
                 else if (isInSubfolder && !originalHref.startsWith("../")) {
@@ -83,4 +89,158 @@ function fixNavbarLinks() {
             }
         });
     }
+    
+    // Garantir que as funcionalidades de busca funcionem
+    ensureSearchFunctionality();
+}
+
+// Garantir funcionalidade de busca em todas as páginas
+function ensureSearchFunctionality() {
+    // Verificar se as funções de busca já existem
+    if (typeof window.filterSuggestions === 'function' && typeof window.navigateToPage === 'function') {
+        return; // Já existem, não fazer nada
+    }
+    
+    console.log('Adicionando funcionalidades de busca...');
+    
+    // Lista de páginas para busca
+    const sitePages = [
+        { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
+        { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
+        { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração"] },
+        { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio"] },
+        { title: "Carga Tabágica", url: "calculadoras/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo"] },
+        { title: "Data Provável do Parto", url: "calculadoras/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação"] },
+        { title: "Idade Gestacional", url: "calculadoras/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez"] },
+        { title: "Parkland", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação"] },
+        { title: "Consulta Geral", url: "prontuario/consulta-geral.html", category: "Prontuário", keywords: ["consulta", "geral", "exame", "físico"] },
+        { title: "Formatar Medicações", url: "prontuario/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar"] },
+        { title: "Modelos de Laudos", url: "prontuario/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x"] },
+        { title: "Guia de Prescrição", url: "condutas/index.html", category: "Prontuário", keywords: ["prescrição", "medicação", "condutas"] },
+        { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Pediatria", keywords: ["pediatria", "criança", "pediátrico"] },
+        { title: "Agradecimentos", url: "extras/agradecimentos.html", category: "Geral", keywords: ["agradecimentos", "créditos", "colaboradores"] },
+        { title: "PedBook", url: "https://www.pedb.com.br/", category: "Externa", keywords: ["pedbook", "pediatria", "site", "externo"] },
+        { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência"] }
+    ];
+    
+    // Definir função de busca global
+    window.filterSuggestions = function() {
+        const query = document.getElementById('buscarInterno').value.toLowerCase().trim();
+        const suggestions = document.getElementById('searchSuggestions');
+        
+        if (query.length < 2) {
+            suggestions.innerHTML = '';
+            suggestions.style.display = 'none';
+            return;
+        }
+        
+        const filteredPages = sitePages.filter(page => {
+            return page.title.toLowerCase().includes(query) ||
+                   page.category.toLowerCase().includes(query) ||
+                   page.keywords.some(keyword => keyword.includes(query));
+        });
+        
+        if (filteredPages.length === 0) {
+            suggestions.innerHTML = '<li class="list-group-item text-muted text-center py-3">Nenhum resultado encontrado</li>';
+        } else {
+            suggestions.innerHTML = filteredPages.slice(0, 6).map(page => {
+                let badgeColor = 'secondary';
+                let badgeText = page.category;
+                switch(page.category) {
+                    case 'Calculadora': badgeColor = 'primary'; break;
+                    case 'Prontuário': badgeColor = 'success'; break;
+                    case 'Pediatria': badgeColor = 'info'; break;
+                    case 'Geral': badgeColor = 'danger'; break;
+                    case 'Externa': badgeColor = 'warning'; badgeText = 'Externo'; break;
+                }
+                
+                return `<li class="list-group-item list-group-item-action" onclick="navigateToPage('${page.url}')" style="cursor: pointer;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="flex-grow-1 text-truncate me-2">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <strong class="text-dark text-truncate">${page.title}</strong>
+                                <span class="badge bg-${badgeColor} text-white flex-shrink-0">${badgeText}</span>
+                            </div>
+                            <small class="text-muted text-truncate d-block">
+                                ${page.keywords.slice(0, 3).join(' • ')}
+                            </small>
+                        </div>
+                    </div>
+                </li>`;
+            }).join('');
+        }
+        
+        suggestions.style.display = 'block';
+    };
+    
+    // Definir função de navegação global
+    window.navigateToPage = function(url) {
+        if (url.startsWith('http')) {
+            window.open(url, '_blank');
+        } else {
+            // Usar a mesma lógica de detecção de pasta
+            const currentPath = window.location.pathname;
+            const isInCalculadoras = currentPath.includes("/calculadoras/");
+            const isInProntuario = currentPath.includes("/prontuario/");
+            const isInPediatria = currentPath.includes("/pediatria/");
+            const isInCondutas = currentPath.includes("/condutas/");
+            const isInExtras = currentPath.includes("/extras/");
+            const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas || isInExtras;
+            
+            let finalUrl = url;
+            
+            // Aplicar correções de caminho
+            if (isInCalculadoras && url.startsWith("calculadoras/")) {
+                finalUrl = url.substring(13);
+            } else if (isInProntuario && url.startsWith("prontuario/")) {
+                finalUrl = url.substring(11);
+            } else if (isInCondutas && url.startsWith("condutas/")) {
+                finalUrl = url.substring(9);
+            } else if (isInExtras && url.startsWith("extras/")) {
+                finalUrl = url.substring(7);
+            } else if (isInSubfolder && !url.startsWith("../")) {
+                finalUrl = "../" + url;
+            } else if (!isInSubfolder && url.startsWith("../")) {
+                finalUrl = url.substring(3);
+            }
+            
+            window.location.href = finalUrl;
+        }
+        document.getElementById('searchSuggestions').style.display = 'none';
+        document.getElementById('buscarInterno').value = '';
+    };
+    
+    // Adicionar event listeners
+    setTimeout(() => {
+        const searchInput = document.getElementById('buscarInterno');
+        const suggestions = document.getElementById('searchSuggestions');
+        
+        if (searchInput && !searchInput.hasAttribute('data-listeners-added')) {
+            searchInput.setAttribute('data-listeners-added', 'true');
+            
+            // Fechar sugestões ao clicar fora
+            document.addEventListener('click', function(event) {
+                const searchContainer = event.target.closest('.position-relative');
+                if (!searchContainer && suggestions) {
+                    suggestions.style.display = 'none';
+                }
+            });
+
+            // Navegação por teclado
+            searchInput.addEventListener('keydown', function(event) {
+                if (!suggestions) return;
+                
+                const items = suggestions.querySelectorAll('.list-group-item-action');
+                
+                if (event.key === 'Enter' && items.length > 0) {
+                    event.preventDefault();
+                    items[0].click();
+                } else if (event.key === 'Escape') {
+                    suggestions.style.display = 'none';
+                }
+            });
+            
+            console.log('Event listeners de busca adicionados');
+        }
+    }, 100);
 }
