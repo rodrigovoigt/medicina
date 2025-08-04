@@ -25,10 +25,10 @@ $(document).ready(function () {
         'collapse3': 'exameFisicoTorax',
         'collapse4': 'exameFisicoCardio',
         'collapse5': 'exameFisicoPele',
-        'collapseMamas': 'exameMamas',
+        'collapseMamas': 'exameMamasCompleto',
         'collapse6': 'exameFisicoAbdomen',
         'collapse7': 'exameFisicoNeuro',
-        'collapse8': 'exameFisicoGineco',
+        'collapse8': 'exameFisicoGinecoCompleto',
         'collapse9': 'exameFisicoOsteoarticular',
         'collapseEspecializados': 'otoscopia'
     };
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
         // Modelos de Prontuário
         if ($('#prontuarioPadrao').is(':checked')) {
-            textoGerado.push("Alergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\n");
+            textoGerado.push("Alergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n");
         }
 
         if ($('#prontuarioPreNatal').is(':checked')) {
@@ -82,7 +82,7 @@ $(document).ready(function () {
 
         // Estado Geral
         if ($('#exameFisicoEstadoGeral').is(':checked')) {
-            textoGerado.push("Bom estado geral, fácies atípica, boas condições de higiene, colaborativo, eutímico, normobúlico, memória e raciocínio preservados, lúcido, orientado autopsiquicamente e alopsiquicamente, normovigilante. Eutrófico (IMC calculadora), normotônico, normoativo, deambulando sem auxílio. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (não aferido). Normosfigmo, normotenso, eupneico, normoxia em ar ambiente.\n");
+            textoGerado.push("Bom estado geral, lúcido e orientado em tempo e espaço. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (SIC), deambulando sem auxílio, fácies atípicas, boas condições de higiene. Colaborativo, memória e raciocínio preservados, normovigilante, humor eutímico e normobúlico com apetite e sono preservados. Eutrófico (IMC), com tônus e força preservados, normoativo. Normosfigmo, normotenso, eupneico, normoxemia em ar ambiente.\n");
         }
 
         if ($('#estadoGeralSimples').is(':checked')) {
@@ -103,35 +103,35 @@ $(document).ready(function () {
         }
 
         if ($('#labTireoide').is(':checked')) {
-            textoGerado.push("Tireóide:\nTSH XXX / T4L XXX\n");
+            textoGerado.push("TSH XXX / T4L XXX\n");
         }
 
         if ($('#labVitaminas').is(':checked')) {
-            textoGerado.push("Vitaminas e nutrientes:\nVit D XXX / Vit B12 XXX / Ferritina XXX / Vit C XXX\n");
+            textoGerado.push("Vit D XXX / Vit B12 XXX / Ferritina XXX / Vit C XXX\n");
         }
 
         if ($('#labHepatico').is(':checked')) {
-            textoGerado.push("Hepático:\nTGO XXX / TGP XXX / Alb. XXX\n");
+            textoGerado.push("TGO XXX / TGP XXX / Alb. XXX\n");
         }
 
         if ($('#labHormoniosFem').is(':checked')) {
-            textoGerado.push("Hormônios femininos:\nFSH XXX / LH XXX / Estrad. XXX / Proges. XXX / BHCG XXX\n");
+            textoGerado.push("FSH XXX / LH XXX / Estrad. XXX / Proges. XXX / BHCG XXX\n");
         }
 
         if ($('#labPreNatal').is(':checked')) {
-            textoGerado.push("Pré-natal:\nTipagem ABO/Rh / Coombs Ind. XXX / HBsAg XXX / Anti-HIV XXX / VDRL XXX / Toxoplasmose IgG XXX / IgM XXX / Glic XXX / EAS XXX / Urina cultura XXX\n");
+            textoGerado.push("Tipagem ABO/Rh / Coombs Ind. XXX / HBsAg XXX / Anti-HIV XXX / VDRL XXX / Toxoplasmose IgG XXX / IgM XXX / Glic XXX / EAS XXX / Urina cultura XXX\n");
         }
 
         if ($('#labVesicula').is(':checked')) {
-            textoGerado.push("Vesícula Biliar:\nGamaGT XXX / FA XXX / BilT XXX\n");
+            textoGerado.push("GamaGT XXX / FA XXX / BilT XXX\n");
         }
 
         if ($('#labRenal').is(':checked')) {
-            textoGerado.push("Renal:\nCr XXX / Ur XXX / TFG XXX\n");
+            textoGerado.push("Cr XXX / Ur XXX / TFG XXX\n");
         }
 
         if ($('#labEletrolitos').is(':checked')) {
-            textoGerado.push("Eletrólitos:\nNa⁺ XXX / K⁺ XXX / Ca²⁺ XXX / Mg²⁺ XXX / P³⁻ XXX\n");
+            textoGerado.push("Na⁺ XXX / K⁺ XXX / Ca²⁺ XXX / Mg²⁺ XXX / P³⁻ XXX\n");
         }
     
         if ($('#exameFisicoPele').is(':checked')) {
@@ -139,7 +139,7 @@ $(document).ready(function () {
         }
     
         if ($('#exameFisicoTorax').is(':checked')) {
-            textoGerado.push("Exame físico de tórax e pulmonar:\nTórax íntegro, sem massas, crostas ou descamação, simétrico, sem abaulamento, sem retração, formato elíptico, normolíneo (ângulo de charpy =90°)/longilíneo (ângulo de charpy <90°)/brevilíneo (ângulo de charpy >90°).\nSom claro pulmonar à percussão.\nExpansão simétrica bilateralmente.\nFrêmito toracovocal presente sem alterações.\nMurmúrios vesiculares presentes bilateralmente, simétricos, sem ruídos adventícios.\n");
+            textoGerado.push("Exame físico pulmonar:\nMurmúrios vesiculares presentes, simétricos, sem ruídos adventícios / com roncos / sibilos / estertores localizados em XXX.\nSem broncofonia, pectorilóquia ou egofonia.\nTórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\nExpansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n");
         }
 
         if ($('#ausculta').is(':checked')) {
@@ -147,11 +147,11 @@ $(document).ready(function () {
         }
 
         if ($('#ectoscopiaTorax').is(':checked')) {
-            textoGerado.push("Ectoscopia:\nTórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\n");
+            textoGerado.push("Tórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\n");
         }
 
         if ($('#palpacaoPercussao').is(':checked')) {
-            textoGerado.push("Palpação e percussão:\nExpansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n");
+            textoGerado.push("Expansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n");
         }
     
         if ($('#exameFisicoCardio').is(':checked')) {
@@ -167,24 +167,32 @@ $(document).ready(function () {
         }
 
         // Exames de Mamas
-        if ($('#exameMamas').is(':checked')) {
+        if ($('#exameMamasCompleto').is(':checked')) {
             textoGerado.push("Exame físico de mamas:\nMamas simétricas, formato arredondado / piriforme / pendular, volume grande/médio/pequeno, sem alterações cutâneas visíveis. Mamilos normoposicionados / protrusos / invertido, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica e estática.\nExpressão papilar sem saída de secreção.\n");
         }
 
+        if ($('#exameMamas').is(':checked')) {
+            textoGerado.push("Exame de mamas: sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica e estática.\n");
+        }
+
         if ($('#amastasia').is(':checked')) {
-            textoGerado.push("Amastasia:\nPaciente com amastasia direita / esquerda / bilateral. Sem alterações cutâneas visíveis. Sem nódulos palpáveis na região, sem abaulamentos ou retrações à inspeção dinâmica e estática.\n");
+            textoGerado.push("Paciente com amastasia direita / esquerda / bilateral. Sem alterações cutâneas visíveis. Sem nódulos palpáveis na região, sem abaulamentos ou retrações à inspeção dinâmica e estática.\nLinfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n");
         }
 
         if ($('#politeliaPolimastia').is(':checked')) {
-            textoGerado.push("Politelia/polimastia:\nPaciente com politelia / polimastia em região XXX. Estrutura com características de tecido mamário e/ou papilar / Estrutura semelhante a mamilo, sem tecido glandular subjacente palpável / , sem nódulos palpáveis e sem alterações cutâneas associadas.\nÀ inspeção dinâmica e estática, sem abaulamentos ou retrações significativas.\n");
+            textoGerado.push("Paciente com politelia / polimastia em região XXX. Estrutura com características de tecido mamário e/ou papilar / Estrutura semelhante a mamilo, sem tecido glandular subjacente palpável / , sem nódulos palpáveis e sem alterações cutâneas associadas.\nÀ inspeção dinâmica e estática, sem abaulamentos ou retrações significativas.\n");
         }
 
         if ($('#linfonodos').is(':checked')) {
-            textoGerado.push("Linfonodos:\nLinfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n");
+            textoGerado.push("Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n");
+        }
+
+        if ($('#exameFisicoGinecoCompleto').is(':checked')) {
+            textoGerado.push("Exame físico ginecológico:\nMamas simétricas, formato arredondado, volume grande/médio/pequeno, sem sinais flogísticos. Mamilos normoposicionados, protrusos, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica. Expressão papilar sem saída de secreção. Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis.\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofia ou outras alterações morfológicas.\nColo uterino de aspecto habitual, sem lesões visíveis ou secreção anômala.\nToque vaginal com útero em posição antevertida, de volume e consistência normais, móvel e indolor. Anexos não palpáveis.\n");
         }
 
         if ($('#exameFisicoGineco').is(':checked')) {
-            textoGerado.push("Exame físico ginecológico:\nMamas simétricas, formato arredondado, volume grande/médio/pequeno, sem sinais flogísticos. Mamilos normoposicionados, protrusos, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica. Expressão papilar sem saída de secreção. Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis.\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofia ou outras alterações morfológicas.\nColo uterino de aspecto habitual, sem lesões visíveis ou secreção anômala.\nToque vaginal com útero em posição antevertida, de volume e consistência normais, móvel e indolor. Anexos não palpáveis.\n");
+            textoGerado.push("Exame ginecológico: sem alterações.\n");
         }
 
         if ($('#ectoscopiaGineco').is(':checked')) {
