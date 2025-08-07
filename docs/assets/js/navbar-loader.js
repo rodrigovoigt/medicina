@@ -1,3 +1,38 @@
+// Função para aguardar carregamento robusto com múltiplas verificações
+function waitForNavbarLoad(callback, maxAttempts = 20) {
+    let attempts = 0;
+    
+    function checkNavbar() {
+        attempts++;
+        
+        const navbarContainer = document.getElementById("navbar-placeholder");
+        const hasContent = navbarContainer && navbarContainer.innerHTML.trim() !== '';
+        const hasLinks = navbarContainer && navbarContainer.querySelectorAll("a[href]").length > 0;
+        const hasImages = navbarContainer && navbarContainer.querySelectorAll("img").length > 0;
+        const allImagesLoaded = navbarContainer ? 
+            Array.from(navbarContainer.querySelectorAll("img")).every(img => img.complete || img.naturalWidth > 0) : 
+            false;
+        
+        console.log(`Tentativa ${attempts}: conteúdo=${hasContent}, links=${hasLinks}, imagens=${hasImages}, todasCarregadas=${allImagesLoaded}`);
+        
+        // Verificar se tudo está carregado
+        if (hasContent && hasLinks && hasImages && allImagesLoaded) {
+            console.log('Navbar completamente carregada!');
+            callback();
+            return;
+        }
+        
+        if (attempts < maxAttempts) {
+            setTimeout(checkNavbar, 200); // Intervalo maior para dar tempo das imagens
+        } else {
+            console.log('Timeout na verificação da navbar, executando mesmo assim...');
+            callback();
+        }
+    }
+    
+    checkNavbar();
+}
+
 // Função para corrigir links da navbar dinamicamente
 function fixNavbarLinks() {
     // Detectar se estamos no GitHub Pages ou Live Server
@@ -15,11 +50,17 @@ function fixNavbarLinks() {
     console.log('Corrigindo navbar - Path:', currentPath);
     console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria, 'Em condutas:', isInCondutas, 'Em extras:', isInExtras);
     
-    // Corrigir apenas os links e imagens dentro da navbar
     const navbarContainer = document.getElementById("navbar-placeholder");
+    if (!navbarContainer) {
+        console.log('Navbar container não encontrado');
+        return;
+    }
+    
+    // Corrigir apenas os links e imagens dentro da navbar
     if (navbarContainer) {
         // Corrigir links
         const links = navbarContainer.querySelectorAll("a[href]");
+        
         links.forEach(link => {
             const originalHref = link.getAttribute("href");
             if (originalHref && !originalHref.startsWith("http") && !originalHref.startsWith("#")) {
@@ -96,8 +137,19 @@ function fixNavbarLinks() {
 
 // Garantir funcionalidade de busca em todas as páginas
 function ensureSearchFunctionality() {
+    // Aguardar um pouco para garantir que os elementos existam
+    const searchInput = document.getElementById('buscarInterno');
+    const suggestions = document.getElementById('searchSuggestions');
+    
+    if (!searchInput || !suggestions) {
+        console.log('Elementos de busca não encontrados ainda, tentando novamente...');
+        setTimeout(ensureSearchFunctionality, 100);
+        return;
+    }
+    
     // Verificar se as funções de busca já existem
     if (typeof window.filterSuggestions === 'function' && typeof window.navigateToPage === 'function') {
+        console.log('Funcionalidades de busca já existem');
         return; // Já existem, não fazer nada
     }
     
@@ -210,10 +262,24 @@ function ensureSearchFunctionality() {
         document.getElementById('buscarInterno').value = '';
     };
     
-    // Adicionar event listeners
-    setTimeout(() => {
+    // Adicionar event listeners com múltiplas tentativas
+    let attempts = 0;
+    const maxAttempts = 10;
+    
+    function addEventListeners() {
+        attempts++;
         const searchInput = document.getElementById('buscarInterno');
         const suggestions = document.getElementById('searchSuggestions');
+        
+        if (!searchInput || !suggestions) {
+            if (attempts < maxAttempts) {
+                console.log(`Tentativa ${attempts}: Elementos não encontrados ainda, tentando novamente...`);
+                setTimeout(addEventListeners, 200);
+            } else {
+                console.log('Máximo de tentativas atingido para adicionar event listeners');
+            }
+            return;
+        }
         
         if (searchInput && !searchInput.hasAttribute('data-listeners-added')) {
             searchInput.setAttribute('data-listeners-added', 'true');
@@ -240,7 +306,141 @@ function ensureSearchFunctionality() {
                 }
             });
             
-            console.log('Event listeners de busca adicionados');
+            console.log('Event listeners de busca adicionados com sucesso');
+        } else {
+            console.log('Event listeners já foram adicionados ou elemento não encontrado');
         }
-    }, 100);
+    }
+    
+    // Iniciar tentativas de adicionar event listeners
+    addEventListeners();
+}
+
+// Função principal para carregar a navbar com carregamento robusto
+function loadNavbar() {
+    console.log('Iniciando carregamento da navbar...');
+    
+    // Detectar caminho correto da navbar
+    const currentPath = location.pathname;
+    const isInSubfolder = currentPath.includes("/calculadoras/") || 
+                          currentPath.includes("/prontuario/") || 
+                          currentPath.includes("/pediatria/") || 
+                          currentPath.includes("/condutas/") || 
+                          currentPath.includes("/extras/");
+    
+    const navbarPath = isInSubfolder ? '../navbar.html' : 'navbar.html';
+    
+    console.log('Caminho da navbar:', navbarPath);
+    
+    // Carregar navbar via fetch
+    fetch(navbarPath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Navbar HTML carregada, inserindo no DOM...');
+            document.getElementById("navbar-placeholder").innerHTML = data;
+            
+            // Usar o sistema robusto de espera
+            waitForNavbarLoad(() => {
+                console.log('Executando correção da navbar...');
+                try {
+                    fixNavbarLinks();
+                    console.log('fixNavbarLinks executado com sucesso');
+                    
+                    // Garantir que a funcionalidade de busca funcione
+                    ensureSearchFunctionality();
+                    
+                    // Verificar se existe callback navbarLoaded (do navbar.html)
+                    if (typeof window.navbarLoaded === 'function') {
+                        window.navbarLoaded();
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro ao executar fixNavbarLinks:', error);
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar navbar:', error);
+            console.error('Tentando caminho alternativo...');
+            
+            // Tentar caminho alternativo
+            const alternativePath = isInSubfolder ? 'navbar.html' : '../navbar.html';
+            fetch(alternativePath)
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.text();
+                })
+                .then(data => {
+                    console.log('Navbar carregada com caminho alternativo');
+                    document.getElementById("navbar-placeholder").innerHTML = data;
+                    
+                    waitForNavbarLoad(() => {
+                        fixNavbarLinks();
+                        ensureSearchFunctionality();
+                        if (typeof window.navbarLoaded === 'function') {
+                            window.navbarLoaded();
+                        }
+                    });
+                })
+                .catch(altError => {
+                    console.error('Erro também no caminho alternativo:', altError);
+                    console.log('Tentando múltiplos caminhos...');
+                    
+                    // Lista de possíveis caminhos
+                    const possiblePaths = [
+                        './navbar.html',
+                        '../navbar.html',
+                        '../../navbar.html',
+                        './docs/navbar.html',
+                        '../docs/navbar.html'
+                    ];
+                    
+                    let pathIndex = 0;
+                    
+                    function tryNextPath() {
+                        if (pathIndex >= possiblePaths.length) {
+                            console.error('Todos os caminhos falharam para carregar a navbar');
+                            return;
+                        }
+                        
+                        const testPath = possiblePaths[pathIndex++];
+                        console.log(`Tentando caminho ${pathIndex}/${possiblePaths.length}: ${testPath}`);
+                        
+                        fetch(testPath)
+                            .then(res => {
+                                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                                return res.text();
+                            })
+                            .then(data => {
+                                console.log(`Sucesso com caminho: ${testPath}`);
+                                document.getElementById("navbar-placeholder").innerHTML = data;
+                                
+                                waitForNavbarLoad(() => {
+                                    fixNavbarLinks();
+                                    ensureSearchFunctionality();
+                                    if (typeof window.navbarLoaded === 'function') {
+                                        window.navbarLoaded();
+                                    }
+                                });
+                            })
+                            .catch(() => {
+                                tryNextPath();
+                            });
+                    }
+                    
+                    tryNextPath();
+                });
+        });
+}
+
+// Executar quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadNavbar);
+} else {
+    loadNavbar();
 }

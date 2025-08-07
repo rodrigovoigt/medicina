@@ -523,3 +523,21 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
         </div>
     </div>
 </div>
+
+<script>
+    // Script executado após o carregamento da navbar
+    console.log('Navbar HTML processada');
+    
+    // Notificar que a navbar foi carregada
+    if (window.navbarLoaded) {
+        window.navbarLoaded();
+    }
+    
+    // Aguardar um pouco e tentar executar as correções
+    setTimeout(() => {
+        if (typeof fixNavbarLinks === 'function') {
+            console.log('Executando fixNavbarLinks após carregamento da navbar');
+            fixNavbarLinks();
+        }
+    }, 100);
+</script>
