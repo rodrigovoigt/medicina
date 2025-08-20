@@ -67,11 +67,9 @@ $(document).ready(function () {
             percentualFuncaoRenal = 100; // Limita a 100%
         }
         
-        let resultadoTexto = `${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\n`;
+        let resultadoTexto = `TFG: ${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\nFunção renal restante: ${percentualFuncaoRenal.toFixed(1)}%`;
         
-        $('#texto1').text("Taxa de Filtração Glomerular (TFG): ");
         $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
-        $('#texto2').text(`Função renal restante: ${percentualFuncaoRenal.toFixed(2)}%`).data('copyText', `Função renal restante: ${percentualFuncaoRenal.toFixed(2)}%`).attr('data-copy', true);
     });
 
 });

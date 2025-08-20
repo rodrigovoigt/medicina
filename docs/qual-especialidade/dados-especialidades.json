@@ -1,0 +1,815 @@
+{
+  "especialidades": [
+    {
+      "id": 1,
+      "nome": "Acupuntura",
+      "descricao": "Medicina alternativa e complementar. No Brasil, não é necessário fazer Medicina para se tornar acupunturista. A Acupuntura é recomendada para o tratamento de 200 doenças e sintomas. Requer delicadeza e amor ao que faz.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Acupuntura"
+    },
+    {
+      "id": 2,
+      "nome": "Alergia e Imunologia",
+      "descricao": "Alergia e Imunologia visa o diagnóstico e o tratamento das doenças alérgicas. O especialista deve estar treinado para tratar doenças alérgicas e também possuir profundo conhecimento do funcionamento do sistema imune.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Alergia e Imunologia"
+    },
+    {
+      "id": 3,
+      "nome": "Anestesiologia",
+      "descricao": "Especialidade que vem crescendo e com melhor remuneração. Gostar de procedimentos invasivos e se manter sempre atualizado são características da área, que não se limita mais ao Centro Cirúrgico. Atuação no pré e pós-operatório",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Anestesiologia"
+    },
+    {
+      "id": 4,
+      "nome": "Angiologia",
+      "descricao": "Ocupa do tratamento clínico das doenças que acometem vasos sanguíneos (artérias e veias) e vasos linfáticos, como varizes, aneurismas e obstruções arteriais. Atua em conjunto com a cirurgia vascular.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Angiologia"
+    },
+    {
+      "id": 5, 
+      "nome": "Cardiologia",
+      "descricao": "Cardiologia é a especialidade médica que se ocupa do diagnóstico e tratamento das doenças que acometem o coração bem como os outros componentes do sistema circulatório.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Cardiologia"
+    },
+    {
+      "id": 6, 
+      "nome": "Cirurgia Cardiovascular",
+      "descricao": "Especialidade de acesso direto com 5 anos de Residência. A especialidade exige as mesmas características da Cirurgia Geral, mas também é necessário ter domínio de tecnologias, como videoendoscopia torácica até robos inteligente.",
+      "formacao": "5 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Cardiovascular"
+    },
+    {
+      "id": 7, 
+      "nome": "Cirurgia da Mão",
+      "descricao": "Cirurgia da mão é uma especialidade médica que se ocupa da prevenção, diagnóstico, tratamento e reabilitação das patologias que acometem as mãos.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia da Mão"
+    },
+    {
+      "id": 8, 
+      "nome": "Cirurgia de Cabeça e Pescoço",
+      "descricao": "Especialidade médica que trata das doenças e tumores que acometem a região da face, fossas nasais, seios paranasais, boca, faringe, laringe, tireoide, paratireoides, glândulas salivares, dos tecidos moles do pescoço e couro cabeludo.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia de Cabeça e Pescoço"
+    },
+    {
+      "id": 9, 
+      "nome": "Cirurgia do Aparelho Digestivo",
+      "descricao": "Cuida do sistema digestivo, o que inclui esôfago, estômago, vesícula biliar, pâncreas, fígado e intestinos, além do cólon, reto e ânus. Realiza procedimentos cirúrgicos de, por exemplo, hérnias, vesícula ou tumores malignos.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia do Aparelho Digestivo"
+    },
+    {
+      "id": 10, 
+      "nome": "Cirurgia Geral",
+      "descricao": "Uma das principais especialidades do país, pré-requisito para RM em outros tipos de cirurgia. Exige resistência física, emocional e segurança nas decisões. São duas áreas: Cirurgia Básica (2 anos) e Programa de Cirurgia Geral (3 anos).",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Geral"
+    },
+    {
+      "id": 11, 
+      "nome": "Cirurgia Oncológica",
+      "descricao": "Esse especialista opera tumores sólidos – benignos e malignos – na cavidade abdominal, pele e os ginecológicos. A cirurgia oncológica diferencia-se da cirurgia geral por seguir protocolos que aumentam a chance de cura do paciente.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Oncológica"
+    },
+    {
+      "id": 12, 
+      "nome": "Cirurgia Pediátrica",
+      "descricao": "O cirurgião pediátrico atua em casos cirúrgicos de rotina e emergenciais. Tem grande de abrangência e, geralmente, o cirurgiões pertence a algum serviço hospitalar, em conjunto com outras especialidades pediátricas.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Pediátrica"
+    },
+    {
+      "id": 13, 
+      "nome": "Cirurgia Plástica",
+      "descricao": "O cirurgião plástico atua na reparação de órgãos e tecidos para garantir os melhores resultados estéticos e funcionais. Exige conhecimentos aprofundados em anatomia, fisiologia e técnica cirúrgica, além de consciência da arte.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Plástica"
+    },
+    {
+      "id": 14, 
+      "nome": "Cirurgia Torácica",
+      "descricao": "O cirurgião torácico realiza de cirurgias para o tratamento de doenças do tórax, como broncoscopia, biópsia de pulmão; cirurgia do câncer de pulmão; drenagem da pleura; cirurgia da hiperidrose, videotorcoscopia, entre outras.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Torácica"
+    },
+    {
+      "id": 15, 
+      "nome": "Cirurgia Vascular",
+      "descricao": "Cuida dos problemas em vasos sanguíneos das pernas, braços, tronco e pescoço. Problemas das artérias como aneurisma de aorta, estenose das carótidas, doença arterial obstrutiva; e nas veias: teleangectasias, varizes e trombos.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Cirurgia Vascular"
+    },
+    {
+      "id": 16, 
+      "nome": "Clínica Médica",
+      "descricao": "O especialista acaba aprendendo de tudo um pouco e vai ter uma visão ampla do paciente, atuando no combate de doenças de baixa e alta complexidade. Pré-requisito para várias outras especialidades clínicas.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Clínica Médica"
+    },
+    {
+      "id": 17, 
+      "nome": "Coloproctologia",
+      "descricao": "Coloproctologista é um cirurgião especializado em tratamentos cirúrgicos e não cirúrgicos de doenças do intestino delgado e grosso, reto e ânus. Tem formação avançada em problemas do intestino e treinamento em cirurgia geral. ",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Coloproctologia"
+    },
+    {
+      "id": 18, 
+      "nome": "Dermatologia",
+      "descricao": "Área delicada da Medicina, que atrai muitas médicas, Carisma e boa relação com o paciente são fundamentais. Atua em procedimentos clínicos, cirúrgicos e cosmiátricos.  Uma das especialidades mais concorridas no Brasil.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Dermatologia"
+    },
+    {
+      "id": 19, 
+      "nome": "Endocrinologia e Metabologia",
+      "descricao": "Especialista que se dedica ao estudo e das glândulas endócrinas, suas doenças e suas funções. Eminentemente ambulatorial, poucas urgências e eventuais internações para acompanhamento de pacientes com descompensação.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Endocrinologia e Metabologia"
+    },
+    {
+      "id": 20, 
+      "nome": "Endoscopia",
+      "descricao": "Realiza o diagnóstico e tratamento das doenças do aparelho gastrointestinal, vias biliares e o pâncreas, a partir de imagens geradas a partir do videoendoscópio.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Endoscopia"
+    },
+    {
+      "id": 21, 
+      "nome": "Gastroenterologia",
+      "descricao": "Especialidades médica responsável por estudar, diagnosticar e tratar moléstias que acometem o aparelho gastrointestinal, fígado e pâncreas.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Gastroenterologia"
+    },
+    {
+      "id": 22, 
+      "nome": "Genética Médica",
+      "descricao": "É a especialidade menos concorrida do país. O especialista lida com doenças genéticas raras – na maioria das vezes – e com os famosos exames de DNA. Sua principal função é investigar. ",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Genética Médica"
+    },
+    {
+      "id": 23, 
+      "nome": "Geriatria",
+      "descricao": "Especialista no cuidado de idosos. É a especialidade que se integra na Gerontologia com o instrumental específico para a promoção da saúde, prevenção e tratamento das doenças, reabilitação funcional e cuidados paliativos.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Geriatria"
+    },
+    {
+      "id": 24, 
+      "nome": "Ginecologia e Obstetrícia",
+      "descricao": "Ela cuida da saúde do sistema reprodutor da mulher e a acompanha no momento da gravidez. É comum começar a trabalhar em Ginecologia e ir migrando aos pouco para a Obstetrícia. Uma das 5 principais especialidades",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Ginecologia e Obstetrícia"
+    },
+    {
+      "id": 25, 
+      "nome": "Hematologia e Hemoterapia",
+      "descricao": "O especialista é responsável por investigar, diagnosticar e tratar os distúrbios do sangue, sejam eles benignos ou malignos do ponto de vista patológico, e por todos os procedimentos relacionados à transfusão de sangue.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Hematologia e Hemoterapia"
+    },
+    {
+      "id": 26, 
+      "nome": "Homeopatia",
+      "descricao": "O especialista deve ter um perfil compreensivo, que gere confiança ao paciente. O especialista atua de forma individual em cada paciente e não focado apenas em doenças. As consultas costumam ser extensas e detalhadas.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Homeopatia"
+    },
+    {
+      "id": 27, 
+      "nome": "Infectologia",
+      "descricao": "O especialista trabalha com doenças relacionadas a vírus, bactérias, fungos, entre outras. . Possui um grande campo de atuação e muito trabalho, mas a remuneração não é das melhores. Especialidade em evidência com a pandemia.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Infectologia"
+    },
+    {
+      "id": 28, 
+      "nome": "Mastologia",
+      "descricao": "A mastologia ou senologia é especialidade médica que se dedica ao estudo das glândulas mamárias. O mastologista é o especialista que estuda, previne, diagnostica, trata e reabilita todas as doenças da mama.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Mastologia"
+    },
+    {
+      "id": 29, 
+      "nome": "Medicina de Emergência",
+      "descricao": "O médico emergencista atende pacientes com doenças e lesões que precisam de atendimento imediato. A Medicina de Emergência concentra-se na abordagem e manejo de situações que representam risco imediato à vida.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Medicina de Emergência"
+    },
+    {
+      "id": 30, 
+      "nome": "Medicina de Família e Comunidade",
+      "descricao": "Devido aos programas federais, essa é a especialidade que mais cresce no país. O especialista realiza cuidados primários em famílias inteiras, por isso precisa sera acessível e empático, criando um relacionamento com as famílias.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Medicina de Família e Comunidade"
+    },
+    {
+      "id": 31, 
+      "nome": "Medicina do Trabalho",
+      "descricao": "Medicina do trabalho é um ramo da medicina que lida com as relações entre homens e mulheres trabalhadores e seu trabalho, visando a prevenção de acidentes e de doenças do trabalho e a promoção da saúde e da qualidade de vida.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Medicina do Trabalho"
+    },
+    {
+      "id": 32, 
+      "nome": "Medicina de Tráfego",
+      "descricao": "Medicina de Tráfego é o ramo da ciência médica que trata da manutenção do bem-estar físico, psíquico e social do ser humano que se desloca, das interações desses deslocamentos com o homem, visando ao equilíbrio ecológico.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Medicina de Tráfego"
+    },
+    {
+      "id": 33, 
+      "nome": "Medicina Esportiva",
+      "descricao": "Especialidade médica que inclui segmentos teóricos e práticos da medicina com o objetivo de investigar a influência do exercício, do treino e do esporte sobre as pessoas sadias ou doentes, para prevenir, tratar e reabilitar.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Medicina Esportiva"
+    },
+    {
+      "id": 34, 
+      "nome": "Medicina Física e Reabilitação",
+      "descricao": "A Medicina Física e de Reabilitação é responsável pela prevenção, diagnóstico, tratamentos e organização da reabilitação de pessoas com patologias médicas incapacitantes e comorbilidades em todos os grupos etários.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Medicina Física e Reabilitação"
+    },
+    {
+      "id": 35, 
+      "nome": "Medicina Intensiva",
+      "descricao": "O intensivista é o médico especializado no atendimento de pacientes críticos, geralmente em unidades de terapia intensiva.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Medicina Intensiva"
+    },
+    {
+      "id": 36, 
+      "nome": "Medicina Legal e Perícia Médica",
+      "descricao": "O perito médico é um especialista na área de medicina legal. Para atuar nesse segmento da medicina, é fundamental o conhecimento e a prática sobre a semiologia e exame físico do corpo e, também, sobre a legislação vigente.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Medicina Legal e Perícia Médica"
+    },
+    {
+      "id": 37, 
+      "nome": "Medicina Nuclear",
+      "descricao": "Medicina Nuclear é a especialidade médica que faz uso in vivo e in vitro de fontes radioativas não seladas com finalidades diagnósticas e terapêuticas. O especialista precisa ter capacidades tecnológicas e atualização na área.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Medicina Nuclear"
+    },
+    {
+      "id": 38, 
+      "nome": "Medicina Preventiva e Social",
+      "descricao": "O médico tem que ter um perfil organizado para planejar ações na saúde da população. É a especialidade que atua na prevenção de doenças coletivas, que se dá, por ex., através de vacinas, projetos focados nas atividades físicas e etc.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Medicina Preventiva e Social"
+    },
+    {
+      "id": 39, 
+      "nome": "Nefrologia",
+      "descricao": "Nefrologia é uma especialidade médica dedicada ao diagnóstico e tratamento clínico das doenças do sistema urinário, principalmente relacionadas ao rim, além de doenças sistêmicas.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Nefrologia"
+    },
+    {
+      "id": 40, 
+      "nome": "Neurocirurgia",
+      "descricao": "Especialidade cirúrgica que contribui para o diagnóstico, tratamento e reabilitação de doenças neurológicas. Um neurocirurgião pode tratar traumatismos cranianos, aneurismas, malformações, tumores do encéfalo, entre outros.",
+      "formacao": "5 anos",
+      "requisito": "Programa de Residência Médica em Neurocirurgia"
+    },
+    {
+      "id": 41, 
+      "nome": "Neurologia",
+      "descricao": "O neurologista, médico que se especializa em neurologia, investiga, diagnostica e trata distúrbios neurológicos. Neurologistas também atuam em pesquisa clínica, ensaios clínicos e em pesquisa de ciências básicas da medicina.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Neurologia"
+    },
+    {
+      "id": 42, 
+      "nome": "Nutrologia",
+      "descricao": "Nutrologia é a especialidade médica clínica que se dedica ao diagnóstico, prevenção e tratamento de doenças do comportamento alimentar. Os nutrólogos são especialistas em doenças provocadas pela alimentação inadequada.",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Nutrologia"
+    },
+    {
+      "id": 43, 
+      "nome": "Oftalmologia",
+      "descricao": "A oftalmologia é uma especialidade que estuda e trata as doenças relacionadas ao olho, à refração e aos olhos e seus anexos. O oftalmologista realiza cirurgias, prescreve tratamentos e correções para os distúrbios de visão.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Oftalmologia"
+    },
+    {
+      "id": 44, 
+      "nome": "Oncologia Clínica",
+      "descricao": "O oncologista é responsável pelo tratamento de diversos tipos de tumores, e a especialidade subdivide-se entre Oncologia Adulta e Pediátrica.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Oncologia Clínica"
+    },
+    {
+      "id": 45, 
+      "nome": "Ortopedia e Traumatologia",
+      "descricao": "A Ortopedia e Traumatologia é a especialidade médica unificada que vai ser responsável por estudar e tratar doenças, lesões e deformidade que atingem o aparelho locomotor, assim como ossos, músculos, articulações e ligamentos.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Ortopedia e Traumatologia"
+    },
+    {
+      "id": 46, 
+      "nome": "Otorrinolaringologia",
+      "descricao": "Otorrinolaringologia é o ramo da Medicina que cuida das seguintes áreas: nariz, seios da face, garganta e ouvidos. Além disso, o médico capacitado em otorrino cuida da cabeça e do pescoço como um todo.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Otorrinolaringologia"
+    },
+    {
+      "id": 47, 
+      "nome": "Patologia",
+      "descricao": "O médico patologista é o profissional que examina os fluidos e tecidos corporais. É também responsável por realizar necropsias e testes de laboratório. O patologista ajuda outros profissionais de saúde ao determinar diagnósticos.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Patologia"
+    },
+    {
+      "id": 48, 
+      "nome": "Patologia Clínica/Medicina Laboratorial",
+      "descricao": "Através da realização de exames laboratoriais, o especialista fornece informações de modo a proporcionar-lhe os meios necessários para atuar na prevenção, diagnóstico, tratamento e prognóstico e acompanhamento dos pacientes.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Patologia Clínica/Medicina Laboratorial"
+    },
+    {
+      "id": 49, 
+      "nome": "Pediatria",
+      "descricao": "A pediatria é a especialidade médica dedicada à assistência à criança e ao adolescente, nos seus diversos aspectos, sejam eles preventivos ou curativos.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Pediatria"
+    },
+    {
+      "id": 50, 
+      "nome": "Pneumologia",
+      "descricao": "Pneumologia é a especialidade médica a qual é responsável pelo tratamento das patologias das vias aéreas inferiores. O profissional habilitado para atuar nessa especialidade é denominado pneumologista. ",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Pneumologia"
+    },
+    {
+      "id": 51, 
+      "nome": "Psiquiatria",
+      "descricao": "Especialidade responsável pelo diagnóstico e tratamento dos Transtornos Mentais e de Comportamento, atuando com a prevenção, diagnóstico, tratamento e a reabilitação dos diferentes modos de manifestações das doenças mentais.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Psiquiatria"
+    },
+    {
+      "id": 52, 
+      "nome": "Radiologia e Diagnóstico por Imagem",
+      "descricao": "Especialidade que utiliza as radiações para a realização de diagnósticos, controle e tratamento de doenças. Ela permite a visualização de ossos, órgãos ou estruturas através do uso de radiações, gerando desta maneira uma imagem.",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Radiologia e Diagnóstico por Imagem"
+    },
+    {
+      "id": 53, 
+      "nome": "Radioterapia",
+      "descricao": "Radioterapia, ou radioncologia, é uma especialidade médica focada no tratamento oncológico utilizando radiação ionizante.",
+      "formacao": "4 anos",
+      "requisito": "Programa de Residência Médica em Radioterapia"
+    },
+    {
+      "id": 54, 
+      "nome": "Reumatologia",
+      "descricao": "Área médica que se ocupa do estudo das doenças que acometem os tecidos conjuntivos, que incluem as articulações, os ossos, os músculos, os tendões e os ligamentos. São patologias designadas de doenças reumáticas",
+      "formacao": "2 anos",
+      "requisito": "Programa de Residência Médica em Reumatologia"
+    },
+    {
+      "id": 55, 
+      "nome": "Urologia",
+      "descricao": "Especialidade cirúrgica que trata do trato urinário de homens e de mulheres e do sistema reprodutor das pessoas do sexo masculino. Urologistas são treinados para diagnosticar, tratar e acompanhar pacientes com distúrbios urológicos",
+      "formacao": "3 anos",
+      "requisito": "Programa de Residência Médica em Urologia"
+    },
+    {
+      "id": 56, 
+      "nome": "Administração em saúde",
+      "descricao": "Gestão Hospitalar, Gestão em Saúde, Administração em saúde ou Administração hospitalar é o campo de atuação em saúde relacionado à liderança, gestão e administração de sistemas de saúde públicos e privados, clínicas, laboratórios, hospitais e redes hospitalares em todos os setores primário, secundário e terciário.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em qualquer Programa da CNRM"
+    },
+    {
+      "id": 57, 
+      "nome": "Alergia e Imunologia Pediátrica",
+      "descricao": "2 anos",
+      "formacao": "requisito de Residência Médica em Alergia e Imunologia ou Pediatria",
+      "requisito": ""
+    },
+    {"id": 58, 
+    "nome": "Angiorradiologia e Cirurgia Endovascular",
+    "descricao": "A angiorradiologia é a subespecialidade irmã da cirurgia endovascular e vascular.Trabalha por dentro dos vasos através de pequenos furos, com materiais como cateteres, stents e endopróteses. Os procedimentos são realizados em salas cirúrgica especiais, equipadas com fluoroscópio (um tipo de raio-X em tempo real) e as salas híbridas mais modernas.",
+    "formacao": "1 ano",
+    "requisito": "requisito de Residência Médica em Radiologia e Diagnóstico por Imagem, Cirurgia Vascular ou Angiologia"
+    },
+    {
+      "id": 59, 
+      "nome": "Atendimento ao queimado",
+      "descricao": "A área de atuação de Atendimento ao Paciente Queimado forma cirurgião plástico especializado no atendimento inicial, tratamento cirúrgico da fase aguda, assistência intensiva ao grande queimado, acompanhamento ambulatorial dos pacientes e tratamento das das sequelas das queimaduras.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cirurgia Plástica"
+    },
+    {
+      "id": 60, 
+      "nome": "Auditoria Médica",
+      "descricao": "A Auditoria Médica é a área de atuação do profissional com experiência em atendimentos clínicos e cirúrgicos, que tenha atuado em hospitais, a fim de compreender as diversas etapas do processo de atendimento, tanto do pequeno risco (ambulatório, emergência) como do grande risco (internações clinicas e cirúrgicas).",
+      "formacao": "1 ano",
+      "requisito": "Opcional e qualquer Programa de Residência Médica (PRM) de especialidade"
+    },
+    {
+      "id": 61, 
+      "nome": "Cardiologia Pediátrica",
+      "descricao": "A cardiologia pediátrica é uma área de atuação abrangente e tornou-se complexa em decorrência da melhoria dos tratamentos das cardiopatias congênitas. Esta área atua desde o pré-natal (diagnóstico fetal das cardiopatias), passa pelo período neonatal, onde a maior parte das cardiopatias se manifesta, abrange os lactentes e pré-escolar e alcança os adolescentes e adultos, visto que boa parte dos pacientes com cardiopatias congênitas chegam à vida adulta.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Cardiologia ou Pediatria"
+    },
+    {
+      "id": 62, 
+      "nome": "Cirurgia Bariátrica",
+      "descricao": "A cirurgia bariátrica é um procedimento que reúne um conjunto de técnicas de diminuição do estômago destinada a redução de peso de pacientes com obesidade. O procedimento é feito quando as atividades físicas não causam mais efeito na pessoa, necessitando de uma intervenção médica.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Cirurgia do Aparelho Digestivo ou Cirurgia Geral"
+    },
+    {
+      "id": 63, 
+      "nome": "Cirurgia Crânio-Maxilo-Facial",
+      "descricao": "A Cirurgia Crânio-maxilo-facial é uma área da medicina que atua no tratamento cirúrgico de deformidades e malformações congênitas, traumas e neoplasias benignas e malignas (nódulos e tumores) na face, parte interna da boca, maxilar e mandíbula.É uma área de atuação complementar à do Otorrinolaringologista",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cirurgia de Cabeça e Pescoço, Cirurgia Plástica ou Otorrinolaringologia"
+    },
+    {
+      "id": 64, 
+      "nome": "Cirurgia do Trauma",
+      "descricao": "A Cirurgia do Trauma é uma área de atuação médica e subespecialidade da Cirurgia Geral que visa ao cuidado cirúrgico em situações de urgência e emergência. Nestas situações há a necessidade de procedimentos rápidos, intervenções agressivas e outras ações objetivando minimizar os danos causados em pacientes vítimas de trauma.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Cirurgia Geral"
+    },
+    {
+      "id": 65, 
+      "nome": "Cirurgia Videolaparoscópica",
+      "descricao": "É a cirurgia minimamente invasiva do abdômen e seus órgãos internos. A videolaparoscopia é uma técnica que realiza procedimentos com o auxílio de uma câmera ligada a uma ótica que é introduzida através da parede abdominal e os órgãos são manipulados por pinças utilizadas pelo cirurgião. Pode ser feita em dois casos: Videolaparoscopia diagnóstica: com o objetivo de diagnosticar doenças já suspeitadas pelo médico; Videolaparoscopia cirúrgica: quando já temos o diagnóstico e precisamos atuar na resolução deste problema.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cirurgia do Aparelho Digestivo ou Cirurgia Geral"
+    },
+    {
+      "id": 66, 
+      "nome": "Citopatologia",
+      "descricao": "Citopatologia é o estudo das células e suas alterações morfológicas em casos patológicos. O exame citopatológico envolve uma avaliação morfológica celular determinante para a detecção, por exemplo, de uma pré-malignidade ou malignidade, o que quando associado a um quadro clínico específico, permite ao médico direcionar o paciente para um tratamento clínico ou cirúrgico.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em PRM em Patologia"
+    },
+    {
+      "id": 67, 
+      "nome": "Densitometria óssea",
+      "descricao": "A Densitometria óssea é um exame que avalia a massa óssea e estima o risco de fratura dos ossos. Várias especialidades podem tratar a Osteoporose a Osteopenia que são diagnosticadas pela Densitometria óssea, em especial, o Reumatologista.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Endocrinologia e Metabologia, Ginecologia e Obstetrícia, Medicina Nuclear, Ortopedia e Traumatologia ou Reumatologia"
+    },
+    {
+      "id":68, 
+      "nome": "Dor",
+      "descricao": "O médico especialista em medicina da dor – conhecido como médico intervencionista da dor ou médico da dor – um profissional que busca proporcionar produtividade e qualidade de vida ao paciente que sofre de alguma doença ou condição acompanhada de dor, em especial a dor crônica.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Acupuntura, Anestesiologia, Clínica Médica, Medicina Física e Reabilitação, Neurocirurgia, Neurologia, Ortopedia, Pediatria ou Reumatologia"
+    },
+    {
+      "id": 69, 
+      "nome": "Ecocardiografia",
+      "descricao": "O avanço da tecnologia permite a realização de exames de ecocardiograma de diferentes formas e cada vez mais precisos. No entanto, para que o exame seja conduzido da maneira adequada – e para que os resultados sejam confiáveis – a qualificação do profissional responsável é fundamental. Somente médicos Cardiologistas e com especialização em Ecocardiografia podem realizar o Ecocardiograma e interpretar as suas imagens com o conhecimento necessário, o que é fundamental para a confiabilidade dos laudos.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Cardiologia"
+    },
+    {
+      "id": 70, 
+      "nome": "Ecografia Vascular com Doppler",
+      "descricao": "Visa a formação e aperfeiçoamento do médico para o diagnóstico e acompanhamento evolutivo das principais doenças vasculares através da ecografia vascular com doppler. O conteúdo teórico inclui abordagem objetiva e atualizada da importância do método e dos principais critérios empregados na ultrassonografia vascular.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Radiologia, Cirurgia Vascular ou Angiologia"
+    },
+    {
+      "id": 71, 
+      "nome": "Eletrofisiologia Clínica Invasiva",
+      "descricao": "É um método diagnóstico invasivo que utiliza cateteres eletrodos para registrar os eventos elétricos do coração. Inicialmente foi empregado para mensuração dos intervalos de condução atrioventricular e, posteriormente, para esclarecer os mecanismos arritmogênicos e para testar a eficácia de agentes antiarrítmicos.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Cardiologia"
+    },
+    {
+      "id": 72, 
+      "nome": "Emergência Pediátrica",
+      "descricao": "A Especialização em Emergências Pediátricas tem como objetivo atualizar o profissional no atendimento de casos de urgência e emergências pediátricas, desde a abordagem diagnóstica até a melhor intervenção terapêutica.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Medicina de Emergência ou Pediatria"
+    },
+    {
+      "id": 73, 
+      "nome": "Endocrinologia Pediátrica",
+      "descricao": "A Endocrinologia Pediátrica é uma subespecialidade médica que estuda as ordens do sistema endócrino e suas secreções específicas, chamadas de secreções fisiológicas especialmente em crianças e adolescentes.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Endocrinologia e Metabologia ou Pediatria"
+    },
+    {
+      "id": 74, 
+      "nome": "Endoscopia Digestiva",
+      "descricao": "Endoscopia Digestiva Alta é a especialização, que prepara o médico para a realização do exame com proficiência. O profissional pode vivenciar a rotina da área, com a ambientação hospitalar e o domínio de todos os equipamentos endoscópicos.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Endoscopia, Cirurgia do Aparelho Digestivo, Gastroenterologia, Coloproctologia ou Cirurgia Geral"
+    },
+    {
+      "id": 75, 
+      "nome": "Endoscopia Ginecológica",
+      "descricao": "A endoscopia ginecológica engloba um conjunto de técnicas minimamente invasivas que têm por objetivo avaliar e tratar alterações dos órgãos reprodutivos femininos (útero, tubas uterinas e ovários).",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Ginecologia e Obstetrícia"
+    },
+    {
+      "id": 76, 
+      "nome": "Endoscopia Respiratória",
+      "descricao": "A endoscopia da árvore brônquica é um tipo de exame médico que se utiliza de um endoscópio para obter imagens do trato respiratório objetivando o diagnóstico de patologias que porventura o acometa. O exame é sempre realizado por um médico especialista auxiliado por uma equipe de enfermagem.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cirurgia Torácica ou Pneumologia"
+    },
+    {
+      "id": 77, 
+      "nome": "Ergometria",
+      "descricao": "Ergometria é a ciência que mede a quantidade de trabalho realizado pelo corpo durante um exercício físico. Também é a ciência responsável por cuidar da postura durante o trabalho. O teste ergométrico é interpretado por médicos cardiologistas especializados.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cardiologia"
+    },
+    {
+      "id": 78, 
+      "nome": "Estimulação Cardíaca Eletrônica Implantável",
+      "descricao": "A estimulação cardíaca artificial (ECA) foi introduzida há cerca de 5 décadas para tratamento das bradiarritmias. De cirurgias de grande porte, evoluiu-se para implantes de dispositivos cardíacos eletrônicos predominantemente por via endocavitária e sob anestesia local. Esta evolução tecnológica exigiu uma mudança na formação dos profissionais médicos dedicados à área.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cardiologia ou Cirurgia Cardiovascular"
+    },
+    {
+      "id": 79, 
+      "nome": "Foniatria",
+      "descricao": "A Foniatria é uma especialidade médica, reconhecida pelo CFM e pela AMB desde 1972, sendo atualmente uma área de atuação da Otorrinolaringologia.O foniatra é o médico especializado nos Distúrbios de Comunicação e Aprendizagem. Portanto, apresenta como principal atuação ser um facilitador e cuidador do desenvolvimento da linguagem, incluindo-se a aprendizagem.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Otorrinolaringologia"
+    },
+    {
+      "id": 80, 
+      "nome": "Gastroenterologia Pediátrica",
+      "descricao": "A gastroenterologia infantil é a especialidade médica responsável por prevenir, diagnosticar e tratar as doenças do aparelho gastrointestinal da criança e do adolescente, que é composto pela boca, faringe, esôfago, estômago e intestinos delgado e grosso, além do fígado, vesícula biliar e pâncreas.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Gastroenterologia ou Pediatria"
+    },
+    {
+      "id": 81, 
+      "nome": "Hansenologia",
+      "descricao": "Hanseniologia é um ramo da Dermatologia que estuda especificamente a hanseníase.O Brasil conta, atualmente, com cerca de 200 hansenologistas. O número de hansenologistas ainda é insuficiente para reverter o atual cenário brasileiro em relação à hanseníase: O Brasil é o segundo país com mais casos da doença, atrás da Índia.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Clínica Médica, Dermatologia, Infectologia, Medicina Preventiva e Social, Medicina de Família e Comunidade ou Neurologia"
+    },
+    {
+      "id": 82, 
+      "nome": "Hematologia e Hemoterapia Pediátrica",
+      "descricao": "A Hematologia e Hemoterapia é a especialidade responsável por investigar, diagnosticar e tratar os distúrbios do sangue, sejam eles benignos ou malignos do ponto de vista patológico, e por todos os procedimentos relacionados à transfusão de sangue.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Hematologia e Hemoterapia ou Pediatria"
+    },
+    {
+      "id": 83, 
+      "nome": "Hemodinâmica e Cardiologia Intervencionista",
+      "descricao": "O serviço de Hemodinâmica é responsável pela realização de cateterismo cardíaco para o diagnóstico e tratamento de doenças do coração. O setor realiza o procedimento em adultos e crianças.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Cardiologia"
+    },
+    {
+      "id": 84, 
+      "nome": "Hepatologia",
+      "descricao": "A hepatologia é o estudo do fígado. Também pode ser considerada a a que estuda e cuida de doenças relacionadas ao fígado, assim como tratamento e prevenção.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Clínica Médica, Gastroenterologia ou Infectologia"
+    },
+    {
+      "id": 85, 
+      "nome": "Infectologia Hospitalar",
+      "descricao": "Infectologia é a especialidade médica que se ocupa do estudo das doenças causadas por diversos patógenos como príons, vírus, bactérias, protozoários, fungos e animais. A infectologia também é chamada de “doenças infecto-parasitárias” (DIP) ou “moléstias infecciosas e parasitárias” (MIP).",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Infectologia"
+    },
+    {
+      "id": 86, 
+      "nome": "Infectologia Pediátrica",
+      "descricao": "A infectologia pediátrica é uma subespecialidade médica que investiga e trata as doenças infecciosas em crianças – desde problemas mais comuns, como as infecções de ouvido, até doenças raras ou potencialmente mais graves.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Infectologia ou Pediatria"
+    },
+    {
+      "id": 87, 
+      "nome": "Mamografia",
+      "descricao": "Mamografia é um exame de imagem da composição das mamas que permite a detecção precoce do câncer de mama, por vezes mesmo quando ainda não palpável.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Ginecologia e Obstetrícia ou Mastologia"
+    },
+    {
+      "id": 88, 
+      "nome": "Medicina Aeroespacial",
+      "descricao": "A medicina aeroespacial é uma especialização que se destina a estudar, tratar e prevenir doenças que podem surgir em pessoas expostas à atividade aérea constante, como pilotos, aeromoças e comandantes de aeronaves, por exemplo, e também em passageiros frequentes e eventuais.O especialista de medicina aeroespacial pode atuar em empresas de companhias aéreas que transportam passageiros, em clínicas médicas em aeroportos, dando orientação médica a viajantes e turistas, entre outras funções que envolvem assuntos relacionados com a saúde e o voo.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Clínica Médica, Medicina Intensiva, Medicina de Emergência, Cirurgia Geral, Pediatria e Anestesiologia"
+    },
+    {
+      "id": 89, 
+      "nome": "Medicina do Adolescente",
+      "descricao": "Pacientes da faixa etária dos 10 aos 20 anos de idade são o foco de atenção da Medicina do Adolescente. Essa especialidade também pode ser apresentada com o nome de hebiatria. A adolescência é uma fase de profundas mudanças, alterações e transformações no corpo.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Pediatria"
+    },
+    {
+      "id": 90, 
+      "nome": "Medicina do Sono",
+      "descricao": "Medicina do Sono é uma área da saúde que estuda as funções do sono, os seus distúrbios e o impacto destes distúrbios na vida dos indivíduos. Atualmente conhece-se mais de oitenta distúrbios do sono.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Clínica Médica, Neurologia, Otorrinolaringologia, Pediatria, Pneumologia ou Psiquiatria"
+    },
+    {
+      "id": 91, 
+      "nome": "Medicina Fetal",
+      "descricao": "A Medicina fetal é uma especialidade que visa o acompanhamento detalhado de gestações através de aconselhamento genético, ultrassonografia e procedimentos invasivos, sempre visando o bem estar do binômio mãe-feto. Realiza ainda rastreamento de cromossomopatias através da medida da TN, ducto venoso e osso nasal.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Ginecologia e Obstetrícia"
+    },
+    {
+      "id": 92, 
+      "nome": "Medicina Intensiva Pediátrica",
+      "descricao": "A Medicina Intensiva Pediátrica é uma especialidade médica destinada ao trabalho em Unidades de Terapia Intensiva (UTI) para saúde infantil.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Medicina Intensiva ou Pediatria"
+    },
+    {
+      "id": 93, 
+      "nome": "Medicina Paliativa",
+      "descricao": "Essa especialidade opera com uma equipe multidisciplinar visando o cuidado integral de pacientes. A proposta é controlar sintomas físicos, emocionais e espirituais, melhorando a qualidade de vida tanto do paciente quanto de sua família.Os cuidados paliativos podem ser oferecidos no fim da vida, mas o ideal é que cheguem muito antes, já no diagnóstico da doença.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Anestesiologia, Cirurgia de Cabeça e Pescoço, Cirurgia Oncológica, Clínica Médica, Geriatria, Mastologia, Medicina de Família e Comunidade, Medicina Intensiva, Neurologia, Nefrologia, Oncologia Clínica ou Pediatria"
+    },
+    {
+      "id": 94, 
+      "nome": "Nefrologia Pediátrica",
+      "descricao": "A nefrologia pediátrica é a subespecialidade da Pediatria responsável por prevenir, diagnosticar e tratar de condições que assolam os rins de pacientes entre o 0 e os 18 anos de idade, ou seja, bebês, crianças e adolescentes.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Infectologia"
+    },
+    {
+      "id": 95, 
+      "nome": "Neonatologia",
+      "descricao": "A neonatologia é o ramo da Pediatria que ocupa-se das crianças desde o nascimento até 28 dias de idade.O neonatologista é o médico que atua nos cuidados específicos com bebês recém-nascidos e com disfunções que necessitam de cuidados especializados intensivos, como os prematuros.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Infectologia"
+    },
+    {
+      "id": 96, 
+      "nome": "Neurofisiologia Clínica",
+      "descricao": "A Neurofisiologia Clínica é uma das vertentes das neurociências. Seu principal objetivo é estudar o Sistema Nervoso na sua dimensão funcional, com base em noções neuroanatômicas, neurofisiológicas e clínicas.Tal estudo tem propósitos diagnósticos, terapêuticos e de monitoração das funções do sistema nervoso, através de procedimentos que envolvem os sistemas nervoso central e periférico.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Medicina Física e Reabilitação, Neurologia ou Neurocirurgia"
+    },
+    {
+      "id": 97, 
+      "nome": "Neurologia Pediátrica",
+      "descricao": "A neurologia é a especialidade responsável pelo estudo, diagnóstico e tratamento de doenças que afetam o sistema nervoso central e periférico, cerebelo, cérebro, tronco encefálico e nervos. A neurologia pediátrica é uma subespecialidade cujo enfoque são os bebês, crianças e adolescentes.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Neurologia ou Pediatria"
+    },
+    {
+      "id": 98, 
+      "nome": "Neurorradiologia",
+      "descricao": "Neurorradiologia é uma subespecialidade da radiologia que se foca no diagnóstico e caracterização de anormalidades do sistema nervoso central e periférico, medula espinhal, e cabeça e pescoço. Os métodos de imagem empregados primariamente são a tomografia computadorizada e a ressonância magnética.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Radiologia e Diagnóstico por Imagem, Neurologia ou Neurocirurgia"
+    },
+    {
+      "id": 99, 
+      "nome": "Nutrição Parenteral e Enteral",
+      "descricao": "Reconhecida pelo MEC, a Nutrologia tem na Terapia Nutricional Parenteral e Enteral Adulto sua área de atuação formalmente constituída, com prova inclusive. Entretanto, outras áreas consagradas de atuação do nutrólogo existem como a Obesidade, Nutrologia Esportiva, Nutrologia no Idoso, etc.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Cirurgia Geral, Cirurgia do Aparelho Digestivo, Clínica Médica, Gastroenterologia, Medicina Intensiva, Nutrologia ou Pediatria"
+    },
+    {
+      "id": 100, 
+      "nome": "Nutrição Parenteral e Enteral Pediátrica",
+      "descricao": "A Nutrologia tem na Terapia Nutricional Parenteral e Enteral Adulto Pediátrica sua área de atuação formalmente constituída, com prova inclusive. Entretanto, outras áreas consagradas de atuação do nutrólogo existem como a Obesidade, Nutrologia Esportiva, Nutrologia no Idoso, etc.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Nutrologia ou Pediatria"
+    },
+    {
+      "id": 101, 
+      "nome": "Nutrologia Pediátrica",
+      "descricao": "Nutrologia Pediátrica é uma especialidade médica voltada para a Nutrição e suas diversas interfaces na criança, desde doenças (gastro, alergia, nefrologia), prevenção com orientação de alimentação saudável e tratamento de carências nutricionais, dificuldades alimentares, erros alimentares, obesidade entre outros.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Nutrologia ou Pediatria"
+    },
+    {
+      "id": 102, 
+      "nome": "Oncologia Pediátrica",
+      "descricao": "A especialidade de cancerologia ou oncologia pediátrica é a área da medicina que trata de crianças e adolescentes com câncer.Oncologia pediátrica é a subespecialidade da oncologia que se ocupa do tratamento das doenças proliferativas que acometem especificamente as crianças.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Hematologia e Hemoterapia, Oncologia Clínica ou Pediatria"
+    },
+    {
+      "id": 103, 
+      "nome": "Pneumologia Pediátrica",
+      "descricao": "O foco da pneumologia pediátrica é o cuidado das doenças respiratórias agudas e crônicas que afetam desde recém-nascidos até adolescentes.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Pediatria ou Pneumologia"
+    },
+    {
+      "id": 104, 
+      "nome": "Psicogeriatria",
+      "descricao": "A Psicogeriatria, Psiquiatria da terceira idade, ou Gerontopsiquiatria é uma subespecialidade da psiquiatria que lida com adultos idosos e os aspectos emocionais e mudanças cognitivas associados com o envelhecimento",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Psiquiatria"
+    },
+    {
+      "id": 105, 
+      "nome": "Psicoterapia",
+      "descricao": "A psicoterapia é um tipo de terapia cuja finalidade é tratar os problemas psicológicos, tais como depressão, ansiedade, dificuldades de relacionamento, entre outros problemas de saúde mental. É um processo dialético efetuado entre um profissional e o paciente ou cliente.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Psiquiatria"
+    },
+    {
+      "id": 106, 
+      "nome": "Psiquiatria da Infância e Adolescência",
+      "descricao": "A psiquiatria da infância e adolescência é uma subespecialidade dentro da psiquiatria com características muito particulares. Portanto, cabe ao psiquiatra da infância ter o conhecimento sobre os domínios do desenvolvimento (físico, cognitivo, afetivo e psicossocial) esperados para cada faixa etária para que ele seja capaz de identificar quando alterações em diferentes aspectos do desenvolvimento estiverem presentes.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Psiquiatria"
+    },
+    {
+      "id": 107, 
+      "nome": "Psiquiatria Forense",
+      "descricao": "Psiquiatria forense é uma subespecialidade da psiquiatria, que lida com a interface entre lei e psiquiatria. Diz respeito à avaliação de uma pessoa do ponto de vista da saúde mental, visando constatar se a mesma pode ser responsabilizada, do ponto de vista penal, pelas consequências dos seus atos.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Psiquiatria"
+    },
+    {
+      "id": 108, 
+      "nome": "Radiologia Intervencionista e Angiorradiologia",
+      "descricao": "A Radiologia Intervencionista é uma subespecialidade médica que utiliza a radiologia não apenas para o diagnóstico, mas também para o tratamento de várias doenças através da associação de princípios clínicos e cirúrgicos.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Angiologia, Cirurgia Vascular ou Radiologia e Diagnóstico por Imagem"
+    },
+    {
+      "id": 109, 
+      "nome": "Reprodução Assistida",
+      "descricao": "A Reprodução Assistida é o conjunto de técnicas médicas, como a inseminação artificial e a fertilização in vitro, que possibilitam a reprodução humana de maneira assistida.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Ginecologia e Obstetrícia"
+    },
+    {
+      "id": 110, 
+      "nome": "Reumatologia Pediátrica",
+      "descricao": "A reumatologia pediátrica se dedica ao diagnóstico e tratamento de um amplo conjunto de doenças crônicas e inflamatórias que ocorrem em crianças e adolescentes.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Reumatologia ou Pediatria"
+    },
+    {
+      "id": 111, 
+      "nome": "Sexologia",
+      "descricao": "A Sexologia é a especialidade médica na qual as intervenções podem ser realizadas tanto na área da educação sexual quanto no aconselhamento ou campo clínico da terapia sexual, mas que em nenhum caso devem ser consideradas individualmente.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Ginecologia e Obstetrícia ou Psiquiatria"
+    },
+    {
+      "id": 112, 
+      "nome": "Toxicologia Médica",
+      "descricao": "A toxicologia médica é uma subespecialidade da medicina com foco na toxicologia e fornece o diagnóstico, gerenciamento e prevenção de envenenamento e outros efeitos adversos devido a medicamentos, tóxicos ocupacionais e ambientais e agentes biológicos",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Clínica Médica, Medicina Intensiva, Pediatria ou Pneumologia"
+    },
+    {
+      "id": 113, 
+      "nome": "Transplante de Medula Óssea",
+      "descricao": "O transplante de medula óssea é uma forma de tratamento que renova as células da medula óssea que respondem pela produção dessas células. Existem diferentes tipos de transplante de medula óssea, que são indicados para tratamento de uma série de doenças. Em alguns casos, o doador da medula é também o seu receptor.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Hematologia e Hemoterapia"
+    },
+    {
+      "id": 114, 
+      "nome": "Ultrassonografia em Ginecologia e Obstetrícia",
+      "descricao": "A ultrassonografia é o exame padrão ouro na área da ginecologia e obstetrícia e de importância elevada para o Ginecologista e Obstetra, tanto no consultório como na rotina dos plantões nos hospitais e maternidades.",
+      "formacao": "1 ano",
+      "requisito": "requisito de Residência Médica em Ginecologia e Obstetrícia"
+    },
+    {
+      "id": 115, 
+      "nome": "Ultrassonografia geral",
+      "descricao": "A Ultrassonografia Geral é um ramo da área médica que estuda órgãos e estruturas do corpo humano por meio de imagens.",
+      "formacao": "2 anos",
+      "requisito": "Requisito de Residência Médica em Clinica Médica, Cirurgia Geral, Ginecologia e Obstetrícia, Pediatria, Medicina de Emergência, Medicina Intensiva, Angiologia, Cirurgia Vascular Medicina de Família e Comunidade ou Medicina Preventiva e Social"
+    },
+    {
+      "id": 116, 
+      "nome": "Medicina Tropical",
+      "descricao": "Medicina tropical ou medicina tropicalista é o ramo da medicina que lida com problemas de saúde que ocorrem unicamente, são mais disseminados ou se mostram mais difíceis de controlar nas regiões tropicais ou subtropicais. Sendo também uma das grandes áreas de atuação do infectologista.",
+      "formacao": "2 anos",
+      "requisito": "requisito de Residência Médica em Infectologia"
+    }
+  ]
+}
