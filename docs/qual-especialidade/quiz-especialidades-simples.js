@@ -680,13 +680,16 @@ class MedicalSpecialtyQuiz {
         // 3 ESPECIALIDADES PARA PESQUISAR (decisões difíceis)
         const complexChoices = realChoices
             .filter(choice => choice.responseTime > 4000 && choice.responseTime < 15000)
-            .sort((a, b) => b.responseTime - a.responseTime)
+            .sort((a, b) => b.responseTime - a.responseTime);
+            
+        // Remover duplicatas mantendo a decisão mais lenta
+        const uniqueComplexChoices = this.removeDuplicateChoices(complexChoices)
             .slice(0, 3);
             
         const researchSuggestions = document.getElementById('research-more-list');
         if (researchSuggestions) {
-            if (complexChoices.length > 0) {
-                researchSuggestions.innerHTML = complexChoices.map((choice, index) => `
+            if (uniqueComplexChoices.length > 0) {
+                researchSuggestions.innerHTML = uniqueComplexChoices.map((choice, index) => `
                     <li class="analysis-item">
                         <div class="specialty-info">
                             <strong>${choice.selected.nome}</strong>
@@ -718,7 +721,7 @@ class MedicalSpecialtyQuiz {
             realChoices: realChoices.length,
             truePreferences: truePreferences.length,
             trueRejections: trueRejections.length,
-            complexChoices: complexChoices.length,
+            complexChoices: uniqueComplexChoices.length,
             autoChoices: this.allChoices.filter(c => c.match === 'auto').length
         });
     }
@@ -823,8 +826,9 @@ class MedicalSpecialtyQuiz {
             }
         });
         
-        // Ordenar por confiança
-        return preferences.sort((a, b) => b.confidence - a.confidence);
+        // Ordenar por confiança e remover duplicatas
+        const uniquePreferences = this.removeDuplicateSpecialties(preferences);
+        return uniquePreferences.sort((a, b) => b.confidence - a.confidence);
     }
     
     analyzeRealRejections() {
@@ -866,7 +870,9 @@ class MedicalSpecialtyQuiz {
             }
         });
         
-        return rejections.sort((a, b) => b.confidence - a.confidence);
+        // Remover duplicatas e ordenar por confiança
+        const uniqueRejections = this.removeDuplicateSpecialties(rejections);
+        return uniqueRejections.sort((a, b) => b.confidence - a.confidence);
     }
     
     getSpecialtyProgression(specialty) {
@@ -899,6 +905,36 @@ class MedicalSpecialtyQuiz {
         ).length;
         
         return totalAreaSpecialties > 0 ? areaRejections / totalAreaSpecialties : 0;
+    }
+    
+    removeDuplicateSpecialties(specialtyList) {
+        const uniqueMap = new Map();
+        
+        specialtyList.forEach(item => {
+            const existingItem = uniqueMap.get(item.specialty.id);
+            
+            if (!existingItem || item.confidence > existingItem.confidence) {
+                // Se não existe ou tem confiança maior, substitui
+                uniqueMap.set(item.specialty.id, item);
+            }
+        });
+        
+        return Array.from(uniqueMap.values());
+    }
+    
+    removeDuplicateChoices(choiceList) {
+        const uniqueMap = new Map();
+        
+        choiceList.forEach(choice => {
+            const existingChoice = uniqueMap.get(choice.selected.id);
+            
+            if (!existingChoice || choice.responseTime > existingChoice.responseTime) {
+                // Se não existe ou levou mais tempo, substitui (queremos o tempo mais longo)
+                uniqueMap.set(choice.selected.id, choice);
+            }
+        });
+        
+        return Array.from(uniqueMap.values());
     }
 
     restartQuiz() {
