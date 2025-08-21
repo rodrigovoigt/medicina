@@ -730,45 +730,95 @@ class MedicalSpecialtyQuiz {
         realChoices.forEach(choice => {
             if (choice.responseTime < 2000) { // Decisão rápida
                 
-                // Fatores que indicam preferência REAL (não eliminação):
-                let confidence = 50; // Base
+                // Sistema de pontuação mais rigoroso e diferenciado
+                let confidence = 30; // Base menor
                 let reasons = [];
                 
-                // 1. A especialidade escolhida progrediu muito no quiz
+                console.log(`🔍 Analisando ${choice.selected.nome}:`);
+                
+                // 1. Progressão no quiz (mais diferenciada)
                 const progression = this.getSpecialtyProgression(choice.selected);
-                if (progression > 2) {
-                    confidence += 30;
-                    reasons.push('chegou longe no quiz');
+                console.log(`  - Progressão: ${progression} rodadas`);
+                
+                if (progression >= 5) {
+                    confidence += 40; // Campeã ou finalista
+                    reasons.push('chegou à final');
+                    console.log(`  - +40 pontos (finalista)`);
+                } else if (progression >= 3) {
+                    confidence += 25; // Semifinalista
+                    reasons.push('chegou às semifinais');
+                    console.log(`  - +25 pontos (semifinalista)`);
+                } else if (progression >= 2) {
+                    confidence += 10; // Quartas
+                    reasons.push('chegou às quartas');
+                    console.log(`  - +10 pontos (quartas)`);
+                } else {
+                    console.log(`  - +0 pontos (eliminada cedo)`);
                 }
                 
-                // 2. Área consistente com outras escolhas
+                // 2. Área consistente (mais rigoroso)
                 const areaConsistency = this.getAreaConsistency(choice.selected);
-                if (areaConsistency > 0.6) {
+                console.log(`  - Consistência de área: ${(areaConsistency * 100).toFixed(1)}%`);
+                if (areaConsistency > 0.7) {
                     confidence += 20;
-                    reasons.push('área consistente');
-                }
-                
-                // 3. Tempo "ideal" (não muito rápido = não foi só eliminação)
-                if (choice.responseTime > 800) {
-                    confidence += 15;
-                    reasons.push('tempo de reflexão adequado');
-                }
-                
-                // 4. A rejeitada também tem boa pontuação (escolha difícil)
-                const rejectedProgression = this.getSpecialtyProgression(choice.rejected);
-                if (rejectedProgression > 1) {
+                    reasons.push('área muito consistente');
+                    console.log(`  - +20 pontos (área muito consistente)`);
+                } else if (areaConsistency > 0.5) {
                     confidence += 10;
-                    reasons.push('escolha entre duas boas opções');
+                    reasons.push('área consistente');
+                    console.log(`  - +10 pontos (área consistente)`);
                 }
                 
-                if (confidence > 70) {
+                // 3. Análise de tempo mais refinada
+                console.log(`  - Tempo de resposta: ${choice.responseTime}ms`);
+                if (choice.responseTime >= 1000 && choice.responseTime <= 1800) {
+                    confidence += 15; // Tempo ideal: pensou mas decidiu rápido
+                    reasons.push('decisão equilibrada');
+                    console.log(`  - +15 pontos (tempo ideal)`);
+                } else if (choice.responseTime > 800) {
+                    confidence += 5; // Pensou um pouco
+                    reasons.push('tempo adequado');
+                    console.log(`  - +5 pontos (tempo adequado)`);
+                } else {
+                    confidence -= 5; // Muito rápido = pode ser eliminação
+                    console.log(`  - -5 pontos (muito rápido)`);
+                }
+                
+                // 4. Qualidade da concorrência (mais rigoroso)
+                const rejectedProgression = this.getSpecialtyProgression(choice.rejected);
+                console.log(`  - Progressão da rejeitada: ${rejectedProgression} rodadas`);
+                if (rejectedProgression >= 3) {
+                    confidence += 15; // Rejeitou uma forte concorrente
+                    reasons.push('venceu forte concorrente');
+                    console.log(`  - +15 pontos (venceu forte concorrente)`);
+                } else if (rejectedProgression >= 1) {
+                    confidence += 5;
+                    reasons.push('venceu concorrente razoável');
+                    console.log(`  - +5 pontos (venceu concorrente razoável)`);
+                }
+                
+                // 5. BÔNUS: Foi campeã?
+                const isFinalWinner = progression >= 5 && this.winners.some(w => w.id === choice.selected.id);
+                if (isFinalWinner) {
+                    confidence += 10;
+                    reasons.push('especialidade campeã');
+                    console.log(`  - +10 pontos BÔNUS (campeã!)`);
+                }
+                
+                console.log(`  - 📊 Confiança final: ${confidence}%`);
+                
+                // Critério mais rigoroso: só as melhores (80%+)
+                if (confidence >= 80) {
                     preferences.push({
                         specialty: choice.selected,
-                        confidence: Math.min(confidence, 95),
+                        confidence: Math.min(confidence, 99), // Máximo 99%
                         reason: `Decisão rápida (${(choice.responseTime/1000).toFixed(1)}s)`,
-                        explanation: `Escolha consistente: ${reasons.join(', ')}`,
+                        explanation: `Escolha de alta qualidade: ${reasons.join(', ')}`,
                         originalChoice: choice
                     });
+                    console.log(`  - ✅ Adicionada às preferências reais (${confidence}%)`);
+                } else {
+                    console.log(`  - ❌ Não adicionada (confiança < 80%)`);
                 }
             }
         });
