@@ -45,10 +45,11 @@ function fixNavbarLinks() {
     const isInPediatria = currentPath.includes("/pediatria/");
     const isInCondutas = currentPath.includes("/condutas/");
     const isInExtras = currentPath.includes("/extras/");
-    const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas || isInExtras;
+    const isInQualEspecialidade = currentPath.includes("/qual-especialidade/");
+    const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas || isInExtras || isInQualEspecialidade;
     
     console.log('Corrigindo navbar - Path:', currentPath);
-    console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria, 'Em condutas:', isInCondutas, 'Em extras:', isInExtras);
+    console.log('Em calculadoras:', isInCalculadoras, 'Em prontuario:', isInProntuario, 'Em pediatria:', isInPediatria, 'Em condutas:', isInCondutas, 'Em extras:', isInExtras, 'Em qual-especialidade:', isInQualEspecialidade);
     
     const navbarContainer = document.getElementById("navbar-placeholder");
     if (!navbarContainer) {
@@ -86,6 +87,11 @@ function fixNavbarLinks() {
                 else if (isInExtras && originalHref.startsWith("extras/")) {
                     correctedHref = originalHref.substring(7); // Remove "extras/"
                     console.log('Link extras corrigido:', originalHref, '->', correctedHref);
+                }
+                // Caso especial: se estamos em qual-especialidade e o link é para outra página de qual-especialidade
+                else if (isInQualEspecialidade && originalHref.startsWith("qual-especialidade/")) {
+                    correctedHref = originalHref.substring(19); // Remove "qual-especialidade/"
+                    console.log('Link qual-especialidade corrigido:', originalHref, '->', correctedHref);
                 }
                 // Se estivermos em uma subpasta e o link NÃO começa com "../"
                 else if (isInSubfolder && !originalHref.startsWith("../")) {
@@ -157,6 +163,7 @@ function ensureSearchFunctionality() {
     
     // Lista de páginas para busca
     const sitePages = [
+        { title: "Quiz de Especialidades", url: "qual-especialidade/index.html", category: "Quiz", keywords: ["quiz", "especialidade", "médica", "gamificado", "neural"] },
         { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
         { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
         { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração"] },
@@ -199,6 +206,7 @@ function ensureSearchFunctionality() {
                 let badgeColor = 'secondary';
                 let badgeText = page.category;
                 switch(page.category) {
+                    case 'Quiz': badgeColor = 'dark'; break;
                     case 'Calculadora': badgeColor = 'primary'; break;
                     case 'Prontuário': badgeColor = 'success'; break;
                     case 'Pediatria': badgeColor = 'info'; break;
@@ -237,7 +245,8 @@ function ensureSearchFunctionality() {
             const isInPediatria = currentPath.includes("/pediatria/");
             const isInCondutas = currentPath.includes("/condutas/");
             const isInExtras = currentPath.includes("/extras/");
-            const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas || isInExtras;
+            const isInQualEspecialidade = currentPath.includes("/qual-especialidade/");
+            const isInSubfolder = isInCalculadoras || isInProntuario || isInPediatria || isInCondutas || isInExtras || isInQualEspecialidade;
             
             let finalUrl = url;
             
@@ -250,6 +259,8 @@ function ensureSearchFunctionality() {
                 finalUrl = url.substring(9);
             } else if (isInExtras && url.startsWith("extras/")) {
                 finalUrl = url.substring(7);
+            } else if (isInQualEspecialidade && url.startsWith("qual-especialidade/")) {
+                finalUrl = url.substring(19);
             } else if (isInSubfolder && !url.startsWith("../")) {
                 finalUrl = "../" + url;
             } else if (!isInSubfolder && url.startsWith("../")) {
@@ -326,7 +337,8 @@ function loadNavbar() {
                           currentPath.includes("/prontuario/") || 
                           currentPath.includes("/pediatria/") || 
                           currentPath.includes("/condutas/") || 
-                          currentPath.includes("/extras/");
+                          currentPath.includes("/extras/") ||
+                          currentPath.includes("/qual-especialidade/");
     
     const navbarPath = isInSubfolder ? '../navbar.html' : 'navbar.html';
     
