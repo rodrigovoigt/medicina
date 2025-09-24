@@ -200,14 +200,14 @@
                         Calculadoras
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="calculadoras/imc.html">Índice de Massa Corporal (IMC)</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/tfg.html">Taxa de Filtração Glomerular (TFG)</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/risco-coronariano.html">Risco Cardiovascular</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/ldl.html">Colesterol LDL</a></li>
                         <li><a class="dropdown-item" href="calculadoras/carga-tabagica.html">Carga Tabágica</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/ldl.html">Colesterol LDL</a></li>
                         <li><a class="dropdown-item" href="calculadoras/dpp.html">Data Provável do Parto</a></li>
                         <li><a class="dropdown-item" href="calculadoras/idade-gestacional.html">Idade Gestacional</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/imc.html">Índice de Massa Corporal (IMC)</a></li>
                         <li><a class="dropdown-item" href="calculadoras/parkland.html">Ressuscitação Volêmica (Parkland)</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/risco-coronariano.html">Risco Cardiovascular</a></li>
+                        <li><a class="dropdown-item" href="calculadoras/tfg.html">Taxa de Filtração Glomerular (TFG)</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -219,6 +219,28 @@
                         <li><a class="dropdown-item" href="prontuario/remedios.html">Formatar Remédios IPM Sistemas</a></li>
                         <li><a class="dropdown-item" href="prontuario/radiologia-laudos.html">Modelos de Laudos</a></li>
                         <li><a class="dropdown-item" href="condutas/index.html">Guia de Prescrição</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pediatria
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="pediatria/ajuda-pediatria.html">Sistema de Pediatria</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><h6 class="dropdown-header">Medicações</h6></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/antibioticos.html">Antibióticos</a></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/antiinflamatorio.html">Anti-inflamatórios</a></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/broncodilatadores.html">Broncodilatadores</a></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/corticosteroides.html">Corticosteroides</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><h6 class="dropdown-header">Calculadoras</h6></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html">Hidratação Venosa</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><h6 class="dropdown-header">Puericultura</h6></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/puericultura-alimentacao.html">Alimentação</a></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/puericultura-curvas.html">Curvas de Crescimento</a></li>
+                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/puericultura-vacinas.html">Vacinas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -258,14 +280,14 @@
 // Base de dados das páginas do site para busca interna - ATUALIZADA
 const sitePages = [
     // Calculadoras
-    { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
-    { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
-    { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
-    { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
     { title: "Carga Tabágica", url: "calculadoras/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo", "tabaco"] },
+    { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
     { title: "Data Provável do Parto", url: "calculadoras/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação", "naegele"] },
     { title: "Idade Gestacional", url: "calculadoras/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez", "semanas", "dum"] },
+    { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
     { title: "Parkland", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
+    { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
+    { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
     
     // Prontuário
     { title: "Consulta Geral", url: "prontuario/consulta-geral.html", category: "Prontuário", keywords: ["consulta", "geral", "exame", "físico", "semiologia"] },
@@ -275,6 +297,14 @@ const sitePages = [
     
     // Pediatria
     { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Pediatria", keywords: ["pediatria", "criança", "pediátrico", "doses"] },
+    { title: "Antibióticos Pediátricos", url: "pediatria/ferramentas-ped/antibioticos.html", category: "Pediatria", keywords: ["antibióticos", "pediatria", "infecção", "criança"] },
+    { title: "Anti-inflamatórios Pediátricos", url: "pediatria/ferramentas-ped/antiinflamatorio.html", category: "Pediatria", keywords: ["anti-inflamatórios", "pediatria", "dor", "febre"] },
+    { title: "Broncodilatadores Pediátricos", url: "pediatria/ferramentas-ped/broncodilatadores.html", category: "Pediatria", keywords: ["broncodilatadores", "asma", "pediatria"] },
+    { title: "Corticosteroides Pediátricos", url: "pediatria/ferramentas-ped/corticosteroides.html", category: "Pediatria", keywords: ["corticosteroides", "pediatria", "inflamação"] },
+    { title: "Hidratação Venosa Pediátrica", url: "pediatria/ferramentas-ped/calc-hidratacaovenosa.html", category: "Pediatria", keywords: ["hidratação", "venosa", "soro", "pediatria"] },
+    { title: "Puericultura - Alimentação", url: "pediatria/ferramentas-ped/puericultura-alimentacao.html", category: "Pediatria", keywords: ["puericultura", "alimentação", "leite", "fórmula"] },
+    { title: "Puericultura - Curvas", url: "pediatria/ferramentas-ped/puericultura-curvas.html", category: "Pediatria", keywords: ["puericultura", "curvas", "crescimento", "peso", "altura"] },
+    { title: "Puericultura - Vacinas", url: "pediatria/ferramentas-ped/puericultura-vacinas.html", category: "Pediatria", keywords: ["puericultura", "vacinas", "imunização", "calendário"] },
     
     // Externos
     { title: "PedBook", url: "https://www.pedb.com.br/", category: "Externa", keywords: ["pedbook", "pediatria", "site", "externo"] },
@@ -435,14 +465,14 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
         <div class="mb-4">
             <h6 class="text-success fw-bold mb-3">🧮 Todas as Calculadoras</h6>
             <div class="list-group list-group-flush">
-                <a href="calculadoras/imc.html" class="list-group-item list-group-item-action">Índice de Massa Corporal (IMC)</a>
-                <a href="calculadoras/tfg.html" class="list-group-item list-group-item-action">Taxa de Filtração Glomerular (TFG)</a>
-                <a href="calculadoras/risco-coronariano.html" class="list-group-item list-group-item-action">Risco Cardiovascular</a>
-                <a href="calculadoras/ldl.html" class="list-group-item list-group-item-action">Colesterol LDL</a>
                 <a href="calculadoras/carga-tabagica.html" class="list-group-item list-group-item-action">Carga Tabágica</a>
+                <a href="calculadoras/ldl.html" class="list-group-item list-group-item-action">Colesterol LDL</a>
                 <a href="calculadoras/dpp.html" class="list-group-item list-group-item-action">Data Provável do Parto</a>
                 <a href="calculadoras/idade-gestacional.html" class="list-group-item list-group-item-action">Idade Gestacional</a>
+                <a href="calculadoras/imc.html" class="list-group-item list-group-item-action">Índice de Massa Corporal (IMC)</a>
                 <a href="calculadoras/parkland.html" class="list-group-item list-group-item-action">Ressuscitação Volêmica (Parkland)</a>
+                <a href="calculadoras/risco-coronariano.html" class="list-group-item list-group-item-action">Risco Cardiovascular</a>
+                <a href="calculadoras/tfg.html" class="list-group-item list-group-item-action">Taxa de Filtração Glomerular (TFG)</a>
             </div>
         </div>
 
@@ -460,11 +490,11 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
                     </h2>
                     <div id="collapseAtencao" class="accordion-collapse collapse" aria-labelledby="headingAtencao" data-bs-parent="#accordionEspecialidades">
                         <div class="accordion-body p-2">
-                            <a href="calculadoras/imc.html" class="d-block text-decoration-none py-1">• IMC</a>
-                            <a href="calculadoras/tfg.html" class="d-block text-decoration-none py-1">• TFG</a>
-                            <a href="calculadoras/risco-coronariano.html" class="d-block text-decoration-none py-1">• Risco Cardiovascular</a>
-                            <a href="calculadoras/ldl.html" class="d-block text-decoration-none py-1">• Colesterol LDL</a>
                             <a href="calculadoras/carga-tabagica.html" class="d-block text-decoration-none py-1">• Carga Tabágica</a>
+                            <a href="calculadoras/ldl.html" class="d-block text-decoration-none py-1">• Colesterol LDL</a>
+                            <a href="calculadoras/imc.html" class="d-block text-decoration-none py-1">• IMC</a>
+                            <a href="calculadoras/risco-coronariano.html" class="d-block text-decoration-none py-1">• Risco Cardiovascular</a>
+                            <a href="calculadoras/tfg.html" class="d-block text-decoration-none py-1">• TFG</a>
                         </div>
                     </div>
                 </div>
@@ -480,7 +510,6 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
                         <div class="accordion-body p-2">
                             <a href="calculadoras/dpp.html" class="d-block text-decoration-none py-1">• Data Provável do Parto</a>
                             <a href="calculadoras/idade-gestacional.html" class="d-block text-decoration-none py-1">• Idade Gestacional</a>
-                            <a href="prontuario/exame-fisico-ginecologico.html" class="d-block text-decoration-none py-1">• Exame Ginecológico</a>
                         </div>
                     </div>
                 </div>
@@ -495,7 +524,10 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
                     <div id="collapsePediatria" class="accordion-collapse collapse" aria-labelledby="headingPediatria" data-bs-parent="#accordionEspecialidades">
                         <div class="accordion-body p-2">
                             <a href="pediatria/ajuda-pediatria.html" class="d-block text-decoration-none py-1">• Sistema de Pediatria</a>
-                            <span class="text-muted">Outras funcionalidades em desenvolvimento...</span>
+                            <a href="pediatria/ferramentas-ped/antibioticos.html" class="d-block text-decoration-none py-1">• Antibióticos</a>
+                            <a href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" class="d-block text-decoration-none py-1">• Hidratação Venosa</a>
+                            <a href="pediatria/ferramentas-ped/puericultura-alimentacao.html" class="d-block text-decoration-none py-1">• Puericultura - Alimentação</a>
+                            <a href="pediatria/ferramentas-ped/puericultura-vacinas.html" class="d-block text-decoration-none py-1">• Puericultura - Vacinas</a>
                         </div>
                     </div>
                 </div>
@@ -510,6 +542,19 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
                 <a href="prontuario/remedios.html" class="list-group-item list-group-item-action">Formatar Medicações IPM</a>
                 <a href="prontuario/radiologia-laudos.html" class="list-group-item list-group-item-action">Modelos de Laudos Radiologia</a>
                 <a href="condutas/index.html" class="list-group-item list-group-item-action">Guia de Prescrição</a>
+            </div>
+        </div>
+
+        <!-- Ferramentas de Pediatria -->
+        <div class="mb-4">
+            <h6 class="text-success fw-bold mb-3">👶 Pediatria</h6>
+            <div class="list-group list-group-flush">
+                <a href="pediatria/ajuda-pediatria.html" class="list-group-item list-group-item-action">Sistema de Pediatria</a>
+                <a href="pediatria/ferramentas-ped/antibioticos.html" class="list-group-item list-group-item-action">Antibióticos Pediátricos</a>
+                <a href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" class="list-group-item list-group-item-action">Hidratação Venosa</a>
+                <a href="pediatria/ferramentas-ped/puericultura-alimentacao.html" class="list-group-item list-group-item-action">Puericultura - Alimentação</a>
+                <a href="pediatria/ferramentas-ped/puericultura-curvas.html" class="list-group-item list-group-item-action">Puericultura - Curvas</a>
+                <a href="pediatria/ferramentas-ped/puericultura-vacinas.html" class="list-group-item list-group-item-action">Puericultura - Vacinas</a>
             </div>
         </div>
 

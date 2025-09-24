@@ -93,8 +93,13 @@ function fixNavbarLinks() {
                     correctedHref = originalHref.substring(19); // Remove "qual-especialidade/"
                     console.log('Link qual-especialidade corrigido:', originalHref, '->', correctedHref);
                 }
-                // Se estivermos em uma subpasta e o link NÃO começa com "../"
-                else if (isInSubfolder && !originalHref.startsWith("../")) {
+                // Caso especial: Home (index.html) sempre deve apontar para a raiz
+                else if (originalHref === "index.html" && isInSubfolder) {
+                    correctedHref = "../index.html";
+                    console.log('Link Home corrigido:', originalHref, '->', correctedHref);
+                }
+                // Se estivermos em uma subpasta e o link contém uma pasta mas NÃO começa com "../"
+                else if (isInSubfolder && originalHref.includes("/") && !originalHref.startsWith("../")) {
                     correctedHref = "../" + originalHref;
                     console.log('Link subpasta corrigido:', originalHref, '->', correctedHref);
                 }

@@ -33,8 +33,24 @@
                 background-color: #e4e4e4;
             }
 
-            /* Estilo melhorado para resultado */
-            #resultado {
+            /* Container para o resultado */
+            .resultado-container {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin-top: 20px;
+            }
+
+            .resultado-header {
+                background-color: #e9ecef;
+                padding: 8px 15px;
+                border-bottom: 1px solid #dee2e6;
+                font-size: 12px;
+            }
+
+            /* Estilo para os itens de resultado individuais */
+            .resultado-item {
                 white-space: pre-wrap;
                 word-wrap: break-word;
                 max-width: 100%;
@@ -53,26 +69,12 @@
                 cursor: pointer;
                 transition: background-color 0.2s ease;
                 display: block;
+                font-weight: bold;
+                color: #2c5530;
             }
 
-            #resultado:hover {
+            .resultado-item:hover {
                 background-color: #e9ecef;
-            }
-
-            /* Container para o resultado */
-            .resultado-container {
-                border: 1px solid #dee2e6;
-                border-radius: 5px;
-                overflow: hidden;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                margin-top: 20px;
-            }
-
-            .resultado-header {
-                background-color: #e9ecef;
-                padding: 8px 15px;
-                border-bottom: 1px solid #dee2e6;
-                font-size: 12px;
             }
 
 
@@ -134,11 +136,31 @@
                     <button id="calcular" type="button" class="btn btn-success">Calcular</button>
                 </form>
                 
-                <div class="resultado-container">
-                    <div class="resultado-header">
-                        <small class="text-muted">🩸 Resultado do LDL - Clique para copiar</small>
+                <!-- Resultados das três fórmulas -->
+                <div class="resultados-container" style="display: none; margin-top: 20px;">
+                    <!-- Fórmula de Martin/Hopkins -->
+                    <div class="resultado-container mb-3">
+                        <div class="resultado-header">
+                            <small class="text-muted">� Fórmula de Martin/Hopkins - Clique para copiar</small>
+                        </div>
+                        <div id="resultado-martin" class="resultado-item"></div>
                     </div>
-                    <div id="resultado"></div>
+
+                    <!-- Fórmula de Friedewald -->
+                    <div class="resultado-container mb-3">
+                        <div class="resultado-header">
+                            <small class="text-muted">📊 Fórmula de Friedewald - Clique para copiar</small>
+                        </div>
+                        <div id="resultado-friedewald" class="resultado-item"></div>
+                    </div>
+
+                    <!-- Fórmula de Sampson/NIH -->
+                    <div class="resultado-container mb-3">
+                        <div class="resultado-header">
+                            <small class="text-muted">🧬 Fórmula de Sampson/NIH - Clique para copiar</small>
+                        </div>
+                        <div id="resultado-sampson" class="resultado-item"></div>
+                    </div>
                 </div>
             </section>
         </div>
