@@ -1,0 +1,76 @@
+{
+  "name": "DocGO! - Medicina Toolkit",
+  "short_name": "DocGO!",
+  "description": "Calculadoras médicas, prontuários e ferramentas para profissionais de saúde",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#a3a3a3",
+  "theme_color": "#00a66c",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "categories": ["medical", "health", "productivity"],
+  "icons": [
+    {
+      "src": "assets/img/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "assets/img/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculadora LDL",
+      "short_name": "LDL",
+      "description": "Calcular LDL com 3 fórmulas diferentes",
+      "url": "/calculadoras/ldl.html",
+      "icons": [
+        {
+          "src": "assets/img/calculadora/scq.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Calculadoras",
+      "short_name": "Calculadoras",
+      "description": "Todas as calculadoras médicas",
+      "url": "/calculadoras/",
+      "icons": [
+        {
+          "src": "assets/img/icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Prontuário",
+      "short_name": "Prontuário",
+      "description": "Ferramentas de prontuário médico",
+      "url": "/prontuario/",
+      "icons": [
+        {
+          "src": "assets/img/icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
