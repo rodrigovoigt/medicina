@@ -107,6 +107,79 @@
         <script>
             // Usar a nova função utilitária para carregar navbar
             initializeNavbar("../navbar.html");
+            
+            // Garantir que as funções globais estejam disponíveis após carregamento
+            setTimeout(() => {
+                // Forçar configuração das funções globais se necessário
+                if (typeof window.setupGlobalSearchFunctions === 'function') {
+                    window.setupGlobalSearchFunctions();
+                } else if (typeof setupMedicalSearchFallback === 'function') {
+                    console.log('Usando fallback de busca médica');
+                    setupMedicalSearchFallback();
+                }
+                
+                // Verificar se tudo está funcionando
+                console.log('🔍 Busca externa:', typeof window.addMedicalSiteFilter === 'function' ? 'OK' : 'ERRO');
+                
+                // Se ainda não funciona, configurar aqui mesmo
+                if (typeof window.addMedicalSiteFilter !== 'function') {
+                    console.log('⚠️ Configurando busca médica diretamente na página');
+                    
+                    // Sites médicos confiáveis
+                    const trustedMedicalSites = [
+                        'pubmed.ncbi.nlm.nih.gov',
+                        'uptodate.com',
+                        'cochrane.org',
+                        'portal.cfm.org.br',
+                        'scielo.br',
+                        'msdmanuals.com',
+                        'consultaremedios.com.br'
+                    ];
+                    
+                    let lastWebSearchQuery = '';
+                    
+                    // Função para adicionar filtro de sites médicos - INLINE
+                    window.addMedicalSiteFilter = function(event) {
+                        console.log('🔍 Função addMedicalSiteFilter chamada - inline');
+                        
+                        const searchInput = document.getElementById('webSearch');
+                        const query = searchInput ? searchInput.value.trim() : '';
+                        
+                        if (query) {
+                            // Evitar processamento duplicado
+                            if (lastWebSearchQuery === query) {
+                                return true;
+                            }
+                            lastWebSearchQuery = query;
+                            
+                            const form = event.target;
+                            const existingHidden = form.querySelector('input[name="q"][type="hidden"]');
+                            if (existingHidden) {
+                                existingHidden.remove();
+                            }
+                            
+                            const hiddenInput = document.createElement('input');
+                            hiddenInput.type = 'hidden';
+                            hiddenInput.name = 'q';
+                            
+                            const siteFilter = `(${trustedMedicalSites.map(site => `site:${site}`).join(' OR ')})`;
+                            hiddenInput.value = `${query} ${siteFilter}`;
+                            
+                            form.appendChild(hiddenInput);
+                            searchInput.name = 'q_visible';
+                            
+                            console.log('🔍 Busca externa com filtro aplicado (inline):', hiddenInput.value);
+                        } else {
+                            event.preventDefault();
+                            if (searchInput) {
+                                searchInput.focus();
+                            }
+                        }
+                    };
+                    
+                    console.log('✅ Busca médica configurada inline');
+                }
+            }, 2000);
         </script>
 
         <!-- Seção para a Consulta Geral -->

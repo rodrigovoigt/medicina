@@ -1,4 +1,19 @@
 // Função para aguardar carregamento robusto com múltiplas verificações
+
+// Sites médicos confiáveis para filtrar a busca web
+const trustedMedicalSites = [
+    "pubmed.ncbi.nlm.nih.gov",
+    "uptodate.com", 
+    "cochrane.org",
+    "portal.cfm.org.br",
+    "scielo.br",
+    "msdmanuals.com",
+    "consultaremedios.com.br"
+];
+
+// Cache da consulta para evitar duplicação
+let lastSearchQuery = '';
+
 function waitForNavbarLoad(callback, maxAttempts = 20) {
     let attempts = 0;
     
@@ -144,6 +159,12 @@ function fixNavbarLinks() {
     
     // Garantir que as funcionalidades de busca funcionem
     ensureSearchFunctionality();
+    
+    // Garantir que as funções globais de busca estejam disponíveis
+    setupGlobalSearchFunctions();
+    
+    // Sobrescrever funções locais com as globais (para compatibilidade)
+    overrideLocalFunctions();
 }
 
 // Garantir funcionalidade de busca em todas as páginas
@@ -453,6 +474,191 @@ function loadNavbar() {
                     tryNextPath();
                 });
         });
+}
+
+// Garantir que as funções globais estejam sempre disponíveis
+function setupGlobalSearchFunctions() {
+    // Garantir que addMedicalSiteFilter esteja no escopo global
+    if (typeof window.addMedicalSiteFilter !== 'function') {
+        window.addMedicalSiteFilter = addMedicalSiteFilter;
+    }
+    
+    // Garantir que showToastMessage esteja no escopo global
+    if (typeof window.showToastMessage !== 'function') {
+        window.showToastMessage = showToastMessage;
+    }
+    
+    // ALIAS para compatibilidade - showToast aponta para showToastMessage
+    if (typeof window.showToast !== 'function') {
+        window.showToast = showToastMessage;
+    }
+    
+    // Exportar array de sites médicos
+    if (typeof window.trustedMedicalSites === 'undefined') {
+        window.trustedMedicalSites = trustedMedicalSites;
+    }
+    
+    console.log('✅ Funções globais de busca configuradas');
+    console.log('📋 Sites médicos disponíveis:', trustedMedicalSites.length);
+}
+
+// Sobrescrever funções locais que podem existir nas páginas
+function overrideLocalFunctions() {
+    // Força showToast global em todas as páginas (substituindo versões locais)
+    window.showToast = showToastMessage;
+    
+    // Se existir jQuery, também disponibilizar via jQuery
+    if (typeof $ !== 'undefined') {
+        $.showToast = showToastMessage;
+    }
+    
+    // Interceptar e substituir console.log de debug para mostrar que a global está ativa
+    const originalLog = console.log;
+    let hasLoggedGlobalToast = false;
+    
+    // Verificar se houve conflito de função e notificar
+    setTimeout(() => {
+        if (!hasLoggedGlobalToast) {
+            console.log('🌐 Toast global ativo - substituindo versões locais');
+            hasLoggedGlobalToast = true;
+        }
+    }, 1000);
+    
+    console.log('🔄 Override de funções locais aplicado');
+}
+
+// Função global para adicionar filtro de sites médicos à busca web
+function addMedicalSiteFilter(event) {
+    const searchInput = document.getElementById('webSearch');
+    const query = searchInput ? searchInput.value.trim() : '';
+    
+    if (query) {
+        // Evitar processamento duplicado
+        if (lastSearchQuery === query) {
+            return true; // Permite o submit normalmente
+        }
+        lastSearchQuery = query;
+        
+        // Criar um input hidden com a consulta filtrada
+        const form = event.target;
+        
+        // Remove input hidden anterior se existir
+        const existingHidden = form.querySelector('input[name="q"][type="hidden"]');
+        if (existingHidden) {
+            existingHidden.remove();
+        }
+        
+        // Criar novo input hidden com a consulta filtrada
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'q';
+        
+        // Adicionar filtro de sites confiáveis à consulta usando sintaxe otimizada
+        const siteFilter = `(${trustedMedicalSites.map(site => `site:${site}`).join(' OR ')})`;
+        hiddenInput.value = `${query} ${siteFilter}`;
+        
+        form.appendChild(hiddenInput);
+        
+        // Limpar o campo visível para não mostrar a consulta complexa
+        searchInput.name = 'q_visible';
+        
+        console.log('🔍 Busca externa com filtro aplicado:', hiddenInput.value);
+        
+        // Feedback visual da busca
+        showSearchFeedback();
+    } else {
+        // Se não há consulta, previne o submit
+        event.preventDefault();
+        if (searchInput) {
+            searchInput.focus();
+        }
+        showToastMessage('⚠️ Digite algo para buscar', 'warning');
+    }
+}
+
+// Função para mostrar feedback da busca externa
+function showSearchFeedback() {
+    const button = document.querySelector('button[title*="sites médicos"]');
+    if (button) {
+        const originalContent = button.innerHTML;
+        
+        button.innerHTML = '<small>✅</small>';
+        button.style.background = 'rgba(40, 167, 69, 0.2)';
+        
+        setTimeout(() => {
+            button.innerHTML = originalContent;
+            button.style.background = '';
+        }, 1500);
+    }
+}
+
+// Função genérica para mostrar mensagens toast (compatível com showToast local)
+function showToastMessage(message, type = 'info') {
+    // Detectar se message é apenas string (formato antigo) ou com tipo
+    let toastMessage = message;
+    let toastType = type;
+    
+    // Auto-detectar tipo baseado em emojis/símbolos no message
+    if (typeof message === 'string') {
+        if (message.includes('✅') || message.includes('sucesso')) {
+            toastType = 'success';
+        } else if (message.includes('❌') || message.includes('erro') || message.includes('Erro')) {
+            toastType = 'error';
+        } else if (message.includes('⚠️') || message.includes('aviso')) {
+            toastType = 'warning';
+        }
+    }
+    
+    // Cores baseadas no tipo
+    let backgroundColor, textColor;
+    switch(toastType) {
+        case 'success':
+            backgroundColor = '#28a745';
+            textColor = 'white';
+            break;
+        case 'error':
+            backgroundColor = '#dc3545';
+            textColor = 'white';
+            break;
+        case 'warning':
+            backgroundColor = '#ffc107';
+            textColor = '#000';
+            break;
+        default:
+            backgroundColor = '#495057';
+            textColor = 'white';
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-custom';
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: ${backgroundColor};
+        color: ${textColor};
+        padding: 12px 20px;
+        border-radius: 6px;
+        z-index: 1000;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    toast.textContent = toastMessage;
+    
+    document.body.appendChild(toast);
+    
+    // Anima a entrada
+    setTimeout(() => {
+        toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove após 3 segundos
+    setTimeout(() => {
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
 }
 
 // Executar quando o DOM estiver pronto

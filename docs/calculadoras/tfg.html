@@ -105,7 +105,33 @@
         <div class="d-flex justify-content-center">
             <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
                 <h4>Estimativa da Taxa de Filtração Glomerular pela Fórmula CKD-EPI</h4>
+                
+                <!-- Informações sobre as fórmulas -->
+                <div class="alert alert-info mb-3" role="alert">
+                    <h6>📊 Diferenças entre as fórmulas:</h6>
+                    <ul class="mb-0">
+                        <li><strong>CKD-EPI 2021:</strong> Fórmula mais recente, sem fator de correção racial (mais inclusiva)</li>
+                        <li><strong>CKD-EPI 2009:</strong> Fórmula tradicional, com fator de correção racial</li>
+                    </ul>
+                </div>
+                
                 <form>
+                  <div class="mb-3">
+                    <label class="form-label">Fórmula:</label>
+                    <div class="form-check">
+                        <label class="form-check-label" for="formula2021">
+                            <input class="form-check-input bg-success border-success me-2" type="radio" name="formula" id="formula2021" value="2021" checked>
+                            CKD-EPI 2021 (sem fator de correção racial)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="formula2009">
+                            <input class="form-check-input bg-success border-success me-2" type="radio" name="formula" id="formula2009" value="2009">
+                            CKD-EPI 2009 (com fator de correção racial)
+                        </label>
+                    </div>
+                  </div>
+
                   <div class="input-group mb-3">
                     <span class="input-group-text" for="idade">Idade:</span>
                     <input type="number" id="idade" name="idade" required min="0" class="form-control" placeholder="Ex: 10">
@@ -113,7 +139,7 @@
 
                   <div class="input-group mb-3">
                     <span class="input-group-text" for="creatinina">Creatinina Sérica (mg/dL):</span>
-                    <input type="number" id="creatinina" name="creatinina" required min="0" class="form-control" placeholder="Ex: 0.8">
+                    <input type="number" id="creatinina" name="creatinina" required min="0" step="0.01" class="form-control" placeholder="Ex: 0.8">
                   </div>
 
                   <div class="mb-3">
@@ -132,7 +158,7 @@
                     </div>
                   </div>
 
-                  <div class="mb-3">
+                  <div id="etniaContainer" class="mb-3" style="display: none;">
                     <label class="form-label">Etnia:</label>
                     <div class="form-check">
                         <label class="form-check-label" for="etniaBranco">
@@ -153,13 +179,38 @@
                 
                 <div class="resultado-container">
                     <div class="resultado-header">
-                        <small class="text-muted">🧬 Resultado da TFG - Clique para copiar</small>
+                        <small class="text-muted">🧬 Resultado da TFG (<span id="formulaUtilizada">CKD-EPI 2021</span>) - Clique para copiar</small>
                     </div>
                     <div id="resultado"></div>
                 </div>
             </section>
         </div>
 
+        <script>
+            // Controlar visibilidade do campo etnia baseado na fórmula
+            document.addEventListener('DOMContentLoaded', function() {
+                const formula2021 = document.getElementById('formula2021');
+                const formula2009 = document.getElementById('formula2009');
+                const etniaContainer = document.getElementById('etniaContainer');
+                const formulaUtilizada = document.getElementById('formulaUtilizada');
+                
+                function toggleEtniaField() {
+                    if (formula2021.checked) {
+                        etniaContainer.style.display = 'none';
+                        formulaUtilizada.textContent = 'CKD-EPI 2021';
+                    } else {
+                        etniaContainer.style.display = 'block';
+                        formulaUtilizada.textContent = 'CKD-EPI 2009';
+                    }
+                }
+                
+                formula2021.addEventListener('change', toggleEtniaField);
+                formula2009.addEventListener('change', toggleEtniaField);
+                
+                // Configurar estado inicial
+                toggleEtniaField();
+            });
+        </script>
         <script src="../assets/js/calculadoras/tfg.js"></script>
     </body>
 </html>

@@ -29,12 +29,29 @@
     .btn-outline-light {
         border: 2px solid rgba(255,255,255,0.3);
         color: white;
+        position: relative;
     }
     
     .btn-outline-light:hover {
         background-color: rgba(255,255,255,0.1);
         border-color: white;
         color: white;
+    }
+    
+    /* Destaque especial para busca médica */
+    .btn-outline-light:hover::after {
+        content: "Sites médicos confiáveis";
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 10px;
+        white-space: nowrap;
+        z-index: 1000;
     }
     
     /* Estilo do offcanvas */
@@ -264,9 +281,9 @@
                 <!-- Busca externa (DuckDuckGo) com filtros de sites confiáveis -->
                 <form class="d-flex" action="https://duckduckgo.com/" method="get" target="_blank" onsubmit="addMedicalSiteFilter(event)">
                     <div class="input-group input-group-sm">
-                        <input name="q" id="webSearch" class="form-control" type="search" placeholder="Buscar na web..." aria-label="Web Search" style="min-width: 150px;">
-                        <button class="btn btn-outline-light btn-sm" type="submit" title="Buscar em sites médicos confiáveis">
-                            <small>🌐</small>
+                        <input name="q" id="webSearch" class="form-control" type="search" placeholder="Buscar em sites médicos..." aria-label="Medical Web Search" style="min-width: 150px;" title="Busca apenas em: PubMed, UpToDate, Cochrane, CFM, SciELO, MSD Manuals, Consulta Remédios">
+                        <button class="btn btn-outline-light btn-sm" type="submit" title="Buscar em sites médicos confiáveis&#10;• PubMed (pubmed.ncbi.nlm.nih.gov)&#10;• UpToDate (uptodate.com)&#10;• Cochrane (cochrane.org)&#10;• CFM (portal.cfm.org.br)&#10;• SciELO (scielo.br)&#10;• MSD Manuals (msdmanuals.com)&#10;• Consulta Remédios (consultaremedios.com.br)">
+                            <small>🩺</small>
                         </button>
                     </div>
                 </form>
@@ -314,16 +331,8 @@ const sitePages = [
     { title: "Agradecimentos", url: "extras/agradecimentos.html", category: "Geral", keywords: ["agradecimentos", "créditos", "colaboradores", "equipe"] }
 ];
 
-// Sites médicos confiáveis para filtrar a busca web
-const trustedMedicalSites = [
-    "pubmed.ncbi.nlm.nih.gov",
-    "uptodate.com",
-    "cochrane.org",
-    "portal.cfm.org.br",
-    "scielo.br",
-    "msdmanuals.com",
-    "consultaremedios.com.br"
-];
+// Cache da consulta para evitar duplicação
+let lastSearchQuery = '';
 
 // Função para busca interna do site - CORRIGIDO PARA FUNCIONAR EM TODAS AS PÁGINAS
 function filterSuggestions() {
@@ -401,37 +410,6 @@ function navigateToPage(url) {
     document.getElementById('buscarInterno').value = '';
 }
 
-// Função para adicionar filtro de sites médicos à busca web
-function addMedicalSiteFilter(event) {
-    const searchInput = document.getElementById('webSearch');
-    const query = searchInput.value.trim();
-    
-    if (query) {
-        // Criar um input hidden com a consulta filtrada
-        const form = event.target;
-        
-        // Remove input hidden anterior se existir
-        const existingHidden = form.querySelector('input[name="q"][type="hidden"]');
-        if (existingHidden) {
-            existingHidden.remove();
-        }
-        
-        // Criar novo input hidden com a consulta filtrada
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'q';
-        
-        // Adicionar filtro de sites confiáveis à consulta
-        const siteFilter = trustedMedicalSites.map(site => `site:${site}`).join(' OR ');
-        hiddenInput.value = `${query} (${siteFilter})`;
-        
-        form.appendChild(hiddenInput);
-        
-        // Limpar o campo visível para não mostrar a consulta complexa
-        searchInput.name = 'q_visible';
-    }
-}
-
 // Fechar sugestões ao clicar fora
 document.addEventListener('click', function(event) {
     const searchContainer = event.target.closest('.position-relative');
@@ -452,6 +430,118 @@ document.getElementById('buscarInterno').addEventListener('keydown', function(ev
         suggestions.style.display = 'none';
     }
 });
+
+// Sites médicos confiáveis para filtrar busca externa
+const trustedMedicalSites = [
+    'pubmed.ncbi.nlm.nih.gov',
+    'uptodate.com',
+    'cochrane.org',
+    'portal.cfm.org.br',
+    'scielo.br',
+    'msdmanuals.com',
+    'consultaremedios.com.br'
+];
+
+// Cache da consulta para evitar duplicação
+let lastWebSearchQuery = '';
+
+// Função para adicionar filtro de sites médicos à busca web
+function addMedicalSiteFilter(event) {
+    const searchInput = document.getElementById('webSearch');
+    const query = searchInput ? searchInput.value.trim() : '';
+    
+    if (query) {
+        // Evitar processamento duplicado
+        if (lastWebSearchQuery === query) {
+            return true; // Permite o submit normalmente
+        }
+        lastWebSearchQuery = query;
+        
+        // Criar um input hidden com a consulta filtrada
+        const form = event.target;
+        
+        // Remove input hidden anterior se existir
+        const existingHidden = form.querySelector('input[name="q"][type="hidden"]');
+        if (existingHidden) {
+            existingHidden.remove();
+        }
+        
+        // Criar novo input hidden com a consulta filtrada
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'q';
+        
+        // Adicionar filtro de sites confiáveis à consulta usando sintaxe otimizada
+        const siteFilter = `(${trustedMedicalSites.map(site => `site:${site}`).join(' OR ')})`;
+        hiddenInput.value = `${query} ${siteFilter}`;
+        
+        form.appendChild(hiddenInput);
+        
+        // Limpar o campo visível para não mostrar a consulta complexa
+        searchInput.name = 'q_visible';
+        
+        console.log('🔍 Busca externa com filtro aplicado:', hiddenInput.value);
+        
+        // Feedback visual da busca
+        showSearchFeedback();
+    } else {
+        // Se não há consulta, previne o submit
+        event.preventDefault();
+        if (searchInput) {
+            searchInput.focus();
+        }
+        showToastForSearch('⚠️ Digite algo para buscar');
+    }
+}
+
+// Função para mostrar feedback da busca externa
+function showSearchFeedback() {
+    const button = document.querySelector('button[title*="sites médicos"]');
+    if (button) {
+        const originalContent = button.innerHTML;
+        
+        button.innerHTML = '<small>✅</small>';
+        button.style.background = 'rgba(40, 167, 69, 0.2)';
+        
+        setTimeout(() => {
+            button.innerHTML = originalContent;
+            button.style.background = '';
+        }, 1500);
+    }
+}
+
+// Toast simples para busca (evitar dependências)
+function showToastForSearch(message) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #495057;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        z-index: 1000;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    // Animar entrada
+    setTimeout(() => {
+        toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remover após 3 segundos
+    setTimeout(() => {
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
 </script>
 
 <!-- Offcanvas Sidebar com todas as opções -->

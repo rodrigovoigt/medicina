@@ -83,20 +83,81 @@ $(document).ready(function () {
         let idade = parseFloat($('#idade').val());
         let sexo = $('input[name="sexo"]:checked').val();
         let etnia = $('input[name="etnia"]:checked').val();
+        let formula = $('input[name="formula"]:checked').val();
         
-        let sex = sexo === "feminino" ? 1.018 : 1;
-        let alpha = sexo === "feminino" ? -0.329 : -0.411;
-        let kappa = sexo === "feminino" ? 0.7 : 0.9;
-        let race = etnia === "negro" ? 1.159 : 1;
+        // Validação dos campos obrigatórios
+        if (isNaN(creatinina) || isNaN(idade) || !sexo) {
+            showToast('⚠️ Preencha todos os campos obrigatórios');
+            return;
+        }
+        
+        if (creatinina <= 0 || idade <= 0) {
+            showToast('⚠️ Os valores devem ser maiores que zero');
+            return;
+        }
+        
+        let tfg;
+        let formulaUsada;
+        
+        if (formula === '2021') {
+            // CKD-EPI 2021 - SEM fator racial
+            // eGFR = 142 × min(Creat/K, 1)^α × max(Creat/K, 1)^-1.200 × 0.9938^idade × 1.012 [se feminino]
+            let K = sexo === "feminino" ? 0.7 : 0.9;
+            let alpha = sexo === "feminino" ? -0.241 : -0.302;
+            let sexFactor = sexo === "feminino" ? 1.012 : 1;
+            
+            let creatK = creatinina / K;
+            
+            // A fórmula usa AMBOS os termos multiplicados
+            let minTerm = Math.pow(Math.min(creatK, 1), alpha);
+            let maxTerm = Math.pow(Math.max(creatK, 1), -1.200);
+            let ageFactor = Math.pow(0.9938, idade);
+            
+            tfg = 142 * minTerm * maxTerm * ageFactor * sexFactor;
+            formulaUsada = "CKD-EPI 2021";
+            
+            console.log('Debug CKD-EPI 2021:', {
+                creatinina, K, alpha, sexFactor, creatK, 
+                minTerm, maxTerm, ageFactor, tfg,
+                'min(creatK, 1)': Math.min(creatK, 1),
+                'max(creatK, 1)': Math.max(creatK, 1)
+            });
+        } else {
+            // CKD-EPI 2009 - COM fator racial
+            if (!etnia) {
+                showToast('⚠️ Selecione a etnia para a fórmula CKD-EPI 2009');
+                return;
+            }
+            
+            let sex = sexo === "feminino" ? 1.018 : 1;
+            let alpha = sexo === "feminino" ? -0.329 : -0.411;
+            let kappa = sexo === "feminino" ? 0.7 : 0.9;
+            let race = etnia === "negro" ? 1.159 : 1;
 
-        let tfg = 141 * Math.min(Math.pow(creatinina / kappa, alpha), Math.pow(creatinina / kappa, -1.209)) * Math.pow(0.993, idade) * sex * race;
+            let creatKappa = creatinina / kappa;
+            
+            // A fórmula CKD-EPI 2009 também usa ambos os termos
+            let minTerm = Math.pow(Math.min(creatKappa, 1), alpha);
+            let maxTerm = Math.pow(Math.max(creatKappa, 1), -1.209);
+            
+            tfg = 141 * minTerm * maxTerm * Math.pow(0.993, idade) * sex * race;
+            formulaUsada = "CKD-EPI 2009";
+            
+            console.log('Debug CKD-EPI 2009:', {
+                creatinina, kappa, alpha, sex, race, creatKappa, 
+                minTerm, maxTerm, idade, tfg,
+                'min(creatKappa, 1)': Math.min(creatKappa, 1),
+                'max(creatKappa, 1)': Math.max(creatKappa, 1)
+            });
+        }
         
+        // Classificação da função renal
         let categoriaG = tfg >= 90 ? "G1" : tfg >= 60 ? "G2" : tfg >= 45 ? "G3a" : tfg >= 30 ? "G3b" : tfg >= 15 ? "G4" : "G5";
         let descricao = tfg >= 90 ? "Normal" : tfg >= 60 ? "Levemente diminuída" : tfg >= 45 ? "Leve/moderadamente diminuída" : tfg >= 30 ? "Moderadamente diminuída" : tfg >= 15 ? "Muito diminuída" : "Falência renal";
         let faixa = tfg >= 90 ? "≥ 90" : tfg >= 60 ? "60-89" : tfg >= 45 ? "45-59" : tfg >= 30 ? "30-44" : tfg >= 15 ? "15-29" : "< 15";
         
-        // let tfgNormal = idade > 70 ? 75 : 125;
-        let tfgNormal  = 0
+        // Valor normal da TFG baseado na idade
+        let tfgNormal = 0;
         if (idade > 70) {
             tfgNormal = 75; // TFG normal para idosos
         } else if (idade > 50) {
@@ -105,14 +166,11 @@ $(document).ready(function () {
             tfgNormal = 125; // TFG normal para jovens
         }
 
-        let percentualFuncaoRenal = (tfg / tfgNormal) * 100;
-        if (percentualFuncaoRenal < 0) {
-            percentualFuncaoRenal = 0; // Evita valores negativos
-        } else if (percentualFuncaoRenal > 100) {
-            percentualFuncaoRenal = 100; // Limita a 100%
-        }
+        let percentualFuncaoRenal = Math.min(100, Math.max(0, (tfg / tfgNormal) * 100));
         
-        let resultadoTexto = `TFG: ${tfg.toFixed(2)} mL/min/1.73m²\nCategoria: ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\nFunção renal restante: ${percentualFuncaoRenal.toFixed(1)}%`;
+        
+        
+        let resultadoTexto = `TFG ${tfg.toFixed(2)} mL/min/1.73m²\nCategoria ${categoriaG} - ${descricao} (Faixa: ${faixa} mL/min/1.73m²)\nFunção renal: ${percentualFuncaoRenal.toFixed(1)}%`;
         
         $('#resultado').text(resultadoTexto).data('copyText', resultadoTexto).attr('data-copy', true);
     });
