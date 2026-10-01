@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+    <title>Quiz de Especialidades Médicas - DocGO!</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .title {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .progress-container {
+            background-color: #e2e8f0;
+            border-radius: 50px;
+            height: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            height: 100%;
+            border-radius: 50px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .table td {
+            vertical-align: middle;
+            padding: 15px;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #resultado-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        #page3c table {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        #page3c td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #page3c tr:hover {
+            background-color: #f7fafc;
+        }
+
+        #page3c font {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+</style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <script src="../../assets/js/navbar-loader.js" defer></script>
+    <script>
+        fetch("../navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar-placeholder").innerHTML = data;
+                if (typeof fixNavbarLinks === 'function') {
+                    fixNavbarLinks();
+                }
+            });
+            
+        window.addEventListener('load', function() {
+            if (typeof fixNavbarLinks === 'function') {
+                fixNavbarLinks();
+            }
+        });
+    </script>
+
+    <div class="container">
+        <div class="quiz-container fade-in">
+            <!-- Tela de Início -->
+            <div id="start-screen">
+                <h1 class="title">
+                    <i class="fas fa-user-md"></i> Quiz de Especialidades Médicas
+                </h1>
+                <p class="text-center mb-4">
+                    Responda às perguntas abaixo com a maior sinceridade possível, dando notas de zero a dez para sua resposta. 
+                    Para maior precisão use notas com duas casas decimais, exemplo 7.53.
+                </p>
+                <div class="text-center">
+                    <button class="btn btn-success btn-lg" onclick="page2()">
+                        <i class="fas fa-play"></i> Iniciar Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tela de Perguntas (page2) -->
+            <div id="page2" style="display: none;">
+                <h2 class="title">Questionário de Especialidades</h2>
+                <div id="perguntas-container" class="mb-4">
+                    <!-- As perguntas serão inseridas aqui via JavaScript -->
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-success btn-lg" onclick="validarEContinuar()">
+                        <i class="fas fa-arrow-right"></i> Ver Resultado
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tela de Resultados (page3) -->
+            <div id="page3" style="display: none;">
+                <h2 class="title">Suas Especialidades Recomendadas</h2>
+                <p class="text-center text-muted mb-4">
+                    Baseado nas suas respostas, estas são as especialidades mais compatíveis com seu perfil:
+                </p>
+                <div id="page3c" class="table-responsive">
+                    <!-- Os resultados serão inseridos aqui pelo JavaScript -->
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary" onclick="location.reload()">
+                        <i class="fas fa-redo"></i> Refazer Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Páginas auxiliares do código original -->
+            <div id="page1" style="display: none;"></div>
+            <div id="main" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="quiz-especialidades.js"></script>
+    <script>
+        // Script de inicialização para conectar com o código existente
+        const perguntas = [
+            "Autonomia é a capacidade do profissional de resolver seus casos médicos sem depender de outros especialistas. Esta autonomia seria pouco ou muito importante?",
+            "Algumas especialidades envolvem um tempo maior de contato direto do médico com o paciente. VOCÊ gosta pouco ou muito deste relacionamento direto com o paciente?",
+            "Em algumas especialidades é grande o grau de dependência do paciente em relação ao médico. VOCÊ gostaria pouco ou muito de ter os pacientes dependentes de você?",
+            "No dia-a-dia de sua especialidade você gostaria que houvesse uma grande diversidade de patologias? Isso é pouco ou muito importante para VOCÊ?",
+            "Que grau de importância VOCÊ dá ao tempo livre que o especialista dispõe para dedicar a si mesmo e à sua família?",
+            "VOCÊ gostaria de uma especialidade que exigisse muitos conhecimentos técnicos para o seu desempenho? Isso é pouco ou muito para VOCÊ?",
+            "Que grau de importância VOCÊ dá aos ganhos financeiros que uma especialidade pode permitir?",
+            "Para VOCÊ é pouco ou muito importante que haja possibilidade do uso de criatividade no dia-a-dia da sua especialidade?",
+            "Algumas especialidades exigem maior desempenho intelectual, ou seja, exigem mais raciocinio lógico do especialista. VOCÊ gostaria pouco ou muito disso no seu trabalho diário?",
+            "No desempenho diário de sua especialidade, VOCÊ desejaria ter de se relacionar pouco ou muito com outros colegas especialistas?",
+            "VOCÊ gostaria de uma especialidade que exigisse pouco ou muita habilidade manual para o seu desempenho?",
+            "Numa escala de zero a dez, qual o grau de estresse ao qual VOCÊ gostaria de estar submetido durante o desempenho da sua especialidade?",
+            "Algumas especialidade exigem um grau maior de responsabilidade do profissional. Com que grau de responsabilidade VOCÊ gostaria de trabalhar?",
+            "Que grau de importância VOCÊ dá à possibilidade de ter uma regularidade de horário no desempenho de sua especialidade?",
+            "VOCÊ como médico de uma determinada especialidade se preocuparia pouco ou muito com a sua segurança profissional em relação ao futuro?",
+            "Para VOCÊ é pouco ou muito importante trabalhar em uma especialidade na qual os resultados sejam claramente visiveis?",
+            "Que importância VOCÊ dá ao 'Status' que sua especialidade e VOCÊ mesmo pode alcançar junto à classe médica e à clientela?"
+        ];
+
+        function page2() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
+            
+            // Criar os campos de input para cada pergunta
+            let html = '<div class="table-responsive"><table class="table table-striped">';
+            for (let i = 0; i < perguntas.length; i++) {
+                html += `
+                    <tr>
+                        <td><strong>${i + 1}.</strong> ${perguntas[i]}</td>
+                        <td style="width: 150px;">
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="iQQ${i + 1}" 
+                                   min="0" 
+                                   max="10" 
+                                   step="0.01" 
+                                   placeholder="0.00"
+                                   required>
+                        </td>
+                    </tr>`;
+            }
+            html += '</table></div>';
+            document.getElementById('perguntas-container').innerHTML = html;
+            
+            // Focar no primeiro campo
+            document.getElementById('iQQ1').focus();
+        }
+
+        function validarEContinuar() {
+            // Validar se todos os campos estão preenchidos
+            let todosPreenchidos = true;
+            let camposInvalidos = [];
+            
+            for (let i = 1; i <= 17; i++) {
+                const campo = document.getElementById(`iQQ${i}`);
+                const valor = parseFloat(campo.value);
+                
+                if (!campo.value || isNaN(valor) || valor < 0 || valor > 10) {
+                    todosPreenchidos = false;
+                    camposInvalidos.push(i);
+                    campo.classList.add('is-invalid');
+                } else {
+                    campo.classList.remove('is-invalid');
+                }
+            }
+            
+            if (!todosPreenchidos) {
+                alert(`Por favor, preencha todas as perguntas com valores entre 0 e 10.\nPerguntas pendentes: ${camposInvalidos.join(', ')}`);
+                return;
+            }
+            
+            // Chamar a função page3 do código original
+            page3();
+        }
+    </script>
+</body>
+</html>

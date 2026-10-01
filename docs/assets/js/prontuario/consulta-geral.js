@@ -1,287 +1,133 @@
-function copiarTexto(id) {
-    let textoParaCopiar = $('#' + id).data('copyText') || $('#' + id).text();
+const D = {"tpl": {"prontuarioPadrao": "Alergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n", "prontuarioPreNatal": "G XXX P XXX C XXX A XXX\nIG US:\nDescrição do USG1T:\nData provável do parto:\nDUM:\nTipo ABO/RH:\n\nAlergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\nBCF:\nAU:\nPA:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n", "prontuarioFeminino": "G XXX P XXX C XXX A XXX\nDUM:\n\nAlergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n", "prontuarioPuericultura": "Alergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\nVacinação: \nAlimentação: \nHábito intestinal: \nTempo de tela: \nSono: \nDNPM:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n", "exameFisicoEstadoGeral": "Bom estado geral, lúcido e orientado em tempo, espaço e pessoa. Mucosas hidratadas e normocoradas, afebril (SIC), deambulando sem auxílio, fácies atípicas.", "estadoGeralSimples": "Bom estado geral, lúcido e orientado em tempo e espaço. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (SIC), deambulando sem auxílio, fácies atípicas, boas condições de higiene.", "condicaoMental": "Colaborativo, memória e raciocínio preservados, normovigilante, humor eutímico e normobúlico com apetite e sono preservados.\n", "capacidadeFisica": "Eutrófico (IMC), com tônus e força preservados, normoativo. Normosfigmo, normotenso, eupneico, normoxemia em ar ambiente.\n", "exameFisicoLabs": "Exame laboratorial (XXX/XXX/2025):\nHb XXX / Ht XXX / Leuco. XXX / Plaq. XXX\nGlicose XXX / HbA1c XXX\nCT XXX / HDL-C XXX / LDL-C XXX / Trig. XXX\n", "labTireoide": "TSH XXX / T4L XXX\n", "labVitaminas": "Vit D XXX / Vit B12 XXX / Ferritina XXX / Vit C XXX\n", "labHepatico": "TGO XXX / TGP XXX / Alb. XXX\n", "labHormoniosFem": "FSH XXX / LH XXX / Estrad. XXX / Proges. XXX / BHCG XXX\n", "labPreNatal": "Tipagem ABO/Rh / Coombs Ind. XXX / HBsAg XXX / Anti-HIV XXX / VDRL XXX / Toxoplasmose IgG XXX / IgM XXX / Glic XXX / EAS XXX / Urina cultura XXX\n", "labVesicula": "GamaGT XXX / FA XXX / BilT XXX\n", "labRenal": "Cr XXX / Ur XXX / TFG XXX\n", "labEletrolitos": "Na⁺ XXX / K⁺ XXX / Ca²⁺ XXX / Mg²⁺ XXX / P³⁻ XXX\n", "exameFisicoPele": "Exame físico de pele:\nLesão do tipo mácula / pápula / placa / vesícula / liquenificação / descamação / erosão / ulceração. Localizada em XXXXX. Simétrica / Assimétrica / Difusa / Localizada / Em áreas de pressão. Bordas nítidas / indefinidas / regulares / irregulares. Hipocrômica / Normocrômica / Hiperpigmentada / Eritematosa / Violácea. Superfície lisa / áspera / com descamação / com crostas / com escamas / com liquenificação. Diâmetro de XXXX cm. Surgimento há XXX, com / sem alterações significativas recentemente.\n", "exameFisicoTorax": "Exame físico pulmonar:\nMurmúrios vesiculares presentes, simétricos, sem ruídos adventícios / com roncos / sibilos / estertores localizados em XXX.\nSem broncofonia, pectorilóquia ou egofonia.\nTórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\nExpansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n", "ausculta": "Ausculta pulmonar:\nMurmúrios vesiculares presentes, simétricos, sem ruídos adventícios / com roncos / sibilos / estertores localizados em XXX.\nSem broncofonia, pectorilóquia ou egofonia.\n", "ectoscopiaTorax": "Tórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\n", "palpacaoPercussao": "Expansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n", "exameFisicoCardio": "Exame físico cardiovascular:\nBulhas normofonéticas, rítmicas, regulares em 2 tempos, sem sopros.\nPalpação do pulso radial de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.\nTempo de reenchimento capilar < 2 seg.", "exameFisicoAbdomen": "Exame físico de abdômen:\nAbdômen plano / globoso, flácido / tenso, ruídos hidroaéreos presentes, indolor à palpação superficial e profunda, sem massas ou visceromegalias.", "exameFisicoNeuro": "Exame físico neurológico:\nPupilas isocóricas e isofotorreagentes. Pares cranianos sem alterações.\nForça muscular +++++/5 nos quatro membros. Reflexos osteotendíneos normais ++/4. Sensibilidade superficial e profunda preservadas. Marcha sem alterações. Sem sinais meníngeos.\n", "exameMamasCompleto": "Exame físico de mamas:\nMamas simétricas, formato arredondado / piriforme / pendular, volume grande/médio/pequeno, sem alterações cutâneas visíveis. Mamilos normoposicionados / protrusos / invertido, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica e estática.\nExpressão papilar sem saída de secreção.\n", "exameMamas": "Exame de mamas: sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica e estática.\n", "amastasia": "Paciente com amastasia direita / esquerda / bilateral. Sem alterações cutâneas visíveis. Sem nódulos palpáveis na região, sem abaulamentos ou retrações à inspeção dinâmica e estática.\nLinfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n", "politeliaPolimastia": "Paciente com politelia / polimastia em região XXX. Estrutura com características de tecido mamário e/ou papilar / Estrutura semelhante a mamilo, sem tecido glandular subjacente palpável / , sem nódulos palpáveis e sem alterações cutâneas associadas.\nÀ inspeção dinâmica e estática, sem abaulamentos ou retrações significativas.\n", "linfonodos": "Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n", "exameFisicoGinecoCompleto": "Exame físico ginecológico:\nMamas simétricas, formato arredondado, volume grande/médio/pequeno, sem sinais flogísticos. Mamilos normoposicionados, protrusos, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica. Expressão papilar sem saída de secreção. Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis.\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofia ou outras alterações morfológicas.\nColo uterino de aspecto habitual, sem lesões visíveis ou secreção anômala.\nToque vaginal com útero em posição antevertida, de volume e consistência normais, móvel e indolor. Anexos não palpáveis.\n", "exameFisicoGineco": "Exame ginecológico: sem alterações.\n", "ectoscopiaGineco": "Ectoscopia:\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofias, verrugas ou outras alterações morfológicas. Períneo íntegro.\n", "especular": "Especular:\nColo uterino de aspecto habitual / hiperemiado / friável / com ectopia / com pólipos, sem lesões visíveis / com lesão exofítica / com secreção anômala (mucoide / purulenta / sanguinolenta / fétida).\nSecreção vaginal ausente / escassa / abundante, de coloração transparente / esbranquiçada / amarelada / esverdeada, sem odor / com odor fétido.\nParedes vaginais íntegras / hiperemiadas / atróficas / com descamação / com lesões.\n", "toqueVaginal": "Toque vaginal bimanual:\nÚtero em posição antevertida / retrovertida / médiovertida, de volume e consistência normais / aumentado / rebaixado / amolecido, móvel / fixo, indolor / doloroso à mobilização.\nAnexos não palpáveis / palpáveis à direita / à esquerda, com massa de aproximadamente X cm, consistência cística / sólida, indolor / dolorosa.\nFundo de saco de Douglas livre / doloroso / com massa / abaulado.\n", "exameFisicoOsteoarticular": "Exame físico osteoarticular:\nInspeção sem assimetrias ou atrofias musculares evidentes. Ausência de lesões cutâneas. Sem sinais flogísticos articulares. Sem deformidades articulares aparentes.\nPalpação sem dor ou edema nas interfaces articulares. Ausência de crepitação à mobilização. Sem hipertrofia sinovial ou edema sinovial palpável.\nAmplitude de movimento preservada, sem limitações ou hipermobilidade articular. Força muscular preservada.\nTeste de Neer e Hawkins negativos para impacto no ombro. Teste de Jobe sem evidências de lesão do supraespinhal. Teste de Phalen e Tinel negativos para síndrome do túnel do carpo. Testes de gaveta anterior e posterior negativos para instabilidade ligamentar do joelho. Sem sinais de derrame articular ao teste do choque da patela.\n", "otoscopia": "Otoscopia:\nPavilhão auricular sem hiperemia.\nMeato acústico externo com cerúmen em quantidade adequada, sem secreção, sem estreitamento, sem hiperemia e sem obstrução.\nMembrana timpânica íntegra, translúcida, normotensa e peroladas/hiperemia.\n", "oroscopia": "Oroscopia:\nDentes em bom estado de conservação.\nMucosa jugal brilhante úmida, normocorada e sem lesões visíveis.\nTonsilas e língua normotróficas e normocoradas, sem placas.\nDucto parotídeo e submandibular sem obstrução.\n", "exameCabeca": "Exame físico cabeça:\nCrânio normocefálico, fontanelas normotensas, sendo a anterior 2-3 polpas (18-24m) e posterior (2m) 1-2 polpas. Suturas não abauladas, sem sinais de acalvagamento, diástase ou craniossinostose.\n", "q_pulm": "Ausculta pulmonar:\nMurmúrios vesiculares presentes bilateralmente, sem ruídos adventícios.", "q_cardio": "Ausculta cardíaca:\nBulhas normofonéticas, rítmicas, regulares em 2 tempos, sem sopros.", "q_abd": "Abdômen plano, flácido, ruídos hidroaéreos presentes, indolor à palpação superficial e profunda, sem massas ou visceromegalias.", "q_neuro": "Pupilas isocóricas e fotorreagentes, força preservada nos quatro membros, sem déficits focais, marcha sem alterações.", "exameFisicoVascular": "Exame físico vascular:\nPalpação do pulso XXXXXX de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.\nTempo de reenchimento capilar < 2 seg.", "psiCompleto": "Exame do Estado Mental:\nAparência e Atitude:\nAparência apropriada para idade e contexto / desleixada / com higiene precarizada / extravagante / emaciada. Atitude colaborativa / reativa / hostil / acessível / desconfiada / oposicional / esquiva / sedutora em relação ao examinador, mantendo contato visual preservado / esquivo / fixado.\nConsciência e Orientação:\nLúcido e vigil / sonolento / torporoso / obnubilado. Orientado autopsiquicamente e allopsiquicamente / desorientado no tempo / desorientado no espaço.\nAtenção e Memória:\nNormoprosexia / hipoprosexia / hiperprosexia / distraibilidade elevada. Memória remota e recente preservadas / hipomnésia recente / amnésia lacunar / presença de confabulações.\nSensopercepção:\nSem alterações sensoperceptivas no momento / presença de alucinações auditivas (comentadoras / de comando) / alucinações visuais / ilusões / alterações do esquema corporal.\nPensamento:\nCurso normopsíquico / taquipsíquico (acelerado) / bradipsíquico (lentificado) / com fuga de ideias / bloqueio do pensamento / descarrilamento. Forma lógica e coerente / circunstancial / tangencial / desagregada / com afrouxamento das associações. Conteúdo sem delírios ou ideias fixas / ideação delirante de cunho (persecutório / paranóide / grandiosidade / ruína / ciúme / místico) / ideação suicida ausente / ideação suicida passiva / ideação suicida ativa e estruturada.\nLinguagem:\nNormolálico / taquilálico / bradilálico / paucilálico / verborreico / murmurado / neologismos / mutismo. Articulação da fala preservada / disártrica.\nHumor e Afeto:\nHumor eutímico / depressivo / disfórico / eufórico / expansivo / anhedônico / ansioso. Afeto sintonizado e modulado / embotado / achatado / incongruente com o discurso / lábil / hipoerético.\nPsicomotricidade e Volição:\nPsicomotricidade preservada / agitação psicomotora / lentificação psicomotora / acatisia / tiques / estereotipias / catatonia. Volição normobúlica / hipobúlica / abúlica, com pragmatismo mantido / hipopragmático.\nCognição e Juízo Crítico:\nNível cognitivo estimado compatível com a escolaridade e nível sócio-cultural / abaixo do esperado / déficit perceptível. Juízo crítico e consciência de doença (insight) preservados (reconhece o quadro e necessidade de tratamento) / parciais / ausentes.", "psi0": "Aparência e Atitude:\nAparência apropriada para idade e contexto / desleixada / com higiene precarizada / extravagante / emaciada. Atitude colaborativa / reativa / hostil / acessível / desconfiada / oposicional / esquiva / sedutora em relação ao examinador, mantendo contato visual preservado / esquivo / fixado.", "psi1": "Consciência e Orientação:\nLúcido e vigil / sonolento / torporoso / obnubilado. Orientado autopsiquicamente e allopsiquicamente / desorientado no tempo / desorientado no espaço.", "psi2": "Atenção e Memória:\nNormoprosexia / hipoprosexia / hiperprosexia / distraibilidade elevada. Memória remota e recente preservadas / hipomnésia recente / amnésia lacunar / presença de confabulações.", "psi3": "Sensopercepção:\nSem alterações sensoperceptivas no momento / presença de alucinações auditivas (comentadoras / de comando) / alucinações visuais / ilusões / alterações do esquema corporal.", "psi4": "Pensamento:\nCurso normopsíquico / taquipsíquico (acelerado) / bradipsíquico (lentificado) / com fuga de ideias / bloqueio do pensamento / descarrilamento. Forma lógica e coerente / circunstancial / tangencial / desagregada / com afrouxamento das associações. Conteúdo sem delírios ou ideias fixas / ideação delirante de cunho (persecutório / paranóide / grandiosidade / ruína / ciúme / místico) / ideação suicida ausente / ideação suicida passiva / ideação suicida ativa e estruturada.", "psi5": "Linguagem:\nNormolálico / taquilálico / bradilálico / paucilálico / verborreico / murmurado / neologismos / mutismo. Articulação da fala preservada / disártrica.", "psi6": "Humor e Afeto:\nHumor eutímico / depressivo / disfórico / eufórico / expansivo / anhedônico / ansioso. Afeto sintonizado e modulado / embotado / achatado / incongruente com o discurso / lábil / hipoerético.", "psi7": "Psicomotricidade e Volição:\nPsicomotricidade preservada / agitação psicomotora / lentificação psicomotora / acatisia / tiques / estereotipias / catatonia. Volição normobúlica / hipobúlica / abúlica, com pragmatismo mantido / hipopragmático.", "psi8": "Cognição e Juízo Crítico:\nNível cognitivo estimado compatível com a escolaridade e nível sócio-cultural / abaixo do esperado / déficit perceptível. Juízo crítico e consciência de doença (insight) preservados (reconhece o quadro e necessidade de tratamento) / parciais / ausentes."}, "groups": [{"title": "Modelos de Prontuário", "info": "", "items": [{"id": "prontuarioPadrao", "label": "Prontuário Padrão"}, {"id": "prontuarioPreNatal", "label": "Prontuário Pré-natal"}, {"id": "prontuarioFeminino", "label": "Prontuário Feminino"}, {"id": "prontuarioPuericultura", "label": "Prontuário Puericultura"}]}, {"title": "Estado geral", "info": "", "items": [{"id": "exameFisicoEstadoGeral", "label": "Estado geral padrão", "q": true}, {"id": "estadoGeralSimples", "label": "Estado geral"}, {"id": "condicaoMental", "label": "Condição Mental"}, {"id": "capacidadeFisica", "label": "Capacidade Física"}]}, {"title": "Cardiovascular", "info": "", "items": [{"id": "q_cardio", "label": "Ausculta cardíaca", "q": true}, {"id": "exameFisicoCardio", "label": "Exame físico cardiovascular"}, {"id": "exameFisicoVascular", "label": "Exame físico vascular"}]}, {"title": "Pneumologia", "info": "<strong>Estertores finos:</strong> Som de \"velcro se abrindo\"; final da inspiração. Causas: Fibrose pulmonar, Pneumonia inicial, ICC.<br><br>\n                                    \n                                    <strong>Estertores grossos:</strong> Som borbulhante, úmido. Inspiração/expiração. Causas: Bronquite, Pneumonia com secreção, Edema pulmonar.<br><br>\n                                    \n                                    <strong>Atrito pleural:</strong> Som áspero, \"raspar couro\". Inspiração/expiração. Causas: Pleurite seca, Neoplasia pleural.<br><br>\n                                    \n                                    <strong>Roncos:</strong> Sons graves, contínuos, \"zumbido\". Expiração. Causas: Secreção em brônquios, Obstrução brônquica.<br><br>\n                                    \n                                    <strong>Sibilos:</strong> Sons agudos, \"assobio\". Expiração. Causas: Asma, DPOC, Broncoespasmo.<br><br>\n                                    \n                                    <strong>Broncofonia:</strong> Voz com nitidez aumentada. Causa: Consolidação pulmonar.<br><br>\n                                    \n                                    <strong>Egofonia:</strong> \"i\" vira \"ê\" ou \"a\", voz \"fanha\". Causa: Consolidação com líquido alveolar.", "items": [{"id": "q_pulm", "label": "Ausculta pulmonar", "q": true}, {"id": "exameFisicoTorax", "label": "Exame Pulmonar Completo"}, {"id": "ectoscopiaTorax", "label": "Ectoscopia do Tórax"}, {"id": "palpacaoPercussao", "label": "Palpação e Percussão"}]}, {"title": "Abdômen", "info": "", "items": [{"id": "exameFisicoAbdomen", "label": "Exame físico de abdômen", "q": true}]}, {"title": "Exames laboratoriais", "info": "", "items": [], "lab": true, "cats": [{"nome": "Hemograma", "titulo": "Hemograma", "items": [{"id": "lab0_0", "label": "Hemoglobina (Hb)", "out": "Hb"}, {"id": "lab0_1", "label": "Hematócrito (Ht)", "out": "Ht"}, {"id": "lab0_2", "label": "Leucócitos", "out": "Leucocitos"}, {"id": "lab0_3", "label": "Plaquetas", "out": "Plaquetas"}]}, {"nome": "Colesterol", "titulo": "Colesterol", "items": [{"id": "lab1_0", "label": "Colesterol total (CTotal)", "out": "CTotal"}, {"id": "lab1_1", "label": "HDL-C", "out": "HDL-C"}, {"id": "lab1_2", "label": "LDL-C", "out": "LDL-C"}, {"id": "lab1_3", "label": "VLDL-C", "out": "VLDL-C"}, {"id": "lab1_4", "label": "Triglicerídeos (Trig)", "out": "Trig"}]}, {"nome": "Glicemia", "titulo": "Glicemia", "items": [{"id": "lab2_0", "label": "Glicemia de jejum", "out": "Glicemia Jejum"}, {"id": "lab2_1", "label": "Hemoglobina glicada (HbA1c)", "out": "HbA1c"}]}, {"nome": "Vitaminas", "titulo": "Vitamina", "items": [{"id": "lab3_0", "label": "Vitamina D", "out": "Vit D"}, {"id": "lab3_1", "label": "Vitamina B12", "out": "Vit B12"}, {"id": "lab3_2", "label": "Ferritina", "out": "Ferritina"}, {"id": "lab3_3", "label": "Ferro sérico", "out": "Ferro sérico"}]}, {"nome": "Tireoide", "titulo": "Tireoide", "items": [{"id": "lab4_0", "label": "TSH", "out": "TSH"}, {"id": "lab4_1", "label": "T4 livre (T4L)", "out": "T4L"}]}, {"nome": "Função renal", "titulo": "Função renal", "items": [{"id": "lab5_0", "label": "Creatinina (Cr)", "out": "Cr"}, {"id": "lab5_1", "label": "Ureia (Ur)", "out": "Ur"}, {"id": "lab5_2", "label": "Taxa de filtração glomerular (TFG)", "out": "TFG"}]}, {"nome": "Fígado", "titulo": "Fígado", "items": [{"id": "lab6_0", "label": "TGO (AST)", "out": "TGO"}, {"id": "lab6_1", "label": "TGP (ALT)", "out": "TGP"}]}, {"nome": "Vesícula biliar", "titulo": "Vesícula biliar", "items": [{"id": "lab7_0", "label": "Fosfatase alcalina (FA)", "out": "FA"}, {"id": "lab7_1", "label": "Gama GT", "out": "GamaGT"}, {"id": "lab7_2", "label": "Bilirrubina total (BiliT)", "out": "BiliT"}]}, {"nome": "Eletrólitos", "titulo": "Eletrólitos", "items": [{"id": "lab8_0", "label": "Sódio (Na)", "out": "Na"}, {"id": "lab8_1", "label": "Potássio (K)", "out": "K"}, {"id": "lab8_2", "label": "Cloro (Cl)", "out": "Cl"}, {"id": "lab8_3", "label": "Cálcio (Ca)", "out": "Ca"}, {"id": "lab8_4", "label": "Magnésio (Mg)", "out": "Mg"}]}, {"nome": "Hormônios femininos", "titulo": "Hormônios femininos", "items": [{"id": "lab9_0", "label": "FSH", "out": "FSH"}, {"id": "lab9_1", "label": "LH", "out": "LH"}, {"id": "lab9_2", "label": "Estradiol (Estrad.)", "out": "Estrad."}, {"id": "lab9_3", "label": "Progesterona (Proges.)", "out": "Proges."}, {"id": "lab9_4", "label": "BHCG", "out": "BHCG"}]}, {"nome": "Pré-natal", "titulo": null, "items": [{"id": "lab10_0", "label": "Tipagem ABO/Rh", "out": "Tipagem ABO/Rh"}, {"id": "lab10_1", "label": "Coombs indireto", "out": "Coombs Ind."}, {"id": "lab10_2", "label": "HBsAg", "out": "HBsAg"}, {"id": "lab10_3", "label": "Anti-HIV", "out": "Anti-HIV"}, {"id": "lab10_4", "label": "VDRL", "out": "VDRL"}, {"id": "lab10_5", "label": "Toxoplasmose IgG", "out": "Toxoplasmose IgG"}, {"id": "lab10_6", "label": "Toxoplasmose IgM", "out": "IgM"}, {"id": "lab10_7", "label": "Glicemia", "out": "Glic"}, {"id": "lab10_8", "label": "EAS", "out": "EAS"}, {"id": "lab10_9", "label": "Urocultura", "out": "Urina cultura"}]}]}, {"title": "Cabeça e pescoço", "info": "", "items": [{"id": "otoscopia", "label": "Otoscopia"}, {"id": "oroscopia", "label": "Oroscopia"}, {"id": "exameCabeca", "label": "Exame da Cabeça (Pediátrico)"}]}, {"title": "Osteoarticular", "info": "", "items": [{"id": "exameFisicoOsteoarticular", "label": "Exame osteoarticular"}]}, {"title": "Dermatológico", "info": "<strong>Lesões primárias:</strong><br>\n                                    • Mácula: alteração de cor, plana, &lt;1cm (ex: sardas)<br>\n                                    • Pápula: elevação sólida, &lt;1cm<br>\n                                    • Placa: lesão elevada, &gt;1cm, geralmente por coalescência de pápulas<br>\n                                    • Vesícula: elevação com conteúdo líquido claro, &lt;1cm<br>\n                                    • Pústula: como vesícula, mas com pus<br>\n                                    • Nódulo: sólido, mais profundo<br>\n                                    • Bolha: vesícula &gt;1cm<br><br>\n                                    \n                                    <strong>Lesões secundárias (evolução de primárias ou trauma):</strong><br>\n                                    • Descamação: perda de camada córnea (ex: psoríase)<br>\n                                    • Crosta: secreção seca (exsudato seco)<br>\n                                    • Erosão: perda superficial da epiderme<br>\n                                    • Ulceração: perda profunda (epiderme + derme)<br>\n                                    • Liquenificação: espessamento da pele com estrias e sulcos (ex: dermatite crônica)", "items": [{"id": "exameFisicoPele", "label": "Exame de Pele"}]}, {"title": "Neurologia", "info": "<strong>Marcha espástica (ceifante):</strong> Arrasto de uma perna em semicírculo. Causas: AVC, hemiparesia.<br><br>\n                                    \n                                    <strong>Marcha escarvante (pé caído):</strong> Elevação exagerada da perna. Causas: Neuropatia fibular, esclerose lateral amiotrófica.<br><br>\n                                    \n                                    <strong>Marcha anserina:</strong> Rebolado com base alargada. Causas: Miopatias (Duchenne).<br><br>\n                                    \n                                    <strong>Marcha atáxica:</strong> Base alargada, instabilidade. Causas: Ataxia cerebelar, etilismo.<br><br>\n                                    \n                                    <strong>Marcha parkinsoniana:</strong> Passos curtos, flexão de tronco, congelamento. Causas: Parkinsonismo.<br><br>\n                                    \n                                    <strong>Marcha tabética:</strong> Pancada forte dos calcanhares. Causas: Ataxia sensitiva (sífilis terciária, deficiência B12).<br><br>\n                                    \n                                    <strong>Marcha em tesoura:</strong> Adução intensa dos MMII. Causas: Paralisia.", "items": [{"id": "q_neuro", "label": "Normal: sem déficits focais", "q": true}, {"id": "exameFisicoNeuro", "label": "Exame neurológico"}]}, {"title": "Psiquiátrico", "info": "", "items": [{"id": "psiCompleto", "label": "Exame do estado mental completo", "q": true}, {"id": "psi0", "label": "Aparência e atitude"}, {"id": "psi1", "label": "Consciência e orientação"}, {"id": "psi2", "label": "Atenção e memória"}, {"id": "psi3", "label": "Sensopercepção"}, {"id": "psi4", "label": "Pensamento"}, {"id": "psi5", "label": "Linguagem"}, {"id": "psi6", "label": "Humor e afeto"}, {"id": "psi7", "label": "Psicomotricidade e volição"}, {"id": "psi8", "label": "Cognição e juízo crítico"}]}, {"title": "Mamas", "info": "", "items": [{"id": "exameMamasCompleto", "label": "Exame de Mamas Completo"}, {"id": "exameMamas", "label": "Exame de Mamas"}, {"id": "amastasia", "label": "Amastasia"}, {"id": "politeliaPolimastia", "label": "Politelia/Polimastia"}, {"id": "linfonodos", "label": "Linfonodos"}]}, {"title": "Ginecológico", "info": "", "items": [{"id": "exameFisicoGinecoCompleto", "label": "Exame Ginecológico Completo"}, {"id": "exameFisicoGineco", "label": "Exame Ginecológico"}, {"id": "ectoscopiaGineco", "label": "Ectoscopia Ginecológica"}, {"id": "especular", "label": "Exame Especular"}, {"id": "toqueVaginal", "label": "Toque Vaginal Bimanual"}]}]};
 
-    if (textoParaCopiar.trim()) {
-        navigator.clipboard.writeText(textoParaCopiar.trim()).then(() => {
-            // Feedback visual melhorado
-            const elemento = $('#' + id);
-            const corOriginal = elemento.css('background-color');
-            elemento.css('background-color', '#d4edda');
-            setTimeout(() => {
-                elemento.css('background-color', corOriginal);
-            }, 300);
-            
-            // Toast notification
-            showToast('✅ Texto copiado com sucesso!');
-        }).catch(err => {
-            console.error('Erro ao copiar: ', err);
-            showToast('❌ Erro ao copiar texto');
-        });
-    } else {
-        showToast('⚠️ Nenhum texto disponível para copiar');
-    }
-}
+$(function () {
+    const $r = $('#resultado');
+    const SIG_PADRAO = 'XXXXX, Acadêmico XXX ° fase\nPrecep. Dr';
+    let sig = SIG_PADRAO;
+    try { sig = localStorage.getItem('docgo_assinatura') || SIG_PADRAO; } catch (e) {}
+    const comSig = t => t.split(SIG_PADRAO).join(sig);
+    const ativos = {}; // id -> texto inserido (permite remover mesmo após edição do restante)
 
-function showToast(message) {
-    // Cria um toast simples
-    const toast = $(`
-        <div class="toast-custom" style="
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #495057;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 6px;
-            z-index: 1000;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        ">${message}</div>
-    `);
-    
-    $('body').append(toast);
-    
-    // Anima a entrada
-    setTimeout(() => {
-        toast.css('transform', 'translateX(0)');
-    }, 100);
-    
-    // Remove após 3 segundos
-    setTimeout(() => {
-        toast.css('transform', 'translateX(100%)');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-$(document).ready(function () {
-
-    // Evento de clique para copiar qualquer texto dinâmico
-    $(document).on('click', '[data-copy]', function () {
-        copiarTexto($(this).attr('id'));
-    });
-
-    // Mapeamento de accordion para o checkbox preferido de cada seção
-    const accordionCheckboxMap = {
-        'collapseProntuarios': 'prontuarioPadrao',
-        'collapse1': 'estadoGeralSimples',  // Mudado para Estado Geral (segunda opção)
-        'collapse2': 'exameFisicoLabs', 
-        'collapse3': 'exameFisicoTorax',
-        'collapse4': 'exameFisicoCardio',
-        'collapse5': 'exameFisicoPele',
-        'collapseMamas': 'exameMamasCompleto',
-        'collapse6': 'exameFisicoAbdomen',
-        'collapse7': 'exameFisicoNeuro',
-        'collapse8': 'exameFisicoGinecoCompleto',
-        'collapse9': 'exameFisicoOsteoarticular',
-        'collapseEspecializados': 'otoscopia'
-    };
-
-    // Evento para quando accordion abrir
-    $('.accordion-collapse').on('shown.bs.collapse', function () {
-        const collapseId = $(this).attr('id');
-        const checkboxId = accordionCheckboxMap[collapseId];
-        
-        if (checkboxId) {
-            $('#' + checkboxId).prop('checked', true);
-            atualizarTexto(); // Atualiza o texto quando marcar
-        }
-    });
-
-    // Evento para quando accordion fechar
-    $('.accordion-collapse').on('hidden.bs.collapse', function () {
-        const collapseId = $(this).attr('id');
-        const checkboxId = accordionCheckboxMap[collapseId];
-        
-        if (checkboxId) {
-            $('#' + checkboxId).prop('checked', false);
-            atualizarTexto(); // Atualiza o texto quando desmarcar
-        }
-    });
-
-    // Evento para mudanças nos checkboxes individuais
-    $('.exame').on('change', function() {
-        atualizarTexto();
-    });
-
-    function atualizarTexto() {
-        let textoGerado = [];
-
-        // Modelos de Prontuário
-        if ($('#prontuarioPadrao').is(':checked')) {
-            textoGerado.push("Alergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n");
-        }
-
-        if ($('#prontuarioPreNatal').is(':checked')) {
-            textoGerado.push("G XXX P XXX C XXX A XXX\nIG US:\nDescrição do USG1T:\nData provável do parto:\nDUM:\nTipo ABO/RH:\n\nAlergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\nBCF:\nAU:\nPA:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n");
-        }
-
-        if ($('#prontuarioFeminino').is(':checked')) {
-            textoGerado.push("G XXX P XXX C XXX A XXX\nDUM:\n\nAlergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n");
-        }
-
-        if ($('#prontuarioPuericultura').is(':checked')) {
-            textoGerado.push("Alergias: nega\nMUC:\nComorbidades:\nHábitos de vida: Nega tabagismo, nega etilismo\nCirurgias e internações:\nHistórico familiar:\nVacinação: \nAlimentação: \nHábito intestinal: \nTempo de tela: \nSono: \nDNPM:\n\nQueixa:\n- \n\nExame físico e complementar:\n\nAvaliação:\n- \n\nConduta:\n- \n- \n\nPaciente ciente e concordante, nega dúvidas.\n\nXXXXX, Acadêmico XXX ° fase\nPrecep. Dr\n\n");
-        }
-
-        // Estado Geral
-        if ($('#exameFisicoEstadoGeral').is(':checked')) {
-            textoGerado.push("Bom estado geral, lúcido e orientado em tempo e espaço. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (SIC), deambulando sem auxílio, fácies atípicas, boas condições de higiene. Colaborativo, memória e raciocínio preservados, normovigilante, humor eutímico e normobúlico com apetite e sono preservados. Eutrófico (IMC), com tônus e força preservados, normoativo. Normosfigmo, normotenso, eupneico, normoxemia em ar ambiente.\n");
-        }
-
-        if ($('#estadoGeralSimples').is(':checked')) {
-            textoGerado.push("Bom estado geral, lúcido e orientado em tempo e espaço. Mucosas úmidas e normocoradas, anictérico, acianótico, afebril (SIC), deambulando sem auxílio, fácies atípicas, boas condições de higiene.\n");
-        }
-
-        if ($('#condicaoMental').is(':checked')) {
-            textoGerado.push("Colaborativo, memória e raciocínio preservados, normovigilante, humor eutímico e normobúlico com apetite e sono preservados.\n");
-        }
-
-        if ($('#capacidadeFisica').is(':checked')) {
-            textoGerado.push("Eutrófico (IMC), com tônus e força preservados, normoativo. Normosfigmo, normotenso, eupneico, normoxemia em ar ambiente.\n");
-        }
-
-        // Exames Laboratoriais
-        if ($('#exameFisicoLabs').is(':checked')) {
-            textoGerado.push("Exame laboratorial (XXX/XXX/2025):\nHb XXX / Ht XXX / Leuco. XXX / Plaq. XXX\nGlicose XXX / HbA1c XXX\nCT XXX / HDL-C XXX / LDL-C XXX / Trig. XXX\n");
-        }
-
-        if ($('#labTireoide').is(':checked')) {
-            textoGerado.push("TSH XXX / T4L XXX\n");
-        }
-
-        if ($('#labVitaminas').is(':checked')) {
-            textoGerado.push("Vit D XXX / Vit B12 XXX / Ferritina XXX / Vit C XXX\n");
-        }
-
-        if ($('#labHepatico').is(':checked')) {
-            textoGerado.push("TGO XXX / TGP XXX / Alb. XXX\n");
-        }
-
-        if ($('#labHormoniosFem').is(':checked')) {
-            textoGerado.push("FSH XXX / LH XXX / Estrad. XXX / Proges. XXX / BHCG XXX\n");
-        }
-
-        if ($('#labPreNatal').is(':checked')) {
-            textoGerado.push("Tipagem ABO/Rh / Coombs Ind. XXX / HBsAg XXX / Anti-HIV XXX / VDRL XXX / Toxoplasmose IgG XXX / IgM XXX / Glic XXX / EAS XXX / Urina cultura XXX\n");
-        }
-
-        if ($('#labVesicula').is(':checked')) {
-            textoGerado.push("GamaGT XXX / FA XXX / BilT XXX\n");
-        }
-
-        if ($('#labRenal').is(':checked')) {
-            textoGerado.push("Cr XXX / Ur XXX / TFG XXX\n");
-        }
-
-        if ($('#labEletrolitos').is(':checked')) {
-            textoGerado.push("Na⁺ XXX / K⁺ XXX / Ca²⁺ XXX / Mg²⁺ XXX / P³⁻ XXX\n");
-        }
-    
-        if ($('#exameFisicoPele').is(':checked')) {
-            textoGerado.push("Exame físico de pele:\nLesão do tipo mácula / pápula / placa / vesícula / liquenificação / descamação / erosão / ulceração. Localizada em XXXXX. Simétrica / Assimétrica / Difusa / Localizada / Em áreas de pressão. Bordas nítidas / indefinidas / regulares / irregulares. Hipocrômica / Normocrômica / Hiperpigmentada / Eritematosa / Violácea. Superfície lisa / áspera / com descamação / com crostas / com escamas / com liquenificação. Diâmetro de XXXX cm. Surgimento há XXX, com / sem alterações significativas recentemente.\n");
-        }
-    
-        if ($('#exameFisicoTorax').is(':checked')) {
-            textoGerado.push("Exame físico pulmonar:\nMurmúrios vesiculares presentes, simétricos, sem ruídos adventícios / com roncos / sibilos / estertores localizados em XXX.\nSem broncofonia, pectorilóquia ou egofonia.\nTórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\nExpansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n");
-        }
-
-        if ($('#ausculta').is(':checked')) {
-            textoGerado.push("Ausculta pulmonar:\nMurmúrios vesiculares presentes, simétricos, sem ruídos adventícios / com roncos / sibilos / estertores localizados em XXX.\nSem broncofonia, pectorilóquia ou egofonia.\n");
-        }
-
-        if ($('#ectoscopiaTorax').is(':checked')) {
-            textoGerado.push("Tórax íntegro, simétrico, sem abaulamentos ou retrações, sem alterações cutâneas visíveis. Tórax de formato elíptico / pectus excavatum / pectus carinatum / em tonel / piriforme, com biotipo normolíneo (ângulo de Charpy ≈ 90°) / longilíneo (< 90°) / brevilíneo (> 90°).\n");
-        }
-
-        if ($('#palpacaoPercussao').is(':checked')) {
-            textoGerado.push("Expansibilidade torácica preservada e simétrica bilateralmente.\nFrêmito toracovocal presente, simétrico, sem alterações.\nPercussão com som predominantemente claro pulmonar bilateralmente.\n");
-        }
-    
-        if ($('#exameFisicoCardio').is(':checked')) {
-            textoGerado.push("Exame físico cardiovascular:\nPalpação do pulso de frequência normal, amplitude mediana ++/3, ritmo regular, simétrico com lado contralateral.\nAusência de turgência jugular.\nIctus cordis palpável na linha hemoclavicular esquerda no ()° espaço intercostal.\nAusência de impulsão paraesternal esquerda.\nAusência de frêmito cardiovascular.\nBulhas rítmicas regulares normofonéticas em dois tempos.\n");
-        }
-        
-        if ($('#exameFisicoAbdomen').is(':checked')) {
-            textoGerado.push("Exame físico de abdômen:\nAbdômen plano, depressível, com ruídos hidroaéreos presentes normoativos.\nSem alterações de sensibilidade, sem alterações de continuidade ou distensão após manobra de valsalva, normotenso bilateralmente.\nSom predominantemente claro e timpânico. Sem dor à palpação profunda ou superficial. Sem visceromegalias.\nSinal de piparote negativo.\nMacicez móvel normal.\nFígado palpável ao método de Lemos-Torres com bordas lisas, regulares, delimitadas e aspecto macio.\n");
-        }
-
-        if ($('#exameFisicoNeuro').is(':checked')) {
-            textoGerado.push("Exame físico neurológico:\nPupilas isocóricas e isofotorreagentes. Pares cranianos sem alterações.\nForça muscular +++++/5 nos quatro membros. Reflexos osteotendíneos normais ++/4. Sensibilidade superficial e profunda preservadas. Marcha sem alterações. Sem sinais meníngeos.\n");
-        }
-
-        // Exames de Mamas
-        if ($('#exameMamasCompleto').is(':checked')) {
-            textoGerado.push("Exame físico de mamas:\nMamas simétricas, formato arredondado / piriforme / pendular, volume grande/médio/pequeno, sem alterações cutâneas visíveis. Mamilos normoposicionados / protrusos / invertido, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica e estática.\nExpressão papilar sem saída de secreção.\n");
-        }
-
-        if ($('#exameMamas').is(':checked')) {
-            textoGerado.push("Exame de mamas: sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica e estática.\n");
-        }
-
-        if ($('#amastasia').is(':checked')) {
-            textoGerado.push("Paciente com amastasia direita / esquerda / bilateral. Sem alterações cutâneas visíveis. Sem nódulos palpáveis na região, sem abaulamentos ou retrações à inspeção dinâmica e estática.\nLinfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n");
-        }
-
-        if ($('#politeliaPolimastia').is(':checked')) {
-            textoGerado.push("Paciente com politelia / polimastia em região XXX. Estrutura com características de tecido mamário e/ou papilar / Estrutura semelhante a mamilo, sem tecido glandular subjacente palpável / , sem nódulos palpáveis e sem alterações cutâneas associadas.\nÀ inspeção dinâmica e estática, sem abaulamentos ou retrações significativas.\n");
-        }
-
-        if ($('#linfonodos').is(':checked')) {
-            textoGerado.push("Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis / palpáveis, de aproximadamente XXX cm, móveis / aderidos, indolores / dolorosos, de consistência fibroelástica / endurecida / amolecida, sem sinais flogísticos locais.\n");
-        }
-
-        if ($('#exameFisicoGinecoCompleto').is(':checked')) {
-            textoGerado.push("Exame físico ginecológico:\nMamas simétricas, formato arredondado, volume grande/médio/pequeno, sem sinais flogísticos. Mamilos normoposicionados, protrusos, sem retrações, descamações ou lesões. Sem nódulos palpáveis, sem abaulamentos ou retrações à inspeção dinâmica. Expressão papilar sem saída de secreção. Linfonodos axilares, supraclaviculares e infraclaviculares não palpáveis.\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofia ou outras alterações morfológicas.\nColo uterino de aspecto habitual, sem lesões visíveis ou secreção anômala.\nToque vaginal com útero em posição antevertida, de volume e consistência normais, móvel e indolor. Anexos não palpáveis.\n");
-        }
-
-        if ($('#exameFisicoGineco').is(':checked')) {
-            textoGerado.push("Exame ginecológico: sem alterações.\n");
-        }
-
-        if ($('#ectoscopiaGineco').is(':checked')) {
-            textoGerado.push("Ectoscopia:\nGenitália Externa com distribuição de pelos de padrão feminino, sem lesões, atrofias, verrugas ou outras alterações morfológicas. Períneo íntegro.\n");
-        }
-
-        if ($('#especular').is(':checked')) {
-            textoGerado.push("Especular:\nColo uterino de aspecto habitual / hiperemiado / friável / com ectopia / com pólipos, sem lesões visíveis / com lesão exofítica / com secreção anômala (mucoide / purulenta / sanguinolenta / fétida).\nSecreção vaginal ausente / escassa / abundante, de coloração transparente / esbranquiçada / amarelada / esverdeada, sem odor / com odor fétido.\nParedes vaginais íntegras / hiperemiadas / atróficas / com descamação / com lesões.\n");
-        }
-
-        if ($('#toqueVaginal').is(':checked')) {
-            textoGerado.push("Toque vaginal bimanual:\nÚtero em posição antevertida / retrovertida / médiovertida, de volume e consistência normais / aumentado / rebaixado / amolecido, móvel / fixo, indolor / doloroso à mobilização.\nAnexos não palpáveis / palpáveis à direita / à esquerda, com massa de aproximadamente X cm, consistência cística / sólida, indolor / dolorosa.\nFundo de saco de Douglas livre / doloroso / com massa / abaulado.\n");
-        }
-
-        if ($('#exameFisicoOsteoarticular').is(':checked')) {
-            textoGerado.push("Exame físico osteoarticular:\nInspeção sem assimetrias ou atrofias musculares evidentes. Ausência de lesões cutâneas. Sem sinais flogísticos articulares. Sem deformidades articulares aparentes.\nPalpação sem dor ou edema nas interfaces articulares. Ausência de crepitação à mobilização. Sem hipertrofia sinovial ou edema sinovial palpável.\nAmplitude de movimento preservada, sem limitações ou hipermobilidade articular. Força muscular preservada.\nTeste de Neer e Hawkins negativos para impacto no ombro. Teste de Jobe sem evidências de lesão do supraespinhal. Teste de Phalen e Tinel negativos para síndrome do túnel do carpo. Testes de gaveta anterior e posterior negativos para instabilidade ligamentar do joelho. Sem sinais de derrame articular ao teste do choque da patela.\n");
-        }
-
-        // Exames Especializados
-        if ($('#otoscopia').is(':checked')) {
-            textoGerado.push("Otoscopia:\nPavilhão auricular sem hiperemia.\nMeato acústico externo com cerúmen em quantidade adequada, sem secreção, sem estreitamento, sem hiperemia e sem obstrução.\nMembrana timpânica íntegra, translúcida, normotensa e peroladas/hiperemia.\n");
-        }
-
-        if ($('#oroscopia').is(':checked')) {
-            textoGerado.push("Oroscopia:\nDentes em bom estado de conservação.\nMucosa jugal brilhante úmida, normocorada e sem lesões visíveis.\nTonsilas e língua normotróficas e normocoradas, sem placas.\nDucto parotídeo e submandibular sem obstrução.\n");
-        }
-
-        if ($('#exameCabeca').is(':checked')) {
-            textoGerado.push("Exame físico cabeça:\nCrânio normocefálico, fontanelas normotensas, sendo a anterior 2-3 polpas (18-24m) e posterior (2m) 1-2 polpas. Suturas não abauladas, sem sinais de acalvagamento, diástase ou craniossinostose.\n");
-        }
-        
-        let textoFinal = textoGerado.length > 0 ? textoGerado.join("\n") : "Selecione os exames para gerar o texto...";
-        $("#resultado").text(textoFinal);
+    function toast(msg) {
+        const $t = $('<div class="toast-custom"></div>').text(msg).appendTo('body');
+        setTimeout(() => $t.addClass('show'), 20);
+        setTimeout(() => { $t.removeClass('show'); setTimeout(() => $t.remove(), 300); }, 2200);
     }
 
-    // Inicializar o texto
-    atualizarTexto();
-    
-    $("#textoCopiavel").click(function() {
-        let texto = $(this).text();
-        navigator.clipboard.writeText(texto).then(() => {
-            alert("Texto copiado com sucesso!");
-        }).catch(err => {
-            console.error("Erro ao copiar texto: ", err);
+    function inserir(id, excl) {
+        const t = comSig(D.tpl[id].trim()), v = $r.val().trim();
+        ativos[id] = t;
+        // modelo de prontuário entra no topo; exames entram embaixo, na ordem em que foram marcados
+        $r.val(excl ? t + (v ? '\n\n' + v : '') : (v ? v + '\n\n' : '') + t);
+        $('[data-id="' + id + '"]').addClass('on');
+    }
+
+    function remover(id) {
+        if (!(id in ativos)) return;
+        $r.val($r.val().replace(ativos[id], '').replace(/\n{3,}/g, '\n\n').trim());
+        delete ativos[id];
+        $('[data-id="' + id + '"]').removeClass('on');
+    }
+
+    function atualizarSig(texto) {
+        const nova = texto.trim() || SIG_PADRAO, antiga = sig;
+        if (nova === antiga) return;
+        Object.keys(ativos).forEach(k => {
+            if (!k.startsWith('prontuario') || !ativos[k].endsWith(antiga)) return; // assinatura fica no fim do modelo
+            const novo = ativos[k].slice(0, -antiga.length) + nova, velho = ativos[k];
+            $r.val($r.val().replace(velho, () => novo)); ativos[k] = novo;
         });
+        sig = nova;
+        try { localStorage.setItem('docgo_assinatura', sig); } catch (e) {}
+    }
+
+    function alternar(id, excl, $g) {
+        if (id in ativos) remover(id);
+        else {
+            if (excl) $g.find('.chip.on').each((_, e) => remover($(e).attr('data-id'))); // 1 modelo por vez
+            inserir(id, excl);
+        }
+        $r.scrollTop(excl ? 0 : 1e6);
+    }
+
+    const LAB_CAB = 'Exame laboratorial (XXX/XXX/2026):';
+    const labSel = [];
+    function blocoLab() {
+        const linhas = [];
+        D.groups.find(x => x.lab).cats.forEach(c => {
+            const o = c.items.filter(i => labSel.includes(i.id)).map(i => i.out + ' XXXX');
+            if (o.length) linhas.push((c.titulo ? c.titulo + ':\n' : '') + o.join(' / '));
+        });
+        return linhas.length ? LAB_CAB + '\n' + linhas.join('\n') : '';
+    }
+    function aplicarLab(ids, on) {
+        const antigo = ativos.__lab || '', v = $r.val();
+        ids.forEach(id => {
+            const k = labSel.indexOf(id);
+            if (on && k < 0) labSel.push(id);
+            if (!on && k >= 0) labSel.splice(k, 1);
+            $('[data-id="' + id + '"]').toggleClass('on', on);
+        });
+        const novo = blocoLab();
+        if (antigo && v.includes(antigo)) $r.val(v.replace(antigo, () => novo).replace(/\n{3,}/g, '\n\n').trim());
+        else if (novo) $r.val((v.trim() ? v.trim() + '\n\n' : '') + novo);
+        if (novo) ativos.__lab = novo; else delete ativos.__lab;
+        $r.scrollTop(1e6);
+    }
+
+    function limpar() {
+        labSel.length = 0;
+        Object.keys(ativos).forEach(k => delete ativos[k]);
+        $('.chip.on').removeClass('on');
+        $r.val('');
+    }
+
+    function copiar() {
+        const t = $r.val().trim();
+        if (!t) return toast('⚠️ Nada selecionado para copiar');
+        navigator.clipboard.writeText(t)
+            .then(() => { limpar(); toast('✅ Copiado! Seleção limpa'); })
+            .catch(() => toast('❌ Erro ao copiar'));
+    }
+
+    D.groups.forEach((g, gi) => {
+        const excl = gi === 0;
+        const $g = $('<div class="grupo"><div class="grupo-h"><span></span></div><div class="info"></div><div class="chips"></div></div>');
+        $g.find('.grupo-h span').text(g.title);
+        if (g.info) {
+            $g.find('.info').html(g.info);
+            $('<button type="button" class="info-btn" title="Informativo">?</button>')
+                .on('click', () => $g.find('.info').slideToggle(120)).appendTo($g.find('.grupo-h'));
+        }
+        if (excl) {
+            const $box = $('<div class="mb-2"><label class="form-label small mb-1">✍️ Assinatura <span class="text-muted">(salva neste navegador e vale para todos os modelos)</span></label><textarea class="form-control" id="assinatura" rows="2"></textarea><button type="button" class="btn btn-link btn-sm p-0 mt-1" id="sigPadrao">Restaurar padrão</button></div>');
+            $box.find('textarea').val(sig).on('input', e => atualizarSig(e.target.value));
+            $box.find('#sigPadrao').on('click', () => { $('#assinatura').val(SIG_PADRAO); atualizarSig(SIG_PADRAO); });
+            $box.insertBefore($g.find('.chips'));
+        }
+        g.items.forEach(it => {
+            $('<button type="button" class="chip"></button>')
+                .toggleClass('q', !!it.q).text(it.label).attr('data-id', it.id)
+                .on('click', () => alternar(it.id, excl, $g))
+                .appendTo($g.find('.chips'));
+        });
+        if (g.lab) g.cats.forEach(c => {
+            const $row = $('<div class="labrow"></div>');
+            $('<button type="button" class="cat" title="Marcar/desmarcar todos"></button>').text(c.nome)
+                .on('click', () => { const ids = c.items.map(i => i.id); aplicarLab(ids, !ids.every(i => labSel.includes(i))); })
+                .appendTo($row);
+            c.items.forEach(i => $('<button type="button" class="chip"></button>').text(i.label).attr('data-id', i.id)
+                .on('click', () => aplicarLab([i.id], !labSel.includes(i.id))).appendTo($row));
+            $row.appendTo($g);
+        });
+        $('#grupos').append($g);
     });
+
+    $r.on('click', () => {
+        const t = $r.val().trim();
+        if (!t) return toast('⚠️ Nada selecionado para copiar');
+        navigator.clipboard.writeText(t).then(() => toast('✅ Copiado! (seleção mantida)')).catch(() => toast('❌ Erro ao copiar'));
+    });
+    $('.btn-copiar').on('click', copiar);
+    $('.btn-limpar').on('click', () => { limpar(); toast('Seleção limpa'); });
 });

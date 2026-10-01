@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+  <meta name="format-detection" content="telephone=no">
+  <title>Banco de Questões</title>
+  <link rel="icon" href="data:,">
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  <!-- PapaParse (leitura do CSV do banco de questões) -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #a3a3a3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-container {
+      background-color: #e4e4e4;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .filter-card {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .filter-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .action-btn {
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .btn-success-custom {
+      background: #00a66c;
+      border-color: #00a66c;
+      color: white;
+    }
+
+    .btn-success-custom:hover {
+      background: #03cd87;
+      border-color: #03cd87;
+    }
+
+    .btn-danger-custom {
+      background: #ca1400;
+      border-color: #ca1400;
+      color: white;
+    }
+
+    .btn-danger-custom:hover {
+      background: #e03e2b;
+      border-color: #e03e2b;
+    }
+
+    .progress-bar-custom {
+      width: 100%;
+      height: 25px;
+      background-color: #e9ecef;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .progress-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .switch-container {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .triple-switch {
+      display: flex;
+      background: #e9ecef;
+      border-radius: 25px;
+      padding: 4px;
+      position: relative;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .switch-option {
+      flex: 1;
+      padding: 10px 15px;
+      text-align: center;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 2;
+      color: #6c757d;
+    }
+
+    .switch-option.active {
+      color: white;
+      background: linear-gradient(135deg, #00a66c, #03cd87);
+      box-shadow: 0 2px 8px rgba(0, 166, 108, 0.3);
+      transform: scale(1.02);
+    }
+
+    .switch-option:hover:not(.active) {
+      color: #495057;
+      background: rgba(0, 166, 108, 0.1);
+    }
+
+    .search-engine-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .engine-icon {
+      font-size: 1.2rem;
+    }
+
+    .search-feedback {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #00a66c, #03cd87);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 1000;
+      transform: translateX(120%);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 4px 15px rgba(0, 166, 108, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .search-feedback.show {
+      transform: translateX(0);
+    }
+
+    .search-feedback::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #00a66c, #03cd87, #00a66c);
+      border-radius: 25px;
+      z-index: -1;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    .form-check.form-switch {
+      display: none; /* Esconde o switch antigo */
+    }
+
+    .title-section {
+      background: linear-gradient(135deg, #00a66c, #03cd87);
+      color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .icon-large {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* Estilo para o indicador de posição */
+    #questionPosition {
+      background: linear-gradient(135deg, #6c757d, #495057) !important;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      line-height: 1.3;
+    }
+
+    /* Estilos para a tela de login */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #00a66c, #03cd87, #00a66c);
+      background-size: 400% 400%;
+      animation: gradientShift 6s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      animation: slideUp 0.8s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid rgba(0, 166, 108, 0.3);
+      border-radius: 25px;
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: #00a66c;
+      box-shadow: 0 0 20px rgba(0, 166, 108, 0.3);
+      transform: scale(1.02);
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #00a66c, #03cd87);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 166, 108, 0.3);
+    }
+
+    .login-error {
+      background: rgba(202, 20, 0, 0.1);
+      color: #ca1400;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 15px;
+      animation: shake 0.5s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* ============================== */
+    /* MEDIA QUERIES PARA MOBILE     */
+    /* ============================== */
+
+    /* Smartphones - 576px e abaixo */
+    @media (max-width: 576px) {
+      .main-container {
+        padding: 10px;
+      }
+
+      .content-card {
+        border-radius: 8px;
+        padding: 15px !important;
+      }
+
+      .title-section {
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .icon-large {
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+
+      .title-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .title-section p {
+        font-size: 0.9rem;
+      }
+
+      /* Ajustes para o switch triplo */
+      .switch-option {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      .search-engine-info {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .engine-icon {
+        font-size: 1rem;
+      }
+
+      /* Feedback de busca */
+      .search-feedback {
+        top: 20px;
+        right: 20px;
+        left: 20px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+        min-width: auto;
+        width: auto;
+        text-align: center;
+      }
+
+      /* Botões de ação */
+      .action-btn {
+        font-size: 0.9rem;
+        padding: 12px 8px !important;
+      }
+
+      .action-btn .fs-5 {
+        font-size: 1rem !important;
+      }
+
+      .action-btn span[style*="font-size: 1.5rem"] {
+        font-size: 1.2rem !important;
+      }
+
+      .action-btn span[style*="font-size: 1.2rem"] {
+        font-size: 1rem !important;
+      }
+
+      /* Cards de filtro */
+      .filter-card:hover {
+        transform: none;
+      }
+
+      .filter-card .row.g-2 {
+        --bs-gutter-x: 0.5rem;
+      }
+
+      .filter-card .col-md-3 {
+        margin-bottom: 10px;
+      }
+
+      /* Login responsivo */
+      .login-card {
+        padding: 30px 20px;
+        margin: 20px;
+        max-width: none;
+        width: calc(100% - 40px);
+      }
+
+      .login-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .login-input {
+        padding: 12px 15px;
+        font-size: 1rem;
+        margin: 15px 0;
+      }
+
+      .login-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+
+      /* Progress bar ajustada */
+      .progress-bar-custom {
+        height: 20px;
+      }
+
+      /* Badge de contagem */
+      #questionsCount, #questionPosition {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        line-height: 1.2 !important;
+      }
+
+      /* Alerta legal */
+      .alert-info {
+        font-size: 0.8rem;
+      }
+
+      .alert-heading {
+        font-size: 0.9rem !important;
+      }
+    }
+
+    /* Tablets pequenos - 768px e abaixo */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 15px;
+      }
+
+      .switch-container {
+        padding: 12px;
+      }
+
+      .search-feedback {
+        top: 25px;
+        right: 25px;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+      }
+
+      .filter-card .col-md-3 {
+        margin-bottom: 8px;
+      }
+    }
+
+    /* Ajustes para telas muito pequenas - 320px */
+    @media (max-width: 320px) {
+      .main-container {
+        padding: 8px;
+      }
+
+      .content-card {
+        border-radius: 6px;
+        padding: 12px !important;
+      }
+
+      .title-section {
+        padding: 12px;
+      }
+
+      .icon-large {
+        font-size: 1.8rem;
+      }
+
+      .title-section h1 {
+        font-size: 1.3rem;
+      }
+
+      .switch-option {
+        padding: 6px 8px;
+        font-size: 0.75rem;
+      }
+
+      .action-btn {
+        font-size: 0.8rem;
+        padding: 10px 6px !important;
+      }
+
+      .login-card {
+        padding: 25px 15px;
+        margin: 15px;
+      }
+
+      .login-icon {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Landscape mode para smartphones */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .login-card {
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .login-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .title-section {
+        padding: 12px;
+      }
+
+      .icon-large {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+      }
+    }
+
+    /* Touch-friendly adjustments */
+    @media (hover: none) {
+      .action-btn:hover,
+      .filter-card:hover {
+        transform: none;
+        box-shadow: initial;
+      }
+
+      .switch-option:hover:not(.active) {
+        background: transparent;
+        color: #6c757d;
+      }
+    }
+
+    /* Ajustes para melhor usabilidade touch */
+    @media (pointer: coarse) {
+      .action-btn {
+        min-height: 48px;
+      }
+
+      .switch-option {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .form-select, .form-control {
+        min-height: 44px;
+      }
+
+      .btn {
+        min-height: 44px;
+      }
+    }
+
+    /* Correção de overflow horizontal */
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    .container-fluid {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+    /* Melhorias de performance para animações */
+    .search-feedback,
+    .action-btn,
+    .switch-option {
+      will-change: transform;
+    }
+
+    /* Fix para o feedback em telas pequenas */
+    @media (max-width: 480px) {
+      .search-feedback {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        border-radius: 20px;
+      }
+    }
+
+    /* ============================== */
+    /* CARD DA QUESTÃO                */
+    /* ============================== */
+    .deck-path {
+      position: relative;
+      margin-bottom: -.4rem;
+      padding-left: .5rem;
+      font: 700 .75em Arial, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .2rem;
+    }
+
+    .deck-path span {
+      background: #00a66c;
+      color: #fff;
+      padding: .2rem .5rem;
+      border-radius: .25rem .25rem 0 0;
+      position: relative;
+      top: 1px;
+      box-shadow: 0 2px 0 rgba(0,0,0,.15);
+    }
+
+    .question-card {
+      font: 14px/1.2 Arial, sans-serif;
+      text-align: left;
+      padding: .25rem clamp(1rem,4vw,2rem) 1rem;
+      margin: 0;
+      background: #eee;
+      color: #000;
+      border-radius: 8px;
+    }
+
+    .credenciais {
+      font-size: .75em;
+      text-align: center;
+      margin: .5rem 0;
+      color: #555;
+    }
+
+    .box {
+      border: 1px solid #1a1a1a;
+      border-radius: .3rem;
+      padding: .75rem 1rem;
+      margin: .5rem 0;
+      background: #fff;
+    }
+
+    .pergunta {
+      margin-bottom: .5rem;
+    }
+
+    .alternativa {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      border: 2px solid #d6d6d6;
+      border-radius: 12px;
+      background: rgba(255,255,255,.55);
+      cursor: pointer;
+      position: relative;
+      line-height: 1.3;
+      transition: border-color .18s, background .18s, transform .15s, opacity .18s;
+    }
+
+    .alternativa:hover {
+      transform: translateY(-1px);
+      border-color: #888;
+    }
+
+    .letra {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 2px solid #999;
+      font: 700 14px Arial, sans-serif;
+      transition: all .18s ease;
+    }
+
+    .alt-text {
+      flex: 1;
+    }
+
+    .alternativa.selected {
+      border-color: #00a66c;
+      background: rgba(0,166,108,.08);
+    }
+
+    .alternativa.selected .letra {
+      background: #00a66c;
+      border-color: #00a66c;
+      color: #fff !important;
+    }
+
+    .alternativa.crossed {
+      opacity: .45;
+    }
+
+    .alternativa.crossed::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 50%;
+      height: 2px;
+      background: #b30000;
+      transform: rotate(-1.5deg);
+    }
+
+    #answer {
+      height: 2px;
+      border: none;
+      background: #1a1a1a;
+      margin: 1rem 0;
+    }
+
+    .gabarito-notif {
+      text-align: center;
+      margin: 1rem 0;
+      font-weight: 700;
+      color: #00a66c !important;
+    }
+
+    .comentario {
+      margin-top: .75rem;
+      text-align: justify;
+      line-height: 1.4;
+    }
+
+    .comentario img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .stat-text {
+      font-size: .85em;
+      opacity: .65;
+      margin-left: 6px;
+      font-style: italic;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Tela de Login -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+      <div class="login-icon">🔐</div>
+      <h2 style="color: #00a66c; margin-bottom: 10px;">Acesso Restrito</h2>
+      <p style="color: #666; margin-bottom: 20px;">Digite o código para acessar o banco de questões</p>
+      
+      <input 
+        type="password" 
+        id="accessCode" 
+        class="login-input" 
+        placeholder="Código de acesso"
+        maxlength="10"
+      >
+      
+      <button onclick="checkAccess()" class="login-btn">
+        🚀 Entrar
+      </button>
+      
+      <div id="loginError" class="login-error" style="display: none;">
+        ❌ Código incorreto! Tente novamente.
+      </div>
+      
+      <div style="margin-top: 20px; font-size: 0.8rem; color: #999;">
+        💡 Dica: +55 47 99145-6541
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ———————————————————————————
+    // Sistema de login bonito
+    // ———————————————————————————
+    const ACCESS_CODE = '112358';
+    const AUTH_SESSION_KEY = 'bancoQuestoesAuthenticatedAt';
+    const AUTH_MAX_AGE_MS = 10 * 60 * 60 * 1000; // 10 horas
+    let loginAttempts = 0;
+
+    function hasValidSession() {
+      try {
+        const rawAuthTime = sessionStorage.getItem(AUTH_SESSION_KEY);
+        if (!rawAuthTime) return false;
+
+        const authenticatedAt = Number(rawAuthTime);
+        if (!Number.isFinite(authenticatedAt)) {
+          sessionStorage.removeItem(AUTH_SESSION_KEY);
+          return false;
+        }
+
+        const isStillValid = (Date.now() - authenticatedAt) <= AUTH_MAX_AGE_MS;
+        if (!isStillValid) {
+          sessionStorage.removeItem(AUTH_SESSION_KEY);
+          return false;
+        }
+
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    function saveSession() {
+      try {
+        sessionStorage.setItem(AUTH_SESSION_KEY, String(Date.now()));
+      } catch {
+        // Ignora quando storage estiver indisponivel
+      }
+    }
+
+    function hideLoginOverlay(animated = true) {
+      const overlay = document.getElementById('loginOverlay');
+      if (!overlay) return;
+
+      if (!animated) {
+        overlay.style.display = 'none';
+        return;
+      }
+
+      overlay.style.animation = 'fadeOut 0.5s ease forwards';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 500);
+    }
+
+    function checkAccess() {
+      const inputCode = document.getElementById('accessCode').value;
+      const errorDiv = document.getElementById('loginError');
+      
+      if (inputCode === ACCESS_CODE) {
+        // Acesso autorizado
+        saveSession();
+        hideLoginOverlay(true);
+      } else {
+        // Acesso negado
+        loginAttempts++;
+        errorDiv.style.display = 'block';
+        document.getElementById('accessCode').value = '';
+        document.getElementById('accessCode').style.animation = 'shake 0.5s ease';
+        
+        if (loginAttempts >= 3) {
+          errorDiv.innerHTML = '🚫 Muitas tentativas! Acesso bloqueado.';
+          setTimeout(() => {
+            window.location.href = 'about:blank';
+          }, 2000);
+        }
+      }
+    }
+
+    // Se ja autenticou nesta sessao, nao pede senha novamente no F5
+    if (hasValidSession()) {
+      hideLoginOverlay(false);
+    }
+
+    // Enter para submeter
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('accessCode').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkAccess();
+        }
+      });
+    });
+
+    // Animação de fade out
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    // ———————————————————————————
+  </script>
+  
+  <div class="main-container">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+          <!-- Cabeçalho -->
+          <div class="title-section text-center">
+            <div class="icon-large">📚</div>
+            <h1 class="mb-2 mb-md-3">Banco de Questões Médicas</h1>
+            <p class="mb-0">Sistema de estudos com questões comentadas</p>
+          </div>
+
+          <!-- Feedback de busca -->
+          <div id="searchFeedback" class="search-feedback"></div>
+          
+          <!-- Card Principal -->
+          <div class="content-card p-3 p-md-4">
+            <!-- Aviso Legal -->
+            <div class="alert alert-info mb-3 mb-md-4" role="alert">
+              <h6 class="alert-heading"><strong>⚖️ Código Penal - Art. 184</strong></h6>
+              <p class="mb-2"><small>Violar direitos de autor e os que lhe são conexos: Pena - detenção, de 3 (três) meses a 1 (um) ano, ou multa.</small></p>
+              <p class="mb-2"><small>§2º - Se a violação consistir na reprodução total ou parcial, com intuito de lucro direto ou indireto, por qualquer meio ou processo, de uma obra intelectual... Pena - reclusão, de 2 (dois) a 4 (quatro) anos, e multa.</small></p>
+              <p class="mb-0"><small><strong>§4º - O disposto neste artigo não se aplica quando se trata de cópia de obra intelectual ou fonograma, em um só exemplar, para uso privado do copista, sem intuito de lucro direto ou indireto.</strong></small></p>
+            </div>
+
+            <!-- Seção Questão -->
+            <div class="row mb-3 mb-md-4">
+              <div class="col-12">
+                <div class="switch-container">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="text-success mb-0">📖 Questão</h6>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="toggleFeedback()" id="feedbackToggle" title="Ativar/Desativar notificações">
+                      <span style="font-size: 0.8rem;">🔔</span>
+                    </button>
+                  </div>
+
+                  <div id="loadingOverlay" class="text-center py-4">
+                    <div class="spinner-border text-success" role="status"></div>
+                    <div class="mt-2" id="loadingText">Carregando banco de questões...</div>
+                    <div class="progress mt-2" style="height: 12px;">
+                      <div class="progress-bar bg-success" id="loadingProgressBar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                  </div>
+
+                  <div id="questionUI" style="display:none;">
+                    <div class="question-card">
+                      <div class="credenciais" id="questionMeta"></div>
+                      <div class="deck-path" id="questionDeckPath"></div>
+                      <div class="box">
+                        <div class="pergunta" id="questionEnunciado"></div>
+                        <div id="questionAlternativas"></div>
+                      </div>
+                      <hr id="answer" style="display:none;">
+                      <div class="gabarito-notif" id="gabaritoNotif" style="display:none;"></div>
+                      <div class="comentario" id="questionSolucao" style="display:none;"></div>
+                    </div>
+
+                    <div class="d-flex flex-column align-items-center gap-2 mt-2">
+                      <button onclick="submitAnswer()" class="btn btn-success-custom action-btn w-100 py-2" id="submitAnswerBtn">
+                        ✅ Responder
+                      </button>
+                      <button onclick="skipAnswer()" class="btn btn-link btn-sm text-muted" id="skipAnswerBtn">
+                        Não sei, mostrar resposta
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seção Filtros -->
+            <div class="mb-3 mb-md-4">
+              <h4 class="text-success mb-2 mb-md-3">🔧 Filtros de Questões</h4>
+              <div class="alert alert-light mb-2" role="alert">
+                <small>
+                  <strong>💡 Como funciona:</strong><br>
+                  • <strong>Palavras-chave:</strong> Use ponto e vírgula (;) para separar. Ex: "digite a palavra 1; palavra2"<br>
+                  • <strong>Dentro de cada filtro:</strong> AND (todas as condições devem ser atendidas)<br>
+                  • <strong>Entre filtros diferentes:</strong> OR (pelo menos um filtro deve ser atendido)
+                </small>
+              </div>
+              <div id="filters" class="mb-2 mb-md-3"></div>
+              <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 mb-3">
+                <button onclick="addFilter()" class="btn btn-outline-success order-2 order-sm-1">
+                  <i>➕</i> Adicionar Filtro (OR)
+                </button>
+                <div id="questionsCount" class="badge bg-info fs-6 p-2 order-1 order-sm-2">
+                  Carregando questões...
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col-6">
+                  <label class="form-label fw-bold text-success">📅 Ano:</label>
+                  <select class="form-select" id="anoFilter" onchange="applyFilters()">
+                    <option value="">-- Qualquer Ano --</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label class="form-label fw-bold text-success">🏛️ Banca:</label>
+                  <select class="form-select" id="bancaFilter" onchange="applyFilters()">
+                    <option value="">-- Qualquer Banca --</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-3 my-md-4">
+
+            <!-- Seção Navegação -->
+            <div class="row g-2 g-md-3 mb-3 mb-md-4">
+              <div class="col-12 col-md-6">
+                <button onclick="nextQuestion()" class="btn btn-primary action-btn w-100 py-2">
+                  <div class="d-flex align-items-center justify-content-center">
+                    <span class="me-2" style="font-size: 1rem;">⏭️</span>
+                    <span>Próxima Questão</span>
+                  </div>
+                </button>
+              </div>
+              <div class="col-12 col-md-6">
+                <button onclick="previousQuestion()" class="btn btn-outline-primary action-btn w-100 py-2">
+                  <div class="d-flex align-items-center justify-content-center">
+                    <span class="me-2" style="font-size: 1rem;">⏮️</span>
+                    <span>Questão Anterior</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Indicador de Posição -->
+            <div class="row mb-2 mb-md-3">
+              <div class="col-12 text-center">
+                <div id="questionPosition" class="badge bg-secondary p-3 fs-5">
+                  📍 Preparando questões... <br><small class="text-light">Aguarde</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Barra de Progresso -->
+            <div class="mb-2 mb-md-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="text-muted mb-0">📊 Progresso das Questões</h6>
+                <button onclick="resetStats()" class="btn btn-sm btn-outline-danger">Resetar stats</button>
+              </div>
+              <div id="statsSummary" class="alert alert-light py-2 px-3 mb-2" role="status">
+                Acertos: 0 | Erros: 0 | Taxa de acerto: 0% | Respondidas: 0
+              </div>
+              <div class="progress-bar-custom" id="progressBar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allQuestions = [];
+    let filteredQuestions = [];
+    let currentIndex = 0;
+    let filters = [];
+    const structure = {};
+    let showFeedback = true; // Controla se mostra o feedback visual
+    let answerVisible = false;
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
+
+    // Caminho do banco de questões (CSV, delimitado por "|")
+    const CSV_PART_COUNT = 7;
+
+    function getCsvPartPath(partNumber) {
+      return `database/qbank-${String(partNumber).padStart(3, '0')}.csv`;
+    }
+
+    function extractTagValue(tags, prefix) {
+      if (!tags) return '';
+      const token = tags.split(/\s+/).find(t => t.startsWith(prefix));
+      return token ? token.slice(prefix.length).replace(/_/g, ' ').trim() : '';
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html || '';
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    function normalize(str) {
+      return str ? str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
+    }
+
+    // Transforma cada linha bruta do CSV num objeto de questão pronto para uso
+    // e já pré-calcula o texto de busca (evita recalcular isso a cada filtro).
+    function buildQuestionObject(r, index) {
+      const alternativas = [1, 2, 3, 4, 5]
+        .map(n => (r['alternativa' + n] || '').trim())
+        .filter(a => a !== '');
+      const stats = [1, 2, 3, 4, 5]
+        .map(n => (r['alternativa' + n + '_stat'] || '').trim());
+      const gabaritoLetter = (r.gabarito || '').trim().toUpperCase();
+      const deckPath = r.deck_path || '';
+      const parts = deckPath.split('::').map(p => p.trim()).filter(Boolean);
+      const tags = r.tags || '';
+      const enunciado = r.enunciado || '';
+
+      return {
+        __id: index,
+        id: r.id,
+        questao: enunciado,
+        alternativas,
+        stats,
+        gabaritoIndex: 'ABCDE'.indexOf(gabaritoLetter),
+        solucao: r.solucao || '',
+        tags,
+        deckPath,
+        link: r.link || '',
+        area: parts[0] || '',
+        sub: parts[1] || '',
+        tema: parts.slice(2).join(' > ') || '',
+        areaNorm: normalize(parts[0] || ''),
+        subNorm: normalize(parts[1] || ''),
+        temaNorm: normalize(parts.slice(2).join(' > ') || ''),
+        ano: extractTagValue(tags, 'ano_'),
+        banca: extractTagValue(tags, 'banca_'),
+        searchText: normalize(stripHtml(enunciado) + ' ' + tags.replace(/_/g, ' '))
+      };
+    }
+
+    function processRows(rows) {
+      for (const r of rows) {
+        if (!r.id || !r.enunciado) continue;
+        const q = buildQuestionObject(r, allQuestions.length);
+        allQuestions.push(q);
+
+        if (!structure[q.area]) structure[q.area] = {};
+        if (!structure[q.area][q.sub]) structure[q.area][q.sub] = new Set();
+        if (q.tema) structure[q.area][q.sub].add(q.tema);
+      }
+    }
+
+    function updateLoadingProgress(cursor, totalBytes, rowCount) {
+      const bar = document.getElementById('loadingProgressBar');
+      const text = document.getElementById('loadingText');
+      if (totalBytes) {
+        const pct = Math.max(0, Math.min(100, Math.round((cursor / totalBytes) * 100)));
+        if (bar) bar.style.width = pct + '%';
+        if (text) text.textContent = `Carregando banco de questões... ${pct}% (${rowCount} questões)`;
+      } else {
+        if (bar) {
+          bar.style.width = '100%';
+          bar.classList.add('progress-bar-striped', 'progress-bar-animated');
+        }
+        if (text) text.textContent = `Carregando banco de questões... ${rowCount} questões carregadas`;
+      }
+    }
+
+    function finishLoading() {
+      filteredQuestions = [...allQuestions];
+      populateExtraFilters();
+      addFilter();
+      updateQuestionsCount();
+      updateQuestionPosition();
+      updateStatsUI();
+      renderQuestion();
+
+      const overlay = document.getElementById('loadingOverlay');
+      const ui = document.getElementById('questionUI');
+      if (overlay) overlay.style.display = 'none';
+      if (ui) ui.style.display = 'block';
+      console.log('Total de questões carregadas:', allQuestions.length);
+    }
+
+    function populateExtraFilters() {
+      const anoSelect = document.getElementById('anoFilter');
+      const bancaSelect = document.getElementById('bancaFilter');
+      const anos = [...new Set(allQuestions.map(q => q.ano).filter(Boolean))].sort().reverse();
+      const bancas = [...new Set(allQuestions.map(q => q.banca).filter(Boolean))].sort();
+
+      if (anoSelect) {
+        anoSelect.innerHTML = '<option value="">-- Qualquer Ano --</option>' +
+          anos.map(ano => `<option value="${ano}">${ano}</option>`).join('');
+      }
+      if (bancaSelect) {
+        bancaSelect.innerHTML = '<option value="">-- Qualquer Banca --</option>' +
+          bancas.map(banca => `<option value="${banca}">${banca}</option>`).join('');
+      }
+    }
+
+    function handleLoadError(err) {
+      console.error(err);
+      const countEl = document.getElementById('questionsCount');
+      if (countEl) countEl.textContent = 'Erro ao carregar o banco de questões (verifique o caminho do CSV)';
+      const text = document.getElementById('loadingText');
+      const bar = document.getElementById('loadingProgressBar');
+      if (bar) bar.classList.add('bg-danger');
+      if (text) text.textContent = 'Não foi possível carregar os fragmentos do banco. Confirme se qbank-001.csv até qbank-007.csv estão publicados.';
+    }
+
+    async function startLoading() {
+      const paths = Array.from({ length: CSV_PART_COUNT }, (_, index) => getCsvPartPath(index + 1));
+      const absolutePaths = paths.map(path => new URL(path, window.location.href).href);
+      let sizes = [];
+
+      try {
+        sizes = await Promise.all(absolutePaths.map(async path => {
+          const response = await fetch(path, { method: 'HEAD' });
+          const length = response.headers.get('content-length');
+          return length ? parseInt(length, 10) : 0;
+        }));
+      } catch (error) {
+        sizes = absolutePaths.map(() => 0);
+      }
+
+      const totalBytes = sizes.reduce((total, size) => total + size, 0) || null;
+      let completedBytes = 0;
+
+      function parsePart(partIndex) {
+        Papa.parse(absolutePaths[partIndex], {
+          download: true,
+          worker: true,
+          header: true,
+          delimiter: '|',
+          quoteChar: '"',
+          skipEmptyLines: true,
+          chunk: function(results) {
+            if (results.errors && results.errors.length) {
+              console.warn('Avisos ao ler o CSV (primeiros 5):', results.errors.slice(0, 5));
+            }
+            processRows(results.data);
+            updateLoadingProgress(completedBytes + results.meta.cursor, totalBytes, allQuestions.length);
+          },
+          complete: function() {
+            completedBytes += sizes[partIndex] || 0;
+            if (partIndex + 1 < absolutePaths.length) {
+              parsePart(partIndex + 1);
+            } else {
+              finishLoading();
+            }
+          },
+          error: function(error) {
+            handleLoadError(error);
+          }
+        });
+      }
+
+      parsePart(0);
+    }
+
+    startLoading();
+
+    function addFilter() {
+      const idx = filters.length;
+      filters.push({ area: '', sub: '', tema: '', keywords: '' });
+
+      const div = document.createElement('div');
+      div.className = 'filter-card p-3 mb-3';
+      div.innerHTML = `
+        <div class="row g-2">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <label class="form-label fw-bold text-success">🏥 Área:</label>
+            <select class="form-select" onchange="onAreaChange(${idx}, this.value)"></select>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <label class="form-label fw-bold text-success">📋 Subárea:</label>
+            <select class="form-select" onchange="onSubChange(${idx}, this.value)"></select>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <label class="form-label fw-bold text-success">📌 Tema:</label>
+            <select class="form-select" onchange="updateFilter(${idx}, 'tema', this.value)"></select>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-end">
+            <button class="btn btn-outline-danger w-100" onclick="removeFilter(${idx})">
+              <i>🗑️</i> <span class="d-none d-sm-inline">Remover</span><span class="d-sm-none">Remover Filtro</span>
+            </button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <label class="form-label fw-bold text-success">🔍 Palavras-chave (TODAS devem estar presentes):</label>
+            <input type="text" class="form-control" placeholder="Ex: digite a palavra 1; palavra2" onchange="updateFilter(${idx}, 'keywords', this.value)">
+            <small class="text-muted">Separe com ponto e vírgula (;). Pode usar frases completas como "digite a palavra 1"</small>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('filters').appendChild(div);
+      populateAreaSelect(idx);
+      applyFilters();
+    }
+
+    function populateAreaSelect(idx) {
+      const select = document.querySelectorAll('.filter-card')[idx].querySelectorAll('select')[0];
+      select.innerHTML = '<option value="">-- Qualquer Área --</option>' + 
+        Object.keys(structure).sort().map(a => `<option value="${a}">${a}</option>`).join('');
+      populateSubSelect(idx, '');
+    }
+
+    function populateSubSelect(idx, area) {
+      const select = document.querySelectorAll('.filter-card')[idx].querySelectorAll('select')[1];
+      select.innerHTML = '<option value="">-- Qualquer Subárea --</option>';
+      if (structure[area]) {
+        Object.keys(structure[area]).sort().forEach(s => 
+          select.innerHTML += `<option value="${s}">${s}</option>`
+        );
+      }
+      populateTemaSelect(idx, area, '');
+    }
+
+    function populateTemaSelect(idx, area, sub) {
+      const select = document.querySelectorAll('.filter-card')[idx].querySelectorAll('select')[2];
+      select.innerHTML = '<option value="">-- Qualquer Tema --</option>';
+      if (structure[area]?.[sub]) {
+        Array.from(structure[area][sub]).sort().forEach(t => 
+          select.innerHTML += `<option value="${t}">${t}</option>`
+        );
+      }
+    }
+
+    function onAreaChange(idx, value) {
+      filters[idx].area = value;
+      filters[idx].sub = '';
+      filters[idx].tema = '';
+      populateSubSelect(idx, value);
+      applyFilters();
+    }
+
+    function onSubChange(idx, value) {
+      filters[idx].sub = value;
+      filters[idx].tema = '';
+      populateTemaSelect(idx, filters[idx].area, value);
+      applyFilters();
+    }
+
+    function updateFilter(idx, field, value) {
+      filters[idx][field] = value;
+      applyFilters();
+    }
+
+    function removeFilter(idx) {
+      filters.splice(idx, 1);
+      document.querySelectorAll('.filter-card')[idx].remove();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      // Normaliza os critérios de cada filtro uma única vez (evita refazer isso para cada questão)
+      const normFilters = filters.map(f => ({
+        area: f.area ? normalize(f.area) : '',
+        sub: f.sub ? normalize(f.sub) : '',
+        tema: f.tema ? normalize(f.tema) : '',
+        keywords: (f.keywords && f.keywords.trim())
+          ? f.keywords.split(';').map(k => normalize(k.trim())).filter(k => k)
+          : []
+      }));
+
+      filteredQuestions = allQuestions.filter(q => {
+        // Se não há filtros, mostra todas as questões
+        if (normFilters.length === 0) return true;
+
+        // Verifica se pelo menos um filtro é atendido (OR entre filtros)
+        return normFilters.some(f => {
+          if (f.area && f.area !== q.areaNorm) return false;
+          if (f.sub && f.sub !== q.subNorm) return false;
+          if (f.tema && f.tema !== q.temaNorm) return false;
+          if (f.keywords.length > 0 && !f.keywords.every(k => q.searchText.includes(k))) return false;
+          return true;
+        });
+      });
+
+      // Filtros adicionais de Ano/Banca (AND, aplicados depois do OR acima)
+      const selectedAno = document.getElementById('anoFilter')?.value || '';
+      const selectedBanca = document.getElementById('bancaFilter')?.value || '';
+      if (selectedAno) filteredQuestions = filteredQuestions.filter(q => q.ano === selectedAno);
+      if (selectedBanca) filteredQuestions = filteredQuestions.filter(q => q.banca === selectedBanca);
+
+      currentIndex = 0;
+      console.log('Questões filtradas:', filteredQuestions.length);
+      updateQuestionsCount();
+      updateQuestionPosition();
+      shuffleArray(filteredQuestions);
+      renderQuestion();
+    }
+
+    function updateQuestionsCount() {
+      const countElement = document.getElementById('questionsCount');
+      if (countElement) {
+        countElement.textContent = `${filteredQuestions.length} questões disponíveis`;
+      }
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    // Guarda, por questão já respondida, qual alternativa foi escolhida e se acertou.
+    // Permite voltar/avançar sem perder o estado da questão já respondida.
+    const answeredQuestionsData = new Map();
+    let selectedAlternativeIndex = null;
+
+    // Renderiza a questão atual no card (enunciado + alternativas)
+    function renderQuestion() {
+      const enunciadoEl = document.getElementById('questionEnunciado');
+      const altEl = document.getElementById('questionAlternativas');
+      const deckPathEl = document.getElementById('questionDeckPath');
+      const metaEl = document.getElementById('questionMeta');
+
+      if (!enunciadoEl) return;
+
+      if (filteredQuestions.length === 0) {
+        enunciadoEl.innerHTML = 'Nenhuma questão encontrada com os filtros atuais.';
+        altEl.innerHTML = '';
+        deckPathEl.innerHTML = '';
+        metaEl.innerHTML = '';
+        hideAnswer();
+        return;
+      }
+
+      if (currentIndex >= filteredQuestions.length) currentIndex = 0;
+      const q = filteredQuestions[currentIndex];
+      selectedAlternativeIndex = null;
+
+      const pathParts = (q.deckPath || '').split('::').map(p => p.trim()).filter(Boolean);
+      deckPathEl.innerHTML = pathParts.map(p => `<span>${p.replace(/_/g, ' ')}</span>`).join('');
+
+      metaEl.textContent = [q.ano ? `Ano: ${q.ano}` : '', q.banca ? `Banca: ${q.banca}` : '']
+        .filter(Boolean).join(' • ');
+
+      enunciadoEl.innerHTML = q.questao;
+
+      const letras = ['A', 'B', 'C', 'D', 'E'];
+      altEl.innerHTML = q.alternativas.map((alt, i) => `
+        <div class="alternativa" data-index="${i}">
+          <span class="letra">${letras[i]}</span>
+          <div class="alt-text">${alt}</div>
+        </div>
+      `).join('');
+
+      attachAlternativaHandlers();
+
+      // Se a questão já foi respondida antes, mostra o resultado direto
+      const previous = answeredQuestionsData.get(q.__id);
+      if (previous) {
+        selectedAlternativeIndex = previous.selectedIndex;
+        if (selectedAlternativeIndex !== null) {
+          const el = altEl.querySelector(`.alternativa[data-index="${selectedAlternativeIndex}"]`);
+          if (el) el.classList.add('selected');
+        }
+        revealAnswer(q, { registerStats: false });
+      } else {
+        hideAnswer();
+      }
+    }
+
+    function attachAlternativaHandlers() {
+      document.querySelectorAll('#questionAlternativas .alternativa').forEach(el => {
+        el.addEventListener('click', () => {
+          if (el.classList.contains('locked')) return; // questão já respondida
+          document.querySelectorAll('#questionAlternativas .alternativa').forEach(a => a.classList.remove('selected'));
+          el.classList.add('selected');
+          selectedAlternativeIndex = parseInt(el.dataset.index, 10);
+        });
+      });
+    }
+
+    // Confirma a alternativa escolhida, verifica se está certa e conta nas estatísticas
+    function submitAnswer() {
+      if (filteredQuestions.length === 0) return;
+      if (selectedAlternativeIndex === null || selectedAlternativeIndex === undefined) {
+        alert('Selecione uma alternativa antes de responder.');
+        return;
+      }
+      const q = filteredQuestions[currentIndex];
+      revealAnswer(q, { registerStats: true });
+    }
+
+    // Revela a resposta sem contar como certo/errado (pra quem quer só ver o gabarito)
+    function skipAnswer() {
+      if (filteredQuestions.length === 0) return;
+      const q = filteredQuestions[currentIndex];
+      revealAnswer(q, { registerStats: false, skipped: true });
+    }
+
+    function revealAnswer(q, { registerStats, skipped = false } = {}) {
+      const hr = document.getElementById('answer');
+      const notif = document.getElementById('gabaritoNotif');
+      const sol = document.getElementById('questionSolucao');
+      const submitBtn = document.getElementById('submitAnswerBtn');
+      const skipBtn = document.getElementById('skipAnswerBtn');
+      const letras = ['A', 'B', 'C', 'D', 'E'];
+
+      const isCorrect = selectedAlternativeIndex === q.gabaritoIndex;
+
+      document.querySelectorAll('#questionAlternativas .alternativa').forEach((el, i) => {
+        el.classList.add('locked');
+        if (i === q.gabaritoIndex) el.classList.add('correct-answer');
+        if (i === selectedAlternativeIndex && !isCorrect) el.classList.add('wrong-answer');
+
+        const statText = q.stats?.[i];
+        const altTextEl = el.querySelector('.alt-text');
+        if (statText && altTextEl && !altTextEl.querySelector('.stat-text')) {
+          altTextEl.insertAdjacentHTML('beforeend', `<span class="stat-text">${statText}</span>`);
+        }
+      });
+
+      if (skipped || selectedAlternativeIndex === null || selectedAlternativeIndex === undefined) {
+        notif.textContent = q.gabaritoIndex >= 0 ? `✅ Gabarito: ${letras[q.gabaritoIndex]}` : '✅ Gabarito indisponível';
+      } else {
+        notif.textContent = isCorrect
+          ? `✅ Você acertou! Gabarito: ${letras[q.gabaritoIndex]}`
+          : `❌ Você errou. Gabarito: ${letras[q.gabaritoIndex]}`;
+      }
+      notif.style.display = 'block';
+      sol.innerHTML = q.solucao || 'Sem comentário disponível para esta questão.';
+      sol.style.display = 'block';
+      hr.style.display = 'block';
+      answerVisible = true;
+
+      if (submitBtn) submitBtn.style.display = 'none';
+      if (skipBtn) skipBtn.style.display = 'none';
+
+      if (registerStats && !answeredQuestionsData.has(q.__id)) {
+        answeredQuestionsData.set(q.__id, { selectedIndex: selectedAlternativeIndex, isCorrect });
+        if (isCorrect) correctAnswers++; else incorrectAnswers++;
+        updateStatsUI();
+        if (showFeedback) showAnswerFeedback(isCorrect ? 1 : -1);
+      } else if (!answeredQuestionsData.has(q.__id)) {
+        // marcado como "pulado": guarda o estado pra não recontar, mas não afeta estatísticas
+        answeredQuestionsData.set(q.__id, { selectedIndex: selectedAlternativeIndex, isCorrect: null });
+      }
+    }
+
+    function hideAnswer() {
+      answerVisible = false;
+      const hr = document.getElementById('answer');
+      const notif = document.getElementById('gabaritoNotif');
+      const sol = document.getElementById('questionSolucao');
+      const submitBtn = document.getElementById('submitAnswerBtn');
+      const skipBtn = document.getElementById('skipAnswerBtn');
+
+      document.querySelectorAll('#questionAlternativas .alternativa').forEach(el => {
+        el.classList.remove('locked', 'correct-answer', 'wrong-answer', 'selected');
+        const statSpan = el.querySelector('.stat-text');
+        if (statSpan) statSpan.remove();
+      });
+
+      if (hr) hr.style.display = 'none';
+      if (notif) notif.style.display = 'none';
+      if (sol) sol.style.display = 'none';
+      if (submitBtn) submitBtn.style.display = '';
+      if (skipBtn) skipBtn.style.display = '';
+    }
+
+    function toggleFeedback() {
+      showFeedback = !showFeedback;
+      const button = document.getElementById('feedbackToggle');
+      button.innerHTML = showFeedback ? 
+        '<span style="font-size: 0.8rem;">🔔</span>' : 
+        '<span style="font-size: 0.8rem;">🔕</span>';
+      button.title = showFeedback ? 
+        'Desativar notificações' : 
+        'Ativar notificações';
+      
+      console.log('Feedback de busca:', showFeedback ? 'ativado' : 'desativado');
+    }
+
+    function nextQuestion() {
+      if (filteredQuestions.length === 0) return;
+      
+      currentIndex = (currentIndex + 1) % filteredQuestions.length;
+      updateQuestionPosition();
+      renderQuestion();
+      showPositionFeedback('próxima');
+    }
+
+    function previousQuestion() {
+      if (filteredQuestions.length === 0) return;
+      
+      currentIndex = currentIndex === 0 ? filteredQuestions.length - 1 : currentIndex - 1;
+      updateQuestionPosition();
+      renderQuestion();
+      showPositionFeedback('anterior');
+    }
+
+    function updateQuestionPosition() {
+      const positionElement = document.getElementById('questionPosition');
+      if (positionElement && filteredQuestions.length > 0) {
+        const current = currentIndex + 1;
+        const total = filteredQuestions.length;
+        const percentage = Math.round((current / total) * 100);
+        
+        positionElement.innerHTML = `
+          📍 Você está na questão <strong>${current}</strong> de <strong>${total}</strong> 
+          <br><small class="text-light">${percentage}% concluído</small>
+        `;
+      }
+    }
+
+    function showPositionFeedback(direction) {
+      if (!showFeedback) return;
+      
+      const feedback = document.getElementById('searchFeedback');
+      const current = currentIndex + 1;
+      const total = filteredQuestions.length;
+      const percentage = Math.round((current / total) * 100);
+      
+      feedback.innerHTML = `
+        <span style="font-size: 1.2rem;">${direction === 'próxima' ? '⏭️' : '⏮️'}</span>
+        <span>Questão ${current}/${total} (${percentage}%)</span>
+      `;
+      feedback.classList.add('show');
+      
+      setTimeout(() => {
+        feedback.classList.remove('show');
+      }, 1500);
+    }
+
+    function showAnswerFeedback(score) {
+      if (!showFeedback) return;
+      
+      const feedback = document.getElementById('searchFeedback');
+      const isCorrect = score === 1;
+      
+      feedback.innerHTML = `
+        <span style="font-size: 1.2rem;">${isCorrect ? '✅' : '❌'}</span>
+        <span>${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</span>
+      `;
+      
+      // Muda a cor do feedback baseado na resposta
+      feedback.style.background = isCorrect ? 
+        'linear-gradient(135deg, #00a66c, #03cd87)' : 
+        'linear-gradient(135deg, #ca1400, #e03e2b)';
+      
+      feedback.classList.add('show');
+      
+      setTimeout(() => {
+        feedback.classList.remove('show');
+        // Restaura a cor original após esconder
+        setTimeout(() => {
+          feedback.style.background = 'linear-gradient(135deg, #00a66c, #03cd87)';
+        }, 400);
+      }, 1200);
+    }
+
+    const progressBar = document.getElementById('progressBar');
+
+    function updateStatsUI() {
+      const answeredCount = correctAnswers + incorrectAnswers;
+      const accuracy = answeredCount > 0 ? Math.round((correctAnswers / answeredCount) * 100) : 0;
+      const summary = document.getElementById('statsSummary');
+
+      if (summary) {
+        summary.textContent = `Acertos: ${correctAnswers} | Erros: ${incorrectAnswers} | Taxa de acerto: ${accuracy}% | Respondidas: ${answeredCount}`;
+      }
+
+      if (!progressBar || allQuestions.length === 0) return;
+
+      const total = allQuestions.length;
+      const unanswered = Math.max(total - answeredCount, 0);
+      const correctPct = (correctAnswers / total) * 100;
+      const incorrectPct = (incorrectAnswers / total) * 100;
+      const unansweredPct = (unanswered / total) * 100;
+
+      progressBar.innerHTML = '';
+
+      const segments = [
+        { pct: correctPct, color: '#00a66c', title: `${correctAnswers} corretas` },
+        { pct: incorrectPct, color: '#ca1400', title: `${incorrectAnswers} erradas` },
+        { pct: unansweredPct, color: '#e9ecef', title: `${unanswered} nao respondidas` }
+      ];
+
+      segments.forEach(segmentData => {
+        if (segmentData.pct <= 0) return;
+        const segment = document.createElement('div');
+        segment.className = 'progress-segment';
+        segment.style.width = `${segmentData.pct}%`;
+        segment.style.backgroundColor = segmentData.color;
+        segment.title = segmentData.title;
+        progressBar.appendChild(segment);
+      });
+    }
+
+    function resetStats() {
+      if (!confirm('Resetar estatisticas de acertos e erros?')) return;
+
+      answeredQuestionsData.clear();
+      correctAnswers = 0;
+      incorrectAnswers = 0;
+      updateStatsUI();
+      renderQuestion();
+    }
+  </script>
+</body>
+</html>
