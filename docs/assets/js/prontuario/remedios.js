@@ -1,55 +1,66 @@
 function copiarTexto(id) {
-    let textoParaCopiar = $('#' + id).data('copyText') || $('#' + id).text();
-    if (textoParaCopiar.trim() && textoParaCopiar.trim() !== "Aguardando formatação das medicações...") {
-        navigator.clipboard.writeText(textoParaCopiar.trim()).then(() => {
-            // Feedback visual melhorado
-            const elemento = $('#' + id);
-            const corOriginal = elemento.css('background-color');
-            elemento.css('background-color', '#d4edda');
-            setTimeout(() => {
-                elemento.css('background-color', corOriginal);
-            }, 300);
-            
-            // Toast notification (opcional)
-            showToast('✅ Medicações copiadas com sucesso!');
-        }).catch(err => {
-            console.error('Erro ao copiar: ', err);
-            showToast('❌ Erro ao copiar medicações');
-        });
-    } else {
+    const elemento = document.getElementById(id);
+    const textoParaCopiar = elemento?.dataset.copyText || elemento?.textContent || '';
+    const texto = textoParaCopiar.trim();
+
+    if (!texto || texto === 'Aguardando formatação das medicações...') {
         showToast('⚠️ Nenhuma medicação formatada para copiar');
+        return;
     }
+
+    const copiarComFallback = () => {
+        const areaTemporaria = document.createElement('textarea');
+        areaTemporaria.value = texto;
+        areaTemporaria.setAttribute('readonly', '');
+        areaTemporaria.style.position = 'fixed';
+        areaTemporaria.style.opacity = '0';
+        document.body.appendChild(areaTemporaria);
+        areaTemporaria.select();
+        const copiado = document.execCommand('copy');
+        areaTemporaria.remove();
+        if (!copiado) {
+            throw new Error('Não foi possível copiar o texto.');
+        }
+    };
+
+    const copia = navigator.clipboard?.writeText
+        ? navigator.clipboard.writeText(texto).catch(copiarComFallback)
+        : Promise.resolve().then(copiarComFallback);
+
+    copia.then(() => {
+        const corOriginal = elemento.style.backgroundColor;
+        elemento.style.backgroundColor = '#d4edda';
+        setTimeout(() => {
+            elemento.style.backgroundColor = corOriginal;
+        }, 300);
+        showToast('✅ Medicações copiadas com sucesso!');
+    }).catch(err => {
+        console.error('Erro ao copiar: ', err);
+        showToast('❌ Erro ao copiar medicações');
+    });
 }
 
 function showToast(message) {
     // Cria um toast simples
-    const toast = $(`
-        <div class="toast-custom" style="
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #495057;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 6px;
-            z-index: 1000;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        ">${message}</div>
-    `);
-    
-    $('body').append(toast);
+    const toast = document.createElement('div');
+    toast.className = 'toast-custom';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed; top: 20px; right: 20px; background-color: #495057;
+        color: white; padding: 12px 20px; border-radius: 6px; z-index: 1000;
+        font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transform: translateX(100%); transition: transform 0.3s ease;
+    `;
+    document.body.appendChild(toast);
     
     // Anima a entrada
     setTimeout(() => {
-        toast.css('transform', 'translateX(0)');
+        toast.style.transform = 'translateX(0)';
     }, 100);
     
     // Remove após 3 segundos
     setTimeout(() => {
-        toast.css('transform', 'translateX(100%)');
+        toast.style.transform = 'translateX(100%)';
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
@@ -65,12 +76,47 @@ function pesquisar(event) {
     window.open(searchUrl, "_blank");
 }
 
-$(document).ready(function () {
-    $(document).on('click', '[data-copy]', function () {
-        copiarTexto($(this).attr('id'));
+function formatarMedicacao(nome, instrucoes) {
+    const textoInstrucoes = instrucoes.toLowerCase();
+    const quantidadeMatch = textoInstrucoes.match(/(\d+)\s?(?:cp|comprimidos?|comprimido)/);
+    const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : 1;
+    let frequencia;
+
+    if (/a cada semana/.test(textoInstrucoes)) {
+        frequencia = `${quantidade}x/semana`;
+    } else if (/no período da noite|à noite|de noite|noite/.test(textoInstrucoes)) {
+        frequencia = `0-0-${quantidade}`;
+    } else {
+        const vezesMatch = textoInstrucoes.match(/(\d+)\s*vez(?:es)?\s*ao dia/);
+        const vezes = vezesMatch ? parseInt(vezesMatch[1], 10) : 1;
+        const padraoFrequencia = {
+            1: [1, 0, 0],
+            2: [1, 0, 1],
+            3: [1, 1, 1],
+            4: [1, 1, 1, 1]
+        }[vezes] || [1, 0, 0];
+
+        frequencia = padraoFrequencia.map(horario => horario * quantidade).join('-');
+    }
+
+    const nomeFormatado = nome
+        .replace(/^\*+\s*/, '')
+        .replace(/\s*-\s*Programa Farmácia Popular\s*/i, '')
+        .replace(/\s*\([^)]*\)/g, '')
+        .trim();
+
+    return `${nomeFormatado} (${frequencia}) / `;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('click', function (event) {
+        const elementoCopiavel = event.target.closest('[data-copy]');
+        if (elementoCopiavel) {
+            copiarTexto(elementoCopiavel.id);
+        }
     });
 
-    $('#formatar').click(function () {
+    document.getElementById('formatar').addEventListener('click', function () {
         let inputText = document.getElementById("inputMedicacoes").value.trim();
         if (!inputText) {
             showToast("⚠️ Insira a lista de medicações.");
@@ -78,18 +124,32 @@ $(document).ready(function () {
         }
 
         // Feedback visual no botão
-        const botao = $(this);
-        const textoOriginal = botao.html();
-        botao.html('<span class="spinner-border spinner-border-sm me-2" role="status"></span>Formatando...');
-        botao.prop('disabled', true);
+        const botao = this;
+        const textoOriginal = botao.innerHTML;
+        botao.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Formatando...';
+        botao.disabled = true;
 
         // Simula um pequeno delay para mostrar o feedback
         setTimeout(() => {
-            // Dividir por linhas primeiro
-            let linhas = inputText.split('\n').filter(linha => linha.trim());
             let resultado = [];
 
-            let padrao = {
+            // O IPM envia oito campos por medicação, separados por ponto e vírgula.
+            if (inputText.includes(';')) {
+                const campos = inputText.split(';').map(campo => campo.trim());
+
+                for (let indice = 0; indice + 4 < campos.length; indice += 8) {
+                    const nome = campos[indice + 3];
+                    const instrucoes = campos[indice + 4];
+
+                    if (nome && instrucoes) {
+                        resultado.push(formatarMedicacao(nome, instrucoes));
+                    }
+                }
+            } else {
+                // Compatibilidade com o formato antigo, que usava uma medicação por linha.
+                let linhas = inputText.split('\n').filter(linha => linha.trim());
+
+                let padrao = {
                 "ao dia": "1-0-0",
                 "manhã": "1-0-0",
                 "tarde": "0-1-0", 
@@ -114,10 +174,10 @@ $(document).ready(function () {
                 "de tarde e à noite": "0-1-1",
                 "de tarde e à noite": "0-1-1",
                 "30 min antes do caf": "1-0-0"
-            };
+                };
 
-            // Processar cada linha como uma medicação
-            for (let linha of linhas) {
+                // Processar cada linha como uma medicação
+                for (let linha of linhas) {
                 // Primeiro tentar dividir por espaços únicos para capturar todas as partes
                 let partes = linha.split(/\s+/).filter(parte => parte.trim());
                 
@@ -159,17 +219,21 @@ $(document).ready(function () {
                     resultado.push(`${nome} (${frequencia}) / `);
                 }
             }
+            }
 
             // Restaura o botão
-            botao.html(textoOriginal);
-            botao.prop('disabled', false);
+            botao.innerHTML = textoOriginal;
+            botao.disabled = false;
 
             if (resultado.length > 0) {
                 const textoResultado = resultado.join("");
-                $('#resultado').text(textoResultado).data('copyText', textoResultado).attr('data-copy', true);
+                const elementoResultado = document.getElementById('resultado');
+                elementoResultado.textContent = textoResultado;
+                elementoResultado.dataset.copyText = textoResultado;
+                elementoResultado.dataset.copy = 'true';
                 showToast('✅ Medicações formatadas com sucesso!');
             } else {
-                $('#resultado').text("❌ Nenhuma medicação formatada. Verifique o formato de entrada.\n\nCertifique-se de que os dados estão separados por tabs ou espaços duplos.");
+                document.getElementById('resultado').textContent = "❌ Nenhuma medicação formatada. Verifique o formato de entrada.\n\nCertifique-se de que os dados estão separados por ponto e vírgula ou por linhas no formato antigo.";
                 showToast('⚠️ Erro na formatação. Verifique o formato dos dados.');
             }
         }, 500);
