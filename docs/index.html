@@ -18,12 +18,22 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <style>
+            :root {
+                --ink: #19323c;
+                --muted: #63757b;
+                --paper: #f7faf8;
+                --line: #dce7e2;
+                --green: #087f5b;
+                --teal: #0b7285;
+                --gold: #b7791f;
+            }
+
             body {
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                background-color: #a3a3a3;
-                color: #000;
+                background: #e8efeb;
+                color: var(--ink);
             }
 
             .hidden {
@@ -34,39 +44,138 @@
                 display: block;
             }
 
-            /* Novos estilos para o menu reorganizado */
-            .menu-card {
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                cursor: pointer;
+            .home-shell {
+                max-width: 1440px;
+                background: var(--paper);
+                border: 1px solid var(--line);
             }
 
-            .menu-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+            .home-intro {
+                border-bottom: 1px solid var(--line);
             }
 
-            .menu-card .btn {
-                transition: all 0.2s ease;
+            .home-intro h1 {
+                color: var(--green);
+                letter-spacing: 0;
             }
 
-            .menu-card:hover .btn {
-                transform: scale(1.05);
+            .home-intro p {
+                color: var(--muted);
             }
 
-            /* Remove os cards antigos */
-            .card {
-                min-height: 150px;
-                border-radius: 10px;
-                background-color: #00a66c;
-                transition: background-color 0.3s ease;
+            section#home > .mb-5,
+            section#home > .mb-4,
+            .legacy-home {
+                display: none;
             }
 
-            .card:hover {
-                background-color: #03cd87;
+            .tool-group + .tool-group {
+                margin-top: 2rem;
             }
 
-            section {
-                background-color: #e4e4e4;
+            .group-heading {
+                display: flex;
+                align-items: baseline;
+                gap: .65rem;
+                margin-bottom: .75rem;
+            }
+
+            .group-heading h2 {
+                margin: 0;
+                font-size: 1.15rem;
+                color: var(--ink);
+            }
+
+            .group-heading span {
+                color: var(--muted);
+                font-size: .8rem;
+            }
+
+            .tool-grid {
+                display: grid;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: .65rem;
+            }
+
+            .tool-grid.calculators {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .tool-link {
+                display: flex;
+                min-height: 92px;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: .85rem;
+                color: var(--ink);
+                text-decoration: none;
+                background: #fff;
+                border: 1px solid var(--line);
+                border-left: 4px solid var(--green);
+                border-radius: 5px;
+                transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+            }
+
+            .tool-link:hover,
+            .tool-link:focus-visible {
+                color: var(--ink);
+                border-color: var(--green);
+                box-shadow: 0 4px 12px rgba(25, 50, 60, .12);
+                transform: translateY(-1px);
+            }
+
+            .tool-link.calculator {
+                border-left-color: var(--gold);
+            }
+
+            .tool-link.study {
+                border-left-color: var(--teal);
+            }
+
+            .tool-icon {
+                display: block;
+                font-size: 1.35rem;
+                line-height: 1;
+            }
+
+            .tool-title {
+                display: block;
+                margin: .25rem 0 .2rem;
+                font-size: .92rem;
+                font-weight: 700;
+                line-height: 1.2;
+            }
+
+            .tool-description {
+                display: block;
+                color: var(--muted);
+                font-size: .76rem;
+                line-height: 1.25;
+            }
+
+            @media (max-width: 1100px) {
+                .tool-grid,
+                .tool-grid.calculators {
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 700px) {
+                .tool-grid,
+                .tool-grid.calculators {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .home-shell {
+                    border-radius: 0 !important;
+                }
+            }
+
+            @media (max-width: 430px) {
+                .tool-grid,
+                .tool-grid.calculators {
+                    grid-template-columns: 1fr;
+                }
             }
 
 
@@ -105,7 +214,56 @@
         </script>
 
         <div class="d-flex justify-content-center px-0 px-md-3 px-lg-5">
-        <section id="home" class="active text-center mt-4 bg-white rounded p-4 shadow-sm w-100">
+        <section id="home" class="home-shell active mt-4 rounded p-3 p-md-4 shadow-sm w-100">
+            <header class="home-intro pb-3 mb-4">
+                <h1 class="mb-1">DocGO!</h1>
+                <p class="mb-0">Acesso rápido às ferramentas que você mais usa.</p>
+            </header>
+
+            <div class="tool-group">
+                <div class="group-heading">
+                    <h2>Consulta</h2>
+                    <span>prontuário e condutas</span>
+                </div>
+                <div class="tool-grid">
+                    <a href="prontuario/consulta-geral.html" class="tool-link"><span class="tool-icon">🩺</span><span class="tool-title">Modelos para consulta</span><span class="tool-description">Consulta geral e prontuário</span></a>
+                    <a href="prontuario/remedios.html" class="tool-link"><span class="tool-icon">💊</span><span class="tool-title">Formatar medicações</span><span class="tool-description">Formatador para medicações</span></a>
+                    <a href="condutas/index.html" class="tool-link"><span class="tool-icon">📋</span><span class="tool-title">Guia de prescrição</span><span class="tool-description">Protocolos e condutas</span></a>
+                    <a href="pediatria/ajuda-pediatria.html" class="tool-link"><span class="tool-icon">👶</span><span class="tool-title">Ajuda em pediatria</span><span class="tool-description">Doses, medicamentos e protocolos</span></a>
+                    <a href="prontuario/radiologia-laudos.html" class="tool-link"><span class="tool-icon">📄</span><span class="tool-title">Laudos de radiologia</span><span class="tool-description">Modelos e templates</span></a>
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <div class="group-heading">
+                    <h2>Calculadoras</h2>
+                    <span>resultados rápidos</span>
+                </div>
+                <div class="tool-grid calculators">
+                    <a href="calculadoras/ldl.html" class="tool-link calculator"><span class="tool-icon">🔬</span><span class="tool-title">Colesterol LDL</span><span class="tool-description">Cálculo do LDL</span></a>
+                    <a href="calculadoras/adrogue-madias.html" class="tool-link calculator"><span class="tool-icon">🧂</span><span class="tool-title">Correção de sódio</span><span class="tool-description">Fórmula de Adrogué-Madias</span></a>
+                    <a href="calculadoras/tfg.html" class="tool-link calculator"><span class="tool-icon">🧪</span><span class="tool-title">Taxa de filtração glomerular</span><span class="tool-description">Estimativa da TFG</span></a>
+                    <a href="calculadoras/imc.html" class="tool-link calculator"><span class="tool-icon">⚖️</span><span class="tool-title">Índice de massa corporal</span><span class="tool-description">Cálculo do IMC</span></a>
+                    <a href="calculadoras/risco-coronariano.html" class="tool-link calculator"><span class="tool-icon">🫀</span><span class="tool-title">Risco cardiovascular</span><span class="tool-description">Risco em 10 anos</span></a>
+                    <a href="calculadoras/carga-tabagica.html" class="tool-link calculator"><span class="tool-icon">🚬</span><span class="tool-title">Carga tabágica</span><span class="tool-description">Anos-maço</span></a>
+                    <a href="calculadoras/dpp.html" class="tool-link calculator"><span class="tool-icon">🤱</span><span class="tool-title">Data provável do parto</span><span class="tool-description">Cálculo da DPP</span></a>
+                    <a href="calculadoras/idade-gestacional.html" class="tool-link calculator"><span class="tool-icon">👶</span><span class="tool-title">Idade gestacional</span><span class="tool-description">Semanas gestacionais</span></a>
+                    <a href="calculadoras/parkland.html" class="tool-link calculator"><span class="tool-icon">🔥</span><span class="tool-title">Parkland</span><span class="tool-description">Ressuscitação volêmica</span></a>
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <div class="group-heading">
+                    <h2>Estudos</h2>
+                    <span>revisão e apoio</span>
+                </div>
+                <div class="tool-grid">
+                    <a href="https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/" class="tool-link study" target="_blank"><span class="tool-icon">📚</span><span class="tool-title">Banco de questões</span><span class="tool-description">Questões comentadas</span></a>
+                    <a href="https://www.pedb.com.br/" class="tool-link study" target="_blank"><span class="tool-icon">🚸</span><span class="tool-title">PedBook</span><span class="tool-description">Apoio para pediatria</span></a>
+                </div>
+            </div>
+
+            <div class="legacy-home">
             <div class="mb-4">
                 <h1 class="text-success mb-2">🏥 DocGO!</h1>
                 <p class="text-muted">Ferramentas médicas integradas para estudantes e profissionais</p>
@@ -319,6 +477,7 @@
                         </a>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
         </div>

@@ -165,7 +165,7 @@ $(document).ready(function () {
         let triglicerideos = parseFloat($('#triglicerideos').val());
 
         if (isNaN(colesterolTotal) || isNaN(colesterolHDL) || isNaN(triglicerideos)) {
-            alert('Preencha todos os campos corretamente!');
+            showToast('⚠️ Preencha todos os campos corretamente.');
             return;
         }
 

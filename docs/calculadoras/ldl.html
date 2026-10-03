@@ -55,6 +55,32 @@
                 background-color: #e4e4e4;
             }
 
+            #calculadoraRiscoCoronariano {
+                width: min(100% - 2rem, 720px);
+                border: 1px solid #dce7e2;
+            }
+
+            #calculadoraRiscoCoronariano h4 {
+                margin-bottom: 1.5rem;
+                color: #19323c;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            #calculadoraRiscoCoronariano .input-group-text {
+                min-width: 180px;
+                color: #19323c;
+                background-color: #f1f6f3;
+                font-weight: 600;
+            }
+
+            #calcular {
+                min-height: 48px;
+                padding: .6rem 1.5rem;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+
             /* Container para o resultado */
             .resultado-container {
                 border: 1px solid #dee2e6;
@@ -62,13 +88,15 @@
                 overflow: hidden;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                 margin-top: 20px;
+                background: #fff;
             }
 
             .resultado-header {
-                background-color: #e9ecef;
-                padding: 8px 15px;
+                background-color: #eef5f1;
+                padding: 10px 15px;
                 border-bottom: 1px solid #dee2e6;
-                font-size: 12px;
+                font-size: 14px;
+                font-weight: 600;
             }
 
             /* Estilo para os itens de resultado individuais */
@@ -82,10 +110,11 @@
                 background-color: #f8f9fa;
                 border: 1px solid #dee2e6;
                 border-radius: 0 0 5px 5px;
-                padding: 15px;
-                min-height: 60px;
-                font-size: 14px;
-                line-height: 1.4;
+                padding: 18px 15px;
+                min-height: 74px;
+                font-size: clamp(1.2rem, 4vw, 1.65rem);
+                line-height: 1.3;
+                letter-spacing: .01em;
                 box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
                 margin: 0;
                 cursor: pointer;
@@ -97,6 +126,19 @@
 
             .resultado-item:hover {
                 background-color: #e9ecef;
+            }
+
+            @media (max-width: 576px) {
+                #calculadoraRiscoCoronariano {
+                    width: 100%;
+                    margin-top: 1rem !important;
+                    padding: 1.25rem !important;
+                }
+
+                .resultado-item {
+                    padding: 18px 12px;
+                    font-size: 1.3rem;
+                }
             }
 
             /* PWA Loading Indicator */
@@ -218,7 +260,7 @@
         <!-- Seção para a Calculadora de LDL -->
         <div class="d-flex justify-content-center">
             <section id="calculadoraRiscoCoronariano" class="mt-4 bg-white rounded p-4 shadow-sm">
-                <h4>Calculadora de LDL</h4>
+                <h4>🧪 Calculadora de LDL</h4>
                 <form>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="colesterolTotal">Colesterol Total:</span>
@@ -243,7 +285,7 @@
                     <!-- Fórmula de Martin/Hopkins -->
                     <div class="resultado-container mb-3">
                         <div class="resultado-header">
-                            <small class="text-muted">� Fórmula de Martin/Hopkins - Clique para copiar</small>
+                            <small class="text-muted">🧬 Fórmula de Martin/Hopkins - clique no resultado para copiar</small>
                         </div>
                         <div id="resultado-martin" class="resultado-item"></div>
                     </div>
@@ -251,7 +293,7 @@
                     <!-- Fórmula de Friedewald -->
                     <div class="resultado-container mb-3">
                         <div class="resultado-header">
-                            <small class="text-muted">📊 Fórmula de Friedewald - Clique para copiar</small>
+                            <small class="text-muted">📊 Fórmula de Friedewald - clique no resultado para copiar</small>
                         </div>
                         <div id="resultado-friedewald" class="resultado-item"></div>
                     </div>
@@ -259,7 +301,7 @@
                     <!-- Fórmula de Sampson/NIH -->
                     <div class="resultado-container mb-3">
                         <div class="resultado-header">
-                            <small class="text-muted">🧬 Fórmula de Sampson/NIH - Clique para copiar</small>
+                            <small class="text-muted">🔬 Fórmula de Sampson/NIH - clique no resultado para copiar</small>
                         </div>
                         <div id="resultado-sampson" class="resultado-item"></div>
                     </div>
