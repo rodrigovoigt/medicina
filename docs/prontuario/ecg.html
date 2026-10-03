@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DocGO! - Checklist de ECG</title>
+	<link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZEdJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<style>
+		:root {
+			--ink: #19323c;
+			--muted: #63757b;
+			--paper: #f7faf8;
+			--line: #dce7e2;
+			--green: #087f5b;
+			--gold: #b7791f;
+			--red: #a33a3a;
+		}
+
+		body {
+			margin: 0;
+			background: #e8efeb;
+			color: var(--ink);
+			font-family: Arial, sans-serif;
+		}
+
+		.ecg-shell {
+			width: min(100% - 2rem, 1180px);
+			background: var(--paper);
+			border: 1px solid var(--line);
+		}
+
+		.calculator-header {
+			border-bottom: 1px solid var(--line);
+		}
+
+		.calculator-header h1 {
+			color: var(--green);
+			font-size: 1.5rem;
+		}
+
+		.calculator-header p,
+		.field-help {
+			color: var(--muted);
+		}
+
+		.ecg-section {
+			margin-bottom: 1.25rem;
+			padding: 1rem;
+			border: 1px solid var(--line);
+			border-radius: 5px;
+			background: #fff;
+		}
+
+		.ecg-section h2 {
+			margin: 0 0 1rem;
+			color: var(--green);
+			font-size: 1.1rem;
+		}
+
+		.ecg-section h3 {
+			margin: 1rem 0 .65rem;
+			color: var(--ink);
+			font-size: .96rem;
+		}
+
+		.input-group-text {
+			min-width: 190px;
+			color: var(--ink);
+			background: #eef5f1;
+			font-weight: 600;
+		}
+
+		input,
+		select {
+			min-height: 44px;
+		}
+
+		.check-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: .55rem .9rem;
+		}
+
+		.form-check {
+			min-height: 2.3rem;
+			padding: .5rem .75rem .5rem 2rem;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: #f8fbf9;
+		}
+
+		.form-check:has(input:checked) {
+			border-color: var(--green);
+			background: #edf8f3;
+		}
+
+		.form-check-input:checked {
+			background-color: var(--green);
+			border-color: var(--green);
+		}
+
+		.result-box {
+			margin-top: 1.5rem;
+			padding: 1rem;
+			border: 1px solid var(--line);
+			border-radius: 5px;
+			background: #fff;
+		}
+
+		.result-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			padding-bottom: .7rem;
+			border-bottom: 1px solid var(--line);
+			color: var(--green);
+			font-weight: 700;
+		}
+
+		#report {
+			min-height: 360px;
+			margin: 1rem 0 0;
+			padding: 1rem;
+			white-space: pre-wrap;
+			color: var(--ink);
+			background: #f8faf9;
+			border: 1px solid var(--line);
+			font-family: 'Courier New', monospace;
+			font-size: .95rem;
+			line-height: 1.55;
+		}
+
+		.alert-note {
+			margin-top: 1rem;
+			padding: .75rem;
+			border-left: 4px solid var(--gold);
+			color: #684d12;
+			background: #fff8e7;
+			font-size: .88rem;
+		}
+
+		@media (max-width: 700px) {
+			.ecg-shell {
+				width: 100%;
+				box-sizing: border-box;
+				margin-top: 1rem !important;
+				padding: 1.25rem !important;
+			}
+
+			.check-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.input-group {
+				display: block;
+			}
+
+			.input-group-text {
+				display: block;
+				width: 100%;
+				min-width: 0;
+				border-radius: .375rem .375rem 0 0;
+			}
+
+			.input-group .form-control,
+			.input-group .form-select {
+				width: 100%;
+				border-radius: 0 0 .375rem .375rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="navbar-placeholder"></div>
+	<script src="../assets/js/navbar-loader.js" defer></script>
+	<script>
+		fetch("../navbar.html")
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById("navbar-placeholder").innerHTML = data;
+				if (typeof fixNavbarLinks === 'function') fixNavbarLinks();
+			});
+	</script>
+
+	<main class="d-flex justify-content-center">
+		<section class="ecg-shell mt-4 rounded p-3 p-md-4 shadow-sm">
+			<header class="calculator-header pb-3 mb-4">
+				<h1 class="mb-1">🫀 Checklist e laudo de ECG</h1>
+				<p class="mb-0">Organize a leitura sistemática do eletrocardiograma e gere um rascunho de laudo.</p>
+			</header>
+
+			<form id="ecg-form">
+				<section class="ecg-section">
+					<h2>1. Identificação e parâmetros</h2>
+					<div class="input-group mb-3">
+						<span class="input-group-text">Paciente</span>
+						<input type="text" id="patient" class="form-control" placeholder="Opcional">
+					</div>
+					<div class="input-group mb-3">
+						<label class="input-group-text" for="sex">Sexo</label>
+						<select id="sex" class="form-select">
+							<option value="">Não informado</option>
+							<option value="male">Masculino</option>
+							<option value="female">Feminino</option>
+						</select>
+						<span class="input-group-text">usado no Cornell/QTc</span>
+					</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text">Velocidade</span>
+						<select id="speed" class="form-select">
+							<option value="25">25 mm/s</option>
+							<option value="50">50 mm/s</option>
+						</select>
+						<span class="input-group-text">Amplitude: 10 mm/mV</span>
+					</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text">Distância R-R</span>
+						<input type="number" id="rrSmall" class="form-control" min="0.1" step="0.1" placeholder="Quadradinhos pequenos">
+						<span class="input-group-text">pequenos</span>
+					</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text">ou R-R</span>
+						<input type="number" id="rrLarge" class="form-control" min="0.1" step="0.1" placeholder="Quadradões">
+						<span class="input-group-text">quadradões</span>
+					</div>
+					<div class="input-group mb-3">
+						<label class="input-group-text" for="regularity">Regularidade</label>
+						<select id="regularity" class="form-select">
+							<option value="">Não avaliada</option>
+							<option value="Regular">Regular</option>
+							<option value="Regularmente irregular">Regularmente irregular</option>
+							<option value="Irregularmente irregular">Irregularmente irregular</option>
+						</select>
+					</div>
+					<p id="rate-output" class="field-help mb-0">Frequência ventricular: informe a distância R-R.</p>
+				</section>
+
+				<section class="ecg-section">
+					<h2>2. Medidas que alimentam o laudo</h2>
+					<p class="field-help">Informe quadradinhos pequenos e milímetros quando disponíveis. O sistema reutiliza as medidas para calcular intervalos e critérios.</p>
+					<div class="row g-2">
+						<div class="col-md-4"><div class="input-group"><span class="input-group-text">PR</span><input type="number" id="prSquares" class="form-control" min="0" step="0.5" placeholder="quadradinhos"><span class="input-group-text">peq.</span></div></div>
+						<div class="col-md-4"><div class="input-group"><span class="input-group-text">QRS</span><input type="number" id="qrsSquares" class="form-control" min="0" step="0.5" placeholder="quadradinhos"><span class="input-group-text">peq.</span></div></div>
+						<div class="col-md-4"><div class="input-group"><span class="input-group-text">QT</span><input type="number" id="qtSquares" class="form-control" min="0" step="0.5" placeholder="quadradinhos"><span class="input-group-text">peq.</span></div></div>
+					</div>
+					<div class="row g-2 mt-1">
+						<div class="col-md-4"><div class="input-group"><span class="input-group-text">P em DII</span><input type="number" id="pDuration" class="form-control" min="0" step="1" placeholder="duração"><span class="input-group-text">ms</span></div></div>
+						<div class="col-md-4"><div class="input-group"><span class="input-group-text">P em DII</span><input type="number" id="pAmplitude" class="form-control" min="0" step="0.5" placeholder="amplitude"><span class="input-group-text">mm</span></div></div>
+						<div class="col-md-4"><div class="input-group"><span class="input-group-text">P terminal V1</span><input type="number" id="pV1Negative" class="form-control" min="0" step="0.01" placeholder="prof. x dur. em mm·s"><span class="input-group-text">Morris</span></div></div>
+					</div>
+					<div class="row g-2 mt-1">
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">S V1/V2</span><input type="number" id="sV1" class="form-control" min="0" step="1" placeholder="mm"></div></div>
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">R V5/V6</span><input type="number" id="rV5" class="form-control" min="0" step="1" placeholder="mm"></div></div>
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">R aVL</span><input type="number" id="rAvl" class="form-control" min="0" step="1" placeholder="mm"></div></div>
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">S V3</span><input type="number" id="sV3" class="form-control" min="0" step="1" placeholder="mm"></div></div>
+					</div>
+					<div class="row g-2 mt-1">
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">R V1/V2</span><input type="number" id="rV1" class="form-control" min="0" step="1" placeholder="mm"></div></div>
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">S V5/V6</span><input type="number" id="sV5" class="form-control" min="0" step="1" placeholder="mm"></div></div>
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">D1</span><select id="axisD1" class="form-select"><option value="">polaridade</option><option value="positive">+</option><option value="negative">−</option></select></div></div>
+						<div class="col-md-3"><div class="input-group"><span class="input-group-text">aVF</span><select id="axisAvf" class="form-select"><option value="">polaridade</option><option value="positive">+</option><option value="negative">−</option></select></div></div>
+					</div>
+				</section>
+
+				<section class="ecg-section">
+					<h2>3. Padrões que não saem só da medida</h2>
+					<div class="row g-2">
+						<div class="col-md-4"><label class="form-label" for="rhythm">Padrão atrial</label><select id="rhythm" class="form-select"><option value="">Não definido</option><option value="Sinusal">P sinusal</option><option value="Fibrilação atrial">Ondas f / fibrilação atrial</option><option value="Flutter atrial">Ondas F / flutter atrial</option><option value="Juncional">P ausente/invertida: juncional</option><option value="Ventricular">Dissociação AV: ventricular</option></select></div>
+						<div class="col-md-4"><label class="form-label" for="avConduction">Condução AV</label><select id="avConduction" class="form-select"><option value="">Não definida</option><option value="Normal">Normal</option><option value="Mobitz I">PR aumenta progressivamente</option><option value="Mobitz II">QRS cai de repente</option><option value="BAV 2:1">P sim, P não</option><option value="BAV total">P sem relação com QRS</option></select></div>
+						<div class="col-md-4"><label class="form-label" for="qrsPattern">Morfologia do QRS</label><select id="qrsPattern" class="form-select"><option value="">Não definida</option><option value="Normal">Normal</option><option value="BRD">rSR' em V1/V2 + S em V5/V6</option><option value="BRE">QRS largo, torre em V5/V6</option><option value="Ventricular">Ritmo ventricular</option><option value="Preexcitation">Onda delta / pré-excitação</option></select></div>
+					</div>
+					<div class="row g-2 mt-3">
+						<div class="col-md-6"><label class="form-label" for="repolarizationPattern">ST e onda T</label><select id="repolarizationPattern" class="form-select"><option value="">Sem alteração selecionada</option><option value="T invertida">T invertida</option><option value="T apiculada">T apiculada</option><option value="Supra de ST">Supra de ST</option><option value="Infra de ST">Infra de ST</option><option value="Wellens A">Wellens A: T bifásica V2-V3</option><option value="Wellens B">Wellens B: T invertida V2-V3</option><option value="Brugada">Padrão de Brugada</option><option value="Pericardite">Padrão de pericardite</option><option value="Repolarização precoce">Repolarização precoce</option></select></div>
+						<div class="col-md-6"><label class="form-label" for="infarctTerritory">Localização do supra/infarto</label><select id="infarctTerritory" class="form-select"><option value="">Nenhuma selecionada</option><option value="Anterior extenso: V1-V6, DI, aVL; DA proximal">Anterior extenso</option><option value="Anterosseptal: V1-V4; DA/septais">Anterosseptal</option><option value="Anterior: V3-V4; DA média">Anterior</option><option value="Anterolateral: V3-V6, DI, aVL">Anterolateral</option><option value="Lateral alto: DI, aVL">Lateral alto</option><option value="Lateral: V5-V6">Lateral</option><option value="Inferior: DII, DIII, aVF">Inferior</option><option value="Inferolateral: DII, DIII, aVF, V5-V6">Inferolateral</option><option value="Ventrículo direito: V3R-V4R">Ventrículo direito</option><option value="Posterior: infra V1-V3; confirmar V7-V9">Posterior</option></select></div>
+					</div>
+					<div class="row g-2 mt-3">
+						<div class="col-md-6"><label class="form-label" for="additionalPattern">Achado adicional</label><select id="additionalPattern" class="form-select"><option value="">Nenhum</option><option value="Baixa voltagem">Baixa voltagem</option><option value="Alternância elétrica">Alternância elétrica</option><option value="Ondas Q patológicas">Ondas Q patológicas</option><option value="Suspeita de hipercalemia / onda U">Suspeita de hipercalemia / onda U</option><option value="Pré-excitação: PR curto/onda delta">Pré-excitação</option></select></div>
+						<div class="col-md-6"><label class="form-label" for="strainPattern">Strain / hipertrofia</label><select id="strainPattern" class="form-select"><option value="">Não selecionado</option><option value="Strain de VE">Strain de VE</option><option value="Hipertrofia sem strain">Hipertrofia sem strain</option></select></div>
+					</div>
+				</section>
+
+				<section class="ecg-section">
+					<h2>6. Observações e conclusão</h2>
+					<div class="input-group mb-3">
+						<span class="input-group-text">Observações adicionais</span>
+						<textarea id="additionalNotes" class="form-control" rows="4" placeholder="Ex: comparação com ECG anterior, sintomas, medicações..." ></textarea>
+					</div>
+					<button class="btn btn-success" type="submit">Gerar laudo</button>
+					<button class="btn btn-outline-secondary ms-2" type="reset">Limpar</button>
+				</section>
+			</form>
+
+			<section id="result-box" class="result-box" hidden aria-live="polite">
+				<div class="result-header">
+					<span>📄 Laudo de ECG</span>
+					<button id="copy-report" class="btn btn-outline-success btn-sm" type="button">Copiar</button>
+				</div>
+				<pre id="report"></pre>
+				<div class="alert-note">Rascunho estruturado para conferência médica. A interpretação final deve considerar o traçado original, contexto clínico e comparação com exames prévios.</div>
+			</section>
+		</section>
+	</main>
+
+	<script>
+		(() => {
+			const form = document.getElementById('ecg-form');
+			const resultBox = document.getElementById('result-box');
+			const report = document.getElementById('report');
+			const rateOutput = document.getElementById('rate-output');
+			const copyButton = document.getElementById('copy-report');
+
+			const numberValue = (id) => {
+				const value = document.getElementById(id).value.trim().replace(',', '.');
+				return value === '' ? null : Number.parseFloat(value);
+			};
+
+			const format = (value, decimals = 0) => value.toLocaleString('pt-BR', {
+				minimumFractionDigits: decimals,
+				maximumFractionDigits: decimals
+			});
+
+			function calculateRate() {
+				const rrSmall = numberValue('rrSmall');
+				const rrLarge = numberValue('rrLarge');
+				if (rrSmall > 0) return { bpm: 1500 / rrSmall, rrSeconds: rrSmall * 0.04 };
+				if (rrLarge > 0) return { bpm: 300 / rrLarge, rrSeconds: rrLarge * 0.2 };
+				return { bpm: null, rrSeconds: null };
+			}
+
+			function updateRate() {
+				const rate = calculateRate();
+				rateOutput.textContent = rate.bpm ? `Frequência ventricular estimada: ${format(rate.bpm)} bpm.` : 'Frequência ventricular: informe a distância R-R.';
+			}
+
+			function buildReport(event) {
+				event.preventDefault();
+				const rate = calculateRate();
+				const prSquares = numberValue('prSquares');
+				const qrsSquares = numberValue('qrsSquares');
+				const qtSquares = numberValue('qtSquares');
+				const pDuration = numberValue('pDuration');
+				const pAmplitude = numberValue('pAmplitude');
+				const pV1Negative = numberValue('pV1Negative');
+				const sV1 = numberValue('sV1');
+				const rV5 = numberValue('rV5');
+				const rAvl = numberValue('rAvl');
+				const sV3 = numberValue('sV3');
+				const rV1 = numberValue('rV1');
+				const sV5 = numberValue('sV5');
+				const lines = [];
+				const findings = [...document.querySelectorAll('[data-finding]:checked')].map(input => input.dataset.finding);
+				const patient = document.getElementById('patient').value.trim();
+				const rhythm = document.getElementById('rhythm').value;
+				let axis = '';
+				const sex = document.getElementById('sex').value;
+				const avConduction = document.getElementById('avConduction').value;
+				const qrsPattern = document.getElementById('qrsPattern').value;
+				const repolarizationPattern = document.getElementById('repolarizationPattern').value;
+				const strainPattern = document.getElementById('strainPattern').value;
+				const notes = document.getElementById('additionalNotes').value.trim();
+				const axisD1 = document.getElementById('axisD1').value;
+				const axisAvf = document.getElementById('axisAvf').value;
+				const infarctTerritory = document.getElementById('infarctTerritory').value;
+				const additionalPattern = document.getElementById('additionalPattern').value;
+
+				if (!axis && axisD1 && axisAvf) {
+					axis = axisD1 === 'positive' && axisAvf === 'positive' ? 'Eixo fisiológico' : axisD1 === 'positive' ? 'Desvio do eixo para a esquerda' : axisAvf === 'positive' ? 'Desvio do eixo para a direita' : 'Eixo indeterminado';
+				}
+				if (avConduction === 'Mobitz I') findings.push('Bloqueio AV de 2º grau Mobitz I (Wenckebach).');
+				if (avConduction === 'Mobitz II') findings.push('Bloqueio AV de 2º grau Mobitz II.');
+				if (avConduction === 'BAV 2:1') findings.push('Bloqueio AV de 2º grau com condução 2:1.');
+				if (avConduction === 'BAV total') findings.push('Bloqueio AV total: dissociação entre P e QRS.');
+				if (qrsPattern === 'BRD') findings.push('Morfologia compatível com bloqueio de ramo direito.');
+				if (qrsPattern === 'BRE') findings.push('Morfologia compatível com bloqueio de ramo esquerdo.');
+				if (qrsPattern === 'Ventricular') findings.push('Morfologia compatível com ritmo ventricular.');
+				if (qrsPattern === 'Preexcitation') findings.push('Pré-excitação ventricular: onda delta e PR curto.');
+				if (repolarizationPattern) findings.push(`Alteração de repolarização: ${repolarizationPattern}.`);
+				if (strainPattern) findings.push(`${strainPattern}.`);
+				if (pAmplitude !== null && pAmplitude > 2.5) findings.push('P pulmonale: amplitude de P em DII > 2,5 mm, sugerindo sobrecarga atrial direita.');
+				if (pDuration !== null && pDuration > 120) findings.push('P mitrale: duração de P > 120 ms, sugerindo sobrecarga atrial esquerda.');
+				if (pV1Negative !== null && pV1Negative > 0.04) findings.push('Índice de Morris alterado em V1, sugerindo sobrecarga atrial esquerda.');
+				if (sV1 !== null && rV5 !== null && sV1 + rV5 >= 35) findings.push(`Sokolow-Lyon positivo para sobrecarga de VE (${format(sV1 + rV5)} mm).`);
+				if (rAvl !== null && sV3 !== null && rAvl + sV3 > (sex === 'male' ? 28 : 20)) findings.push(`Cornell positivo para sobrecarga de VE (${format(rAvl + sV3)} mm).`);
+				if (rV1 !== null && sV5 !== null && (rV1 + sV5 >= 11 || rV1 > 7)) findings.push('Critério de voltagem para sobrecarga de ventrículo direito.');
+				if (infarctTerritory) findings.push(`Localização sugerida: ${infarctTerritory}.`);
+				if (additionalPattern) findings.push(`${additionalPattern}.`);
+
+				if (rate.bpm !== null) {
+					if (rate.bpm < 60) findings.unshift(`Bradicardia: frequência ventricular de ${format(rate.bpm)} bpm.`);
+					if (rate.bpm > 100) findings.unshift(`Taquicardia: frequência ventricular de ${format(rate.bpm)} bpm.`);
+				}
+				if (prSquares !== null && prSquares > 5) {
+					findings.push('PR prolongado (> 200 ms), compatível com BAV de 1º grau.');
+				}
+				if (qrsSquares !== null && qrsSquares > 3) {
+					findings.push('QRS alargado (> 120 ms); avaliar BRD, BRE, ritmo ventricular ou distúrbio de condução intraventricular.');
+				}
+
+				lines.push('LAUDO DE ELETROCARDIOGRAMA');
+				if (patient) lines.push(`Paciente: ${patient}`);
+				lines.push('');
+				lines.push(`Ritmo: ${rhythm || 'não definido no checklist'}.`);
+				lines.push(`Regularidade: ${document.getElementById('regularity').value || 'não informada'}.`);
+				lines.push(`Frequência ventricular: ${rate.bpm ? `${format(rate.bpm)} bpm` : 'não calculada'}.`);
+				if (prSquares !== null) lines.push(`Intervalo PR: ${format(prSquares * 40)} ms (${format(prSquares, 1)} quadradinhos).`);
+				if (qrsSquares !== null) lines.push(`Duração do QRS: ${format(qrsSquares * 40)} ms (${format(qrsSquares, 1)} quadradinhos).`);
+				if (qtSquares !== null) {
+					const qtMs = qtSquares * 40;
+					let qtc = null;
+					if (rate.rrSeconds) {
+						qtc = (qtMs / 1000) / Math.sqrt(rate.rrSeconds) * 1000;
+					}
+					lines.push(`Intervalo QT: ${format(qtMs)} ms.`);
+					if (qtc) lines.push(`QTc (Bazett): ${format(qtc)} ms.`);
+					if (qtc && qtc >= 480) findings.push(`QTc prolongado (${format(qtc)} ms); revisar fármacos e eletrólitos.`);
+					if (qtc && qtc < 350) findings.push(`QTc curto (${format(qtc)} ms); correlacionar com o contexto clínico.`);
+				}
+				lines.push(`Eixo: ${axis || 'não definido no checklist'}.`);
+				lines.push('');
+				lines.push('ACHADOS SELECIONADOS');
+				lines.push(findings.length ? findings.map(finding => `- ${finding}`).join('\n') : '- Nenhum achado adicional selecionado.');
+				if (notes) {
+					lines.push('');
+					lines.push(`Observações: ${notes}`);
+				}
+				lines.push('');
+				lines.push('Conclusão: correlacionar os achados com o traçado original e o contexto clínico.');
+
+				report.textContent = lines.join('\n');
+				resultBox.hidden = false;
+				resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}
+
+			document.getElementById('rrSmall').addEventListener('input', updateRate);
+			document.getElementById('rrLarge').addEventListener('input', updateRate);
+			form.addEventListener('submit', buildReport);
+			form.addEventListener('reset', () => {
+				window.setTimeout(() => {
+					resultBox.hidden = true;
+					updateRate();
+				}, 0);
+			});
+			copyButton.addEventListener('click', async () => {
+				try {
+					await navigator.clipboard.writeText(report.textContent);
+					copyButton.textContent = 'Copiado';
+					window.setTimeout(() => { copyButton.textContent = 'Copiar'; }, 1600);
+				} catch (error) {
+					window.alert('Não foi possível copiar o laudo.');
+				}
+			});
+		})();
+	</script>
+</body>
+</html>

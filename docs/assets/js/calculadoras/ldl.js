@@ -187,16 +187,16 @@ $(document).ready(function () {
         let vldlMartinHopkins = triglicerideos / novelFactor;
 
         // Atualizar resultados
-        $('#resultado-friedewald').text(`LDL-C ${ldlFriedewald.toFixed(1)} / VLDL-C ${vldlFriedewald.toFixed(1)}`)
-            .data('copyText', `LDL-C ${ldlFriedewald.toFixed(1)} / VLDL-C ${vldlFriedewald.toFixed(1)}`)
+        $('#resultado-friedewald').text(`LDL-C ${ldlFriedewald.toFixed(1)} / VLDL-C ${vldlFriedewald.toFixed(1)} / Não-HDL ${nonHDL.toFixed(1)}`)
+            .data('copyText', `LDL-C ${ldlFriedewald.toFixed(1)} / VLDL-C ${vldlFriedewald.toFixed(1)} / Não-HDL ${nonHDL.toFixed(1)}`)
             .attr('data-copy', true);
 
-        $('#resultado-sampson').text(`LDL-C ${ldlSampson.toFixed(1)} / VLDL-C ${vldlSampson.toFixed(1)}`)
-            .data('copyText', `LDL-C ${ldlSampson.toFixed(1)} / VLDL-C ${vldlSampson.toFixed(1)}`)
+        $('#resultado-sampson').text(`LDL-C ${ldlSampson.toFixed(1)} / VLDL-C ${vldlSampson.toFixed(1)} / Não-HDL ${nonHDL.toFixed(1)}`)
+            .data('copyText', `LDL-C ${ldlSampson.toFixed(1)} / VLDL-C ${vldlSampson.toFixed(1)} / Não-HDL ${nonHDL.toFixed(1)}`)
             .attr('data-copy', true);
 
-        $('#resultado-martin').text(`LDL-C ${ldlMartinHopkins.toFixed(1)} / VLDL-C ${vldlMartinHopkins.toFixed(1)}`)
-            .data('copyText', `LDL-C ${ldlMartinHopkins.toFixed(1)} / VLDL-C ${vldlMartinHopkins.toFixed(1)}`)
+        $('#resultado-martin').text(`LDL-C ${ldlMartinHopkins.toFixed(1)} / VLDL-C ${vldlMartinHopkins.toFixed(1)} / Não-HDL ${nonHDL.toFixed(1)}`)
+            .data('copyText', `LDL-C ${ldlMartinHopkins.toFixed(1)} / VLDL-C ${vldlMartinHopkins.toFixed(1)} / Não-HDL ${nonHDL.toFixed(1)}`)
             .attr('data-copy', true);
 
         // Mostrar os resultados
