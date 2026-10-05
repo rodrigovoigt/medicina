@@ -7,12 +7,23 @@
   <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <link rel="stylesheet" href="./style.css">
+  <style>
+    :root { --bg:#f3f4f2; --card:#fff; --linha:#d9dcd8; --texto:#1c1f1d; --suave:#666d68; --cor:#00805a; --cor-fundo:#e6f3ee; }
+    body.dark { --bg:#1a1a1a; --card:#2d2d30; --linha:#444; --texto:#e6e6e6; --suave:#a0a0a0; --cor:#2fc08f; --cor-fundo:#25352f; }
+    body { background:var(--bg); color:var(--texto); font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+    .painel { background:var(--card); border:1px solid var(--linha); border-radius:8px; }
+    #lista { max-height:calc(100vh - 230px); overflow-y:auto; }
+    #lista .list-group-item { background:transparent; color:var(--texto); border-color:var(--linha); border-left:3px solid transparent; font-size:.92rem; }
+    #lista .list-group-item:hover { background:var(--cor-fundo); }
+    #lista .list-group-item.active { background:var(--cor-fundo); border-left-color:var(--cor); color:var(--texto); font-weight:600; }
+    #texto { min-height:60vh; font-family:Consolas,Menlo,monospace; font-size:.9rem; line-height:1.45; cursor:pointer; background:var(--card); color:var(--texto); border-color:var(--linha); }
+    #texto:hover { border-color:var(--cor); }
+    #obs { background:var(--cor-fundo); border-left:3px solid var(--cor); border-radius:4px; padding:10px 12px; font-size:.88rem; white-space:pre-wrap; }
+    .toast-custom { position:fixed; top:20px; right:20px; background:#495057; color:#fff; padding:12px 20px; border-radius:6px; z-index:1000; transform:translateX(120%); transition:transform .3s; }
+    .toast-custom.show { transform:translateX(0); }
+  </style>
 </head>
-<body>  
-
+<body>
         <!-- Onde a navbar será injetada -->
         <div id="navbar-placeholder"></div>
 
@@ -43,386 +54,148 @@
                     }
                 });
         </script>
-
-        <!-- Container principal com layout Bootstrap -->
-        <div class="container-fluid mt-4">
-            <div class="row">
-                <!-- Sidebar com busca e lista de doenças -->
-                <div class="col-lg-3 col-md-4 disease-list-section">
-                    <div class="card shadow-sm">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0">
-                                <i class="bx bx-plus-circle me-2"></i>Guia de Prescrição
-                                <small class="d-block mt-1" id="userStatus">Carregando...</small>
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- Toggle modo escuro e filtros -->
-                            <div class="mb-3 pb-3 border-bottom">
-                                <div class="row g-2">
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="darkModeToggle">
-                                            <label class="form-check-label" for="darkModeToggle">
-                                                <i class="bx bx-moon me-2"></i>Modo Escuro
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="showAllToggle">
-                                            <label class="form-check-label" for="showAllToggle">
-                                                <i class="bx bx-show me-2"></i>Mostrar Todos
-                                            </label>
-                                        </div>
-                                        <small class="text-muted">Desativado: apenas itens editáveis</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Botão adicionar doença -->
-                            <button class="btn btn-success w-100 mb-3 adicionar-button" data-bs-toggle="modal" data-bs-target="#addModal">
-                                <i class="bx bx-plus me-2"></i>ADICIONAR DOENÇA
-                            </button>
-                            
-                            <!-- Barra de busca -->
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="bx bx-search"></i></span>
-                                <input type="search" id="search-input" class="form-control" placeholder="Pesquisar..." />
-                            </div>
-                            
-                            <!-- Lista de doenças -->
-                            <div class="list-group menu-links" id="disease-list">
-                                <!-- As doenças serão adicionadas aqui dinamicamente -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Área de conteúdo principal -->
-                <div class="col-lg-9 col-md-8 content-section">
-                    <div class="card shadow-sm">
-                        <div class="card-header d-flex align-items-center">
-                            <h4 class="mb-0 content-title flex-grow-1">Selecione uma doença</h4>
-                        </div>
-                        <div class="card-body">
-                            <textarea class="form-control content-textarea" rows="15" placeholder="Selecione uma doença da lista para ver as informações de prescrição..."></textarea>
-                            <small class="text-muted mt-2 d-block readonly-hint" style="display: none;">
-                                <i class="bx bx-info-circle me-1"></i>Clique no texto acima para copiar para área de transferência
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container-fluid px-md-4 mt-3">
+    <div class="row g-3">
+      <div class="col-lg-4 col-xl-3">
+        <div class="painel p-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="m-0">Guia de Prescrição</h5>
+            <div class="d-flex gap-1"><button type="button" id="novo" class="btn btn-sm btn-success">+ Novo</button><button type="button" id="tema" class="btn btn-sm btn-outline-secondary">Escuro</button></div>
+          </div>
+          <input type="search" id="busca" class="form-control mb-2" placeholder="Pesquisar..." autocomplete="off">
+          <div id="lista" class="list-group"><div class="p-3 text-muted">Carregando...</div></div>
         </div>
-
-        <!-- Modal para adicionar doença -->
-        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addModalLabel">
-                            <i class="bx bx-plus-circle me-2"></i>Adicionar Doença
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="add-form">
-                            <div class="mb-3">
-                                <label for="doenca" class="form-label">Nome da Doença:</label>
-                                <input type="text" class="form-control" id="doenca" name="doenca" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="medicacao" class="form-label">Medicação/Prescrição:</label>
-                                <textarea class="form-control" id="medicacao" name="medicacao" rows="4" required></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" form="add-form" class="btn btn-success">Adicionar</button>
-                    </div>
-                </div>
+      </div>
+      <div class="col-lg-8 col-xl-9" id="conteudo">
+        <div class="painel p-3">
+          <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
+            <h4 class="m-0" id="titulo">Selecione uma opção</h4>
+            <div class="d-flex gap-1">
+              <button type="button" id="copiar" class="btn btn-success btn-sm" disabled>Copiar</button>
+              <button type="button" id="editar" class="btn btn-outline-secondary btn-sm" disabled>Editar</button>
+              <button type="button" id="excluir" class="btn btn-outline-danger btn-sm" disabled>Excluir</button>
+              <button type="button" id="salvar" class="btn btn-success btn-sm d-none">Salvar</button>
+              <button type="button" id="cancelar" class="btn btn-outline-secondary btn-sm d-none">Cancelar</button>
             </div>
+          </div>
+          <textarea id="texto" class="form-control" readonly placeholder="Escolha um item da lista. Clique no texto para copiar."></textarea>
+          <div id="obs" class="mt-3 d-none"></div>
+          <textarea id="obsEdit" class="form-control mt-3 d-none" rows="3" placeholder="Obs (opcional)"></textarea>
         </div>
-
-        <!-- Modal para login/senha -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">
-                            <i class="bx bx-key me-2"></i>Acessar Sistema
-                        </h5>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p class="mb-3">Como você deseja acessar o sistema?</p>
-                        
-                        <!-- Opção sem senha -->
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-outline-primary w-100" id="accessWithoutPassword">
-                                <i class="bx bx-book-open me-2"></i>Apenas Visualizar
-                                <small class="d-block text-white">Não poderá editar ou adicionar</small>
-                            </button>
-                        </div>
-                        
-                        <!-- Divisor -->
-                        <div class="mb-3">
-                            <hr class="my-3">
-                            <small class="text-muted">ou</small>
-                        </div>
-                        
-                        <!-- Opção com senha -->
-                        <div class="mb-3">
-                            <label for="userPassword" class="form-label">Digite sua senha (5 dígitos):</label>
-                            <input type="password" class="form-control text-center" id="userPassword" 
-                                   placeholder="•••••" maxlength="5" pattern="[0-9]{5}">
-                            <small class="text-muted">Apenas números de 0-9</small>
-                        </div>
-                        
-                        <button type="button" class="btn btn-success w-100" id="accessWithPassword">
-                            <i class="bx bx-edit me-2"></i>Entrar para Editar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-<script src="./script.js"></script>
+      </div>
+    </div>
+  </div>
+<div class="modal fade" id="modalNovo" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Novo item</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body">
+      <label class="form-label">Título</label><input id="nTitulo" class="form-control mb-2">
+      <label class="form-label">Copia e cola</label><textarea id="nTexto" class="form-control mb-2" rows="6"></textarea>
+      <label class="form-label">Obs (opcional)</label><textarea id="nObs" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" id="nSalvar" class="btn btn-success">Adicionar</button></div>
+  </div></div></div>
 <script>
-// Sistema de controle de acesso com prefixos
-let userPassword = null;
-let isReadOnly = false;
+const URL_PLANILHA = 'https://script.google.com/macros/s/AKfycbx9E30sXGC8z9bOu73vO87kDm03C5gUiGio2Uy0kcX5oChSnVt7_oozh8r4rwlfyumpCQ/exec'; // termina em /exec
+const $ = id => document.getElementById(id);
+let dados = [], atual = null;
+const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
-// Adaptação para o novo layout Bootstrap
-document.addEventListener('DOMContentLoaded', function() {
-    const body = document.querySelector("body");
-    const darkModeToggle = document.querySelector("#darkModeToggle");
-    const showAllToggle = document.querySelector("#showAllToggle");
-    const searchInput = document.querySelector("#search-input");
-    
-    // Mostrar modal de login na inicialização
-    showLoginModal();
-    
-    // Inicializar modo escuro
-    if (localStorage.getItem('darkMode') === 'true') {
-        body.classList.add("dark");
-        darkModeToggle.checked = true;
-    }
-    
-    // Inicializar filtro "mostrar todos" (padrão: ativado)
-    if (localStorage.getItem('showAll') === null || localStorage.getItem('showAll') === 'true') {
-        showAllToggle.checked = true;
-    } else {
-        showAllToggle.checked = false;
-    }
-    
-    // Toggle modo escuro
-    darkModeToggle.addEventListener("change", () => {
-        body.classList.toggle("dark");
-        localStorage.setItem('darkMode', body.classList.contains("dark"));
-    });
-    
-    // Toggle mostrar todos
-    showAllToggle.addEventListener("change", () => {
-        localStorage.setItem('showAll', showAllToggle.checked);
-        // Aplica os filtros imediatamente
-        setTimeout(() => {
-            applyFilters();
-        }, 50);
-    });
-    
-    // Funcionalidade de busca combinada com filtro
-    searchInput.addEventListener("input", function() {
-        applyFilters();
-    });
+function toast(m) {
+  const t = Object.assign(document.createElement('div'), { className: 'toast-custom', textContent: m });
+  document.body.appendChild(t);
+  setTimeout(() => t.classList.add('show'), 20);
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 2000);
+}
+function copiar() {
+  const t = $('texto').value;
+  if (!t) return;
+  navigator.clipboard.writeText(t).then(() => toast('✅ Copiado!')).catch(() => toast('❌ Erro ao copiar'));
+}
+function abrir(d) {
+  atual = d;
+  $('titulo').textContent = d.titulo;
+  $('texto').value = d.texto;
+  $('obs').textContent = d.obs ? 'Obs: ' + d.obs.replace(/^[-•]\s*/, '') : '';
+  $('obs').classList.toggle('d-none', !d.obs);
+  ['copiar', 'editar', 'excluir'].forEach(i => $(i).disabled = false);
+  modo(false);
+  dados.forEach(x => x.el.classList.toggle('active', x === d));
+  if (innerWidth < 992) $('conteudo').scrollIntoView({ behavior: 'smooth' });
+}
+function montar(lista) {
+  const antigo = atual && atual.titulo;
+  dados = lista.sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt'));
+  const l = $('lista'); l.innerHTML = '';
+  dados.forEach(d => {
+    d.el = Object.assign(document.createElement('button'), { type: 'button', className: 'list-group-item list-group-item-action', textContent: d.titulo });
+    d.el.onclick = () => abrir(d);
+    l.appendChild(d.el);
+  });
+  if (!dados.length) l.innerHTML = '<div class="p-3 text-muted">Planilha vazia</div>';
+  filtrar();
+  const mesmo = dados.find(d => d.titulo === antigo);
+  if (mesmo) abrir(mesmo);
+}
+function filtrar() { const q = norm($('busca').value); dados.forEach(d => d.el.hidden = !norm(d.titulo).includes(q)); }
+
+async function carregar() {
+  try { const c = sessionStorage.getItem('guia'); if (c) montar(JSON.parse(c)); } catch (e) {}   // abre rápido com o último carregamento
+  try {
+    const novo = await (await fetch(URL_PLANILHA)).json();
+    const txt = JSON.stringify(novo);
+    if (txt !== sessionStorage.getItem('guia')) { sessionStorage.setItem('guia', txt); montar(novo); }
+  } catch (e) {
+    if (!dados.length) $('lista').innerHTML = '<div class="p-3 text-danger">Erro ao carregar a planilha</div>';
+  }
+}
+$('busca').addEventListener('input', filtrar);
+$('texto').addEventListener('click', () => { if ($('texto').readOnly) copiar(); });
+$('copiar').addEventListener('click', copiar);
+$('tema').addEventListener('click', () => { document.body.classList.toggle('dark'); localStorage.setItem('darkMode', document.body.classList.contains('dark')); });
+if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// ---- edição pela página ----
+function modo(e) {
+  $('texto').readOnly = !e;
+  $('obsEdit').classList.toggle('d-none', !e);
+  $('obs').classList.toggle('d-none', e || !atual || !atual.obs);
+  ['copiar', 'editar', 'excluir'].forEach(i => $(i).classList.toggle('d-none', e));
+  ['salvar', 'cancelar'].forEach(i => $(i).classList.toggle('d-none', !e));
+}
+async function enviar(p) {
+  toast('Salvando...');
+  const r = await fetch(URL_PLANILHA, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
+  const j = await r.json();
+  if (j.erro) throw new Error(j.erro);
+  const novo = await (await fetch(URL_PLANILHA)).json();
+  sessionStorage.setItem('guia', JSON.stringify(novo));
+  montar(novo);
+}
+const falhou = e => toast('❌ ' + e.message);
+function limparPainel() {
+  atual = null; $('titulo').textContent = 'Selecione uma opção'; $('texto').value = '';
+  $('obs').classList.add('d-none'); modo(false);
+  ['copiar', 'editar', 'excluir'].forEach(i => $(i).disabled = true);
+}
+$('editar').addEventListener('click', () => { $('obsEdit').value = atual.obs; modo(true); $('texto').focus(); });
+$('cancelar').addEventListener('click', () => { $('texto').value = atual.texto; modo(false); });
+$('salvar').addEventListener('click', () =>
+  enviar({ acao: 'editar', titulo: atual.titulo, texto: $('texto').value, obs: $('obsEdit').value })
+    .then(() => toast('✅ Salvo!')).catch(falhou));
+$('excluir').addEventListener('click', () => {
+  if (!confirm('Excluir "' + atual.titulo + '"?')) return;
+  const t = atual.titulo;
+  enviar({ acao: 'excluir', titulo: t }).then(() => { limparPainel(); toast('🗑️ Excluído'); }).catch(falhou);
 });
-
-// Função para aplicar filtros combinados
-function applyFilters() {
-    const searchInput = document.querySelector("#search-input");
-    const showAllToggle = document.querySelector("#showAllToggle");
-    const filter = searchInput.value.toLowerCase();
-    const showAll = showAllToggle.checked;
-    const listItems = document.querySelectorAll("#disease-list .doenca-item");
-    
-    // Contar tipos de doenças
-    let countWithPrefix = 0;
-    let countWithUserPrefix = 0;
-    let countWithoutPrefix = 0;
-    
-    listItems.forEach((item, index) => {
-        const doencaData = item.getAttribute('data-doenca');
-        const originalName = decodeURIComponent(doencaData);
-        
-        if (/^\d{5}/.test(originalName)) {
-            countWithPrefix++;
-            if (userPassword && originalName.startsWith(userPassword)) {
-                countWithUserPrefix++;
-            }
-        } else {
-            countWithoutPrefix++;
-        }
-    });
-    
-    let totalVisible = 0;
-    let totalHidden = 0;
-    let userItems = 0;
-    let oldItems = 0;
-    
-    listItems.forEach((item, index) => {
-        const text = item.textContent.toLowerCase();
-        const doencaData = item.getAttribute('data-doenca');
-        const originalName = decodeURIComponent(doencaData);
-        
-        let displayName;
-        try {
-            displayName = removePasswordPrefix(originalName);
-        } catch (error) {
-            displayName = originalName; // fallback
-        }
-        
-        // 1. Primeiro verifica se passa na busca por texto
-        const matchesSearch = displayName.toLowerCase().includes(filter);
-        
-        let shouldShow = false; // Começa com false
-        
-        if (matchesSearch) {
-            if (showAll) {
-                // Se "mostrar todos" está ligado, mostra tudo que passou na busca
-                shouldShow = true;
-            } else if (!isReadOnly && userPassword) {
-                // Se "mostrar todos" está desligado, só mostra as doenças do usuário
-                const startsWithUserPassword = originalName.startsWith(userPassword);
-                shouldShow = startsWithUserPassword;
-                if (startsWithUserPassword) userItems++;
-            }
-        }
-        
-        if (shouldShow) {
-            item.style.display = "";
-            item.style.visibility = "visible";
-            item.classList.remove("hidden-by-filter");
-            totalVisible++;
-        } else {
-            // FORÇA esconder com múltiplas técnicas
-            item.style.display = "none !important";
-            item.style.visibility = "hidden";
-            item.classList.add("hidden-by-filter");
-            totalHidden++;
-        }
-        
-        // Conta itens antigos vs novos
-        if (/^\d{5}/.test(originalName)) {
-            // Tem prefixo numérico
-        } else {
-            oldItems++;
-        }
-    });
-}
-
-// Funções de controle de acesso
-function showLoginModal() {
-    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    loginModal.show();
-    
-    // Event listeners para os botões de login
-    document.getElementById('accessWithoutPassword').addEventListener('click', function() {
-        isReadOnly = true;
-        userPassword = null;
-        updateUserStatus();
-        loginModal.hide();
-        initializeApp();
-    });
-    
-    document.getElementById('accessWithPassword').addEventListener('click', function() {
-        const password = document.getElementById('userPassword').value.trim();
-        
-        if (password.length !== 5 || !/^\d{5}$/.test(password)) {
-            alert('A senha deve ter exatamente 5 dígitos numéricos!');
-            return;
-        }
-        
-        isReadOnly = false;
-        userPassword = password;
-        updateUserStatus();
-        loginModal.hide();
-        initializeApp();
-    });
-    
-    // Permitir enter no campo de senha
-    document.getElementById('userPassword').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            document.getElementById('accessWithPassword').click();
-        }
-    });
-}
-
-function updateUserStatus() {
-    const statusElement = document.getElementById('userStatus');
-    const addButton = document.querySelector('.adicionar-button');
-    
-    if (isReadOnly) {
-        statusElement.textContent = '👁️ Modo Visualização';
-        addButton.style.display = 'none';
-    } else {
-        statusElement.textContent = `🔑 Usuário: ${userPassword}`;
-        addButton.style.display = 'block';
-    }
-}
-
-function initializeApp() {
-    // Inicializar o sistema após o login
-    if (typeof fetchDoencas === 'function') {
-        fetchDoencas();
-    }
-    
-    // Aplica filtros após carregar os dados
-    setTimeout(() => {
-        if (typeof applyFilters === 'function') {
-            applyFilters();
-        }
-    }, 500);
-}
-
-// Funções auxiliares para trabalhar com prefixos (globais)
-function addPasswordPrefix(doencaName) {
-    if (!userPassword) return doencaName;
-    return userPassword + doencaName;
-}
-
-function removePasswordPrefix(doencaName) {
-    // Remove prefixo de 5 dígitos se existir
-    if (/^\d{5}/.test(doencaName)) {
-        return doencaName.substring(5);
-    }
-    return doencaName;
-}
-
-function extractPasswordFromName(doencaName) {
-    if (/^\d{5}/.test(doencaName)) {
-        return doencaName.substring(0, 5);
-    }
-    return null;
-}
-
-function canUserEdit(doencaName) {
-    if (isReadOnly) return false;
-    
-    const doencaPassword = extractPasswordFromName(doencaName);
-    
-    // Se não tem prefixo (doença antiga), ninguém pode editar
-    if (!doencaPassword) return false;
-    
-    // Se tem prefixo, só pode editar quem tem a mesma senha
-    return doencaPassword === userPassword;
-}
-
-// Função para verificar se deve mostrar todos os itens
-function shouldShowAll() {
-    const showAllToggle = document.querySelector("#showAllToggle");
-    return showAllToggle ? showAllToggle.checked : true;
-}
+const modalNovo = new bootstrap.Modal($('modalNovo'));
+$('novo').addEventListener('click', () => { ['nTitulo', 'nTexto', 'nObs'].forEach(i => $(i).value = ''); modalNovo.show(); });
+$('nSalvar').addEventListener('click', () => {
+  const titulo = $('nTitulo').value.trim(), texto = $('nTexto').value;
+  if (!titulo || !texto.trim()) return toast('⚠️ Preencha título e texto');
+  enviar({ acao: 'adicionar', titulo, texto, obs: $('nObs').value })
+    .then(() => { modalNovo.hide(); const d = dados.find(x => x.titulo === titulo); if (d) abrir(d); toast('✅ Adicionado!'); }).catch(falhou);
+});
+carregar();
 </script>
 </body>
 </html>
