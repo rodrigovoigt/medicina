@@ -1,678 +1,341 @@
 <style>
-    /* Importar Bootstrap Icons */
     @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css");
-    
-    nav {
-        background-color: #00a66c;
-    }
-    
-    .navbar-nav .nav-link {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        font-size: 0.95rem;
-    }
-    
-    /* Espaçamento para as barras de busca */
-    .d-flex[role="search"] {
-        margin-left: 1rem;
-    }
-    
-    .d-flex.gap-2 {
-        margin-left: 1rem;
-    }
-    
-    .navbar-brand {
-        font-size: 1.1rem;
-        color: white !important;
-    }
-    
-    .btn-outline-light {
-        border: 2px solid rgba(255,255,255,0.3);
-        color: white;
-        position: relative;
-    }
-    
-    .btn-outline-light:hover {
-        background-color: rgba(255,255,255,0.1);
-        border-color: white;
-        color: white;
-    }
-    
-    /* Destaque especial para busca médica */
-    .btn-outline-light:hover::after {
-        content: "Sites médicos confiáveis";
-        position: absolute;
-        bottom: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(0,0,0,0.8);
-        color: white;
-        padding: 2px 6px;
-        border-radius: 3px;
-        font-size: 10px;
-        white-space: nowrap;
-        z-index: 1000;
-    }
-    
-    /* Estilo do offcanvas */
-    .offcanvas-body {
-        background-color: #f8f9fa;
-    }
-    
-    .list-group-item-action:hover {
-        background-color: #e8f5e8;
-        color: #000;
-    }
 
-    .list-group-item-action {
-        color: #000;
-        text-decoration: none;
-        border: none;
-    }
+    :root { --g:#00a66c; --gd:#007a50; --gl:#e6f6ee; --ink:#1c2a23; --mute:#5f6f66; }
 
-    .list-group-item-action:focus {
-        background-color: #e8f5e8;
-        color: #000;
-        box-shadow: none;
-    }
+    /* ===== Barra superior ===== */
+    .dg-nav { background:var(--g); box-shadow:0 1px 0 rgba(0,0,0,.12); padding:.4rem 0; z-index:1030; }
+    .dg-nav a, .offcanvas a, .dg-tabs a { text-decoration:none; }
+    .dg-nav .navbar-brand { color:#fff !important; font-weight:700; font-size:1.15rem; display:flex; align-items:center; gap:.4rem; margin:0 .5rem 0 0; }
+    .dg-nav .navbar-brand img { height:34px; width:auto; }
+    .dg-nav .nav-link { color:rgba(255,255,255,.93) !important; padding:.45rem .7rem; border-radius:.5rem; font-size:.95rem; display:flex; align-items:center; gap:.4rem; }
+    .dg-nav .nav-link:hover, .dg-nav .nav-link.show, .dg-nav .nav-link.active { background:rgba(255,255,255,.17); color:#fff !important; }
+    .dg-nav .dropdown-toggle::after { margin-left:.15rem; }
+    .dg-btn { display:inline-flex; align-items:center; gap:.4rem; border:1.5px solid rgba(255,255,255,.4); background:transparent; color:#fff; border-radius:.55rem; padding:.35rem .7rem; font-size:.95rem; }
+    .dg-btn:hover { background:rgba(255,255,255,.15); border-color:#fff; }
+    .dg-btn i { font-size:1.25rem; line-height:1; }
+    .dg-nav :focus-visible, .dg-tabs :focus-visible { outline:2px solid #fff; outline-offset:2px; }
+    .dg-tabs :focus-visible { outline-color:var(--g); }
 
-    /* Remove efeitos azuis de links */
-    a, a:link, a:visited, a:active {
-        color: inherit;
-        text-decoration: none;
-    }
+    /* ===== Painéis (mega menu) ===== */
+    .dg-mega { padding:.6rem; border:0; border-radius:.9rem; box-shadow:0 14px 34px rgba(0,0,0,.2); width:min(700px,94vw); gap:.1rem .9rem; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:.5rem !important; }
+    .dg-mega.show { display:grid; }
+    .dg-sec h6 { margin:.5rem .6rem .2rem; font-size:.78rem; font-weight:700; color:var(--gd); }
+    .dg-wide { grid-column:1/-1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .dg-wide h6 { grid-column:1/-1; }
+    .dg-item { display:flex; gap:.7rem; align-items:center; padding:.45rem .6rem; border-radius:.6rem; color:var(--ink); }
+    .dg-item i { flex:none; width:2.1rem; height:2.1rem; display:grid; place-items:center; border-radius:.6rem; background:var(--gl); color:var(--gd); font-size:1.05rem; }
+    .dg-item b { display:block; font-size:.9rem; font-weight:600; }
+    .dg-item small { display:block; color:var(--mute); font-size:.78rem; line-height:1.25; }
+    .dg-item:hover, .dg-item:focus-visible, .dg-item.active { background:var(--gl); color:var(--ink); }
+    .dg-item.active i { background:var(--g); color:#fff; }
 
-    /* Links na navbar principal */
-    .navbar-nav .nav-link {
-        color: rgba(255,255,255,0.95) !important;
-    }
+    /* ===== Busca ===== */
+    .dg-sbox { display:flex; align-items:center; gap:.4rem; background:#fff; border-radius:2rem; padding:.2rem .25rem .2rem .8rem; color:var(--mute); }
+    .dg-sbox input { border:0; outline:0; flex:1; min-width:0; font-size:.9rem; background:transparent; color:var(--ink); }
+    .dg-sbox:focus-within { box-shadow:0 0 0 3px rgba(255,255,255,.45); }
+    .dg-sbox kbd { background:#eef2f0; color:var(--mute); font-size:.7rem; padding:.05rem .4rem; border-radius:.3rem; }
+    .dg-mode { display:flex; background:#eef2f0; border-radius:2rem; padding:2px; flex:none; }
+    .dg-mode button { border:0; background:transparent; color:var(--mute); border-radius:2rem; padding:.22rem .65rem; font-size:.78rem; display:flex; align-items:center; gap:.3rem; }
+    .dg-mode button:hover { color:var(--gd); }
+    .dg-mode button[aria-checked="true"] { background:var(--g); color:#fff; }
+    .dg-mode:focus-within { outline:2px solid var(--g); outline-offset:1px; }
+    @media (max-width:1199.98px) { .dg-search .dg-mode span { display:none; } }
+    .dg-sug { position:absolute; top:calc(100% + 6px); right:0; left:auto; width:min(400px, calc(100vw - 1rem)); list-style:none; margin:0; padding:.3rem; background:#fff; color:var(--ink); border-radius:.8rem; box-shadow:0 14px 34px rgba(0,0,0,.22); z-index:1060; max-height:70vh; overflow:auto; }
+    .dg-sug li { display:flex; gap:.6rem; align-items:center; padding:.5rem; border-radius:.6rem; cursor:pointer; }
+    .dg-sug li > i { color:var(--gd); font-size:1.1rem; width:1.4rem; text-align:center; }
+    .dg-sug li span { flex:1; min-width:0; }
+    .dg-sug b { display:block; font-size:.9rem; }
+    .dg-sug small { display:block; color:var(--mute); font-size:.76rem; }
+    .dg-sug em { font-style:normal; font-size:.7rem; background:var(--gl); color:var(--gd); padding:.1rem .45rem; border-radius:1rem; white-space:nowrap; }
+    .dg-sug li:hover, .dg-sug li.on { background:var(--gl); }
+    .dg-sug li[data-w] { border-top:1px solid #e5ece8; border-radius:0 0 .6rem .6rem; margin-top:.2rem; }
+    .dg-sug .none { color:var(--mute); cursor:default; justify-content:center; }
+    .offcanvas .dg-sug { position:static; width:auto; box-shadow:none; border:1px solid #dfe8e3; margin-top:.4rem; min-width:0; }
+    .offcanvas .dg-sbox { background:#fff; border:1.5px solid #cfdcd5; }
 
-    .navbar-nav .nav-link:hover {
-        color: white !important;
-        background-color: rgba(255,255,255,0.1);
-        border-radius: 4px;
-    }
+    /* ===== Menu lateral ===== */
+    .offcanvas { --bs-offcanvas-width:390px; }
+    .offcanvas-header { background:var(--g); color:#fff; }
+    .offcanvas-body { background:#f7faf8; }
+    .dg-lbl { font-size:.8rem; font-weight:700; color:var(--gd); margin:1.1rem 0 .4rem; }
+    .accordion-button { font-weight:600; font-size:.95rem; }
+    .accordion-button:focus { box-shadow:0 0 0 3px rgba(0,166,108,.25); }
+    .accordion-button:not(.collapsed) { background:var(--gl); color:var(--gd); }
 
-    .navbar-nav .nav-link.active {
-        color: white !important;
-        font-weight: 500;
-    }
-
-    /* Dropdown menu */
-    .dropdown-menu .dropdown-item {
-        color: #000;
-    }
-
-    .dropdown-menu .dropdown-item:hover {
-        background-color: #e8f5e8;
-        color: #000;
-    }
-
-    /* Links do accordion no offcanvas */
-    .accordion-body a {
-        color: #000;
-        transition: color 0.2s ease;
-    }
-
-    .accordion-body a:hover {
-        color: #000;
-        text-decoration: none;
-    }
-    
-    .accordion-button:focus {
-        box-shadow: none;
-        border-color: #00a66c;
-    }
-    
-    .accordion-button:not(.collapsed) {
-        background-color: #e8f5e8;
-        color: #00a66c;
-    }
-    
-    /* Estilo das sugestões de busca - MELHORADO */
-    #searchSuggestions {
-        border: 1px solid #dee2e6;
-        border-radius: 0.375rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-        background: white;
-        z-index: 1050;
-        margin-top: 2px;
-        max-width: 400px; /* Limitar largura máxima */
-        min-width: 300px; /* Largura mínima */
-    }
-    
-    #searchSuggestions .list-group-item {
-        border: none;
-        border-bottom: 1px solid #f8f9fa;
-        padding: 0.75rem 1rem;
-        transition: all 0.2s ease;
-        word-wrap: break-word; /* Quebrar palavras longas */
-        overflow: hidden; /* Evitar overflow */
-    }
-    
-    #searchSuggestions .list-group-item:last-child {
-        border-bottom: none;
-        border-radius: 0 0 0.375rem 0.375rem;
-    }
-    
-    #searchSuggestions .list-group-item:first-child {
-        border-radius: 0.375rem 0.375rem 0 0;
-    }
-    
-    #searchSuggestions .list-group-item:hover {
-        background-color: #f8f9fa;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    #searchSuggestions .list-group-item .badge {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.4rem;
-        white-space: nowrap; /* Evitar quebra do badge */
-    }
-    
-    /* Truncar texto longo */
-    #searchSuggestions .text-truncate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    /* Responsivo */
-    @media (max-width: 991.98px) {
-        .navbar-nav .nav-link {
-            font-size: 0.9rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-        
-        /* Esconder barras de busca em telas pequenas */
-        .d-flex[role="search"], 
-        .d-flex[action*="duckduckgo"] {
-            display: none !important;
-        }
-    }
+    /* ===== Barra inferior (celular) ===== */
+    .dg-tabs { position:fixed; left:0; right:0; bottom:0; z-index:1030; display:grid; grid-template-columns:repeat(5,1fr); background:#fff; border-top:1px solid #dfe8e3; padding-bottom:env(safe-area-inset-bottom); }
+    .dg-tabs a, .dg-tabs button { border:0; background:none; color:var(--mute); font-size:.68rem; display:flex; flex-direction:column; align-items:center; gap:2px; padding:.5rem 0 .4rem; }
+    .dg-tabs i { font-size:1.3rem; line-height:1; }
+    .dg-tabs a:hover, .dg-tabs button:hover, .dg-tabs .on { color:var(--g); }
+    @media (max-width:991.98px) { body { padding-bottom:calc(60px + env(safe-area-inset-bottom)); } }
+    @media (min-width:992px) and (max-width:1199.98px) { .dg-search { width:230px; } }
+    @media (min-width:1200px) { .dg-search { width:320px; } }
+    @media (prefers-reduced-motion:reduce) { .dg-nav *, .offcanvas { transition:none !important; } }
 </style>
 
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img style="width: 70px" src="assets/img/icon.png" alt="DocGO Logo" />DocGO!</a>
-        
-        <!-- Botão do menu lateral (offcanvas) -->
-        <button class="btn btn-outline-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
+<nav class="navbar dg-nav sticky-top" aria-label="Navegação principal">
+    <div class="container-fluid gap-2 flex-nowrap">
+        <!-- Caminho 1: menu completo -->
+        <button class="dg-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Abrir menu completo">
+            <i class="bi bi-list"></i><span class="d-none d-xl-inline">Menu</span>
         </button>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html"><i class="bi bi-house-fill"></i> Home</a>
-                </li>
-                <!-- Itens principais mais usados -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Calculadoras
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="calculadoras/carga-tabagica.html">Carga Tabágica</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/ldl.html">Colesterol LDL</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/dpp.html">Data Provável do Parto</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/idade-gestacional.html">Idade Gestacional</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/imc.html">Índice de Massa Corporal (IMC)</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/parkland.html">Ressuscitação Volêmica (Parkland)</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/risco-coronariano.html">Risco Cardiovascular</a></li>
-                        <li><a class="dropdown-item" href="calculadoras/tfg.html">Taxa de Filtração Glomerular (TFG)</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Prontuário
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="prontuario/consulta-geral.html">Consulta Geral</a></li>
-                        <li><a class="dropdown-item" href="prontuario/remedios.html">Formatar Remédios IPM Sistemas</a></li>
-                        <li><a class="dropdown-item" href="prontuario/radiologia-laudos.html">Modelos de Laudos</a></li>
-                        <li><a class="dropdown-item" href="condutas/index.html">Guia de Prescrição</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pediatria
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="pediatria/ajuda-pediatria.html">Sistema de Pediatria</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><h6 class="dropdown-header">Medicações</h6></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/antibioticos.html">Antibióticos</a></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/antiinflamatorio.html">Anti-inflamatórios</a></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/broncodilatadores.html">Broncodilatadores</a></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/corticosteroides.html">Corticosteroides</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><h6 class="dropdown-header">Calculadoras</h6></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html">Hidratação Venosa</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><h6 class="dropdown-header">Puericultura</h6></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/puericultura-alimentacao.html">Alimentação</a></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/puericultura-curvas.html">Curvas de Crescimento</a></li>
-                        <li><a class="dropdown-item" href="pediatria/ferramentas-ped/puericultura-vacinas.html">Vacinas</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="extras/agradecimentos.html"><i class="bi bi-heart-fill"></i> Agradecimentos</a>
-                </li>
-            </ul>
-            
-            <!-- Duas opções de busca -->
-            <div class="d-flex gap-2">
-                <!-- Busca interna do site -->
-                <form class="d-flex position-relative" role="search" onsubmit="return false;">
-                    <div class="input-group input-group-sm">
-                        <input id="buscarInterno" class="form-control" type="search" placeholder="Buscar ferramenta..." aria-label="Search" autocomplete="off" oninput="filterSuggestions()" style="min-width: 150px;">
-                        <button class="btn btn-success btn-sm" type="submit" title="Buscar no site">
-                            <small>🔍</small>
-                        </button>
-                    </div>
-                    <ul id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3" style="max-height: 300px; overflow-y: auto; display: none;"></ul>
-                </form>
+        <a class="navbar-brand" href="index.html"><img src="assets/img/icon.png" alt="" />DocGO!</a>
 
-                <!-- Busca externa (DuckDuckGo) com filtros de sites confiáveis -->
-                <form class="d-flex" action="https://duckduckgo.com/" method="get" target="_blank" onsubmit="addMedicalSiteFilter(event)">
-                    <div class="input-group input-group-sm">
-                        <input name="q" id="webSearch" class="form-control" type="search" placeholder="Buscar em sites médicos..." aria-label="Medical Web Search" style="min-width: 150px;" title="Busca apenas em: PubMed, UpToDate, Cochrane, CFM, SciELO, MSD Manuals, Consulta Remédios">
-                        <button class="btn btn-outline-light btn-sm" type="submit" title="Buscar em sites médicos confiáveis&#10;• PubMed (pubmed.ncbi.nlm.nih.gov)&#10;• UpToDate (uptodate.com)&#10;• Cochrane (cochrane.org)&#10;• CFM (portal.cfm.org.br)&#10;• SciELO (scielo.br)&#10;• MSD Manuals (msdmanuals.com)&#10;• Consulta Remédios (consultaremedios.com.br)">
-                            <small>🩺</small>
-                        </button>
-                    </div>
-                </form>
+        <!-- Caminho 2: links e painéis (desktop) -->
+        <ul class="navbar-nav flex-row d-none d-lg-flex me-auto gap-1" id="topNav"><li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page"><i class="bi bi-house-door-fill"></i> Home</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-calculator"></i> Calculadoras</a><div class="dropdown-menu dg-mega"><div class="dg-sec dg-wide"><a class="dg-item" href="calculadoras/ldl.html" data-id="ldl"><i class="bi bi-droplet-half"></i><span><b>Colesterol LDL</b><small>Cálculo do LDL</small></span></a><a class="dg-item" href="calculadoras/adrogue-madias.html" data-id="na"><i class="bi bi-moisture"></i><span><b>Correção de sódio</b><small>Fórmula de Adrogué-Madias</small></span></a><a class="dg-item" href="calculadoras/tfg.html" data-id="tfg"><i class="bi bi-funnel"></i><span><b>Taxa de filtração glomerular</b><small>Estimativa da TFG</small></span></a><a class="dg-item" href="calculadoras/imc.html" data-id="imc"><i class="bi bi-speedometer2"></i><span><b>Índice de massa corporal</b><small>Cálculo do IMC</small></span></a><a class="dg-item" href="calculadoras/risco-coronariano.html" data-id="risco"><i class="bi bi-heart-pulse"></i><span><b>Risco cardiovascular</b><small>Risco em 10 anos</small></span></a><a class="dg-item" href="calculadoras/prevent.html" data-id="prevent"><i class="bi bi-graph-up-arrow"></i><span><b>AHA PREVENT</b><small>Risco cardiovascular em 10 e 30 anos</small></span></a><a class="dg-item" href="calculadoras/carga-tabagica.html" data-id="tabag"><i class="bi bi-cloud-haze2"></i><span><b>Carga tabágica</b><small>Anos-maço</small></span></a><a class="dg-item" href="calculadoras/dpp.html" data-id="dpp"><i class="bi bi-calendar-heart"></i><span><b>Data provável do parto</b><small>Cálculo da DPP</small></span></a><a class="dg-item" href="calculadoras/idade-gestacional.html" data-id="ig"><i class="bi bi-calendar-week"></i><span><b>Idade gestacional</b><small>Semanas gestacionais</small></span></a><a class="dg-item" href="calculadoras/parkland.html" data-id="park"><i class="bi bi-fire"></i><span><b>Parkland</b><small>Ressuscitação volêmica</small></span></a></div></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-journal-medical"></i> Prontuário</a><div class="dropdown-menu dg-mega"><div class="dg-sec dg-wide"><a class="dg-item" href="prontuario/consulta-geral.html" data-id="consulta"><i class="bi bi-clipboard2-pulse"></i><span><b>Modelos para consulta</b><small>Consulta geral e prontuário</small></span></a><a class="dg-item" href="prontuario/remedios.html" data-id="meds"><i class="bi bi-capsule"></i><span><b>Formatar medicações</b><small>Formatador para medicações IPM</small></span></a><a class="dg-item" href="condutas/index.html" data-id="condutas"><i class="bi bi-list-check"></i><span><b>Guia de prescrição</b><small>Protocolos e condutas</small></span></a><a class="dg-item" href="prontuario/radiologia-laudos.html" data-id="laudos"><i class="bi bi-file-earmark-medical"></i><span><b>Laudos de radiologia</b><small>Modelos e templates</small></span></a><a class="dg-item" href="prontuario/ecg.html" data-id="ecg"><i class="bi bi-activity"></i><span><b>Checklist de ECG</b><small>Medidas, padrões e laudo</small></span></a><a class="dg-item" href="pediatria/ajuda-pediatria.html" data-id="pedajuda"><i class="bi bi-balloon-heart"></i><span><b>Ajuda em pediatria</b><small>Doses, medicamentos e protocolos</small></span></a></div></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-balloon-heart"></i> Pediatria</a><div class="dropdown-menu dg-mega"><div class="dg-sec"><a class="dg-item" href="pediatria/ajuda-pediatria.html" data-id="pedajuda"><i class="bi bi-balloon-heart"></i><span><b>Ajuda em pediatria</b><small>Doses, medicamentos e protocolos</small></span></a></div><div class="dg-sec"><h6>Medicações</h6><a class="dg-item" href="pediatria/ferramentas-ped/antibioticos.html" data-id="atb"><i class="bi bi-capsule-pill"></i><span><b>Antibióticos</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/antiinflamatorio.html" data-id="ai"><i class="bi bi-thermometer-half"></i><span><b>Anti-inflamatórios</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/broncodilatadores.html" data-id="bd"><i class="bi bi-wind"></i><span><b>Broncodilatadores</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/corticosteroides.html" data-id="cc"><i class="bi bi-prescription2"></i><span><b>Corticosteroides</b><small>Doses pediátricas</small></span></a></div><div class="dg-sec"><h6>Calculadoras</h6><a class="dg-item" href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" data-id="hv"><i class="bi bi-droplet"></i><span><b>Hidratação venosa</b><small>Cálculo pediátrico</small></span></a></div><div class="dg-sec"><h6>Puericultura</h6><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-alimentacao.html" data-id="pal"><i class="bi bi-cup-straw"></i><span><b>Alimentação</b><small>Puericultura</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-curvas.html" data-id="pcur"><i class="bi bi-graph-up"></i><span><b>Curvas de crescimento</b><small>Puericultura</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-vacinas.html" data-id="pvac"><i class="bi bi-shield-plus"></i><span><b>Vacinas</b><small>Puericultura</small></span></a></div></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-mortarboard"></i> Estudos</a><div class="dropdown-menu dg-mega"><div class="dg-sec dg-wide"><a class="dg-item" href="https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/" data-id="banco" target="_blank" rel="noopener"><i class="bi bi-patch-question"></i><span><b>Banco de questões</b><small>Questões comentadas</small></span></a><a class="dg-item" href="https://www.pedb.com.br/" data-id="pedbook" target="_blank" rel="noopener"><i class="bi bi-book"></i><span><b>PedBook</b><small>Apoio para pediatria</small></span></a><a class="dg-item" href="ferramenta-externa/ajuda-pediatria.html" data-id="pedext"><i class="bi bi-box-arrow-up-right"></i><span><b>Ajuda Pediatria</b><small>Ferramenta externa</small></span></a></div></div></li><li class="nav-item"><a class="nav-link" href="extras/agradecimentos.html"><i class="bi bi-heart-fill"></i> Agradecimentos</a></li></ul>
+
+        <!-- Caminho 3: busca (desktop) -->
+        <div class="dg-search position-relative d-none d-lg-block ms-auto ms-lg-0">
+            <div class="dg-sbox" role="search">
+                <i class="bi bi-search"></i>
+                <input id="buscarInterno" type="search" placeholder="Buscar ferramenta…" autocomplete="off" aria-label="Buscar ferramenta">
+                <kbd title="Atalho: tecla / ou Ctrl+K">/</kbd>
+                <div class="dg-mode" role="radiogroup" aria-label="Onde buscar">
+                    <button type="button" role="radio" data-mode="site" aria-checked="true" title="Buscar nas ferramentas do DocGO"><i class="bi bi-grid"></i><span>Site</span></button>
+                    <button type="button" role="radio" data-mode="web" aria-checked="false" title="Buscar em sites médicos confiáveis (PubMed, SciELO, UpToDate, CFM…)"><i class="bi bi-globe2"></i><span>Web</span></button>
+                </div>
             </div>
+            <ul id="searchSuggestions" class="dg-sug" hidden></ul>
         </div>
+
+        <!-- Busca no celular -->
+        <button class="dg-btn d-lg-none ms-auto" type="button" id="mSearch" aria-label="Buscar"><i class="bi bi-search"></i></button>
     </div>
 </nav>
 
-<!-- Script para funcionalidades de busca -->
-<script>
-// Base de dados das páginas do site para busca interna - ATUALIZADA
-const sitePages = [
-    // Calculadoras
-    { title: "Carga Tabágica", url: "calculadoras/carga-tabagica.html", category: "Calculadora", keywords: ["carga", "tabágica", "cigarro", "fumo", "tabaco"] },
-    { title: "Colesterol LDL", url: "calculadoras/ldl.html", category: "Calculadora", keywords: ["colesterol", "ldl", "lipídio", "gordura"] },
-    { title: "Data Provável do Parto", url: "calculadoras/dpp.html", category: "Calculadora", keywords: ["dpp", "parto", "gravidez", "gestação", "naegele"] },
-    { title: "Idade Gestacional", url: "calculadoras/idade-gestacional.html", category: "Calculadora", keywords: ["idade", "gestacional", "gravidez", "semanas", "dum"] },
-    { title: "IMC", url: "calculadoras/imc.html", category: "Calculadora", keywords: ["imc", "peso", "massa", "corporal", "obesidade"] },
-    { title: "Parkland", url: "calculadoras/parkland.html", category: "Calculadora", keywords: ["parkland", "queimadura", "ressuscitação", "volêmica", "fluido"] },
-    { title: "Risco Cardiovascular", url: "calculadoras/risco-coronariano.html", category: "Calculadora", keywords: ["risco", "cardiovascular", "coronário", "coração", "infarto"] },
-    { title: "TFG", url: "calculadoras/tfg.html", category: "Calculadora", keywords: ["tfg", "filtração", "glomerular", "rim", "creatinina"] },
-    
-    // Prontuário
-    { title: "Consulta Geral", url: "prontuario/consulta-geral.html", category: "Prontuário", keywords: ["consulta", "geral", "exame", "físico", "semiologia"] },
-    { title: "Formatar Medicações", url: "prontuario/remedios.html", category: "Prontuário", keywords: ["medicação", "remédio", "ipm", "formatar", "prescrição"] },
-    { title: "Modelos de Laudos", url: "prontuario/radiologia-laudos.html", category: "Prontuário", keywords: ["laudo", "radiologia", "raio-x", "tc", "ressonância"] },
-    { title: "Guia de Prescrição", url: "condutas/index.html", category: "Prontuário", keywords: ["prescrição", "medicação", "condutas", "tratamento", "doença"] },
-    
-    // Pediatria
-    { title: "Sistema de Pediatria", url: "pediatria/ajuda-pediatria.html", category: "Pediatria", keywords: ["pediatria", "criança", "pediátrico", "doses"] },
-    { title: "Antibióticos Pediátricos", url: "pediatria/ferramentas-ped/antibioticos.html", category: "Pediatria", keywords: ["antibióticos", "pediatria", "infecção", "criança"] },
-    { title: "Anti-inflamatórios Pediátricos", url: "pediatria/ferramentas-ped/antiinflamatorio.html", category: "Pediatria", keywords: ["anti-inflamatórios", "pediatria", "dor", "febre"] },
-    { title: "Broncodilatadores Pediátricos", url: "pediatria/ferramentas-ped/broncodilatadores.html", category: "Pediatria", keywords: ["broncodilatadores", "asma", "pediatria"] },
-    { title: "Corticosteroides Pediátricos", url: "pediatria/ferramentas-ped/corticosteroides.html", category: "Pediatria", keywords: ["corticosteroides", "pediatria", "inflamação"] },
-    { title: "Hidratação Venosa Pediátrica", url: "pediatria/ferramentas-ped/calc-hidratacaovenosa.html", category: "Pediatria", keywords: ["hidratação", "venosa", "soro", "pediatria"] },
-    { title: "Puericultura - Alimentação", url: "pediatria/ferramentas-ped/puericultura-alimentacao.html", category: "Pediatria", keywords: ["puericultura", "alimentação", "leite", "fórmula"] },
-    { title: "Puericultura - Curvas", url: "pediatria/ferramentas-ped/puericultura-curvas.html", category: "Pediatria", keywords: ["puericultura", "curvas", "crescimento", "peso", "altura"] },
-    { title: "Puericultura - Vacinas", url: "pediatria/ferramentas-ped/puericultura-vacinas.html", category: "Pediatria", keywords: ["puericultura", "vacinas", "imunização", "calendário"] },
-    
-    // Externos
-    { title: "PedBook", url: "https://www.pedb.com.br/", category: "Externa", keywords: ["pedbook", "pediatria", "site", "externo"] },
-    { title: "Banco de Questões", url: "https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/", category: "Externa", keywords: ["questões", "prova", "residência", "concurso"] },
-    
-    // Geral
-    { title: "Agradecimentos", url: "extras/agradecimentos.html", category: "Geral", keywords: ["agradecimentos", "créditos", "colaboradores", "equipe"] }
-];
+<!-- Caminho 4: barra inferior (celular) -->
+<nav class="dg-tabs d-lg-none" aria-label="Atalhos">
+    <a href="index.html"><i class="bi bi-house-door"></i>Home</a>
+    <button type="button" data-open="calc"><i class="bi bi-calculator"></i>Calculadoras</button>
+    <button type="button" data-open="pront"><i class="bi bi-journal-medical"></i>Prontuário</button>
+    <button type="button" data-open="ped"><i class="bi bi-balloon-heart"></i>Pediatria</button>
+    <button type="button" data-open=""><i class="bi bi-grid-3x3-gap"></i>Menu</button>
+</nav>
 
-// Cache da consulta para evitar duplicação
-let lastSearchQuery = '';
-
-// Função para busca interna do site - CORRIGIDO PARA FUNCIONAR EM TODAS AS PÁGINAS
-function filterSuggestions() {
-    const query = document.getElementById('buscarInterno').value.toLowerCase().trim();
-    const suggestions = document.getElementById('searchSuggestions');
-    
-    if (query.length < 2) {
-        suggestions.innerHTML = '';
-        suggestions.style.display = 'none';
-        return;
-    }
-    
-    const filteredPages = sitePages.filter(page => {
-        return page.title.toLowerCase().includes(query) ||
-               page.category.toLowerCase().includes(query) ||
-               page.keywords.some(keyword => keyword.includes(query));
-    });
-    
-    if (filteredPages.length === 0) {
-        suggestions.innerHTML = '<li class="list-group-item text-muted text-center py-3"><i class="bi bi-search"></i> Nenhum resultado encontrado</li>';
-    } else {
-        suggestions.innerHTML = filteredPages.slice(0, 6).map(page => {
-            // Definir cor do badge baseado na categoria
-            let badgeColor = 'secondary';
-            let badgeText = page.category;
-            switch(page.category) {
-                case 'Calculadora': badgeColor = 'primary'; break;
-                case 'Prontuário': badgeColor = 'success'; break;
-                case 'Pediatria': badgeColor = 'info'; break;
-                case 'Geral': badgeColor = 'danger'; break;
-                case 'Externa': badgeColor = 'warning'; badgeText = 'Externo'; break;
-            }
-            
-            return `<li class="list-group-item list-group-item-action" onclick="navigateToPage('${page.url}')" style="cursor: pointer;">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="flex-grow-1 text-truncate me-2">
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <strong class="text-dark text-truncate">${page.title}</strong>
-                            <span class="badge bg-${badgeColor} text-white flex-shrink-0">${badgeText}</span>
-                        </div>
-                        <small class="text-muted text-truncate d-block">
-                            ${page.keywords.slice(0, 3).join(' • ')}
-                        </small>
-                    </div>
-                </div>
-            </li>`;
-        }).join('');
-    }
-    
-    suggestions.style.display = 'block';
-}
-
-// Função para navegar para página selecionada - CORRIGIDO PARA CAMINHOS RELATIVOS
-function navigateToPage(url) {
-    if (url.startsWith('http')) {
-        window.open(url, '_blank');
-    } else {
-        // Detectar se estamos na página inicial ou em subpasta
-        const currentPath = window.location.pathname;
-        let finalUrl = url;
-        
-        // Se não estamos na raiz (index.html), ajustar caminho relativo
-        if (!currentPath.endsWith('index.html') && !currentPath.endsWith('/')) {
-            // Contar quantos níveis de pasta estamos
-            const pathParts = currentPath.split('/').filter(part => part && part !== 'index.html');
-            const levels = pathParts.length - 1; // -1 porque o último é o arquivo atual
-            
-            // Adicionar ../ para cada nível
-            finalUrl = '../'.repeat(levels) + url;
-        }
-        
-        window.location.href = finalUrl;
-    }
-    document.getElementById('searchSuggestions').style.display = 'none';
-    document.getElementById('buscarInterno').value = '';
-}
-
-// Fechar sugestões ao clicar fora
-document.addEventListener('click', function(event) {
-    const searchContainer = event.target.closest('.position-relative');
-    if (!searchContainer) {
-        document.getElementById('searchSuggestions').style.display = 'none';
-    }
-});
-
-// Navegação por teclado nas sugestões
-document.getElementById('buscarInterno').addEventListener('keydown', function(event) {
-    const suggestions = document.getElementById('searchSuggestions');
-    const items = suggestions.querySelectorAll('.list-group-item-action');
-    
-    if (event.key === 'Enter' && items.length > 0) {
-        event.preventDefault();
-        items[0].click();
-    } else if (event.key === 'Escape') {
-        suggestions.style.display = 'none';
-    }
-});
-
-// Sites médicos confiáveis para filtrar busca externa
-const trustedMedicalSites = [
-    'pubmed.ncbi.nlm.nih.gov',
-    'uptodate.com',
-    'cochrane.org',
-    'portal.cfm.org.br',
-    'scielo.br',
-    'msdmanuals.com',
-    'consultaremedios.com.br'
-];
-
-// Cache da consulta para evitar duplicação
-let lastWebSearchQuery = '';
-
-// Função para adicionar filtro de sites médicos à busca web
-function addMedicalSiteFilter(event) {
-    const searchInput = document.getElementById('webSearch');
-    const query = searchInput ? searchInput.value.trim() : '';
-    
-    if (query) {
-        // Evitar processamento duplicado
-        if (lastWebSearchQuery === query) {
-            return true; // Permite o submit normalmente
-        }
-        lastWebSearchQuery = query;
-        
-        // Criar um input hidden com a consulta filtrada
-        const form = event.target;
-        
-        // Remove input hidden anterior se existir
-        const existingHidden = form.querySelector('input[name="q"][type="hidden"]');
-        if (existingHidden) {
-            existingHidden.remove();
-        }
-        
-        // Criar novo input hidden com a consulta filtrada
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'q';
-        
-        // Adicionar filtro de sites confiáveis à consulta usando sintaxe otimizada
-        const siteFilter = `(${trustedMedicalSites.map(site => `site:${site}`).join(' OR ')})`;
-        hiddenInput.value = `${query} ${siteFilter}`;
-        
-        form.appendChild(hiddenInput);
-        
-        // Limpar o campo visível para não mostrar a consulta complexa
-        searchInput.name = 'q_visible';
-        
-        console.log('🔍 Busca externa com filtro aplicado:', hiddenInput.value);
-        
-        // Feedback visual da busca
-        showSearchFeedback();
-    } else {
-        // Se não há consulta, previne o submit
-        event.preventDefault();
-        if (searchInput) {
-            searchInput.focus();
-        }
-        showToastForSearch('⚠️ Digite algo para buscar');
-    }
-}
-
-// Função para mostrar feedback da busca externa
-function showSearchFeedback() {
-    const button = document.querySelector('button[title*="sites médicos"]');
-    if (button) {
-        const originalContent = button.innerHTML;
-        
-        button.innerHTML = '<small>✅</small>';
-        button.style.background = 'rgba(40, 167, 69, 0.2)';
-        
-        setTimeout(() => {
-            button.innerHTML = originalContent;
-            button.style.background = '';
-        }, 1500);
-    }
-}
-
-// Toast simples para busca (evitar dependências)
-function showToastForSearch(message) {
-    const toast = document.createElement('div');
-    toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #495057;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 6px;
-        z-index: 1000;
-        font-size: 14px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-    `;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    // Animar entrada
-    setTimeout(() => {
-        toast.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Remover após 3 segundos
-    setTimeout(() => {
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-</script>
-
-<!-- Offcanvas Sidebar com todas as opções -->
+<!-- Menu lateral completo -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-    <div class="offcanvas-header" style="background-color: #00a66c; color: white;">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Completo</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu completo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
     </div>
     <div class="offcanvas-body">
-        <!-- Todas as Calculadoras -->
-        <div class="mb-4">
-            <h6 class="text-success fw-bold mb-3">🧮 Todas as Calculadoras</h6>
-            <div class="list-group list-group-flush">
-                <a href="calculadoras/carga-tabagica.html" class="list-group-item list-group-item-action">Carga Tabágica</a>
-                <a href="calculadoras/ldl.html" class="list-group-item list-group-item-action">Colesterol LDL</a>
-                <a href="calculadoras/dpp.html" class="list-group-item list-group-item-action">Data Provável do Parto</a>
-                <a href="calculadoras/idade-gestacional.html" class="list-group-item list-group-item-action">Idade Gestacional</a>
-                <a href="calculadoras/imc.html" class="list-group-item list-group-item-action">Índice de Massa Corporal (IMC)</a>
-                <a href="calculadoras/parkland.html" class="list-group-item list-group-item-action">Ressuscitação Volêmica (Parkland)</a>
-                <a href="calculadoras/risco-coronariano.html" class="list-group-item list-group-item-action">Risco Cardiovascular</a>
-                <a href="calculadoras/tfg.html" class="list-group-item list-group-item-action">Taxa de Filtração Glomerular (TFG)</a>
-            </div>
-        </div>
-
-        <!-- Especialidades Médicas -->
-        <div class="mb-4">
-            <h6 class="text-success fw-bold mb-3">🩺 Por Especialidade</h6>
-            
-            <!-- Atenção Primária -->
-            <div class="accordion" id="accordionEspecialidades">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingAtencao">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAtencao" aria-expanded="false" aria-controls="collapseAtencao">
-                            Atenção Primária
-                        </button>
-                    </h2>
-                    <div id="collapseAtencao" class="accordion-collapse collapse" aria-labelledby="headingAtencao" data-bs-parent="#accordionEspecialidades">
-                        <div class="accordion-body p-2">
-                            <a href="calculadoras/ldl.html" class="d-block text-decoration-none py-1">• Colesterol LDL</a>
-                            <a href="calculadoras/risco-coronariano.html" class="d-block text-decoration-none py-1">• Risco Cardiovascular</a>
-                            <a href="calculadoras/tfg.html" class="d-block text-decoration-none py-1">• TFG</a>
-                            <a href="calculadoras/carga-tabagica.html" class="d-block text-decoration-none py-1">• Carga Tabágica</a>
-                            <a href="calculadoras/imc.html" class="d-block text-decoration-none py-1">• IMC</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gineco/Obstetrícia -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingGineco">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGineco" aria-expanded="false" aria-controls="collapseGineco">
-                            Ginecologia/Obstetrícia
-                        </button>
-                    </h2>
-                    <div id="collapseGineco" class="accordion-collapse collapse" aria-labelledby="headingGineco" data-bs-parent="#accordionEspecialidades">
-                        <div class="accordion-body p-2">
-                            <a href="calculadoras/dpp.html" class="d-block text-decoration-none py-1">• Data Provável do Parto</a>
-                            <a href="calculadoras/idade-gestacional.html" class="d-block text-decoration-none py-1">• Idade Gestacional</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pediatria -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingPediatria">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePediatria" aria-expanded="false" aria-controls="collapsePediatria">
-                            Pediatria
-                        </button>
-                    </h2>
-                    <div id="collapsePediatria" class="accordion-collapse collapse" aria-labelledby="headingPediatria" data-bs-parent="#accordionEspecialidades">
-                        <div class="accordion-body p-2">
-                            <a href="pediatria/ajuda-pediatria.html" class="d-block text-decoration-none py-1">• Sistema de Pediatria</a>
-                            <a href="pediatria/ferramentas-ped/antibioticos.html" class="d-block text-decoration-none py-1">• Antibióticos</a>
-                            <a href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" class="d-block text-decoration-none py-1">• Hidratação Venosa</a>
-                            <a href="pediatria/ferramentas-ped/puericultura-alimentacao.html" class="d-block text-decoration-none py-1">• Puericultura - Alimentação</a>
-                            <a href="pediatria/ferramentas-ped/puericultura-vacinas.html" class="d-block text-decoration-none py-1">• Puericultura - Vacinas</a>
-                        </div>
-                    </div>
+        <div class="position-relative">
+            <div class="dg-sbox" role="search">
+                <i class="bi bi-search"></i>
+                <input id="menuSearch" type="search" placeholder="Buscar ferramenta…" autocomplete="off" aria-label="Buscar ferramenta">
+                <div class="dg-mode" role="radiogroup" aria-label="Onde buscar">
+                    <button type="button" role="radio" data-mode="site" aria-checked="true" title="Buscar nas ferramentas do DocGO"><i class="bi bi-grid"></i><span>Site</span></button>
+                    <button type="button" role="radio" data-mode="web" aria-checked="false" title="Buscar em sites médicos confiáveis (PubMed, SciELO, UpToDate, CFM…)"><i class="bi bi-globe2"></i><span>Web</span></button>
                 </div>
             </div>
+            <ul id="sugMenu" class="dg-sug" hidden></ul>
         </div>
 
-        <!-- Ferramentas do Prontuário -->
-        <div class="mb-4">
-            <h6 class="text-success fw-bold mb-3">📋 Prontuário</h6>
-            <div class="list-group list-group-flush">
-                <a href="prontuario/consulta-geral.html" class="list-group-item list-group-item-action">Consulta Geral</a>
-                <a href="prontuario/remedios.html" class="list-group-item list-group-item-action">Formatar Medicações IPM</a>
-                <a href="prontuario/radiologia-laudos.html" class="list-group-item list-group-item-action">Modelos de Laudos Radiologia</a>
-                <a href="condutas/index.html" class="list-group-item list-group-item-action">Guia de Prescrição</a>
-            </div>
+        <div id="recWrap" hidden>
+            <div class="dg-lbl">Usados recentemente</div>
+            <div id="recList"></div>
         </div>
 
-        <!-- Ferramentas de Pediatria -->
-        <div class="mb-4">
-            <h6 class="text-success fw-bold mb-3">👶 Pediatria</h6>
-            <div class="list-group list-group-flush">
-                <a href="pediatria/ajuda-pediatria.html" class="list-group-item list-group-item-action">Sistema de Pediatria</a>
-                <a href="pediatria/ferramentas-ped/antibioticos.html" class="list-group-item list-group-item-action">Antibióticos Pediátricos</a>
-                <a href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" class="list-group-item list-group-item-action">Hidratação Venosa</a>
-                <a href="pediatria/ferramentas-ped/puericultura-alimentacao.html" class="list-group-item list-group-item-action">Puericultura - Alimentação</a>
-                <a href="pediatria/ferramentas-ped/puericultura-curvas.html" class="list-group-item list-group-item-action">Puericultura - Curvas</a>
-                <a href="pediatria/ferramentas-ped/puericultura-vacinas.html" class="list-group-item list-group-item-action">Puericultura - Vacinas</a>
-            </div>
-        </div>
+        <div class="dg-lbl">Por categoria</div>
+        <div id="accCat"><div class="accordion" id="accC"><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-calc" aria-expanded="false" aria-controls="c-calc"><i class="bi bi-calculator me-2"></i>Calculadoras</button></h2><div id="c-calc" class="accordion-collapse collapse" data-bs-parent="#accC"><div class="accordion-body p-1"><div class="dg-sec dg-wide"><a class="dg-item" href="calculadoras/ldl.html" data-id="ldl"><i class="bi bi-droplet-half"></i><span><b>Colesterol LDL</b><small>Cálculo do LDL</small></span></a><a class="dg-item" href="calculadoras/adrogue-madias.html" data-id="na"><i class="bi bi-moisture"></i><span><b>Correção de sódio</b><small>Fórmula de Adrogué-Madias</small></span></a><a class="dg-item" href="calculadoras/tfg.html" data-id="tfg"><i class="bi bi-funnel"></i><span><b>Taxa de filtração glomerular</b><small>Estimativa da TFG</small></span></a><a class="dg-item" href="calculadoras/imc.html" data-id="imc"><i class="bi bi-speedometer2"></i><span><b>Índice de massa corporal</b><small>Cálculo do IMC</small></span></a><a class="dg-item" href="calculadoras/risco-coronariano.html" data-id="risco"><i class="bi bi-heart-pulse"></i><span><b>Risco cardiovascular</b><small>Risco em 10 anos</small></span></a><a class="dg-item" href="calculadoras/prevent.html" data-id="prevent"><i class="bi bi-graph-up-arrow"></i><span><b>AHA PREVENT</b><small>Risco cardiovascular em 10 e 30 anos</small></span></a><a class="dg-item" href="calculadoras/carga-tabagica.html" data-id="tabag"><i class="bi bi-cloud-haze2"></i><span><b>Carga tabágica</b><small>Anos-maço</small></span></a><a class="dg-item" href="calculadoras/dpp.html" data-id="dpp"><i class="bi bi-calendar-heart"></i><span><b>Data provável do parto</b><small>Cálculo da DPP</small></span></a><a class="dg-item" href="calculadoras/idade-gestacional.html" data-id="ig"><i class="bi bi-calendar-week"></i><span><b>Idade gestacional</b><small>Semanas gestacionais</small></span></a><a class="dg-item" href="calculadoras/parkland.html" data-id="park"><i class="bi bi-fire"></i><span><b>Parkland</b><small>Ressuscitação volêmica</small></span></a></div></div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-pront" aria-expanded="false" aria-controls="c-pront"><i class="bi bi-journal-medical me-2"></i>Prontuário</button></h2><div id="c-pront" class="accordion-collapse collapse" data-bs-parent="#accC"><div class="accordion-body p-1"><div class="dg-sec dg-wide"><a class="dg-item" href="prontuario/consulta-geral.html" data-id="consulta"><i class="bi bi-clipboard2-pulse"></i><span><b>Modelos para consulta</b><small>Consulta geral e prontuário</small></span></a><a class="dg-item" href="prontuario/remedios.html" data-id="meds"><i class="bi bi-capsule"></i><span><b>Formatar medicações</b><small>Formatador para medicações IPM</small></span></a><a class="dg-item" href="condutas/index.html" data-id="condutas"><i class="bi bi-list-check"></i><span><b>Guia de prescrição</b><small>Protocolos e condutas</small></span></a><a class="dg-item" href="prontuario/radiologia-laudos.html" data-id="laudos"><i class="bi bi-file-earmark-medical"></i><span><b>Laudos de radiologia</b><small>Modelos e templates</small></span></a><a class="dg-item" href="prontuario/ecg.html" data-id="ecg"><i class="bi bi-activity"></i><span><b>Checklist de ECG</b><small>Medidas, padrões e laudo</small></span></a><a class="dg-item" href="pediatria/ajuda-pediatria.html" data-id="pedajuda"><i class="bi bi-balloon-heart"></i><span><b>Ajuda em pediatria</b><small>Doses, medicamentos e protocolos</small></span></a></div></div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-ped" aria-expanded="false" aria-controls="c-ped"><i class="bi bi-balloon-heart me-2"></i>Pediatria</button></h2><div id="c-ped" class="accordion-collapse collapse" data-bs-parent="#accC"><div class="accordion-body p-1"><div class="dg-sec"><a class="dg-item" href="pediatria/ajuda-pediatria.html" data-id="pedajuda"><i class="bi bi-balloon-heart"></i><span><b>Ajuda em pediatria</b><small>Doses, medicamentos e protocolos</small></span></a></div><div class="dg-sec"><h6>Medicações</h6><a class="dg-item" href="pediatria/ferramentas-ped/antibioticos.html" data-id="atb"><i class="bi bi-capsule-pill"></i><span><b>Antibióticos</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/antiinflamatorio.html" data-id="ai"><i class="bi bi-thermometer-half"></i><span><b>Anti-inflamatórios</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/broncodilatadores.html" data-id="bd"><i class="bi bi-wind"></i><span><b>Broncodilatadores</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/corticosteroides.html" data-id="cc"><i class="bi bi-prescription2"></i><span><b>Corticosteroides</b><small>Doses pediátricas</small></span></a></div><div class="dg-sec"><h6>Calculadoras</h6><a class="dg-item" href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" data-id="hv"><i class="bi bi-droplet"></i><span><b>Hidratação venosa</b><small>Cálculo pediátrico</small></span></a></div><div class="dg-sec"><h6>Puericultura</h6><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-alimentacao.html" data-id="pal"><i class="bi bi-cup-straw"></i><span><b>Alimentação</b><small>Puericultura</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-curvas.html" data-id="pcur"><i class="bi bi-graph-up"></i><span><b>Curvas de crescimento</b><small>Puericultura</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-vacinas.html" data-id="pvac"><i class="bi bi-shield-plus"></i><span><b>Vacinas</b><small>Puericultura</small></span></a></div></div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-est" aria-expanded="false" aria-controls="c-est"><i class="bi bi-mortarboard me-2"></i>Estudos</button></h2><div id="c-est" class="accordion-collapse collapse" data-bs-parent="#accC"><div class="accordion-body p-1"><div class="dg-sec dg-wide"><a class="dg-item" href="https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/" data-id="banco" target="_blank" rel="noopener"><i class="bi bi-patch-question"></i><span><b>Banco de questões</b><small>Questões comentadas</small></span></a><a class="dg-item" href="https://www.pedb.com.br/" data-id="pedbook" target="_blank" rel="noopener"><i class="bi bi-book"></i><span><b>PedBook</b><small>Apoio para pediatria</small></span></a><a class="dg-item" href="ferramenta-externa/ajuda-pediatria.html" data-id="pedext"><i class="bi bi-box-arrow-up-right"></i><span><b>Ajuda Pediatria</b><small>Ferramenta externa</small></span></a></div></div></div></div></div></div>
 
-        <!-- Ferramentas Externas -->
-        <div class="mb-4">
-            <h6 class="text-success fw-bold mb-3">🔗 Ferramentas Externas</h6>
-            <div class="list-group list-group-flush">
-                <a href="ferramenta-externa/ajuda-pediatria.html" class="list-group-item list-group-item-action">Ajuda Pediatria</a>
-                <a href="https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/" class="list-group-item list-group-item-action" target="_blank">Banco de Questões</a>
-            </div>
-        </div>
+        <div class="dg-lbl">Por especialidade</div>
+        <div id="accEsp"><div class="accordion" id="accE"><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-sap" aria-expanded="false" aria-controls="c-sap"><i class="bi bi-hospital me-2"></i>Atenção Primária</button></h2><div id="c-sap" class="accordion-collapse collapse" data-bs-parent="#accE"><div class="accordion-body p-1"><a class="dg-item" href="prontuario/consulta-geral.html" data-id="consulta"><i class="bi bi-clipboard2-pulse"></i><span><b>Modelos para consulta</b><small>Consulta geral e prontuário</small></span></a><a class="dg-item" href="calculadoras/ldl.html" data-id="ldl"><i class="bi bi-droplet-half"></i><span><b>Colesterol LDL</b><small>Cálculo do LDL</small></span></a><a class="dg-item" href="calculadoras/risco-coronariano.html" data-id="risco"><i class="bi bi-heart-pulse"></i><span><b>Risco cardiovascular</b><small>Risco em 10 anos</small></span></a><a class="dg-item" href="calculadoras/prevent.html" data-id="prevent"><i class="bi bi-graph-up-arrow"></i><span><b>AHA PREVENT</b><small>Risco cardiovascular em 10 e 30 anos</small></span></a><a class="dg-item" href="calculadoras/tfg.html" data-id="tfg"><i class="bi bi-funnel"></i><span><b>Taxa de filtração glomerular</b><small>Estimativa da TFG</small></span></a><a class="dg-item" href="calculadoras/carga-tabagica.html" data-id="tabag"><i class="bi bi-cloud-haze2"></i><span><b>Carga tabágica</b><small>Anos-maço</small></span></a><a class="dg-item" href="calculadoras/imc.html" data-id="imc"><i class="bi bi-speedometer2"></i><span><b>Índice de massa corporal</b><small>Cálculo do IMC</small></span></a><a class="dg-item" href="calculadoras/adrogue-madias.html" data-id="na"><i class="bi bi-moisture"></i><span><b>Correção de sódio</b><small>Fórmula de Adrogué-Madias</small></span></a></div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-sgo" aria-expanded="false" aria-controls="c-sgo"><i class="bi bi-gender-female me-2"></i>Ginecologia/Obstetrícia</button></h2><div id="c-sgo" class="accordion-collapse collapse" data-bs-parent="#accE"><div class="accordion-body p-1"><a class="dg-item" href="calculadoras/dpp.html" data-id="dpp"><i class="bi bi-calendar-heart"></i><span><b>Data provável do parto</b><small>Cálculo da DPP</small></span></a><a class="dg-item" href="calculadoras/idade-gestacional.html" data-id="ig"><i class="bi bi-calendar-week"></i><span><b>Idade gestacional</b><small>Semanas gestacionais</small></span></a></div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-sped" aria-expanded="false" aria-controls="c-sped"><i class="bi bi-balloon-heart me-2"></i>Pediatria</button></h2><div id="c-sped" class="accordion-collapse collapse" data-bs-parent="#accE"><div class="accordion-body p-1"><a class="dg-item" href="pediatria/ajuda-pediatria.html" data-id="pedajuda"><i class="bi bi-balloon-heart"></i><span><b>Ajuda em pediatria</b><small>Doses, medicamentos e protocolos</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/antibioticos.html" data-id="atb"><i class="bi bi-capsule-pill"></i><span><b>Antibióticos</b><small>Doses pediátricas</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/calc-hidratacaovenosa.html" data-id="hv"><i class="bi bi-droplet"></i><span><b>Hidratação venosa</b><small>Cálculo pediátrico</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-alimentacao.html" data-id="pal"><i class="bi bi-cup-straw"></i><span><b>Alimentação</b><small>Puericultura</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-curvas.html" data-id="pcur"><i class="bi bi-graph-up"></i><span><b>Curvas de crescimento</b><small>Puericultura</small></span></a><a class="dg-item" href="pediatria/ferramentas-ped/puericultura-vacinas.html" data-id="pvac"><i class="bi bi-shield-plus"></i><span><b>Vacinas</b><small>Puericultura</small></span></a></div></div></div></div></div>
+
+        <div class="dg-lbl">Mais</div>
+        <a class="dg-item" href="extras/agradecimentos.html"><i class="bi bi-heart-fill"></i><span><b>Agradecimentos</b><small>Créditos e colaboradores</small></span></a>
     </div>
 </div>
 
-<script>
-    // Script executado após o carregamento da navbar
-    console.log('Navbar HTML processada');
-    
-    // Notificar que a navbar foi carregada
-    if (window.navbarLoaded) {
-        window.navbarLoaded();
+<!-- Código da navbar: type="text/plain" não é executado ao inserir via innerHTML; a imagem abaixo o inicia sozinha. -->
+<script type="text/plain" id="dg-code">
+(() => {
+    const $ = id => document.getElementById(id);
+    const ready = () => ['topNav','menuSearch','buscarInterno','offcanvasNavbar'].every(i => $(i));
+    (function boot(n) {
+        if (ready()) { try { init(); } catch (e) { console.error('Navbar:', e); } }
+        else if (n < 60) setTimeout(() => boot(n + 1), 50);
+        else console.error('Navbar: elementos não encontrados');
+    })(0);
+    function init() {
+    const TRUSTED = ['pubmed.ncbi.nlm.nih.gov','uptodate.com','cochrane.org','portal.cfm.org.br','scielo.br','msdmanuals.com','consultaremedios.com.br'];
+
+    // ===== Fonte única dos links: [título, descrição, url, ícone, palavras-chave, externo] =====
+    const I = {
+        ldl:['Colesterol LDL','Cálculo do LDL','calculadoras/ldl.html','bi-droplet-half','colesterol lipidio gordura'],
+        na:['Correção de sódio','Fórmula de Adrogué-Madias','calculadoras/adrogue-madias.html','bi-moisture','sodio hiponatremia hipernatremia adrogue madias'],
+        tfg:['Taxa de filtração glomerular','Estimativa da TFG','calculadoras/tfg.html','bi-funnel','tfg rim creatinina renal'],
+        imc:['Índice de massa corporal','Cálculo do IMC','calculadoras/imc.html','bi-speedometer2','imc peso obesidade'],
+        risco:['Risco cardiovascular','Risco em 10 anos','calculadoras/risco-coronariano.html','bi-heart-pulse','risco coronariano coracao infarto'],
+        prevent:['AHA PREVENT','Risco cardiovascular em 10 e 30 anos','calculadoras/prevent.html','bi-graph-up-arrow','prevent aha risco'],
+        tabag:['Carga tabágica','Anos-maço','calculadoras/carga-tabagica.html','bi-cloud-haze2','cigarro fumo tabaco anos maco'],
+        dpp:['Data provável do parto','Cálculo da DPP','calculadoras/dpp.html','bi-calendar-heart','dpp parto gravidez naegele'],
+        ig:['Idade gestacional','Semanas gestacionais','calculadoras/idade-gestacional.html','bi-calendar-week','gravidez semanas dum'],
+        park:['Parkland','Ressuscitação volêmica','calculadoras/parkland.html','bi-fire','queimadura fluido volemica'],
+        consulta:['Modelos para consulta','Consulta geral e prontuário','prontuario/consulta-geral.html','bi-clipboard2-pulse','consulta exame fisico semiologia'],
+        meds:['Formatar medicações','Formatador para medicações IPM','prontuario/remedios.html','bi-capsule','remedio ipm prescricao formatar'],
+        condutas:['Guia de prescrição','Protocolos e condutas','condutas/index.html','bi-list-check','condutas tratamento protocolo'],
+        laudos:['Laudos de radiologia','Modelos e templates','prontuario/radiologia-laudos.html','bi-file-earmark-medical','laudo raio-x tc ressonancia'],
+        ecg:['Checklist de ECG','Medidas, padrões e laudo','prontuario/ecg.html','bi-activity','ecg eletrocardiograma'],
+        pedajuda:['Ajuda em pediatria','Doses, medicamentos e protocolos','pediatria/ajuda-pediatria.html','bi-balloon-heart','pediatria crianca doses sistema'],
+        atb:['Antibióticos','Doses pediátricas','pediatria/ferramentas-ped/antibioticos.html','bi-capsule-pill','antibioticos infeccao'],
+        ai:['Anti-inflamatórios','Doses pediátricas','pediatria/ferramentas-ped/antiinflamatorio.html','bi-thermometer-half','dor febre ibuprofeno'],
+        bd:['Broncodilatadores','Doses pediátricas','pediatria/ferramentas-ped/broncodilatadores.html','bi-wind','asma salbutamol'],
+        cc:['Corticosteroides','Doses pediátricas','pediatria/ferramentas-ped/corticosteroides.html','bi-prescription2','inflamacao prednisolona dexametasona'],
+        hv:['Hidratação venosa','Cálculo pediátrico','pediatria/ferramentas-ped/calc-hidratacaovenosa.html','bi-droplet','soro hidratacao'],
+        pal:['Alimentação','Puericultura','pediatria/ferramentas-ped/puericultura-alimentacao.html','bi-cup-straw','leite formula puericultura'],
+        pcur:['Curvas de crescimento','Puericultura','pediatria/ferramentas-ped/puericultura-curvas.html','bi-graph-up','peso altura percentil puericultura'],
+        pvac:['Vacinas','Puericultura','pediatria/ferramentas-ped/puericultura-vacinas.html','bi-shield-plus','vacina imunizacao calendario puericultura'],
+        banco:['Banco de questões','Questões comentadas','https://rodrigovoigt.github.io/PythonHTML-Questoes-Comentadas/','bi-patch-question','questoes prova residencia concurso',1],
+        pedbook:['PedBook','Apoio para pediatria','https://www.pedb.com.br/','bi-book','pedbook pediatria',1],
+        pedext:['Ajuda Pediatria','Ferramenta externa','ferramenta-externa/ajuda-pediatria.html','bi-box-arrow-up-right','pediatria externa']
+    };
+    // Categorias (cada item pode aparecer em várias — é a redundância)
+    const G = [
+        {k:'calc',n:'Calculadoras',i:'bi-calculator',sec:[{w:1,ids:['ldl','na','tfg','imc','risco','prevent','tabag','dpp','ig','park']}]},
+        {k:'pront',n:'Prontuário',i:'bi-journal-medical',sec:[{w:1,ids:['consulta','meds','condutas','laudos','ecg','pedajuda']}]},
+        {k:'ped',n:'Pediatria',i:'bi-balloon-heart',sec:[{ids:['pedajuda']},{h:'Medicações',ids:['atb','ai','bd','cc']},{h:'Calculadoras',ids:['hv']},{h:'Puericultura',ids:['pal','pcur','pvac']}]},
+        {k:'est',n:'Estudos',i:'bi-mortarboard',sec:[{w:1,ids:['banco','pedbook','pedext']}]}
+    ];
+    const SP = [
+        {k:'sap',n:'Atenção Primária',i:'bi-hospital',ids:['consulta','ldl','risco','prevent','tfg','tabag','imc','na']},
+        {k:'sgo',n:'Ginecologia/Obstetrícia',i:'bi-gender-female',ids:['dpp','ig']},
+        {k:'sped',n:'Pediatria',i:'bi-balloon-heart',ids:['pedajuda','atb','hv','pal','pcur','pvac']}
+    ];
+
+    // ===== Utilidades =====
+    const root = () => $('topNav').closest('nav').querySelector('.navbar-brand').href.replace(/index\.html.*$/, '');
+    const rel = u => /^https?:/.test(u) ? u : root() + u;
+    const A = (id, desc = 1, abs) => { const [t,s,u,ic,,x] = I[id]; return `<a class="dg-item" href="${abs ? rel(u) : u}" data-id="${id}"${x ? ' target="_blank" rel="noopener"' : ''}><i class="bi ${ic}"></i><span><b>${t}</b>${desc ? `<small>${s}</small>` : ''}</span></a>`; };
+    const S = s => `<div class="dg-sec${s.w ? ' dg-wide' : ''}">${s.h ? `<h6>${s.h}</h6>` : ''}${s.ids.map(i => A(i)).join('')}</div>`;
+    const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+    // ===== Barra superior =====
+    if (!$('topNav').children.length) $('topNav').innerHTML =
+        `<li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-door-fill"></i> Home</a></li>` +
+        G.map(g => `<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi ${g.i}"></i> ${g.n}</a><div class="dropdown-menu dg-mega">${g.sec.map(S).join('')}</div></li>`).join('') +
+        `<li class="nav-item"><a class="nav-link" href="extras/agradecimentos.html"><i class="bi bi-heart-fill"></i> Agradecimentos</a></li>`;
+
+    // ===== Menu lateral =====
+    const acc = (id, arr, body) => `<div class="accordion" id="${id}">` + arr.map(g =>
+        `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c-${g.k}" aria-expanded="false" aria-controls="c-${g.k}"><i class="bi ${g.i} me-2"></i>${g.n}</button></h2><div id="c-${g.k}" class="accordion-collapse collapse" data-bs-parent="#${id}"><div class="accordion-body p-1">${body(g)}</div></div></div>`).join('') + `</div>`;
+    if (!$('accCat').children.length) $('accCat').innerHTML = acc('accC', G, g => g.sec.map(S).join(''));
+    if (!$('accEsp').children.length) $('accEsp').innerHTML = acc('accE', SP, g => g.ids.map(i => A(i)).join(''));
+
+    const oc = $('offcanvasNavbar');
+    const RK = 'docgo_recentes';
+    const getR = () => { try { return JSON.parse(localStorage.getItem(RK)) || []; } catch (e) { return []; } };
+    oc.addEventListener('show.bs.offcanvas', () => {
+        const r = getR().filter(x => I[x]);
+        $('recWrap').hidden = !r.length;
+        $('recList').innerHTML = r.map(id => A(id, 0, 1)).join('');
+    });
+    document.addEventListener('click', e => {
+        const el = e.target.closest('[data-id]');
+        if (!el || !I[el.dataset.id]) return;
+        try { localStorage.setItem(RK, JSON.stringify([el.dataset.id, ...getR().filter(x => x !== el.dataset.id)].slice(0, 4))); } catch (_) {}
+    });
+    function openMenu(k, focus) {
+        if (k) { const c = $('c-' + k); if (c) bootstrap.Collapse.getOrCreateInstance(c, { toggle:false }).show(); }
+        if (focus) oc.addEventListener('shown.bs.offcanvas', () => $('menuSearch').focus(), { once:true });
+        bootstrap.Offcanvas.getOrCreateInstance(oc).show();
     }
-    
-    // Aguardar um pouco e tentar executar as correções
-    setTimeout(() => {
-        if (typeof fixNavbarLinks === 'function') {
-            console.log('Executando fixNavbarLinks após carregamento da navbar');
-            fixNavbarLinks();
+    document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => openMenu(b.dataset.open)));
+    $('mSearch').addEventListener('click', () => openMenu('', true));
+
+    // ===== Busca: um campo, dois modos (Site / Web médica) =====
+    const ALL = Object.entries(I).map(([id,[t,s,u,ic,k,x]]) => ({ id, t, s, u, ic, k, x, c: id === 'pedajuda' ? 'Pediatria' : (G.find(g => g.sec.some(z => z.ids.includes(id))) || {}).n }));
+    ALL.push({ id:'agr', t:'Agradecimentos', s:'Créditos e colaboradores', u:'extras/agradecimentos.html', ic:'bi-heart-fill', k:'creditos equipe', c:'Geral' });
+
+    const MK = 'docgo_busca_modo';
+    let mode = 'site';
+    try { mode = localStorage.getItem(MK) === 'web' ? 'web' : 'site'; } catch (_) {}
+    const boxes = [];
+
+    function webSearch(q) {
+        q = (q || '').trim();
+        if (!q) return false;
+        const f = '(' + TRUSTED.map(s => 'site:' + s).join(' OR ') + ')';
+        window.open('https://duckduckgo.com/?q=' + encodeURIComponent(q + ' ' + f), '_blank', 'noopener');
+        return true;
+    }
+    function setMode(m) {
+        mode = m;
+        try { localStorage.setItem(MK, m); } catch (_) {}
+        document.querySelectorAll('.dg-mode button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.mode === m)));
+        boxes.forEach(b => { b.inp.placeholder = m === 'web' ? 'Buscar em sites médicos…' : 'Buscar ferramenta…'; b.refresh(); });
+    }
+    function bindSearch(inp, ul) {
+        let sel = -1;
+        const rows = () => [...ul.querySelectorAll('li[data-u],li[data-w]')];
+        const close = () => { ul.hidden = true; sel = -1; };
+        const mark = () => rows().forEach((r, i) => r.classList.toggle('on', i === sel));
+        const run = li => {
+            if (li.dataset.w) webSearch(inp.value);
+            else if (li.dataset.x) window.open(li.dataset.u, '_blank', 'noopener');
+            else location.href = rel(li.dataset.u);
+            close();
+        };
+        const WEB = `<li data-w="1"><i class="bi bi-globe2"></i><span><b>Pesquisar na web médica</b><small>PubMed, SciELO, UpToDate, CFM e outros · Enter</small></span></li>`;
+        const refresh = () => {
+            const q = norm(inp.value.trim());
+            if (q.length < 2) return close();
+            if (mode === 'web') { ul.innerHTML = WEB; ul.hidden = false; sel = 0; mark(); return; }
+            const w = q.split(/\s+/);
+            const r = ALL.filter(p => { const h = norm(p.t + ' ' + p.s + ' ' + p.k + ' ' + p.c); return w.every(x => h.includes(x)); }).slice(0, 6);
+            ul.innerHTML = (r.length ? r.map(p => `<li data-u="${p.u}" data-x="${p.x ? 1 : ''}" data-id="${p.id}"><i class="bi ${p.ic}"></i><span><b>${p.t}</b><small>${p.s}</small></span><em>${p.x ? 'Externo' : p.c}</em></li>`).join('') : '<li class="none">Nenhuma ferramenta encontrada</li>') + WEB;
+            ul.hidden = false; sel = -1;
+        };
+        boxes.push({ inp, refresh });
+        inp.addEventListener('input', refresh);
+        inp.addEventListener('keydown', e => {
+            const r = rows();
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                if (ul.hidden || !r.length) return;
+                e.preventDefault();
+                sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + r.length) % r.length; mark();
+                r[sel].scrollIntoView({ block:'nearest' });
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (mode === 'web' || e.ctrlKey || e.metaKey || !r.length) { if (webSearch(inp.value)) close(); return; }
+                run(r[sel >= 0 ? sel : 0]);
+            } else if (e.key === 'Escape') close();
+        });
+        ul.addEventListener('click', e => { const li = e.target.closest('li[data-u],li[data-w]'); if (li) run(li); });
+        document.addEventListener('click', e => { if (!ul.parentElement.contains(e.target)) close(); });
+    }
+    bindSearch($('buscarInterno'), $('searchSuggestions'));
+    bindSearch($('menuSearch'), $('sugMenu'));
+    document.querySelectorAll('.dg-mode button').forEach(b => b.addEventListener('click', () => {
+        setMode(b.dataset.mode);
+        const i = b.closest('.dg-sbox').querySelector('input'); if (i) i.focus();
+    }));
+    setMode(mode);
+
+    // Atalhos: "/" ou Ctrl/Cmd+K
+    document.addEventListener('keydown', e => {
+        const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) || document.activeElement.isContentEditable;
+        if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+            e.preventDefault();
+            const d = $('buscarInterno');
+            d.offsetParent ? d.focus() : openMenu('', true);
         }
-    }, 100);
+    });
+
+    // Marca a página atual (depois que fixNavbarLinks corrigir os caminhos)
+    setTimeout(() => {
+        const p = location.pathname;
+        document.querySelectorAll('.dg-item,#topNav .nav-link[href]').forEach(a => {
+            if (a.getAttribute('href') === '#' || new URL(a.href).pathname !== p) return;
+            a.classList.add('active'); a.setAttribute('aria-current', 'page');
+            const d = a.closest('.dropdown'); if (d) d.querySelector('.nav-link').classList.add('active');
+        });
+    }, 300);
+
+    if (window.navbarLoaded) window.navbarLoaded();
+    setTimeout(() => { if (typeof fixNavbarLinks === 'function') fixNavbarLinks(); }, 100);
+    }
+})();
 </script>
+<img alt="" aria-hidden="true" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload="var c=document.getElementById('dg-code');if(c&&!c.dataset.run){c.dataset.run=1;var s=document.createElement('script');s.textContent=c.textContent;document.head.appendChild(s)}">

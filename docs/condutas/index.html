@@ -59,9 +59,10 @@
       <div class="col-lg-4 col-xl-3">
         <div class="painel p-3">
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="m-0">Guia de Prescrição</h5>
-            <div class="d-flex gap-1"><button type="button" id="novo" class="btn btn-sm btn-success">+ Novo</button><button type="button" id="tema" class="btn btn-sm btn-outline-secondary">Escuro</button></div>
+            <div><h5 class="m-0">Guia de Prescrição</h5><small id="status" class="text-muted"></small></div>
+            <div class="d-flex gap-1"><button type="button" id="novo" class="btn btn-sm btn-success d-none">+ Novo</button><button type="button" id="tema" class="btn btn-sm btn-outline-secondary">Escuro</button></div>
           </div>
+          <div id="boxTodos" class="form-check form-switch mb-2 d-none"><input class="form-check-input" type="checkbox" id="todos"><label class="form-check-label small" for="todos">Mostrar todos <span class="text-muted">(desligado: só os seus)</span></label></div>
           <input type="search" id="busca" class="form-control mb-2" placeholder="Pesquisar..." autocomplete="off">
           <div id="lista" class="list-group"><div class="p-3 text-muted">Carregando...</div></div>
         </div>
@@ -85,7 +86,19 @@
       </div>
     </div>
   </div>
-<div class="modal fade" id="modalNovo" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+<div class="modal fade" id="modalLogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Acessar Sistema</h5></div>
+    <div class="modal-body text-center">
+      <p class="mb-3">Como você deseja acessar o sistema?</p>
+      <button type="button" class="btn btn-outline-secondary w-100" id="semSenha">Apenas Visualizar<small class="d-block text-muted">Não poderá editar ou adicionar</small></button>
+      <hr class="my-3"><small class="text-muted">ou</small>
+      <label for="inSenha" class="form-label d-block mt-2">Digite sua senha (5 dígitos):</label>
+      <input type="password" class="form-control text-center mb-1" id="inSenha" placeholder="•••••" maxlength="5" inputmode="numeric">
+      <small class="text-muted d-block mb-3">Apenas números de 0-9</small>
+      <button type="button" class="btn btn-success w-100" id="comSenha">Entrar para Editar</button>
+    </div>
+  </div></div></div>
+  <div class="modal fade" id="modalNovo" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
     <div class="modal-header"><h5 class="modal-title">Novo item</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
     <div class="modal-body">
       <label class="form-label">Título</label><input id="nTitulo" class="form-control mb-2">
@@ -97,7 +110,7 @@
 <script>
 const URL_PLANILHA = 'https://script.google.com/macros/s/AKfycbx9E30sXGC8z9bOu73vO87kDm03C5gUiGio2Uy0kcX5oChSnVt7_oozh8r4rwlfyumpCQ/exec'; // termina em /exec
 const $ = id => document.getElementById(id);
-let dados = [], atual = null;
+let dados = [], atual = null, somenteLeitura = true, usuario = null;
 const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 function toast(m) {
@@ -113,21 +126,28 @@ function copiar() {
 }
 function abrir(d) {
   atual = d;
-  $('titulo').textContent = d.titulo;
+  $('titulo').textContent = d.nome;
   $('texto').value = d.texto;
   $('obs').textContent = d.obs ? 'Obs: ' + d.obs.replace(/^[-•]\s*/, '') : '';
-  $('obs').classList.toggle('d-none', !d.obs);
   ['copiar', 'editar', 'excluir'].forEach(i => $(i).disabled = false);
   modo(false);
   dados.forEach(x => x.el.classList.toggle('active', x === d));
   if (innerWidth < 992) $('conteudo').scrollIntoView({ behavior: 'smooth' });
 }
+const podeEditar = d => !!d && !somenteLeitura && !!d.dono && d.dono === usuario;
 function montar(lista) {
   const antigo = atual && atual.titulo;
-  dados = lista.sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt'));
+  lista.forEach(d => { const m = /^\d{5}/.exec(d.titulo); d.dono = m ? m[0] : null; d.nome = m ? d.titulo.slice(5) : d.titulo; });
+  dados = lista.sort((a, b) => a.nome.localeCompare(b.nome, 'pt'));
   const l = $('lista'); l.innerHTML = '';
   dados.forEach(d => {
-    d.el = Object.assign(document.createElement('button'), { type: 'button', className: 'list-group-item list-group-item-action', textContent: d.titulo });
+    const [cls, txt] = !d.dono ? ['bg-secondary', 'Original'] : podeEditar(d) ? ['bg-success', 'Editável'] : ['bg-warning text-dark', 'Protegido'];
+    d.el = document.createElement('button');
+    d.el.type = 'button';
+    d.el.className = 'list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-2';
+    const n = document.createElement('span'); n.textContent = d.nome;
+    const b = document.createElement('span'); b.className = 'badge ' + cls; b.textContent = txt;
+    d.el.append(n, b);
     d.el.onclick = () => abrir(d);
     l.appendChild(d.el);
   });
@@ -136,7 +156,10 @@ function montar(lista) {
   const mesmo = dados.find(d => d.titulo === antigo);
   if (mesmo) abrir(mesmo);
 }
-function filtrar() { const q = norm($('busca').value); dados.forEach(d => d.el.hidden = !norm(d.titulo).includes(q)); }
+function filtrar() {
+  const q = norm($('busca').value), todos = somenteLeitura || $('todos').checked;
+  dados.forEach(d => d.el.classList.toggle('d-none', !norm(d.nome).includes(q) || !(todos || d.dono === usuario)));
+}
 
 async function carregar() {
   try { const c = sessionStorage.getItem('guia'); if (c) montar(JSON.parse(c)); } catch (e) {}   // abre rápido com o último carregamento
@@ -159,10 +182,12 @@ function modo(e) {
   $('texto').readOnly = !e;
   $('obsEdit').classList.toggle('d-none', !e);
   $('obs').classList.toggle('d-none', e || !atual || !atual.obs);
-  ['copiar', 'editar', 'excluir'].forEach(i => $(i).classList.toggle('d-none', e));
+  $('copiar').classList.toggle('d-none', e);
+  ['editar', 'excluir'].forEach(i => $(i).classList.toggle('d-none', e || !podeEditar(atual)));
   ['salvar', 'cancelar'].forEach(i => $(i).classList.toggle('d-none', !e));
 }
 async function enviar(p) {
+  p.senha = usuario;
   toast('Salvando...');
   const r = await fetch(URL_PLANILHA, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
   const j = await r.json();
@@ -190,12 +215,32 @@ $('excluir').addEventListener('click', () => {
 const modalNovo = new bootstrap.Modal($('modalNovo'));
 $('novo').addEventListener('click', () => { ['nTitulo', 'nTexto', 'nObs'].forEach(i => $(i).value = ''); modalNovo.show(); });
 $('nSalvar').addEventListener('click', () => {
-  const titulo = $('nTitulo').value.trim(), texto = $('nTexto').value;
-  if (!titulo || !texto.trim()) return toast('⚠️ Preencha título e texto');
+  const nome = $('nTitulo').value.trim(), titulo = usuario + nome, texto = $('nTexto').value;
+  if (!nome || !texto.trim()) return toast('⚠️ Preencha título e texto');
   enviar({ acao: 'adicionar', titulo, texto, obs: $('nObs').value })
     .then(() => { modalNovo.hide(); const d = dados.find(x => x.titulo === titulo); if (d) abrir(d); toast('✅ Adicionado!'); }).catch(falhou);
 });
-carregar();
+
+// ---- acesso (igual ao original) ----
+$('todos').checked = localStorage.getItem('showAll') !== 'false';
+$('todos').addEventListener('change', () => { localStorage.setItem('showAll', $('todos').checked); filtrar(); });
+const modalLogin = new bootstrap.Modal($('modalLogin'));
+function entrar(leitura, senha) {
+  somenteLeitura = leitura; usuario = senha;
+  $('status').textContent = leitura ? '👁️ Modo Visualização' : '🔑 Usuário: ' + senha;
+  $('novo').classList.toggle('d-none', leitura);
+  $('boxTodos').classList.toggle('d-none', leitura);
+  modalLogin.hide();
+  carregar();
+}
+$('semSenha').addEventListener('click', () => entrar(true, null));
+$('comSenha').addEventListener('click', () => {
+  const s = $('inSenha').value.trim();
+  if (!/^\d{5}$/.test(s)) return alert('A senha deve ter exatamente 5 dígitos numéricos!');
+  entrar(false, s);
+});
+$('inSenha').addEventListener('keypress', e => { if (e.key === 'Enter') $('comSenha').click(); });
+modalLogin.show();
 </script>
 </body>
 </html>
