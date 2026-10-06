@@ -21,6 +21,18 @@
         return value.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
     }
 
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-custom';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        window.setTimeout(() => toast.classList.add('show'), 50);
+        window.setTimeout(() => {
+            toast.classList.remove('show');
+            window.setTimeout(() => toast.remove(), 250);
+        }, 3200);
+    }
+
     function ldlTarget(risk, veryHighRisk, extremeRisk) {
         if (extremeRisk) return '< 40 mg/dL';
         if (veryHighRisk) return '< 50 mg/dL';
@@ -104,7 +116,7 @@
         };
 
         if ([values.age, values.totalCholesterol, values.hdl, values.sbp].some((value) => value === null || Number.isNaN(value)) || values.age < 30 || values.age > 79) {
-            alert('Preencha os campos clínicos obrigatórios com valores válidos. A faixa de idade é de 30 a 79 anos.');
+            showToast('⚠️ Preencha os campos clínicos obrigatórios. A idade deve estar entre 30 e 79 anos.');
             return;
         }
 
@@ -118,7 +130,7 @@
         }
 
         if (values.bmi === null || Number.isNaN(values.bmi) || values.egfr === null || Number.isNaN(values.egfr)) {
-            alert('Informe o IMC e a TFG, ou preencha peso/altura e creatinina para calculá-los automaticamente.');
+            showToast('⚠️ Informe IMC e TFG, ou preencha peso/altura e creatinina para calculá-los automaticamente.');
             return;
         }
 
@@ -145,7 +157,7 @@
             copyButton.textContent = 'Copiado';
             window.setTimeout(() => { copyButton.textContent = 'Copiar'; }, 1800);
         } catch (error) {
-            window.alert('Não foi possível copiar o resultado.');
+            showToast('❌ Não foi possível copiar o resultado.');
         }
     });
 })();

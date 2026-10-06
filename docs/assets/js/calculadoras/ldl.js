@@ -27,13 +27,13 @@ function showToast(message) {
     const toast = $(`
         <div class="toast-custom" style="
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: 20px;
             background-color: #495057;
             color: white;
             padding: 12px 20px;
             border-radius: 6px;
-            z-index: 1000;
+            z-index: 2000;
             font-size: 14px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transform: translateX(100%);

@@ -129,6 +129,27 @@
 				font-size: .88rem;
 			}
 
+			.toast-custom {
+				position: fixed;
+				top: 80px;
+				right: 20px;
+				z-index: 2000;
+				max-width: min(90vw, 420px);
+				padding: 12px 20px;
+				border-radius: 6px;
+				color: #fff;
+				background: #495057;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+				opacity: 0;
+				transform: translateY(-10px);
+				transition: opacity .2s ease, transform .2s ease;
+			}
+
+			.toast-custom.show {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
 			.risk-criteria {
 				padding: 1rem;
 				border: 1px solid var(--line);
@@ -217,6 +238,11 @@
 						<span class="input-group-text">cm</span>
 					</div>
 					<div class="input-group mb-3">
+						<span class="input-group-text">IMC</span>
+						<input type="number" id="bmi" class="form-control" min="1" max="100" step="0.1" placeholder="Informe ou use peso/altura">
+						<span class="input-group-text">kg/m²</span>
+					</div>
+					<div class="input-group mb-3">
 						<span class="input-group-text">Colesterol total</span>
 						<input type="number" id="totalCholesterol" class="form-control" min="130" max="320" step="0.1" placeholder="Ex: 200" required>
 						<span class="input-group-text">mg/dL</span>
@@ -230,11 +256,6 @@
 						<span class="input-group-text">Pressão sistólica</span>
 						<input type="number" id="sbp" class="form-control" min="90" max="200" step="1" placeholder="Ex: 130" required>
 						<span class="input-group-text">mmHg</span>
-					</div>
-					<div class="input-group mb-3">
-						<span class="input-group-text">IMC</span>
-						<input type="number" id="bmi" class="form-control" min="1" max="100" step="0.1" placeholder="Informe ou use peso/altura">
-						<span class="input-group-text">kg/m²</span>
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">Creatinina sérica</span>
